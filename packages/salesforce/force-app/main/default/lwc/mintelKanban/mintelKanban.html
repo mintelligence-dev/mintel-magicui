@@ -1,0 +1,52 @@
+<template>
+    <section class="kanban">
+        <header class="head">
+            <h2 class="title">{heading}</h2>
+            <template lwc:if={statusText}><p class="status" role="status">{statusText}</p></template>
+        </header>
+        <template lwc:if={errorText}>
+            <p class="error" role="alert">{errorText}</p>
+        </template>
+        <div class="board" role="list" aria-label={heading}>
+            <template for:each={columns} for:item="col">
+                <section
+                    key={col.value}
+                    class={col.className}
+                    role="listitem"
+                    aria-label={col.label}
+                    data-value={col.value}
+                    ondragover={handleDragOver}
+                    ondragleave={handleDragLeave}
+                    ondrop={handleDrop}
+                >
+                    <h3 class="col-head">
+                        <span class="col-name">{col.label}</span>
+                        <span class="col-count">{col.count}</span>
+                    </h3>
+                    <ul class="cards">
+                        <template for:each={col.cards} for:item="card">
+                            <li key={card.id} class={card.className} draggable="true" data-id={card.id} ondragstart={handleDragStart} ondragend={handleDragEnd}>
+                                <button type="button" class="card-open" data-id={card.id} onclick={handleOpen}>{card.title}</button>
+                                <template lwc:if={card.subtitle}><p class="card-sub">{card.subtitle}</p></template>
+                                <lightning-button-menu
+                                    class="move"
+                                    icon-name="utility:move"
+                                    icon-size="x-small"
+                                    variant="bare"
+                                    alternative-text={card.moveLabel}
+                                    menu-alignment="auto"
+                                    data-id={card.id}
+                                    onselect={handleMenuMove}
+                                >
+                                    <template for:each={card.targets} for:item="t">
+                                        <lightning-menu-item key={t.value} value={t.value} label={t.label}></lightning-menu-item>
+                                    </template>
+                                </lightning-button-menu>
+                            </li>
+                        </template>
+                    </ul>
+                </section>
+            </template>
+        </div>
+    </section>
+</template>
