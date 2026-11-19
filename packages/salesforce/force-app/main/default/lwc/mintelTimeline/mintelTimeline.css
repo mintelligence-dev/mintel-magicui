@@ -1,0 +1,11 @@
+@import 'c/mintelTokens';
+
+:host {
+    display: block;
+    font-family: var(--mintel-font-sans);
+    color: var(--mintel-foreground);
+}
+
+.timeline {
+    display: grid;
+}

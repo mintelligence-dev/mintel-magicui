@@ -1,0 +1,31 @@
+<template>
+    <div class="path">
+        <ol class="track" aria-label={labels.progress}>
+            <template for:each={steps} for:item="step">
+                <li key={step.value} class="item">
+                    <button
+                        type="button"
+                        class={step.className}
+                        data-value={step.value}
+                        aria-current={step.ariaCurrent}
+                        title={step.label}
+                        onclick={handleSelect}
+                    >
+                        <template lwc:if={step.complete}>
+                            <svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+                        </template>
+                        <span class="label">{step.label}</span>
+                    </button>
+                </li>
+            </template>
+        </ol>
+        <template lwc:if={showMark}>
+            <div class="actions">
+                <button type="button" class="mark" disabled={markDisabled} onclick={handleMark}>{labels.mark}</button>
+            </div>
+        </template>
+        <template lwc:if={errorMessage}>
+            <p class="error" role="alert">{errorMessage}</p>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,19 @@
+<template>
+    <div class={rootClass} role="radiogroup" aria-label={label} onkeydown={handleKeydown}>
+        <span class="thumb" style={thumbStyle} aria-hidden="true"></span>
+        <template for:each={items} for:item="item">
+            <button
+                key={item.value}
+                type="button"
+                role="radio"
+                class={item.className}
+                aria-checked={item.ariaChecked}
+                tabindex={item.tabindex}
+                data-value={item.value}
+                onclick={handleClick}
+            >
+                {item.label}
+            </button>
+        </template>
+    </div>
+</template>

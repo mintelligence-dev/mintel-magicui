@@ -6,6 +6,9 @@ import { CopyCommand } from "@/components/copy-command"
 import { LwcSource } from "@/components/lwc-source"
 import { MobileNav } from "@/components/mobile-nav"
 import { SiteHeader } from "@/components/site-header"
+import { PathPreview } from "@/components/path-preview"
+import { StatusBadgePreview, TimelinePreview } from "@/components/sf-status-preview"
+import { SegmentedPreview, TabsPreview } from "@/components/sf-tabs-preview"
 import { SldsPreview } from "@/components/slds-preview"
 import { getDict, type Lang } from "@/lib/i18n"
 import { scopeLwcCss } from "@/lib/scope-css"
@@ -24,7 +27,7 @@ const BRAND_CSS = readFileSync(join(process.cwd(), "../../packages/tokens/salesf
 const LWC_DIR = join(process.cwd(), "../../packages/salesforce/force-app/main/default/lwc")
 
 // The Mintel LWC stylesheets, scoped so the preview renders them exactly as they look in an org.
-const MINTEL_LWC_CSS = ["mintelGlassCard", "mintelShimmerButton", "mintelGradientText", "mintelStatCard"]
+const MINTEL_LWC_CSS = ["mintelPath", "mintelStatusBadge", "mintelGlassCard", "mintelShimmerButton", "mintelGradientText", "mintelStatCard"]
   .map((name) => scopeLwcCss(readFileSync(join(LWC_DIR, name, `${name}.css`), "utf8"), `.c-${name}`))
   .join("\n")
 
@@ -39,6 +42,59 @@ function bundle(name: string) {
 }
 
 const COMPONENTS = [
+  {
+    name: "mintelPath",
+    usage: `<!-- Record page: reads and updates a picklist (two steps, like the standard Path) -->
+<c-mintel-path record-id={recordId} object-api-name="Case" field-api-name="Status"></c-mintel-path>
+
+<!-- Without a record -->
+<c-mintel-path stages="New,Working,Escalated,Closed" current="Working" onstagechange={handleStage}></c-mintel-path>`,
+    preview: <PathPreview />,
+  },
+  {
+    name: "mintelTabs",
+    sources: ["mintelTabs", "mintelTab"],
+    usage: `<c-mintel-tabs label="Account" active-value="overview" ontabchange={handleTab}>
+    <c-mintel-tab label="Overview" value="overview">...</c-mintel-tab>
+    <c-mintel-tab label="Cases" value="cases">...</c-mintel-tab>
+</c-mintel-tabs>
+
+<!-- Underline style -->
+<c-mintel-tabs variant="underline">...</c-mintel-tabs>`,
+    preview: <TabsPreview />,
+  },
+  {
+    name: "mintelSegmentedControl",
+    usage: `<!-- App Builder: Options = "day:Day,week:Week,month:Month" -->
+<c-mintel-segmented-control label="Range" options="day:Day,week:Week,month:Month"
+    value="week" onchange={handleRange}></c-mintel-segmented-control>
+
+<!-- From JS: an array of { value, label } -->
+<c-mintel-segmented-control options={views} variant="brand"></c-mintel-segmented-control>`,
+    preview: <SegmentedPreview />,
+  },
+  {
+    name: "mintelStatusBadge",
+    usage: `<!-- Record page: shows the field's label, colored by its value -->
+<c-mintel-status-badge record-id={recordId} object-api-name="Case" field-api-name="Status"
+    variants="Escalated:destructive,On Hold:warning"></c-mintel-status-badge>
+
+<!-- Fixed value -->
+<c-mintel-status-badge value="Closed" appearance="solid"></c-mintel-status-badge>`,
+    preview: <StatusBadgePreview />,
+  },
+  {
+    name: "mintelTimeline",
+    sources: ["mintelTimeline", "mintelTimelineItem"],
+    usage: `<c-mintel-timeline label="Case history">
+    <c-mintel-timeline-item title="Case created" time="09:12">From LINE OA</c-mintel-timeline-item>
+    <c-mintel-timeline-item title="Assigned to Nina" time="09:15" variant="brand">
+        <lightning-icon slot="icon" icon-name="utility:user" size="x-small"></lightning-icon>
+    </c-mintel-timeline-item>
+    <c-mintel-timeline-item title="Resolved" variant="success" current></c-mintel-timeline-item>
+</c-mintel-timeline>`,
+    preview: <TimelinePreview />,
+  },
   {
     name: "mintelGlassCard",
     usage: `<c-mintel-glass-card title="Case summary" subtitle="LINE OA" variant="brand">
@@ -173,7 +229,7 @@ export function SalesforcePage({ lang }: { lang: Lang }) {
                   </div>
                   <div>
                     <p className="mb-1.5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t.source}</p>
-                    <LwcSource files={bundle(c.name)} />
+                    <LwcSource files={("sources" in c ? c.sources : [c.name]).flatMap(bundle)} />
                   </div>
                 </div>
               </div>

@@ -11,6 +11,11 @@
   --animate-shine: shine var(--duration) infinite linear;
 }
 
+@keyframes mintel-skeleton {
+  to {
+    transform: translateX(100%);
+  }
+}
 @keyframes gradient {
   to {
     background-position: var(--bg-size, 300%) 0;

@@ -13,6 +13,22 @@ const require = createRequire(import.meta.url)
 const theme = require("@mintelligence-dev/tokens/shadcn-theme.json")
 const items = JSON.parse(readFileSync(join(root, "registry/items.json"), "utf8"))
 
+// Registry dependencies on our own items must point at THIS registry by URL — a bare name like
+// "button" would install shadcn's own component. Items write them as "@mintel/<name>".
+const vercelProduction = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? (vercelProduction ? `https://${vercelProduction}` : "http://localhost:3000")
+const registryUrl = process.env.NEXT_PUBLIC_REGISTRY_URL ?? `${siteUrl}/r`
+const itemNames = new Set(items.map((i) => i.name))
+for (const item of items) {
+  item.registryDependencies = (item.registryDependencies ?? []).map((dep) => {
+    if (!dep.startsWith("@mintel/")) return dep
+    const name = dep.slice("@mintel/".length)
+    if (!itemNames.has(name)) throw new Error(`${item.name} depends on unknown item "${name}"`)
+    return `${registryUrl}/${name}.json`
+  })
+}
+
 const themeItem = {
   name: "mintel-theme",
   type: "registry:theme",
@@ -39,12 +55,6 @@ const themeItem = {
   },
 }
 
-// Page templates (registry:block). Their registry dependencies must point at THIS registry by URL —
-// a bare name like "button" would install shadcn's own component instead of the Mintel one.
-const vercelProduction = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? (vercelProduction ? `https://${vercelProduction}` : "http://localhost:3000")
-const registryUrl = process.env.NEXT_PUBLIC_REGISTRY_URL ?? `${siteUrl}/r`
 const blocks = JSON.parse(readFileSync(join(root, "registry/blocks.json"), "utf8")).map((b) => ({
   name: b.name,
   type: "registry:block",

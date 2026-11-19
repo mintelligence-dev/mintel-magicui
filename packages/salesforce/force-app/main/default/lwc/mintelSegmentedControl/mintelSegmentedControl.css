@@ -1,0 +1,84 @@
+@import 'c/mintelTokens';
+
+:host {
+    display: inline-block;
+    font-family: var(--mintel-font-sans);
+}
+
+.track {
+    position: relative;
+    display: inline-flex;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--mintel-foreground) 7%, transparent);
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.08);
+}
+
+.segment {
+    position: relative;
+    z-index: 1;
+    min-height: 2.25rem;
+    padding: 0 1rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--mintel-muted-foreground);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color var(--mintel-duration-base) var(--mintel-ease-standard),
+        transform var(--mintel-spring-snappy-duration) var(--mintel-ease-spring-snappy);
+}
+.segment:active {
+    transform: scale(0.95);
+}
+.segment:focus-visible {
+    outline: 2px solid var(--mintel-brand);
+    outline-offset: 2px;
+}
+.default .segment.active {
+    color: var(--mintel-foreground);
+    font-weight: 600;
+}
+.brand .segment.active {
+    color: var(--mintel-brand-foreground);
+    font-weight: 600;
+}
+
+.thumb {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 0;
+    z-index: 0;
+    border-radius: 999px;
+    transition: transform var(--mintel-spring-snappy-duration) var(--mintel-ease-spring-snappy),
+        width var(--mintel-spring-snappy-duration) var(--mintel-ease-spring-snappy);
+}
+.default .thumb {
+    background: var(--mintel-background);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.1), 0 6px 16px -6px var(--mintel-glass-shadow);
+}
+.brand .thumb {
+    background: var(--mintel-brand);
+    box-shadow: 0 4px 14px -4px var(--mintel-brand);
+}
+
+@media (pointer: coarse) {
+    .segment {
+        min-height: 2.75rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .thumb,
+    .segment {
+        transition: none;
+    }
+    .segment:active {
+        transform: none;
+    }
+}

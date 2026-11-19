@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "title": "Avatar",
+  "description": "Round avatar with image, initials fallback, presence dot, brand-gradient ring and an overlapping group.",
+  "dependencies": [
+    "@radix-ui/react-avatar",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/ui/avatar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst avatarVariants = cva(\"relative flex shrink-0 rounded-full\", {\n  variants: {\n    size: {\n      sm: \"size-7 text-[0.6875rem]\",\n      default: \"size-9 text-xs\",\n      lg: \"size-12 text-sm\",\n    },\n  },\n  defaultVariants: { size: \"default\" },\n})\n\nconst STATUS = {\n  online: \"bg-success\",\n  away: \"bg-warning\",\n  busy: \"bg-destructive\",\n  offline: \"bg-muted-foreground\",\n} as const\n\n/**\n * Round avatar with an image, initials fallback and optional presence dot.\n * `ring` adds the brand-gradient ring used for highlighted people.\n */\nfunction Avatar({\n  className,\n  size,\n  status,\n  ring = false,\n  children,\n  ...props\n}: React.ComponentProps<typeof AvatarPrimitive.Root> &\n  VariantProps<typeof avatarVariants> & { status?: keyof typeof STATUS; ring?: boolean }) {\n  return (\n    <span data-slot=\"avatar-wrapper\" className={cn(avatarVariants({ size }), ring && \"bg-[image:var(--brand-gradient)] p-0.5\", className)}>\n      <AvatarPrimitive.Root\n        data-slot=\"avatar\"\n        className={cn(\"relative flex size-full overflow-hidden rounded-full\", ring && \"ring-2 ring-background\")}\n        {...props}\n      >\n        {children}\n      </AvatarPrimitive.Root>\n      {status && (\n        <span\n          data-slot=\"avatar-status\"\n          role=\"img\"\n          aria-label={status}\n          className={cn(\"absolute right-0 bottom-0 size-[28%] min-h-2 min-w-2 rounded-full ring-2 ring-background\", STATUS[status])}\n        />\n      )}\n    </span>\n  )\n}\n\nfunction AvatarImage({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Image>) {\n  return <AvatarPrimitive.Image data-slot=\"avatar-image\" className={cn(\"aspect-square size-full object-cover\", className)} {...props} />\n}\n\nfunction AvatarFallback({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {\n  return (\n    <AvatarPrimitive.Fallback\n      data-slot=\"avatar-fallback\"\n      className={cn(\"flex size-full items-center justify-center rounded-full bg-brand/12 font-semibold text-brand\", className)}\n      {...props}\n    />\n  )\n}\n\n/** Overlapping stack of avatars; extra people collapse into a \"+N\" bubble. */\nfunction AvatarGroup({\n  className,\n  max,\n  children,\n  ...props\n}: React.ComponentProps<\"div\"> & { max?: number }) {\n  const items = React.Children.toArray(children)\n  const shown = max ? items.slice(0, max) : items\n  const extra = items.length - shown.length\n  return (\n    <div data-slot=\"avatar-group\" className={cn(\"flex items-center -space-x-2 [&>*]:ring-2 [&>*]:ring-background\", className)} {...props}>\n      {shown}\n      {extra > 0 && (\n        <span className=\"relative flex size-9 items-center justify-center rounded-full bg-muted text-xs font-semibold text-muted-foreground\">\n          +{extra}\n        </span>\n      )}\n    </div>\n  )\n}\n\nexport { Avatar, AvatarImage, AvatarFallback, AvatarGroup, avatarVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

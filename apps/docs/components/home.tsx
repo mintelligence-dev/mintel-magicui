@@ -10,6 +10,7 @@ import { MobileNav } from "@/components/mobile-nav"
 import { MobileShowcase } from "@/components/mobile-showcase"
 import { MotionShowcase, ZoomShowcase } from "@/components/motion-showcase"
 import { SiteHeader } from "@/components/site-header"
+import { countItems } from "@/lib/component-docs"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
 import { installCmd } from "@/lib/site"
 import { cn } from "@/lib/utils"
@@ -162,7 +163,7 @@ export function Home({ lang }: { lang: Lang }) {
         <BlurFade delay={0.45} className="mt-16 grid w-full max-w-3xl grid-cols-3 gap-4">
           {[
             { v: Object.keys(tokens.light).length, l: t.hero.stats.tokens },
-            { v: 45, l: t.hero.stats.items },
+            { v: countItems(), l: t.hero.stats.items },
             { v: 2, l: t.hero.stats.platforms },
           ].map((s) => (
             <div key={s.l} className="rounded-2xl border bg-card/60 p-4 backdrop-blur">
@@ -296,11 +297,11 @@ export function Home({ lang }: { lang: Lang }) {
       <Section id="components" eyebrow={t.components.eyebrow} title={t.components.title}>
         <nav aria-label={t.components.categories} className="mb-10 flex flex-wrap gap-2">
           {[
-            ["#core", "Core UI", 21],
-            ["#effects", "Effects", 12],
-            ["#glass", "Glass", 4],
-            ["#mobile", "Mobile", 2],
-            ["#motion", "Fluid Motion", 5],
+            ["#core", "Core UI", countItems("core", "forms", "data", "navigation")],
+            ["#effects", "Effects", countItems("effects")],
+            ["#glass", "Glass", countItems("glass")],
+            ["#mobile", "Mobile", countItems("mobile")],
+            ["#motion", "Fluid Motion", countItems("motion")],
           ].map(([href, label, n]) => (
             <a
               key={href}
