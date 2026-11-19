@@ -546,5 +546,84 @@
       "source": "Magic UI (MIT)",
       "category": "animated"
     }
+  },
+  {
+    "name": "glass-card",
+    "type": "registry:ui",
+    "title": "Glass Card",
+    "description": "Frosted glass surface with optional edge-lens refraction (Chromium + mouse). Solid fallback for reduced transparency.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/glass/glass-card.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "glass"
+    }
+  },
+  {
+    "name": "glass-button",
+    "type": "registry:ui",
+    "title": "Glass Button",
+    "description": "Pill glass button with spring press feedback; default, tinted (brand) and accent variants.",
+    "dependencies": [
+      "@radix-ui/react-slot",
+      "class-variance-authority"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/glass/glass-button.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "glass"
+    }
+  },
+  {
+    "name": "glass-navbar",
+    "type": "registry:ui",
+    "title": "Glass Navbar",
+    "description": "Sticky frosted navigation bar, full-width or floating pill, safe-area aware.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/glass/glass-navbar.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "glass"
+    }
+  },
+  {
+    "name": "segmented-control",
+    "type": "registry:ui",
+    "title": "Segmented Control",
+    "description": "iOS-style segmented control with a spring-animated thumb and radiogroup keyboard support.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/glass/segmented-control.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "glass"
+    }
   }
 ]

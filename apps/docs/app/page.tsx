@@ -5,6 +5,7 @@ import { DialogDemo, ChannelSelect, TableDemo, TabsDemo, ToastDemo } from "@/com
 import { BeamDemo } from "@/components/beam-demo"
 import { CopyCommand } from "@/components/copy-command"
 import { GithubIcon } from "@/components/github-icon"
+import { GlassShowcase } from "@/components/glass-showcase"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { REPO_URL, installCmd } from "@/lib/site"
 import { cn } from "@/lib/utils"
@@ -115,6 +116,9 @@ export default function Home() {
             </a>
             <a href="#components" className="hidden rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground sm:block">
               Components
+            </a>
+            <a href="#glass" className="hidden rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground sm:block">
+              Glass
             </a>
             <a href="#salesforce" className="hidden rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground sm:block">
               Salesforce
@@ -417,6 +421,11 @@ export default function Home() {
             </Card>
           </Preview>
         </div>
+      </Section>
+
+      {/* Glass */}
+      <Section id="glass" eyebrow="Glass" title="Frosted glass + refraction">
+        <GlassShowcase />
       </Section>
 
       {/* Salesforce */}
