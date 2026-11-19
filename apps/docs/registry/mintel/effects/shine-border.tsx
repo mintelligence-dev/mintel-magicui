@@ -1,6 +1,6 @@
 "use client"
 
-// Portions Copyright (c) 2023 Magic UI — MIT License. See THIRD_PARTY_NOTICES.md.
+// Portions Copyright (c) 2023 Magic UI — MIT License: https://github.com/mintelligence-dev/mintel-magicui/blob/main/THIRD_PARTY_NOTICES.md
 import * as React from "react"
 
 import { cn } from "@/lib/utils"

@@ -43,8 +43,8 @@ npx shadcn@latest add https://raw.githubusercontent.com/mintelligence-dev/mintel
 All default colors point at brand tokens (`--brand`, `--brand-accent`, `--brand-cyan`, `--brand-gradient`),
 so components follow the theme — including dark mode — without passing colors.
 
-**Mobile web & accessibility** — every component is checked at 390px, on touch, in WebKit (iPhone) and
-with 4× CPU throttling:
+**Mobile web & accessibility** — the docs site is checked at 390px with touch emulation, in WebKit
+(iPhone 15 profile) and with 4× CPU throttling. Not yet tested on real devices, Firefox or the Salesforce Mobile App.
 
 - Add `viewport-fit=cover` to your viewport meta so `drawer`, `tab-bar` and `glass-navbar` can pad for the
   notch / home indicator (`env(safe-area-inset-*)`).
