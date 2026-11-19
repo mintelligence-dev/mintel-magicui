@@ -1,0 +1,18 @@
+<template>
+    <section class="wrap">
+        <header class="intro reveal">
+            <template lwc:if={eyebrow}><p class="eyebrow">{eyebrow}</p></template>
+            <h2 class="heading">{title}</h2>
+            <template lwc:if={description}><p class="sub">{description}</p></template>
+        </header>
+        <ul class="grid">
+            <template for:each={items} for:item="f">
+                <li key={f.key} class="card reveal" style={f.style}>
+                    <span class="tile"><lightning-icon icon-name={f.icon} size="small" alternative-text=""></lightning-icon></span>
+                    <h3 class="card-title">{f.title}</h3>
+                    <p class="card-text">{f.text}</p>
+                </li>
+            </template>
+        </ul>
+    </section>
+</template>

@@ -1,0 +1,76 @@
+@import 'c/tokens';
+
+:host {
+    display: block;
+    font-family: var(--mintel-font-sans);
+    color: var(--mintel-foreground);
+}
+.heading {
+    margin: 0 0 0.75rem;
+    font-family: var(--mintel-font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+    gap: 0.625rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.action {
+    display: flex;
+    width: 100%;
+    min-height: 5.5rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid var(--mintel-border);
+    border-radius: calc(var(--mintel-radius) + 4px);
+    background: var(--mintel-card);
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    transition: transform var(--mintel-spring-snappy-duration) var(--mintel-ease-spring-snappy), border-color var(--mintel-duration-base),
+        box-shadow var(--mintel-duration-base);
+}
+.action:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--mintel-brand) 35%, transparent);
+    box-shadow: 0 10px 24px -14px var(--mintel-brand);
+}
+.action:active {
+    transform: scale(0.97);
+}
+.action:focus-visible {
+    outline: 3px solid color-mix(in oklab, var(--mintel-ring) 50%, transparent);
+    outline-offset: 2px;
+}
+.tile {
+    display: flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background: var(--mintel-brand-gradient);
+    --slds-c-icon-color-foreground-default: var(--mintel-brand-foreground);
+    --sds-c-icon-color-foreground-default: var(--mintel-brand-foreground);
+}
+.label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-align: center;
+}
+@media (prefers-reduced-motion: reduce) {
+    .action {
+        transition: none;
+    }
+    .action:hover,
+    .action:active {
+        transform: none;
+    }
+}

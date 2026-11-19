@@ -1,0 +1,15 @@
+<template>
+    <section class="actions">
+        <template lwc:if={heading}><h2 class="heading">{heading}</h2></template>
+        <ul class="grid">
+            <template for:each={items} for:item="a">
+                <li key={a.key}>
+                    <button type="button" class="action" data-index={a.index} onclick={handleClick}>
+                        <span class="tile"><lightning-icon icon-name={a.icon} size="small" alternative-text=""></lightning-icon></span>
+                        <span class="label">{a.label}</span>
+                    </button>
+                </li>
+            </template>
+        </ul>
+    </section>
+</template>

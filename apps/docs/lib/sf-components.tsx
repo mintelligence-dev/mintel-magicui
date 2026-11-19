@@ -18,6 +18,11 @@ import {
 } from "@/components/sf-more-previews"
 import { ActivityTimelinePreview, KanbanPreview, RelatedCardsPreview } from "@/components/sf-records-previews"
 import { SegmentedPreview, TabsPreview } from "@/components/sf-tabs-preview"
+import { AnnouncementPreview, FilesGalleryPreview, KpiTrendPreview, QuickActionsPreview } from "@/components/sf-new-previews"
+import { SectionCta } from "@/registry/mintel/sections/section-cta"
+import { SectionFaq } from "@/registry/mintel/sections/section-faq"
+import { SectionFeatureGrid } from "@/registry/mintel/sections/section-feature-grid"
+import { SectionHeroCentered } from "@/registry/mintel/sections/section-hero-centered"
 
 import { SF_INDEX, type SfGroup } from "@/lib/sf-index"
 
@@ -253,6 +258,78 @@ export const SF_COMPONENTS: SfComponent[] = [
     usage: `<!-- Experience Cloud: scales the whole page and remembers the choice -->
 <c-font-size-control locale="th" apply-to-page></c-font-size-control>`,
     preview: <FontSizeControl />,
+  },
+  {
+    name: "quickActions",
+    group: "record",
+    usage: `<!-- App Builder: one line per button, "Label | icon | flow/action/url/event | target" -->
+<c-quick-actions record-id={recordId} object-api-name="Case"
+    actions="New task | utility:task | action | NewTask; Send LINE | utility:chat | flow | Send_Line_Message"
+    onaction={handleAction}></c-quick-actions>`,
+    preview: <QuickActionsPreview />,
+  },
+  {
+    name: "filesGallery",
+    group: "record",
+    usage: `<!-- Record page: the record's files as cards; opens Salesforce's file preview. UI API, no Apex -->
+<c-files-gallery record-id={recordId} page-size="12"></c-files-gallery>`,
+    preview: <FilesGalleryPreview />,
+  },
+  {
+    name: "kpiTrend",
+    group: "display",
+    react: "chart",
+    usage: `<!-- Home or app page: value and trend from App Builder -->
+<c-kpi-trend label="Open cases" trend="31,28,35,33,37" caption="Last 5 weeks"></c-kpi-trend>
+
+<!-- Record page: the value from a number field; trend from a parent LWC -->
+<c-kpi-trend record-id={recordId} object-api-name="Account" field-api-name="AnnualRevenue"
+    trend={history} good-direction="up"></c-kpi-trend>`,
+    preview: <KpiTrendPreview />,
+  },
+  {
+    name: "announcement",
+    group: "display",
+    react: "alert",
+    usage: `<!-- App Builder: change "version" to show a dismissed banner again -->
+<c-announcement title="Heads up" message="Scheduled maintenance on Saturday 22:00–23:00."
+    variant="info" link-label="Details" link-url="/s/maintenance" dismissible version="2026-11"></c-announcement>`,
+    preview: <AnnouncementPreview />,
+  },
+  {
+    name: "siteHero",
+    group: "site",
+    react: "section-hero-centered",
+    usage: `<!-- Experience Builder: drag "Mintel Site Hero" onto the page and fill in the properties -->
+<c-site-hero eyebrow="Help center" title="How can we" highlight="help you today?"
+    primary-label="Start a chat" primary-url="/s/chat"></c-site-hero>`,
+    preview: <SectionHeroCentered className="w-full" />,
+  },
+  {
+    name: "siteFeatures",
+    group: "site",
+    react: "section-feature-grid",
+    usage: `<!-- Experience Builder: "Title | Description | icon" separated by semicolons -->
+<c-site-features title="Why customers choose us"
+    features="One inbox | All channels in one place | utility:chat; Fast answers | Replies in minutes | utility:clock"></c-site-features>`,
+    preview: <SectionFeatureGrid className="w-full py-6" />,
+  },
+  {
+    name: "siteFaq",
+    group: "site",
+    react: "section-faq",
+    usage: `<!-- Experience Builder: "Question | Answer" separated by semicolons; the first one starts open -->
+<c-site-faq title="Questions, answered"
+    questions="Which channels can I use? | LINE, Messenger and web chat.; How fast will you reply? | Within minutes."></c-site-faq>`,
+    preview: <SectionFaq className="w-full py-6" />,
+  },
+  {
+    name: "siteCta",
+    group: "site",
+    react: "section-cta",
+    usage: `<c-site-cta title="Need help? We are one message away." primary-label="Start a chat" primary-url="/s/chat"
+    secondary-label="Call us" secondary-url="tel:021234567"></c-site-cta>`,
+    preview: <SectionCta className="w-full py-6" />,
   },
   {
     name: "brandLoader",

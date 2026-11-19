@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Mintel Site Hero</masterLabel>
+    <description>[Mintel UI] Centered hero for Experience Cloud pages.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default,lightning__AppPage,lightning__HomePage">
+            <property name="eyebrow" type="String" label="Eyebrow" />
+            <property name="title" type="String" label="Title" default="Customer service that" />
+            <property name="highlight" type="String" label="Highlighted words (gradient)" default="feels personal" />
+            <property name="description" type="String" label="Description" />
+            <property name="primaryLabel" type="String" label="Primary button" default="Get started" />
+            <property name="primaryUrl" type="String" label="Primary button URL" default="#" />
+            <property name="secondaryLabel" type="String" label="Secondary button" />
+            <property name="secondaryUrl" type="String" label="Secondary button URL" default="#" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
