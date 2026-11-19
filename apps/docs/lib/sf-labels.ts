@@ -5,6 +5,7 @@ export const SF_LABELS = {
   en: {
     overview: "Overview",
     getStarted: "Getting started",
+    inAppBuilder: "In App Builder",
     pager: "More components",
     previous: "Previous",
     next: "Next",
@@ -51,6 +52,7 @@ export const SF_LABELS = {
   th: {
     overview: "ภาพรวม",
     getStarted: "เริ่มต้นใช้งาน",
+    inAppBuilder: "ชื่อใน App Builder",
     pager: "component อื่น",
     previous: "ก่อนหน้า",
     next: "ถัดไป",

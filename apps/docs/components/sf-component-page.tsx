@@ -4,10 +4,14 @@ import { ItemBadge } from "@/components/item-badge"
 import { LwcSource } from "@/components/lwc-source"
 import { SfShell } from "@/components/sf-shell"
 import { SfSidebar } from "@/components/sf-sidebar"
+import { WhenToUse } from "@/components/when-to-use"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
-import { SF_COMPONENTS, SF_GROUP_ORDER, sfTag } from "@/lib/sf-components"
+import { SF_COMPONENTS, SF_GROUP_ORDER, sfLabel, sfTag } from "@/lib/sf-components"
+import { SF_GUIDES } from "@/lib/sf-guides"
 import { SF_GROUP_STYLE, sfIcon } from "@/lib/sf-icons"
+import { PREVIEW_CANVAS } from "@/lib/preview-canvas"
 import { SF_LABELS } from "@/lib/sf-labels"
+import { cn } from "@/lib/utils"
 import { readSfMeta, readSfSource } from "@/lib/sf-meta"
 import { Badge } from "@/registry/mintel/ui/badge"
 
@@ -20,6 +24,11 @@ export function SfComponentPage({ lang, name }: { lang: Lang; name: string }) {
   const description = (d.sf.components as Record<string, string>)[name]
   const where = [...new Set(meta.targets.map((x) => t.targets[x] ?? x))]
   const Icon = sfIcon(name)
+  const guide = SF_GUIDES[name]
+  const toLine = (line: { en: string; th: string; alt?: string }) => ({
+    text: line[lang],
+    alt: line.alt ? { href: langPath(lang, `/salesforce/${line.alt}`), label: sfLabel(line.alt) } : undefined,
+  })
   // Sidebar order, for previous / next links.
   const ordered = SF_GROUP_ORDER.flatMap((g) => SF_COMPONENTS.filter((x) => x.group === g))
   const at = ordered.findIndex((x) => x.name === name)
@@ -40,10 +49,17 @@ export function SfComponentPage({ lang, name }: { lang: Lang; name: string }) {
             <span aria-hidden className={`inline-flex size-12 items-center justify-center rounded-2xl ${SF_GROUP_STYLE[c.group].tile}`}>
               <Icon className="size-6" />
             </span>
-            <span className="font-mono text-3xl sm:text-4xl">{sfTag(name)}</span>
+            {sfLabel(name)}
             <ItemBadge name={`sf:${name}`} lang={lang} className="px-2.5 text-sm leading-6" />
           </h1>
-          {meta.label && <p className="font-medium">{meta.label}</p>}
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+            <code className="rounded-md bg-muted px-2 py-1 font-mono text-[13px] font-semibold">&lt;{sfTag(name)}&gt;</code>
+            {meta.label && (
+              <span className="text-muted-foreground">
+                {t.inAppBuilder}: <span className="font-medium text-foreground">{meta.label}</span>
+              </span>
+            )}
+          </p>
           <p className="max-w-3xl text-lg text-muted-foreground">{description}</p>
           <div className="flex flex-wrap gap-2">
             {meta.exposed ? (
@@ -77,9 +93,13 @@ export function SfComponentPage({ lang, name }: { lang: Lang; name: string }) {
 
         <section className="space-y-3">
           <h2 className="font-heading text-xl font-semibold">{t.preview}</h2>
-          <div className="flex min-h-64 items-center justify-center overflow-x-auto rounded-2xl border bg-muted/30 bg-[radial-gradient(circle_at_1px_1px,color-mix(in_oklab,var(--foreground)_9%,transparent)_1px,transparent_0)] bg-[size:18px_18px] p-4 sm:p-10 [&>*]:min-w-0 [&>*]:max-w-full">{c.preview}</div>
+          <div className={cn("flex min-h-64 items-center justify-center overflow-x-auto rounded-2xl border p-4 sm:p-10 [&>*]:min-w-0 [&>*]:max-w-full", PREVIEW_CANVAS)}>{c.preview}</div>
           <p className="text-xs text-muted-foreground">{t.previewNote}</p>
         </section>
+
+        {guide && (
+          <WhenToUse title={d.docs.whenToUse} labels={{ use: d.docs.use, avoid: d.docs.avoid }} use={guide.use.map(toLine)} avoid={guide.avoid.map(toLine)} />
+        )}
 
         <section className="space-y-3">
           <h2 className="font-heading text-xl font-semibold">{t.usage}</h2>
@@ -176,7 +196,7 @@ export function SfComponentPage({ lang, name }: { lang: Lang; name: string }) {
               <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" /> {t.previous}
               </span>
-              <span className="mt-1 block font-mono text-sm font-semibold">{sfTag(prev.name)}</span>
+              <span className="mt-1 block text-sm font-semibold">{sfLabel(prev.name)}</span>
             </a>
           ) : (
             <span />
@@ -186,7 +206,7 @@ export function SfComponentPage({ lang, name }: { lang: Lang; name: string }) {
               <span className="flex items-center justify-end gap-1.5 text-xs text-muted-foreground">
                 {t.next} <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
-              <span className="mt-1 block font-mono text-sm font-semibold">{sfTag(next.name)}</span>
+              <span className="mt-1 block text-sm font-semibold">{sfLabel(next.name)}</span>
             </a>
           )}
         </nav>

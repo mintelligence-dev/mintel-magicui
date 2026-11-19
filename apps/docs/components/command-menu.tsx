@@ -106,16 +106,16 @@ export function CommandMenu({ lang }: { lang: Lang }) {
                   <Command.Item
                     key={c.name}
                     value={`sf ${c.name}`}
-                    keywords={[sfTag(c.name), "lwc", "salesforce", SF_LABELS[lang].groups[c.group]]}
+                    keywords={[c.label, `Mintel ${c.label}`, sfTag(c.name), "lwc", "salesforce", SF_LABELS[lang].groups[c.group]]}
                     onSelect={() => go(`/salesforce/${c.name}`)}
                     className={itemClass}
                   >
                     <Cloud className="size-4 text-muted-foreground" />
-                    <span className="flex flex-1 items-center gap-2 font-mono text-[13px]">
-                      {sfTag(c.name)}
+                    <span className="flex flex-1 items-center gap-2">
+                      {c.label}
                       <ItemBadge name={`sf:${c.name}`} lang={lang} />
                     </span>
-                    <span className="text-xs text-muted-foreground">LWC</span>
+                    <span className="font-mono text-xs text-muted-foreground">{sfTag(c.name)}</span>
                   </Command.Item>
                 ))}
               </Command.Group>
