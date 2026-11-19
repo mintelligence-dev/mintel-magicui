@@ -13,9 +13,9 @@ import { SegmentedControl } from "@/registry/mintel/glass/segmented-control"
 function Backdrop() {
   return (
     <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
-      <div className="absolute -top-24 -left-16 size-80 rounded-full bg-brand opacity-70 blur-3xl animate-[blob_16s_ease-in-out_infinite] motion-reduce:animate-none pointer-coarse:animate-none" />
-      <div className="absolute top-20 right-[-4rem] size-96 rounded-full bg-brand-accent opacity-60 blur-3xl animate-[blob_20s_ease-in-out_infinite_reverse] motion-reduce:animate-none pointer-coarse:animate-none" />
-      <div className="absolute bottom-[-6rem] left-1/3 size-80 rounded-full bg-brand-cyan opacity-50 blur-3xl animate-[blob_18s_ease-in-out_infinite] motion-reduce:animate-none pointer-coarse:animate-none" />
+      <div className="absolute -top-24 -left-16 size-80 rounded-full bg-brand opacity-70 blur-3xl" />
+      <div className="absolute top-20 right-[-4rem] size-96 rounded-full bg-brand-accent opacity-60 blur-3xl" />
+      <div className="absolute bottom-[-6rem] left-1/3 size-80 rounded-full bg-brand-cyan opacity-50 blur-3xl" />
       {/* Detailed content so blur and refraction are visible */}
       <div className="absolute inset-0 flex flex-col justify-center gap-2 px-6 font-heading text-[clamp(2.5rem,9vw,6rem)] leading-none font-bold tracking-tight text-foreground/10 select-none">
         <span>Customer</span>
@@ -54,6 +54,7 @@ export function GlassShowcase() {
             <p className="mt-1 font-heading text-4xl font-bold tabular-nums">{stats[period]}</p>
             <SegmentedControl
               aria-label="ช่วงเวลา"
+              variant="brand"
               className="mt-5 w-full"
               value={period}
               onValueChange={setPeriod}

@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils"
 const glassButtonVariants = cva(
   "relative isolate inline-flex shrink-0 items-center justify-center gap-2 rounded-full border text-sm font-semibold whitespace-nowrap outline-none select-none touch-manipulation " +
     "backdrop-blur-glass backdrop-saturate-180 " +
+    // inside another glass surface the parent already blurs the backdrop; skip the nested (costly) pass
+    "in-data-[slot=glass-card]:backdrop-filter-none in-data-[slot=glass-navbar]:backdrop-filter-none " +
     "shadow-[inset_0_1px_0_0_var(--glass-highlight),0_8px_24px_-10px_var(--glass-shadow)] " +
     // spring press feedback; disabled for reduced motion
     "transition-[transform,background-color,box-shadow] duration-500 ease-spring-snappy active:scale-[0.96] motion-reduce:transition-none motion-reduce:active:scale-100 " +

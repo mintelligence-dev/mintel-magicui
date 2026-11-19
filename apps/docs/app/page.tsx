@@ -84,7 +84,7 @@ function Preview({
   children: React.ReactNode
 }) {
   return (
-    <Card className={cn("gap-0 overflow-hidden py-0", wrapperClassName)}>
+    <Card className={cn("gap-0 overflow-hidden py-0 [contain-intrinsic-size:auto_320px] [content-visibility:auto]", wrapperClassName)}>
       <div
         className={cn(
           "relative flex min-h-48 items-center justify-center overflow-hidden border-b bg-muted/30 p-6",
@@ -134,7 +134,7 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="relative isolate flex flex-col items-center px-4 pt-20 pb-24 text-center sm:pt-28">
+      <section className="relative isolate flex flex-col items-center px-4 pt-20 pb-24 text-center [contain-intrinsic-size:auto_900px] [content-visibility:auto] sm:pt-28">
         <DotPattern
           className="-z-10 text-brand/30 [mask-image:radial-gradient(520px_circle_at_center,white,transparent)]"
         />

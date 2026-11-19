@@ -11,7 +11,7 @@ const SPRING = { type: "spring", stiffness: 400, damping: 32, mass: 1 } as const
 type Option = { value: string; label: React.ReactNode }
 
 /**
- * Segmented control: a glass track with a thumb that springs to the selected option.
+ * Segmented control: a tinted track with a thumb that springs to the selected option.
  * Keyboard: arrow keys move the selection (radiogroup semantics).
  */
 function SegmentedControl({
@@ -21,6 +21,7 @@ function SegmentedControl({
   onValueChange,
   className,
   "aria-label": ariaLabel,
+  variant = "default",
 }: {
   options: Option[]
   value?: string
@@ -28,6 +29,8 @@ function SegmentedControl({
   onValueChange?: (value: string) => void
   className?: string
   "aria-label"?: string
+  /** `default`: white thumb (neutral). `brand`: brand-colored thumb. */
+  variant?: "default" | "brand"
 }) {
   const [uncontrolled, setUncontrolled] = React.useState(defaultValue ?? options[0]?.value)
   const value = controlled ?? uncontrolled
@@ -55,9 +58,10 @@ function SegmentedControl({
       aria-label={ariaLabel}
       data-slot="segmented-control"
       className={cn(
-        "relative inline-flex items-center gap-0.5 rounded-full border border-glass-border bg-glass p-1 backdrop-blur-glass backdrop-saturate-180",
-        "shadow-[inset_0_1px_2px_0_var(--glass-shadow)]",
-        "not-supports-[backdrop-filter:blur(1px)]:bg-muted [@media(prefers-reduced-transparency:reduce)]:bg-muted",
+        // Tinted track (no backdrop-filter): readable on any surface, including inside glass cards,
+        // and avoids a second, nested backdrop blur.
+        "relative inline-flex items-center gap-0.5 rounded-full p-1",
+        "bg-foreground/[0.07] shadow-[inset_0_1px_2px_0_rgb(0_0_0/0.08)] dark:bg-white/[0.08]",
         className
       )}
     >
@@ -76,17 +80,28 @@ function SegmentedControl({
             onClick={() => select(o.value)}
             onKeyDown={(e) => onKeyDown(e, i)}
             className={cn(
-              "relative z-10 min-h-9 flex-1 rounded-full px-4 text-sm font-medium whitespace-nowrap transition-colors outline-none touch-manipulation focus-visible:ring-[3px] focus-visible:ring-ring/50",
+              "relative z-10 min-h-9 flex-1 rounded-full px-4 text-sm whitespace-nowrap outline-none touch-manipulation select-none",
+              "transition-[color,transform] duration-300 ease-spring-snappy active:scale-95 motion-reduce:transition-none motion-reduce:active:scale-100",
+              "focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background",
               // larger hit area on touch screens without changing the visual size
               "after:absolute after:-inset-y-1.5 after:inset-x-0 pointer-fine:after:hidden",
-              active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              active
+                ? variant === "brand"
+                  ? "font-semibold text-brand-foreground"
+                  : "font-semibold text-foreground"
+                : "font-medium text-muted-foreground hover:text-foreground"
             )}
           >
             {active && (
               <motion.span
                 layoutId={layoutId}
                 transition={reduceMotion ? { duration: 0 } : SPRING}
-                className="absolute inset-0 -z-10 rounded-full border border-glass-border bg-background/90 shadow-[0_2px_8px_-2px_var(--glass-shadow),inset_0_1px_0_0_var(--glass-highlight)] dark:bg-white/15"
+                className={cn(
+                  "absolute inset-0 -z-10 rounded-full",
+                  variant === "brand"
+                    ? "bg-brand shadow-[0_4px_14px_-4px_var(--brand),inset_0_1px_0_0_rgb(255_255_255/0.25)]"
+                    : "bg-background shadow-[0_1px_2px_rgb(0_0_0/0.1),0_6px_16px_-6px_var(--glass-shadow)] ring-1 ring-black/5 dark:bg-white/20 dark:ring-white/10"
+                )}
               />
             )}
             {o.label}
