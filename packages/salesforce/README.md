@@ -14,8 +14,8 @@ the namespace is the prefix:
 
 No package version exists yet. Before creating one, the namespace must be registered in a Developer Edition org
 owned by M-Intelligence and linked to the Dev Hub. Until then, a direct deploy puts the components in the target
-org's default namespace (`c`), where generic names such as `tabs`, `path` or `kanban` can overwrite components
-that already exist there, so check the target org for same-named bundles first.
+org's default namespace (`c`), where generic names such as `tabs`, `path` or `kanban` could collide with existing
+components; `npm run deploy` checks for that and refuses to overwrite them (see Deploy).
 
 | Metadata | What it does |
 |---|---|
@@ -35,8 +35,14 @@ that already exist there, so check the target org for same-named bundles first.
 ```bash
 sf org login web --alias my-org
 cd packages/salesforce
-sf project deploy start --source-dir force-app --target-org my-org
+npm run deploy:check -- --target-org my-org   # only checks for name conflicts
+npm run deploy -- --target-org my-org         # checks, then deploys
 ```
+
+`npm run deploy` first looks for LWC in the org's default namespace with the same names as ours (`tabs`, `path`,
+`kanban`, …). Bundles whose description starts with `[Mintel UI]` are ours from an earlier deploy and get
+updated; anything else stops the deploy before a single file is written, and lists the conflicts. Any extra
+flags are passed on to `sf project deploy start`.
 
 Then, in Lightning App Builder, add **Mintel Brand Loader** once to the app/home/record pages you want rebranded,
 and place the other components where you need them. All components are available in the Salesforce mobile app

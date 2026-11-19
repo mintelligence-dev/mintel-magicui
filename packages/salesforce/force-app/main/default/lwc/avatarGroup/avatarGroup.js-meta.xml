@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Avatar Group</masterLabel>
-    <description>Overlapping avatars with a +N bubble.</description>
+    <description>[Mintel UI] Overlapping avatars with a +N bubble.</description>
     <targets>
         <target>lightning__RecordPage</target>
         <target>lightning__AppPage</target>

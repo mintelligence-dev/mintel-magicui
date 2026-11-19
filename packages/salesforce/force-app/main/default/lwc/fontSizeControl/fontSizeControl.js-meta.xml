@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Font Size Control</masterLabel>
-    <description>Text-size control (ก- ก ก+) for Experience Cloud sites.</description>
+    <description>[Mintel UI] Text-size control (ก- ก ก+) for Experience Cloud sites.</description>
     <targets>
         <target>lightningCommunity__Page</target>
         <target>lightningCommunity__Default</target>

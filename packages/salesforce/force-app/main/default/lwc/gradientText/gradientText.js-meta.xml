@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Gradient Text</masterLabel>
-    <description>Animated brand-gradient headline.</description>
+    <description>[Mintel UI] Animated brand-gradient headline.</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>

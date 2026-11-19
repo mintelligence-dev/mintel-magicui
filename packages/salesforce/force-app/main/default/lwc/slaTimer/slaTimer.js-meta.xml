@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel SLA Timer</masterLabel>
-    <description>Countdown to a deadline field (green, amber, red), e.g. a Case SLA.</description>
+    <description>[Mintel UI] Countdown to a deadline field (green, amber, red), e.g. a Case SLA.</description>
     <targets>
         <target>lightning__RecordPage</target>
         <target>lightning__AppPage</target>

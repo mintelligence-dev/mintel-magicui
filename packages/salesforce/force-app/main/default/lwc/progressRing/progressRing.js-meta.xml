@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Progress Ring</masterLabel>
-    <description>Percentage ring that sweeps in, from a record field or a fixed value.</description>
+    <description>[Mintel UI] Percentage ring that sweeps in, from a record field or a fixed value.</description>
     <targets>
         <target>lightning__RecordPage</target>
         <target>lightning__AppPage</target>

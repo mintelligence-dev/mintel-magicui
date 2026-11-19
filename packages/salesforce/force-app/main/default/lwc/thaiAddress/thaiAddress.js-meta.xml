@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Thai Address</masterLabel>
-    <description>Thai province, district, sub-district and postal code, for Flow screens and Lightning pages.</description>
+    <description>[Mintel UI] Thai province, district, sub-district and postal code, for Flow screens and Lightning pages.</description>
     <targets>
         <target>lightning__FlowScreen</target>
         <target>lightning__AppPage</target>

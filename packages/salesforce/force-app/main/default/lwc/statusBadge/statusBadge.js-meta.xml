@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Status Badge</masterLabel>
-    <description>Status pill with a colored dot, from a record field or a fixed value.</description>
+    <description>[Mintel UI] Status pill with a colored dot, from a record field or a fixed value.</description>
     <targets>
         <target>lightning__RecordPage</target>
         <target>lightning__AppPage</target>

@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Path</masterLabel>
-    <description>Stage path in Mintel colors. On record pages it reads and updates a picklist field.</description>
+    <description>[Mintel UI] Stage path in Mintel colors. On record pages it reads and updates a picklist field.</description>
     <targets>
         <target>lightning__RecordPage</target>
         <target>lightning__AppPage</target>

@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Segmented Control</masterLabel>
-    <description>Segmented control with a spring-animated thumb.</description>
+    <description>[Mintel UI] Segmented control with a spring-animated thumb.</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>
