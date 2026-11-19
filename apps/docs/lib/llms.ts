@@ -92,6 +92,8 @@ function intro(full: boolean): string[] {
     "- Files land in `components/ui/<name>.tsx`; sections land in `components/section-*.tsx`; templates land in `app/<route>/page.tsx`.",
     "- Components with state or event handlers are client components: files that use them need `\"use client\"`, as the examples show.",
     "- Icons in the examples come from `lucide-react`.",
+    "- Installing an item also installs the other Mintel items and npm packages it depends on.",
+    "- Components built on Radix take the Radix props (`open` / `onOpenChange`, `checked` / `onCheckedChange`, `value` / `onValueChange`); the component names a section exports are the ones its example imports.",
     "- When Mintel has a component, use it instead of the stock shadcn one with the same name. For anything Mintel does not have, stock shadcn components work with the theme.",
     `- The source and dependencies of an item are at \`${REGISTRY_URL}/<name>.json\`; the index of all items is \`${REGISTRY_URL}/registry.json\`.`,
     `- Step-by-step guide: ${abs("/getting-started")}`,
@@ -189,7 +191,12 @@ export function buildLlmsFull(): string {
   lines.push("# React: Page templates", "")
   for (const b of blocks as { name: string; title: string; description: string; route?: string; registryDependencies?: string[] }[]) {
     lines.push(`## ${b.title} (\`@mintel/${b.name}\`)`, "", oneLine(b.description), "")
-    lines.push(`- Install: \`npx shadcn@latest add @mintel/${b.name}\`${b.route ? ` (creates \`app/${b.route}/page.tsx\`)` : ""}`, `- Preview: ${abs(`/templates/${b.name}`)}`, "")
+    lines.push(
+      `- Install: \`npx shadcn@latest add @mintel/${b.name}\`${b.route ? ` (creates \`app/${b.route}/page.tsx\`)` : ""}`,
+      `- Preview: ${abs(`/templates/${b.name}`)}`,
+      `- Full source, as a pattern to follow: \`${REGISTRY_URL}/${b.name}.json\` (\`files[0].content\`)`,
+      ""
+    )
   }
 
   for (const g of SF_GROUP_ORDER) {

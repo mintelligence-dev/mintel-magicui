@@ -148,6 +148,78 @@ export const SF_GUIDES: Record<string, SfGuide> = {
       l("More than one per page with different themes.", "วางหลายตัวในหน้าเดียวโดยตั้ง Theme ต่างกัน"),
     ],
   },
+  recordHeader: {
+    use: [l("A branded header at the top of a record page: the title, a status and up to four key fields.", "header สีแบรนด์ด้านบนของหน้า record แสดงชื่อ สถานะ และฟิลด์สำคัญไม่เกิน 4 ช่อง")],
+    avoid: [
+      l("You need the record's standard action buttons: keep the standard Highlights Panel.", "ต้องการปุ่ม action มาตรฐานของ record ให้ใช้ Highlights Panel มาตรฐาน"),
+      l("Showing only a status.", "แสดงแค่สถานะ", "statusBadge"),
+    ],
+  },
+  conversation: {
+    use: [l("A chat thread on a Case or Messaging Session, inside your own LWC that supplies the messages.", "แชตบนหน้า Case หรือ Messaging Session ภายใน LWC ของเราเองที่ส่งข้อความเข้ามา")],
+    avoid: [
+      l("Dropping it on a page and expecting messages: it does not fetch them itself.", "ลากวางบนหน้าแล้วคาดว่าจะมีข้อความ เพราะตัวมันไม่ได้ดึงข้อความเอง"),
+      l("Tasks and Events of a record.", "Task และ Event ของ record", "activityTimeline"),
+    ],
+  },
+  thaiAddress: {
+    use: [l("A Thai address in a Flow screen or on a page: province, district, sub-district and postal code that stay consistent.", "ที่อยู่ไทยใน Flow screen หรือบนหน้า จังหวัด อำเภอ ตำบล และรหัสไปรษณีย์ที่สอดคล้องกันเสมอ")],
+    avoid: [l("Addresses outside Thailand: use the standard address field.", "ที่อยู่ต่างประเทศ ควรใช้ช่องที่อยู่มาตรฐาน")],
+  },
+  progressRing: {
+    use: [l("A percent field of the record as a ring: Opportunity Probability, a completion rate.", "ฟิลด์เปอร์เซ็นต์ของ record แสดงเป็นวงแหวน เช่น Probability ของ Opportunity อัตราความสำเร็จ")],
+    avoid: [
+      l("A number with its direction over time.", "ตัวเลขพร้อมแนวโน้มตามเวลา", "kpiTrend"),
+      l("Time left until a deadline.", "เวลาที่เหลือก่อนครบกำหนด", "slaTimer"),
+    ],
+  },
+  statusBadge: {
+    use: [l("A picklist value of the record as a colored pill, read only.", "ค่า picklist ของ record แสดงเป็นป้ายสี อ่านอย่างเดียว")],
+    avoid: [l("Letting people change the stage.", "ให้ผู้ใช้เปลี่ยนสถานะ", "path")],
+  },
+  emptyState: {
+    use: [l("A related list or page with nothing yet: say why and offer the next step.", "related list หรือหน้าที่ยังไม่มีข้อมูล บอกเหตุผลและให้ปุ่มทำขั้นถัดไป")],
+    avoid: [l("Errors: show the error message instead.", "กรณีเกิดข้อผิดพลาด ควรแสดงข้อความผิดพลาดแทน")],
+  },
+  avatarGroup: {
+    use: [l("The people on a record at a glance: a case team, account owners.", "คนที่เกี่ยวข้องกับ record แบบมองแวบเดียว เช่น ทีมดูแลเคส เจ้าของบัญชี")],
+    avoid: [l("A list of people with their details.", "รายชื่อคนพร้อมรายละเอียด", "relatedCards")],
+  },
+  glassCard: {
+    use: [l("Content you want to stand out on a colored or image background: an AI summary, a highlight.", "เนื้อหาที่อยากให้เด่นบนพื้นสีหรือรูป เช่น สรุปจาก AI ข้อความเน้น")],
+    avoid: [l("Ordinary content on a plain page: use the standard card.", "เนื้อหาทั่วไปบนหน้าเรียบๆ ควรใช้ card มาตรฐาน")],
+  },
+  shimmerButton: {
+    use: [l("The one main call to action, mostly on Experience Cloud pages.", "ปุ่มหลักเพียงปุ่มเดียว โดยเฉพาะบนหน้า Experience Cloud")],
+    avoid: [
+      l("The everyday actions of a record page.", "คำสั่งประจำของหน้า record", "quickActions"),
+      l("More than one on a page.", "มากกว่า 1 ปุ่มในหน้าเดียว"),
+    ],
+  },
+  gradientText: {
+    use: [l("A short headline on an app, home or Experience Cloud page.", "หัวข้อสั้นๆ บนหน้า app, home หรือ Experience Cloud")],
+    avoid: [l("Body text or field values.", "เนื้อหาทั่วไปหรือค่าของฟิลด์")],
+  },
+  fontSizeControl: {
+    use: [l("Public Experience Cloud sites for a wide audience, including older readers.", "เว็บ Experience Cloud สาธารณะที่มีผู้ใช้หลากหลาย รวมถึงผู้สูงอายุ")],
+    avoid: [l("Lightning Experience: it is not offered there, because the global font size should not change.", "Lightning Experience ซึ่งไม่เปิดให้ใช้ เพราะไม่ควรเปลี่ยนขนาดฟอนต์ของทั้งระบบ")],
+  },
+  siteHero: {
+    use: [l("The top of an Experience Cloud landing page.", "ส่วนบนสุดของหน้า landing บน Experience Cloud")],
+    avoid: [l("Internal Lightning pages.", "หน้า Lightning ภายใน")],
+  },
+  siteFeatures: {
+    use: [l("Three to six features or services on an Experience Cloud page.", "ฟีเจอร์หรือบริการ 3–6 ข้อบนหน้า Experience Cloud")],
+    avoid: [l("Internal Lightning pages.", "หน้า Lightning ภายใน")],
+  },
+  siteFaq: {
+    use: [l("A short list of common questions on an Experience Cloud page.", "คำถามที่พบบ่อยจำนวนไม่มากบนหน้า Experience Cloud")],
+    avoid: [l("A searchable help center: use Salesforce Knowledge components.", "ศูนย์ช่วยเหลือที่ต้องค้นหาได้ ควรใช้ component ของ Salesforce Knowledge")],
+  },
+  siteCta: {
+    use: [l("Closing an Experience Cloud page with one action.", "ปิดท้ายหน้า Experience Cloud ด้วยการกระทำเดียว")],
+    avoid: [l("More than once on a page.", "ใช้มากกว่า 1 ครั้งต่อหน้า")],
+  },
 }
 
 // Build-time check: every guide and every "use instead" link points at a real component.

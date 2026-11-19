@@ -312,7 +312,7 @@ const en = {
       gradientText: "Headline filled with a slowly moving brand gradient.",
       statCard: "KPI card whose number counts up when it appears.",
       quickActions:
-        "Big buttons for the actions people use most on a page: start a Flow, open a quick action (New task, Log a call), go to a URL, or tell your own LWC. Configured in App Builder, one line per button.",
+        "Big buttons for the actions people use most on a page: start a Flow, open a quick action (New task, Log a call), go to a URL, or tell your own LWC. Configured in App Builder as one text value, buttons separated by semicolons.",
       filesGallery:
         "The record's files as cards with image thumbnails or a file-type tile; a click opens Salesforce's own file preview. Reads the Files related list through the UI API, no Apex.",
       kpiTrend:
@@ -639,7 +639,7 @@ const th: Dict = {
       gradientText: "หัวข้อที่เติมสีไล่เฉดแบรนด์ซึ่งค่อยๆ เคลื่อนที่",
       statCard: "การ์ด KPI ที่ตัวเลขนับขึ้นตอนแสดงผล",
       quickActions:
-        "ปุ่มใหญ่สำหรับงานที่ทำบ่อยบนหน้า: เปิด Flow, เปิด quick action (สร้าง Task, บันทึกการโทร), ไปที่ลิงก์ หรือส่ง event ให้ LWC ของเรา ตั้งใน App Builder บรรทัดละปุ่ม",
+        "ปุ่มใหญ่สำหรับงานที่ทำบ่อยบนหน้า: เปิด Flow, เปิด quick action (สร้าง Task, บันทึกการโทร), ไปที่ลิงก์ หรือส่ง event ให้ LWC ของเรา ตั้งใน App Builder เป็นข้อความเดียว คั่นแต่ละปุ่มด้วยเครื่องหมาย ;",
       filesGallery:
         "ไฟล์ของ record เป็นการ์ด รูปภาพมีภาพย่อ ไฟล์อื่นแสดงชนิดไฟล์ กดแล้วเปิดหน้าดูไฟล์ของ Salesforce ดึงจาก related list Files ผ่าน UI API ไม่ใช้ Apex",
       kpiTrend:
