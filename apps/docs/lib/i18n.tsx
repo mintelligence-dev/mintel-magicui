@@ -147,6 +147,7 @@ const en = {
   docs: {
     gettingStarted: "Getting started",
     themes: "Themes",
+    changelog: "Changelog",
     whenToUse: "When to use",
     use: "Use it for",
     avoid: "Not for",
@@ -260,7 +261,7 @@ const en = {
       },
       {
         title: "Ready-made Mintel LWC",
-        body: "Glass card, shimmer button, gradient text and stat card — drag them onto any Lightning or Experience Builder page.",
+        body: "Record pages, KPIs, kanban, timelines, Thai forms, chat and Experience Cloud sections — about 30 components to drag onto any Lightning or Experience Builder page.",
       },
     ],
     previewTitle: "Live preview: SLDS vs. Mintel",
@@ -325,20 +326,20 @@ const en = {
       recordForm:
         "Edit or create a record with fields grouped in sections, two columns on wide screens and a save bar that stays in view. Built on lightning-record-edit-form, so field types, validation and field-level security come from Salesforce; no Apex.",
       brandLoader:
-        "Invisible helper: drop it once on an app, home or record page to load the mintelGlobal stylesheet, so standard lightning-* components switch to the Mintel brand.",
+        "Invisible helper: drop it once on an app, home or record page. Theme “brand” loads the mintelGlobal stylesheet, so standard lightning-* components switch to the Mintel brand; “follow-org” does the opposite and makes the Mintel components take the org's SLDS 2 theme.",
       fontSizeControl:
         "Text-size control (ก- ก ก+) for Experience Cloud: scales the page and remembers the choice. Not for Lightning Experience, whose global font size should not change.",
     },
     deployTitle: "Deploy to your org",
     deploySteps: [
       "Log in to the org with the Salesforce CLI.",
-      "Deploy the SFDX project from packages/salesforce.",
+      "Deploy with npm run deploy: it checks the org for name conflicts first.",
       "In Lightning App Builder, add “Mintel Brand Loader” once per page, then place the components you need.",
     ],
     lwrTitle: "Experience Cloud (LWR)",
     lwrBody: "Instead of the loader, link the static resource from Settings → Advanced → Edit Head Markup:",
     ownTitle: "Use the tokens in your own LWC",
-    ownBody: "Import the module at the top of the component's CSS. For dark mode, add class=\"mintel-dark\" on the host element.",
+    ownBody: "Import the module at the top of the component's CSS. For dark mode, add class=\"mintel-dark\" on the host element; to follow the org's SLDS 2 theme instead of the Mintel brand, add class=\"mintel-follow-org\".",
     statusTitle: "Status",
     status:
       "All bundles compile with @lwc/compiler and the SLDS hook names are checked against the SLDS CSS. Not yet tested in a real org — report anything that differs, especially on SLDS 2 (Cosmos).",
@@ -474,6 +475,7 @@ const th: Dict = {
   docs: {
     gettingStarted: "เริ่มต้นใช้งาน",
     themes: "ธีม",
+    changelog: "บันทึกการเปลี่ยนแปลง",
     whenToUse: "ควรใช้เมื่อไหร่",
     use: "เหมาะกับ",
     avoid: "ไม่เหมาะกับ",
@@ -587,7 +589,7 @@ const th: Dict = {
       },
       {
         title: "LWC สำเร็จรูปของ Mintel",
-        body: "Glass card, shimmer button, gradient text และ stat card ลากวางบนหน้า Lightning หรือ Experience Builder ได้เลย",
+        body: "หน้า record, KPI, kanban, timeline, ฟอร์มไทย, แชต และ section สำหรับ Experience Cloud รวมราว 30 ตัว ลากวางบนหน้า Lightning หรือ Experience Builder ได้เลย",
       },
     ],
     previewTitle: "ตัวอย่างจริง: SLDS เทียบกับ Mintel",
@@ -651,20 +653,20 @@ const th: Dict = {
       recordForm:
         "ฟอร์มแก้ไขหรือสร้าง record จัดฟิลด์เป็นหมวด จอกว้างแสดง 2 คอลัมน์ และแถบปุ่มบันทึกติดด้านล่างเสมอ ใช้ lightning-record-edit-form ของ Salesforce จึงได้ชนิดฟิลด์ การตรวจค่า และสิทธิ์ระดับฟิลด์มาเอง ไม่ใช้ Apex",
       brandLoader:
-        "ตัวช่วยที่มองไม่เห็น วางครั้งเดียวในหน้า app, home หรือ record เพื่อโหลด stylesheet mintelGlobal ให้ component มาตรฐาน lightning-* เป็นแบรนด์ Mintel",
+        "ตัวช่วยที่มองไม่เห็น วางครั้งเดียวในหน้า app, home หรือ record ถ้าตั้ง Theme เป็น “brand” จะโหลด stylesheet mintelGlobal ให้ component มาตรฐาน lightning-* เป็นแบรนด์ Mintel ส่วน “follow-org” กลับกัน คือให้ component ของ Mintel ใช้ธีม SLDS 2 ของ org แทน",
       fontSizeControl:
         "ปุ่มปรับขนาดตัวอักษร (ก- ก ก+) สำหรับ Experience Cloud ขยายทั้งหน้าและจำค่าที่เลือก ไม่ใช้กับ Lightning Experience เพราะไม่ควรเปลี่ยนขนาดฟอนต์ของทั้งระบบ",
     },
     deployTitle: "Deploy เข้า org",
     deploySteps: [
       "Login เข้า org ด้วย Salesforce CLI",
-      "Deploy SFDX project จาก packages/salesforce",
+      "Deploy ด้วย npm run deploy ซึ่งจะตรวจชื่อซ้ำใน org ก่อน",
       "ใน Lightning App Builder ใส่ “Mintel Brand Loader” หน้าละ 1 ตัว แล้ววาง component ที่ต้องการ",
     ],
     lwrTitle: "Experience Cloud (LWR)",
     lwrBody: "แทนการใช้ loader ให้ link static resource ที่ Settings → Advanced → Edit Head Markup:",
     ownTitle: "ใช้ token ใน LWC ของทีมเอง",
-    ownBody: "Import module ที่บรรทัดแรกของ CSS ใน component ถ้าต้องการ dark mode ให้ใส่ class=\"mintel-dark\" ที่ host element",
+    ownBody: "Import module ที่บรรทัดแรกของ CSS ใน component ถ้าต้องการ dark mode ให้ใส่ class=\"mintel-dark\" ที่ host element ถ้าอยากให้ใช้ธีม SLDS 2 ของ org แทนแบรนด์ Mintel ให้ใส่ class=\"mintel-follow-org\"",
     statusTitle: "สถานะ",
     status:
       "ทุก bundle ผ่าน @lwc/compiler และตรวจชื่อ SLDS hook กับ CSS ของ SLDS แล้ว ยังไม่ได้ทดสอบใน org จริง — ถ้าเจออะไรต่างไป โดยเฉพาะบน SLDS 2 (Cosmos) แจ้งได้เลย",
