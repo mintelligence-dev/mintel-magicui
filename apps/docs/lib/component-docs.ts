@@ -297,7 +297,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("accept", "string", 'Like <input accept>: ".pdf,image/*".', 'เหมือน <input accept> เช่น ".pdf,image/*"'),
       p("maxSize", "number", "Max bytes per file.", "ขนาดสูงสุดต่อไฟล์ (ไบต์)"),
       p("multiple", "boolean", "Allow several files.", "เลือกได้หลายไฟล์", "true"),
-      p("locale", '"en" | "th"', "Label language.", "ภาษาของป้าย", '"en"'),
+      p("locale", '"th" | "en"', "Label language.", "ภาษาของป้าย", '"th"'),
     ],
   },
   "thai-address": {

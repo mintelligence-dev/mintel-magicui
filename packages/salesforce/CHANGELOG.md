@@ -2,6 +2,12 @@
 
 Lightning Web Components, static resources and deploy scripts for Salesforce.
 
+## 0.2.2 — 2026-11-20
+
+### Patch Changes
+
+- f032504: Every React component and every LWC page now has "When to use / Not for" guidance (75 more components and 15 more LWC), and /llms.txt carries it for all of them. Quick Actions: the App Builder property now explains the format (buttons separated by semicolons, the four types and their targets); no behavior change.
+
 ## 0.2.1 — 2026-11-20
 
 ### Patch Changes

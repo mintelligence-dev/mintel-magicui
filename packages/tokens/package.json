@@ -1,6 +1,6 @@
 {
   "name": "@mintelligence-dev/tokens",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "M-Intelligence design tokens — CSS variables, Tailwind v4 theme, JS tokens and Salesforce LWC/SLDS outputs from one source.",
   "license": "MIT",
   "type": "module",

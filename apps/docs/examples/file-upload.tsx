@@ -18,6 +18,7 @@ export default function FileUploadExample() {
 
   return (
     <FileUpload
+      locale="en"
       className="w-full max-w-md"
       files={files}
       onFilesChange={setFiles}
