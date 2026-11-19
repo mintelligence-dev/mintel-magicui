@@ -11,6 +11,17 @@
   --animate-shine: shine var(--duration) infinite linear;
 }
 
+@keyframes mintel-shake {
+  0%, 100% {
+    translate: 0;
+  }
+  20%, 60% {
+    translate: -4px;
+  }
+  40%, 80% {
+    translate: 4px;
+  }
+}
 @keyframes mintel-skeleton {
   to {
     transform: translateX(100%);

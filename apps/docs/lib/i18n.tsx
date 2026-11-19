@@ -278,7 +278,7 @@ const en = {
       mintelPath:
         "Stage path in Mintel colors. On a record page it reads a picklist (e.g. Case Status), and changes it in two steps — select, then “Mark as current stage”. Works without a record too.",
       mintelTabs:
-        "Tabs whose pill or underline springs to the active tab. Wrap c-mintel-tab children; arrow keys move between tabs. For composing inside your own LWC.",
+        "Tabs whose pill or underline springs to the active tab. Two parts, like lightning-tabset and lightning-tab: c-mintel-tabs is the tab bar (selection, indicator, arrow keys, tabchange); each c-mintel-tab holds one tab's label and content. For composing inside your own LWC.",
       mintelSegmentedControl:
         "Segmented control with a sliding thumb, for switching views or ranges. Set options in App Builder as value:Label pairs, or pass an array from JS.",
       mintelStatusBadge:
@@ -568,7 +568,7 @@ const th: Dict = {
       mintelPath:
         "แถบขั้นตอนสี Mintel บนหน้า record จะอ่าน picklist (เช่น Case Status) และเปลี่ยนค่าแบบ 2 ขั้น — เลือก แล้วกด “ตั้งเป็นขั้นปัจจุบัน” ใช้แบบไม่มี record ก็ได้",
       mintelTabs:
-        "แท็บที่ตัวไฮไลต์ (pill หรือขีดเส้นใต้) เด้งไปหาแท็บที่เลือก ใส่ c-mintel-tab ไว้ข้างใน ใช้ปุ่มลูกศรเลื่อนแท็บได้ ใช้ประกอบใน LWC ของเราเอง",
+        "แท็บที่ตัวไฮไลต์ (pill หรือขีดเส้นใต้) เด้งไปหาแท็บที่เลือก มี 2 ส่วนเหมือน lightning-tabset กับ lightning-tab: c-mintel-tabs คือแถบแท็บ (จำแท็บที่เลือก ตัวไฮไลต์ ปุ่มลูกศร และ event tabchange) ส่วน c-mintel-tab แต่ละตัวคือ 1 แท็บ เก็บชื่อแท็บและเนื้อหา ใช้ประกอบใน LWC ของเราเอง",
       mintelSegmentedControl:
         "ตัวเลือกแบบแบ่งช่อง มีแถบเลื่อนไปยังช่องที่เลือก ใช้สลับมุมมองหรือช่วงเวลา ตั้ง options ใน App Builder เป็นคู่ value:Label หรือส่ง array จาก JS",
       mintelStatusBadge:

@@ -353,7 +353,20 @@
           "path": "registry/mintel/ui/input.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-shake": {
+          "0%, 100%": {
+            "translate": "0"
+          },
+          "20%, 60%": {
+            "translate": "-4px"
+          },
+          "40%, 80%": {
+            "translate": "4px"
+          }
+        }
+      }
     },
     {
       "name": "dialog",
@@ -750,7 +763,20 @@
           "path": "registry/mintel/ui/textarea.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-shake": {
+          "0%, 100%": {
+            "translate": "0"
+          },
+          "20%, 60%": {
+            "translate": "-4px"
+          },
+          "40%, 80%": {
+            "translate": "4px"
+          }
+        }
+      }
     },
     {
       "name": "checkbox",

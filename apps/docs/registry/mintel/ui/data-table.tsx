@@ -13,7 +13,7 @@ import {
   type RowSelectionState,
   type SortingState,
 } from "@tanstack/react-table"
-import { ArrowDownIcon, ArrowUpDownIcon, ArrowUpIcon, SearchIcon } from "lucide-react"
+import { ArrowUpDownIcon, ArrowUpIcon, SearchIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Checkbox } from "@/registry/mintel/ui/checkbox"
@@ -44,7 +44,6 @@ const LABELS = {
 function DataTableColumnHeader<TData>({ column, title, className }: { column: Column<TData>; title: string; className?: string }) {
   if (!column.getCanSort()) return <span className={className}>{title}</span>
   const sorted = column.getIsSorted()
-  const Icon = sorted === "asc" ? ArrowUpIcon : sorted === "desc" ? ArrowDownIcon : ArrowUpDownIcon
   return (
     <button
       type="button"
@@ -52,7 +51,17 @@ function DataTableColumnHeader<TData>({ column, title, className }: { column: Co
       className={cn("-ml-2 inline-flex h-8 items-center gap-1.5 rounded-md px-2 [font:inherit] [letter-spacing:inherit] [text-transform:inherit] transition-colors hover:bg-muted hover:text-foreground", sorted && "text-brand", className)}
     >
       {title}
-      <Icon className={cn("size-3.5", !sorted && "opacity-50")} />
+      {/* One arrow that turns between ascending and descending (spring), instead of swapping icons. */}
+      {sorted ? (
+        <ArrowUpIcon
+          className={cn(
+            "size-3.5 transition-transform duration-500 ease-spring-snappy motion-reduce:transition-none",
+            sorted === "desc" && "rotate-180"
+          )}
+        />
+      ) : (
+        <ArrowUpDownIcon className="size-3.5 opacity-50" />
+      )}
     </button>
   )
 }
@@ -175,8 +184,14 @@ function DataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() ? "selected" : undefined}>
+              table.getRowModel().rows.map((row, i) => (
+                // Rows that appear (new page, search, sort) fade in with a short stagger.
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() ? "selected" : undefined}
+                  className="motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1 motion-safe:fill-mode-both motion-safe:duration-300"
+                  style={{ animationDelay: `${Math.min(i, 10) * 25}ms` }}
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                   ))}

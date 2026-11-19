@@ -22,11 +22,14 @@ function EmptyState({
   return (
     <div
       data-slot="empty-state"
-      className={cn("flex flex-col items-center justify-center gap-1 rounded-xl border border-dashed px-6 py-10 text-center", className)}
+      className={cn(
+        "flex flex-col items-center justify-center gap-1 rounded-xl border border-dashed px-6 py-10 text-center motion-safe:animate-in motion-safe:fade-in-0 motion-safe:duration-500",
+        className
+      )}
       {...props}
     >
       {icon && (
-        <div className="relative mb-3 flex size-14 items-center justify-center">
+        <div className="relative mb-3 flex size-14 items-center justify-center motion-safe:animate-in motion-safe:zoom-in-75 motion-safe:duration-700 motion-safe:ease-spring-bouncy">
           <span aria-hidden className="absolute inset-0 rounded-full bg-[image:var(--brand-gradient)] opacity-15 blur-md" />
           <span className="relative flex size-12 items-center justify-center rounded-2xl border bg-background text-brand shadow-sm [&_svg]:size-6">
             {icon}
