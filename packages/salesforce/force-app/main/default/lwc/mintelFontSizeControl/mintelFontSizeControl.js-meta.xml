@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Mintel Font Size Control</masterLabel>
+    <description>Text-size control (ก- ก ก+) for Experience Cloud sites.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="locale" type="String" label="Language" datasource="th,en" default="th" />
+            <property name="applyToPage" type="Boolean" label="Scale the whole page" default="true" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

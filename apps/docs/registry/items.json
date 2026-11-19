@@ -390,6 +390,21 @@
     ]
   },
   {
+    "name": "font-size-control",
+    "type": "registry:ui",
+    "title": "Font Size Control",
+    "description": "Text-size control (\u0e01- \u0e01 \u0e01+ / A- A A+) that scales the root font size and remembers the choice; includes a no-flash head script.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/font-size-control.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
     "name": "animated-beam",
     "type": "registry:ui",
     "title": "Animated Beam",

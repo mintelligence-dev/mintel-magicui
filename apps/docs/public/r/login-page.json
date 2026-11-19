@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "login-page",
+  "title": "Login page",
+  "description": "Split-screen sign-in: brand gradient panel with a glass testimonial, and an email/password form.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils",
+    "http://localhost:3000/r/mintel-theme.json",
+    "http://localhost:3000/r/aurora-text.json",
+    "http://localhost:3000/r/dot-pattern.json",
+    "http://localhost:3000/r/glass-card.json",
+    "http://localhost:3000/r/button.json",
+    "http://localhost:3000/r/checkbox.json",
+    "http://localhost:3000/r/input.json",
+    "http://localhost:3000/r/label.json",
+    "http://localhost:3000/r/toast.json"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/blocks/login-page.tsx",
+      "content": "\"use client\"\n\nimport { Cloud, Sparkles } from \"lucide-react\"\n\nimport { AuroraText } from \"@/registry/mintel/effects/aurora-text\"\nimport { DotPattern } from \"@/registry/mintel/effects/dot-pattern\"\nimport { GlassCard } from \"@/registry/mintel/glass/glass-card\"\nimport { Button } from \"@/registry/mintel/ui/button\"\nimport { Checkbox } from \"@/registry/mintel/ui/checkbox\"\nimport { Input } from \"@/registry/mintel/ui/input\"\nimport { Label } from \"@/registry/mintel/ui/label\"\nimport { toast } from \"@/registry/mintel/ui/toast\"\n\nexport default function LoginPage() {\n  return (\n    <div className=\"grid min-h-svh bg-background lg:grid-cols-2\">\n      {/* Brand panel */}\n      <div\n        className=\"relative hidden flex-col justify-between overflow-hidden p-10 text-white lg:flex\"\n        style={{\n          background:\n            \"radial-gradient(120% 120% at 10% 0%, var(--brand-cyan), transparent 55%), radial-gradient(120% 120% at 100% 100%, var(--brand-accent), transparent 55%), var(--brand)\",\n        }}\n      >\n        <DotPattern className=\"text-white/15\" />\n        <span className=\"relative flex items-center gap-2 font-heading text-lg font-semibold\">\n          <Sparkles className=\"size-5\" /> Mintel\n        </span>\n        <div className=\"relative space-y-6\">\n          <h1 className=\"font-heading text-5xl leading-tight font-bold\">\n            Every customer,\n            <br />\n            <AuroraText colors={[\"#ffffff\", \"#c1dbff\", \"#d4ceff\", \"#ffffff\"]}>one view.</AuroraText>\n          </h1>\n          <GlassCard className=\"max-w-sm p-5 text-sm text-glass-foreground\">\n            “Our agents answer LINE and Facebook in Salesforce without switching apps.”\n            <p className=\"mt-3 text-xs text-muted-foreground\">Head of Customer Service</p>\n          </GlassCard>\n        </div>\n        <p className=\"relative text-xs text-white/70\">© M Intelligence Co., Ltd.</p>\n      </div>\n\n      {/* Form */}\n      <div className=\"flex items-center justify-center px-6 py-12 pb-[max(env(safe-area-inset-bottom),3rem)]\">\n        <form\n          className=\"grid w-full max-w-sm gap-5\"\n          onSubmit={(e) => {\n            e.preventDefault()\n            toast.success(\"Signed in\")\n          }}\n        >\n          <div className=\"space-y-1\">\n            <h2 className=\"font-heading text-3xl font-bold tracking-tight\">Welcome back</h2>\n            <p className=\"text-sm text-muted-foreground\">Sign in to your workspace</p>\n          </div>\n          <div className=\"grid gap-2\">\n            <Label htmlFor=\"email\">Email</Label>\n            <Input id=\"email\" type=\"email\" autoComplete=\"email\" placeholder=\"name@company.com\" required />\n          </div>\n          <div className=\"grid gap-2\">\n            <div className=\"flex items-center justify-between\">\n              <Label htmlFor=\"password\">Password</Label>\n              <a href=\"#\" className=\"text-xs text-brand hover:underline\">\n                Forgot password?\n              </a>\n            </div>\n            <Input id=\"password\" type=\"password\" autoComplete=\"current-password\" required />\n          </div>\n          <div className=\"flex items-center gap-2\">\n            <Checkbox id=\"remember\" defaultChecked />\n            <Label htmlFor=\"remember\">Keep me signed in</Label>\n          </div>\n          <Button type=\"submit\" variant=\"brand\" size=\"lg\">\n            Sign in\n          </Button>\n          <div className=\"flex items-center gap-3 text-xs text-muted-foreground\">\n            <span className=\"h-px flex-1 bg-border\" /> or <span className=\"h-px flex-1 bg-border\" />\n          </div>\n          <Button type=\"button\" variant=\"outline\" size=\"lg\">\n            <Cloud /> Continue with Salesforce\n          </Button>\n        </form>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/login/page.tsx"
+    }
+  ],
+  "meta": {
+    "category": "template",
+    "route": "login"
+  },
+  "type": "registry:block"
+}

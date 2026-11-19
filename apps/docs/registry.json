@@ -8,11 +8,21 @@
       "type": "registry:theme",
       "title": "Mintel Theme",
       "description": "M-Intelligence brand theme: colors (light + dark), fonts and radius. Install this first.",
+      "css": {
+        "@layer base": {
+          "*": {
+            "border-color": "var(--border)"
+          },
+          "button:not(:disabled), [role=\"button\"]:not(:disabled)": {
+            "cursor": "pointer"
+          }
+        }
+      },
       "cssVars": {
         "theme": {
-          "font-sans": "Manrope, \"IBM Plex Sans Thai\", ui-sans-serif, system-ui, sans-serif",
-          "font-heading": "Rubik, \"IBM Plex Sans Thai\", ui-sans-serif, system-ui, sans-serif",
-          "font-mono": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, monospace",
+          "font-sans": "var(--font-manrope, Manrope), var(--font-plex-thai, \"IBM Plex Sans Thai\"), ui-sans-serif, system-ui, sans-serif",
+          "font-heading": "var(--font-rubik, Rubik), var(--font-plex-thai, \"IBM Plex Sans Thai\"), ui-sans-serif, system-ui, sans-serif",
+          "font-mono": "var(--font-jetbrains, \"JetBrains Mono\"), ui-monospace, SFMono-Regular, Menlo, monospace",
           "color-brand": "var(--brand)",
           "color-brand-foreground": "var(--brand-foreground)",
           "color-brand-accent": "var(--brand-accent)",
@@ -513,6 +523,21 @@
       "files": [
         {
           "path": "registry/mintel/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "font-size-control",
+      "type": "registry:ui",
+      "title": "Font Size Control",
+      "description": "Text-size control (ก- ก ก+ / A- A A+) that scales the root font size and remembers the choice; includes a no-flash head script.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/font-size-control.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1121,6 +1146,139 @@
       ],
       "meta": {
         "category": "mobile"
+      }
+    },
+    {
+      "name": "login-page",
+      "type": "registry:block",
+      "title": "Login page",
+      "description": "Split-screen sign-in: brand gradient panel with a glass testimonial, and an email/password form.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "http://localhost:3000/r/mintel-theme.json",
+        "http://localhost:3000/r/aurora-text.json",
+        "http://localhost:3000/r/dot-pattern.json",
+        "http://localhost:3000/r/glass-card.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/checkbox.json",
+        "http://localhost:3000/r/input.json",
+        "http://localhost:3000/r/label.json",
+        "http://localhost:3000/r/toast.json"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/blocks/login-page.tsx",
+          "type": "registry:page",
+          "target": "app/login/page.tsx"
+        }
+      ],
+      "meta": {
+        "category": "template",
+        "route": "login"
+      }
+    },
+    {
+      "name": "dashboard-page",
+      "type": "registry:block",
+      "title": "Dashboard",
+      "description": "Customer-service dashboard: sidebar, date-range filter, stat cards, and a cases table with channel filter and row actions.",
+      "dependencies": [
+        "lucide-react",
+        "react-day-picker"
+      ],
+      "registryDependencies": [
+        "utils",
+        "http://localhost:3000/r/mintel-theme.json",
+        "http://localhost:3000/r/number-ticker.json",
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/card.json",
+        "http://localhost:3000/r/combobox.json",
+        "http://localhost:3000/r/date-picker.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/table.json",
+        "http://localhost:3000/r/tabs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/blocks/dashboard-page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/page.tsx"
+        }
+      ],
+      "meta": {
+        "category": "template",
+        "route": "dashboard"
+      }
+    },
+    {
+      "name": "mobile-app-page",
+      "type": "registry:block",
+      "title": "Mobile app shell",
+      "description": "Mobile web / PWA shell: glass top bar, segmented filter, chat list, bottom tab bar and a compose drawer.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "http://localhost:3000/r/mintel-theme.json",
+        "http://localhost:3000/r/glass-button.json",
+        "http://localhost:3000/r/glass-navbar.json",
+        "http://localhost:3000/r/segmented-control.json",
+        "http://localhost:3000/r/drawer.json",
+        "http://localhost:3000/r/tab-bar.json",
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/textarea.json",
+        "http://localhost:3000/r/toast.json"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/blocks/mobile-app-page.tsx",
+          "type": "registry:page",
+          "target": "app/app/page.tsx"
+        }
+      ],
+      "meta": {
+        "category": "template",
+        "route": "app"
+      }
+    },
+    {
+      "name": "landing-page",
+      "type": "registry:block",
+      "title": "Landing page",
+      "description": "Marketing page: glass navbar, animated hero, logo marquee, feature cards with spotlight, stats and a call to action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "http://localhost:3000/r/mintel-theme.json",
+        "http://localhost:3000/r/animated-gradient-text.json",
+        "http://localhost:3000/r/aurora-text.json",
+        "http://localhost:3000/r/blur-fade.json",
+        "http://localhost:3000/r/dot-pattern.json",
+        "http://localhost:3000/r/magic-card.json",
+        "http://localhost:3000/r/marquee.json",
+        "http://localhost:3000/r/number-ticker.json",
+        "http://localhost:3000/r/shimmer-button.json",
+        "http://localhost:3000/r/glass-navbar.json",
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/blocks/landing-page.tsx",
+          "type": "registry:page",
+          "target": "app/landing/page.tsx"
+        }
+      ],
+      "meta": {
+        "category": "template",
+        "route": "landing"
       }
     }
   ]

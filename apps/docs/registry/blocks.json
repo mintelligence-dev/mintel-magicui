@@ -1,0 +1,34 @@
+[
+  {
+    "name": "login-page",
+    "title": "Login page",
+    "description": "Split-screen sign-in: brand gradient panel with a glass testimonial, and an email/password form.",
+    "route": "login",
+    "dependencies": ["lucide-react"],
+    "registryDependencies": ["aurora-text", "dot-pattern", "glass-card", "button", "checkbox", "input", "label", "toast"]
+  },
+  {
+    "name": "dashboard-page",
+    "title": "Dashboard",
+    "description": "Customer-service dashboard: sidebar, date-range filter, stat cards, and a cases table with channel filter and row actions.",
+    "route": "dashboard",
+    "dependencies": ["lucide-react", "react-day-picker"],
+    "registryDependencies": ["number-ticker", "badge", "button", "card", "combobox", "date-picker", "dropdown-menu", "table", "tabs"]
+  },
+  {
+    "name": "mobile-app-page",
+    "title": "Mobile app shell",
+    "description": "Mobile web / PWA shell: glass top bar, segmented filter, chat list, bottom tab bar and a compose drawer.",
+    "route": "app",
+    "dependencies": ["lucide-react"],
+    "registryDependencies": ["glass-button", "glass-navbar", "segmented-control", "drawer", "tab-bar", "badge", "button", "textarea", "toast"]
+  },
+  {
+    "name": "landing-page",
+    "title": "Landing page",
+    "description": "Marketing page: glass navbar, animated hero, logo marquee, feature cards with spotlight, stats and a call to action.",
+    "route": "landing",
+    "dependencies": ["lucide-react"],
+    "registryDependencies": ["animated-gradient-text", "aurora-text", "blur-fade", "dot-pattern", "magic-card", "marquee", "number-ticker", "shimmer-button", "glass-navbar", "button"]
+  }
+]

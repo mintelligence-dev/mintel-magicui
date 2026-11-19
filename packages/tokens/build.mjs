@@ -182,7 +182,7 @@ out(
     `@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));\n\n` +
     block("@theme inline", themeLines) +
     "\n" +
-    `@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  body {\n    @apply bg-background text-foreground font-sans antialiased;\n  }\n}\n`
+    `@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  body {\n    @apply bg-background text-foreground font-sans antialiased;\n  }\n  /* Tailwind v4 resets buttons to the default cursor */\n  button:not(:disabled),\n  [role="button"]:not(:disabled) {\n    cursor: pointer;\n  }\n}\n`
 )
 
 // ---------- dist/fonts.css ----------
@@ -237,9 +237,11 @@ out(
   JSON.stringify(
     {
       theme: {
-        "font-sans": fonts.sans,
-        "font-heading": fonts.heading,
-        "font-mono": fonts.mono,
+        // Prefer next/font variables (--font-manrope, --font-rubik, --font-plex-thai, --font-jetbrains)
+        // when the app defines them, otherwise fall back to the font names.
+        "font-sans": `var(--font-manrope, Manrope), var(--font-plex-thai, "IBM Plex Sans Thai"), ui-sans-serif, system-ui, sans-serif`,
+        "font-heading": `var(--font-rubik, Rubik), var(--font-plex-thai, "IBM Plex Sans Thai"), ui-sans-serif, system-ui, sans-serif`,
+        "font-mono": `var(--font-jetbrains, "JetBrains Mono"), ui-monospace, SFMono-Regular, Menlo, monospace`,
         "color-brand": "var(--brand)",
         "color-brand-foreground": "var(--brand-foreground)",
         "color-brand-accent": "var(--brand-accent)",
