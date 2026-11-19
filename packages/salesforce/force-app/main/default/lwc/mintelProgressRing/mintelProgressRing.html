@@ -1,0 +1,12 @@
+<template>
+    <div class={rootClass} role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={percent} aria-label={label}>
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="track" cx="50" cy="50" r="42"></circle>
+            <circle class="value" cx="50" cy="50" r="42" style={dashStyle}></circle>
+        </svg>
+        <div class="center">
+            <span class="number">{percent}<small>%</small></span>
+            <template lwc:if={label}><span class="caption">{label}</span></template>
+        </div>
+    </div>
+</template>

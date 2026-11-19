@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Mintel SLA Timer</masterLabel>
+    <description>Countdown to a deadline field (green, amber, red), e.g. a Case SLA.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="deadlineField" type="String" label="Deadline field (DateTime API name)" default="SlaExitDate" />
+            <property name="startField" type="String" label="Start field (DateTime, for the bar)" default="CreatedDate" />
+            <property name="completedField" type="String" label="Completed field (Boolean)" default="IsClosed" />
+            <property name="warningMinutes" type="Integer" label="Turn amber this many minutes before" default="30" />
+            <property name="label" type="String" label="Label" default="SLA" />
+            <property name="locale" type="String" label="Language" datasource="th,en" default="th" />
+            <supportedFormFactors>
+                <supportedFormFactor type="Large" />
+                <supportedFormFactor type="Small" />
+            </supportedFormFactors>
+        </targetConfig>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage">
+            <property name="deadline" type="String" label="Deadline (ISO date-time)" />
+            <property name="warningMinutes" type="Integer" label="Turn amber this many minutes before" default="30" />
+            <property name="label" type="String" label="Label" default="SLA" />
+            <property name="locale" type="String" label="Language" datasource="th,en" default="th" />
+            <supportedFormFactors>
+                <supportedFormFactor type="Large" />
+                <supportedFormFactor type="Small" />
+            </supportedFormFactors>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="deadline" type="String" label="Deadline (ISO date-time)" />
+            <property name="label" type="String" label="Label" default="SLA" />
+            <property name="locale" type="String" label="Language" datasource="th,en" default="th" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -134,6 +134,23 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     ],
     upstream: radix("Avatar"),
   },
+  progress: {
+    th: "แถบความคืบหน้า เลื่อนนุ่มไปยังค่าใหม่ มีโทนแบรนด์ สำเร็จ เตือน ผิดพลาด และแบบไม่ทราบค่า (แถบวิ่ง)",
+    props: [
+      p("value", "number | null", "0–100; leave out for indeterminate.", "0–100 ไม่ใส่ = ไม่ทราบค่า"),
+      p("tone", '"brand" | "success" | "warning" | "destructive"', "Bar color.", "สีแถบ", '"brand"'),
+      p("size", '"sm" | "default" | "lg"', "Bar height.", "ความสูง", '"default"'),
+    ],
+  },
+  "progress-ring": {
+    th: "วงแหวนเปอร์เซ็นต์ที่กวาดไปยังค่าเมื่อแสดงหรือเปลี่ยนค่า สีแบรนด์ หรือสีตามสถานะ (แดง/เหลือง/เขียว)",
+    props: [
+      p("value", "number", "0–100.", "0–100"),
+      p("label", "ReactNode", "Caption under the number.", "คำอธิบายใต้ตัวเลข"),
+      p("size", '"sm" | "default" | "lg"', "Ring size.", "ขนาด", '"default"'),
+      p("tone", '"brand" | "status"', "Gradient or red/amber/green by value.", "ไล่สีแบรนด์ หรือสีตามค่า", '"brand"'),
+    ],
+  },
   skeleton: { th: "กล่องรอโหลด มีแสงวิ่งผ่านเบาๆ ถ้าผู้ใช้ปิด motion จะเป็นการกะพริบช้าๆ แทน" },
   alert: {
     th: "ข้อความแจ้งในหน้า มีโทนปกติ แบรนด์ สำเร็จ เตือน และผิดพลาด ใส่ไอคอนได้",

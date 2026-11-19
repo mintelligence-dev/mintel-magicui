@@ -1,0 +1,123 @@
+@import 'c/mintelTokens';
+
+:host {
+    display: block;
+    font-family: var(--mintel-font-sans);
+    color: var(--mintel-foreground);
+}
+
+.header {
+    position: relative;
+    overflow: hidden;
+    padding: 1.25rem;
+    border: 1px solid var(--mintel-border);
+    border-radius: calc(var(--mintel-radius) + 6px);
+    background: var(--mintel-card);
+}
+.glow {
+    position: absolute;
+    inset: -40% -10% auto auto;
+    width: 60%;
+    height: 180%;
+    background: radial-gradient(closest-side, color-mix(in oklab, var(--mintel-brand-accent) 22%, transparent), transparent),
+        radial-gradient(closest-side at 30% 60%, color-mix(in oklab, var(--mintel-brand-cyan) 18%, transparent), transparent);
+    pointer-events: none;
+}
+.row {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+}
+.icon {
+    display: flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    background: var(--mintel-brand-gradient);
+}
+.icon img {
+    width: 100%;
+    height: 100%;
+}
+.names {
+    min-width: 0;
+    flex: 1;
+}
+.eyebrow {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--mintel-muted-foreground);
+}
+.title {
+    margin: 0;
+    overflow: hidden;
+    font-family: var(--mintel-font-heading);
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background: var(--mintel-brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+.highlights {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 0.75rem 1.5rem;
+    margin: 1rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--mintel-border);
+}
+.highlight {
+    min-width: 0;
+    animation: mintel-hl-in var(--mintel-duration-slow) var(--mintel-ease-out) both;
+}
+.highlight:nth-child(2) {
+    animation-delay: 60ms;
+}
+.highlight:nth-child(3) {
+    animation-delay: 120ms;
+}
+.highlight:nth-child(4) {
+    animation-delay: 180ms;
+}
+dt {
+    font-size: 0.75rem;
+    color: var(--mintel-muted-foreground);
+}
+dd {
+    margin: 0.125rem 0 0;
+    overflow: hidden;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@keyframes mintel-hl-in {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .highlight {
+        animation: none;
+    }
+}

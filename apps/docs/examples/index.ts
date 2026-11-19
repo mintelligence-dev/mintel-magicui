@@ -13,6 +13,8 @@ import StepperExample from "./stepper"
 import TimelineExample from "./timeline"
 import AvatarExample from "./avatar"
 import SkeletonExample from "./skeleton"
+import ProgressExample from "./progress"
+import ProgressRingExample from "./progress-ring"
 import AlertExample from "./alert"
 import EmptyStateExample from "./empty-state"
 import AccordionExample from "./accordion"
@@ -80,6 +82,8 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "timeline": TimelineExample,
   "avatar": AvatarExample,
   "skeleton": SkeletonExample,
+  "progress": ProgressExample,
+  "progress-ring": ProgressRingExample,
   "alert": AlertExample,
   "empty-state": EmptyStateExample,
   "accordion": AccordionExample,

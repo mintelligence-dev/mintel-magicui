@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Mintel Progress Ring</masterLabel>
+    <description>Percentage ring that sweeps in, from a record field or a fixed value.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="fieldApiName" type="String" label="Percent field API name" default="Probability" />
+            <property name="label" type="String" label="Caption" />
+            <property name="size" type="String" label="Size" datasource="small,medium,large" default="medium" />
+            <property name="variant" type="String" label="Colors" datasource="brand,status" default="brand" />
+            <supportedFormFactors>
+                <supportedFormFactor type="Large" />
+                <supportedFormFactor type="Small" />
+            </supportedFormFactors>
+        </targetConfig>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage">
+            <property name="value" type="Integer" label="Value (0-100)" default="72" />
+            <property name="label" type="String" label="Caption" />
+            <property name="size" type="String" label="Size" datasource="small,medium,large" default="medium" />
+            <property name="variant" type="String" label="Colors" datasource="brand,status" default="brand" />
+            <supportedFormFactors>
+                <supportedFormFactor type="Large" />
+                <supportedFormFactor type="Small" />
+            </supportedFormFactors>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="value" type="Integer" label="Value (0-100)" default="72" />
+            <property name="label" type="String" label="Caption" />
+            <property name="size" type="String" label="Size" datasource="small,medium,large" default="medium" />
+            <property name="variant" type="String" label="Colors" datasource="brand,status" default="brand" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

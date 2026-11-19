@@ -496,6 +496,46 @@
       }
     },
     {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Linear progress that eases to its value, with brand/success/warning/destructive tones and an indeterminate sweep.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "css": {
+        "@keyframes mintel-progress-sweep": {
+          "0%": {
+            "left": "-40%"
+          },
+          "100%": {
+            "left": "100%"
+          }
+        }
+      }
+    },
+    {
+      "name": "progress-ring",
+      "type": "registry:ui",
+      "title": "Progress ring",
+      "description": "Percentage ring that sweeps to its value, in the brand gradient or status colors.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/progress-ring.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",

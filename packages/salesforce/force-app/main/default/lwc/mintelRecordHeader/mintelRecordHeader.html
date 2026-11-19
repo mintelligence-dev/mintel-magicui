@@ -1,0 +1,34 @@
+<template>
+    <header class="header">
+        <span class="glow" aria-hidden="true"></span>
+        <div class="row">
+            <span class="icon" style={iconStyle}>
+                <template lwc:if={iconUrl}><img src={iconUrl} alt="" /></template>
+            </span>
+            <div class="names">
+                <p class="eyebrow">{objectLabel}</p>
+                <h1 class="title">{titleText}</h1>
+            </div>
+            <template lwc:if={statusField}>
+                <c-mintel-status-badge
+                    class="status"
+                    record-id={recordId}
+                    object-api-name={objectApiName}
+                    field-api-name={statusField}
+                    variants={statusVariants}
+                ></c-mintel-status-badge>
+            </template>
+            <div class="actions"><slot name="actions"></slot></div>
+        </div>
+        <template lwc:if={highlights.length}>
+            <dl class="highlights">
+                <template for:each={highlights} for:item="h">
+                    <div key={h.key} class="highlight">
+                        <dt>{h.label}</dt>
+                        <dd>{h.value}</dd>
+                    </div>
+                </template>
+            </dl>
+        </template>
+    </header>
+</template>
