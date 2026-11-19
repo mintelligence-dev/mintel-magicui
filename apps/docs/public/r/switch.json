@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "title": "Switch",
+  "description": "Toggle switch with spring-eased thumb (default / sm).",
+  "dependencies": [
+    "@radix-ui/react-switch"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\"\n\nimport { cn } from \"@/lib/utils\"\n\n/** Toggle switch; the thumb moves with the brand \"snappy\" spring curve. */\nfunction Switch({\n  className,\n  size = \"default\",\n  ...props\n}: React.ComponentProps<typeof SwitchPrimitive.Root> & { size?: \"sm\" | \"default\" }) {\n  return (\n    <SwitchPrimitive.Root\n      data-slot=\"switch\"\n      data-size={size}\n      className={cn(\n        \"peer group/switch relative inline-flex shrink-0 items-center rounded-full border border-transparent p-0.5 shadow-xs outline-none transition-colors duration-200\",\n        \"data-[size=default]:h-6 data-[size=default]:w-11 data-[size=sm]:h-5 data-[size=sm]:w-9\",\n        \"data-[state=checked]:bg-primary data-[state=unchecked]:bg-input dark:data-[state=unchecked]:bg-input/80\",\n        \"focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50\",\n        \"after:absolute after:-inset-y-2.5 after:-inset-x-1 pointer-fine:after:hidden\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        data-slot=\"switch-thumb\"\n        className={cn(\n          \"pointer-events-none block rounded-full bg-background shadow-[0_2px_4px_rgb(0_0_0/0.2)] ring-0 dark:data-[state=checked]:bg-primary-foreground\",\n          \"transition-[translate,width] duration-500 ease-spring-snappy motion-reduce:transition-none\",\n          \"group-data-[size=default]/switch:size-5 group-data-[size=sm]/switch:size-4\",\n          \"data-[state=unchecked]:translate-x-0\",\n          \"group-data-[size=default]/switch:data-[state=checked]:translate-x-5 group-data-[size=sm]/switch:data-[state=checked]:translate-x-4\"\n        )}\n      />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

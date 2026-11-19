@@ -158,6 +158,238 @@
     ]
   },
   {
+    "name": "label",
+    "type": "registry:ui",
+    "title": "Label",
+    "description": "Accessible form label.",
+    "dependencies": [
+      "@radix-ui/react-label"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/label.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "textarea",
+    "type": "registry:ui",
+    "title": "Textarea",
+    "description": "Auto-growing textarea (field-sizing), 16px on phones to avoid iOS zoom.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/textarea.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "checkbox",
+    "type": "registry:ui",
+    "title": "Checkbox",
+    "description": "Checkbox with indeterminate state, spring press and 44px touch target.",
+    "dependencies": [
+      "@radix-ui/react-checkbox",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/checkbox.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "radio-group",
+    "type": "registry:ui",
+    "title": "Radio Group",
+    "description": "Radio group with spring press and 44px touch targets.",
+    "dependencies": [
+      "@radix-ui/react-radio-group"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/radio-group.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "switch",
+    "type": "registry:ui",
+    "title": "Switch",
+    "description": "Toggle switch with spring-eased thumb (default / sm).",
+    "dependencies": [
+      "@radix-ui/react-switch"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/switch.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "form",
+    "type": "registry:ui",
+    "title": "Form",
+    "description": "react-hook-form + zod building blocks with accessible labels, descriptions and errors.",
+    "dependencies": [
+      "@radix-ui/react-label",
+      "@radix-ui/react-slot",
+      "react-hook-form",
+      "@hookform/resolvers",
+      "zod"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/form.tsx",
+        "type": "registry:ui"
+      },
+      {
+        "path": "registry/mintel/ui/label.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "combobox",
+    "type": "registry:ui",
+    "title": "Combobox",
+    "description": "Searchable select (single / multiple chips / async) on Radix Popover + cmdk; Thai search.",
+    "dependencies": [
+      "@radix-ui/react-popover",
+      "cmdk",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/combobox.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "calendar",
+    "type": "registry:ui",
+    "title": "Calendar",
+    "description": "Thai calendar with Buddhist-era (\u0e1e.\u0e28.) years by default; single, multiple and range modes.",
+    "dependencies": [
+      "react-day-picker",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/calendar.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "date-picker",
+    "type": "registry:ui",
+    "title": "Date Picker",
+    "description": "Date and date-range pickers showing \u0e1e.\u0e28. by default (e.g. 19 \u0e1e.\u0e22. 2569); value stays a JS Date.",
+    "dependencies": [
+      "@radix-ui/react-popover",
+      "react-day-picker",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/date-picker.tsx",
+        "type": "registry:ui"
+      },
+      {
+        "path": "registry/mintel/ui/calendar.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "dropdown-menu",
+    "type": "registry:ui",
+    "title": "Dropdown Menu",
+    "description": "Menu with items, checkbox/radio items, submenus, shortcuts and destructive variant.",
+    "dependencies": [
+      "@radix-ui/react-dropdown-menu",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/dropdown-menu.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "tooltip",
+    "type": "registry:ui",
+    "title": "Tooltip",
+    "description": "Tooltip that works without a provider; dark-on-light, animated.",
+    "dependencies": [
+      "@radix-ui/react-tooltip"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/tooltip.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "popover",
+    "type": "registry:ui",
+    "title": "Popover",
+    "description": "Floating panel anchored to a trigger.",
+    "dependencies": [
+      "@radix-ui/react-popover"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/popover.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
     "name": "animated-beam",
     "type": "registry:ui",
     "title": "Animated Beam",

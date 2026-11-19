@@ -2,6 +2,7 @@ import { ArrowRight, Atom, Cloud, Globe, Layers, Orbit, Palette, Smartphone, Spa
 import { tokens } from "@mintelligence-dev/tokens"
 
 import { DialogDemo, ChannelSelect, TableDemo, TabsDemo, ToastDemo } from "@/components/app-ui-demos"
+import { ChoiceDemo, ComboboxDemo, DatePickerDemo, DropdownMenuDemo, FormDemo, TooltipPopoverDemo } from "@/components/form-demos"
 import { BeamDemo } from "@/components/beam-demo"
 import { CopyCommand } from "@/components/copy-command"
 import { GithubIcon } from "@/components/github-icon"
@@ -180,7 +181,7 @@ export default function Home() {
         <BlurFade delay={0.45} className="mt-16 grid w-full max-w-3xl grid-cols-3 gap-4">
           {[
             { v: Object.keys(tokens.light).length, l: "Semantic tokens" },
-            { v: 33, l: "Registry items" },
+            { v: 45, l: "Registry items" },
             { v: 2, l: "Platforms" },
           ].map((s) => (
             <div key={s.l} className="rounded-2xl border bg-card/60 p-4 backdrop-blur">
@@ -324,7 +325,7 @@ export default function Home() {
       <Section id="components" eyebrow="Registry" title="Components">
         <nav aria-label="หมวด component" className="mb-10 flex flex-wrap gap-2">
           {[
-            ["#core", "Core UI", 9],
+            ["#core", "Core UI", 21],
             ["#effects", "Effects", 12],
             ["#glass", "Glass", 4],
             ["#mobile", "Mobile", 2],
@@ -382,6 +383,21 @@ export default function Home() {
           <Preview name="table" title="Table" className="p-4" wrapperClassName="md:col-span-2">
             <TableDemo />
           </Preview>
+          <Preview name="combobox" title="Combobox — ค้นหาได้ / เลือกหลายค่า">
+            <ComboboxDemo />
+          </Preview>
+          <Preview name="date-picker" title="Date Picker — พ.ศ.">
+            <DatePickerDemo />
+          </Preview>
+          <Preview name="switch" title="Switch · Checkbox · Radio">
+            <ChoiceDemo />
+          </Preview>
+          <Preview name="dropdown-menu" title="Dropdown Menu">
+            <DropdownMenuDemo />
+          </Preview>
+          <Preview name="tooltip" title="Tooltip · Popover">
+            <TooltipPopoverDemo />
+          </Preview>
           <Preview name="card" title="Card" className="p-4">
             <Card className="w-full max-w-xs gap-3 py-4">
               <CardHeader className="px-4">
@@ -396,6 +412,20 @@ export default function Home() {
             </Card>
           </Preview>
         </div>
+        <div className="mt-6">
+          <Card className="gap-0 overflow-hidden py-0">
+            <div className="border-b bg-muted/30 p-5 sm:p-8">
+              <FormDemo />
+            </div>
+            <div className="flex flex-col gap-3 p-4">
+              <p className="font-heading text-sm font-semibold">
+                Form — react-hook-form + zod (กดส่งโดยไม่กรอกเพื่อดู validation)
+              </p>
+              <CopyCommand command={installCmd("form")} />
+            </div>
+          </Card>
+        </div>
+
         <h3 id="effects" className="mt-16 mb-4 flex scroll-mt-20 items-center gap-2 font-heading text-xl font-semibold">
           <Sparkles className="size-5 text-brand-accent" /> Effects
         </h3>

@@ -29,12 +29,13 @@ npx shadcn@latest add https://raw.githubusercontent.com/mintelligence-dev/mintel
 npx shadcn@latest add https://raw.githubusercontent.com/mintelligence-dev/mintel-magicui/main/apps/docs/public/r/shimmer-button.json
 ```
 
-**Components** (33 registry items)
+**Components** (45 registry items)
 
 | Category | Items |
 |---|---|
 | Theme | `mintel-theme` — install first |
-| Core UI | `button`, `badge`, `card`, `input`, `dialog`, `select`, `table`, `tabs`, `toast` (sonner — render `<Toaster />` once, then call `toast()`) |
+| Core UI | `button`, `badge`, `card`, `input`, `dialog`, `select`, `table`, `tabs`, `toast` (sonner — render `<Toaster />` once, then call `toast()`), `dropdown-menu`, `tooltip`, `popover` |
+| Forms | `label`, `textarea`, `checkbox`, `radio-group`, `switch`, `form` (react-hook-form + zod), `combobox` (searchable, multiple, async), `calendar` + `date-picker` (Thai, พ.ศ. by default; values stay JS `Date`) |
 | Effects | `shimmer-button`, `aurora-text`, `animated-gradient-text`, `magic-card`, `border-beam`, `shine-border`, `number-ticker`, `meteors`, `marquee`, `dot-pattern`, `blur-fade`, `animated-beam` |
 | Glass | `glass-card` (optional refraction), `glass-button`, `glass-navbar`, `segmented-control` |
 | Fluid Motion | `scroll-reveal-text`, `sticky-showcase`, `zoom-parallax`, `dock`, `animated-tabs` |
