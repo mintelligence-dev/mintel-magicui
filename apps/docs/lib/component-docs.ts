@@ -39,8 +39,8 @@ const FORM_ITEMS = new Set([
   "file-upload",
 ])
 
-const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper"])
-const NAV_ITEMS = new Set(["breadcrumb", "pagination", "accordion", "sheet"])
+const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper", "grouped-list"])
+const NAV_ITEMS = new Set(["breadcrumb", "pagination", "accordion", "sheet", "collapsing-header"])
 
 const categoryOf = (it: RawItem): Category =>
   (it.meta?.category as Category) ??
@@ -204,6 +204,26 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("valueFormatter", "(value) => ReactNode", "ChartTooltipContent: format values.", "ChartTooltipContent: จัดรูปแบบตัวเลข"),
     ],
     upstream: { label: "recharts", href: "https://recharts.org" },
+  },
+  "grouped-list": {
+    th: "รายการแบบหน้าตั้งค่า แบ่งเป็นกลุ่มมุมโค้ง มีไอคอน ค่า ลูกศร หรือสวิตช์ด้านขวา เส้นคั่นเริ่มหลังไอคอน",
+    props: [
+      p("header / footer", "ReactNode", "GroupedSection: text above and below the group.", "GroupedSection: ข้อความเหนือและใต้กลุ่ม"),
+      p("icon / iconTone", 'ReactNode / "brand" | "blue" | "purple" | "cyan" | "green" | "amber" | "red" | "gray"', "GroupedRow: icon in a colored tile.", "GroupedRow: ไอคอนในกล่องสี", '"brand"'),
+      p("title / description", "ReactNode", "GroupedRow: main text and a smaller line.", "GroupedRow: ข้อความหลักและบรรทัดรอง"),
+      p("value", "ReactNode", "GroupedRow: short value on the right.", "GroupedRow: ค่าด้านขวา"),
+      p("trailing", "ReactNode", "GroupedRow: control on the right (switch …); hides the chevron.", "GroupedRow: ตัวควบคุมด้านขวา (เช่นสวิตช์) แทนลูกศร"),
+      p("href / onClick", "string / () => void", "GroupedRow: makes the row a link or button with a chevron.", "GroupedRow: ทำให้แถวกดได้ เป็นลิงก์หรือปุ่ม"),
+      p("destructive", "boolean", "GroupedRow: red title for actions like sign out.", "GroupedRow: หัวข้อสีแดง เช่น ออกจากระบบ", "false"),
+    ],
+  },
+  "collapsing-header": {
+    th: "หัวข้อหน้าตัวใหญ่ที่เลื่อนหายไป แล้วหัวข้อเล็กค่อยๆ โผล่ในแถบด้านบนที่กลายเป็นกระจก ใช้ได้ทั้งเลื่อนทั้งหน้าและในกล่องที่เลื่อนได้",
+    props: [
+      p("title", "ReactNode", "Page title (big, then compact in the bar).", "หัวข้อหน้า (ตัวใหญ่ แล้วย่อไปอยู่ในแถบ)"),
+      p("leading / trailing", "ReactNode", "Bar content left and right, e.g. back and actions.", "ปุ่มซ้ายและขวาของแถบ เช่น ย้อนกลับ และปุ่มคำสั่ง"),
+      p("children", "ReactNode", "Content under the big title, e.g. a search field.", "เนื้อหาใต้หัวข้อใหญ่ เช่น ช่องค้นหา"),
+    ],
   },
   tabs: { th: "แท็บที่เลือกเป็นสีแบรนด์ เนื้อหาค่อยๆ ปรากฏ", upstream: radix("Tabs") },
   toast: {
@@ -389,8 +409,14 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
   },
 
   drawer: {
-    th: "bottom sheet สำหรับมือถือ ลากที่แถบด้านบนลงเพื่อปิด เว้นที่ให้ home indicator",
-    props: [p("open / defaultOpen / onOpenChange", "boolean", "Controlled or uncontrolled open state.", "สถานะเปิด/ปิด")],
+    th: "bottom sheet สำหรับมือถือ ลากที่แถบด้านบนลงเพื่อปิด เว้นที่ให้ home indicator ตั้ง snapPoints ให้หยุดได้หลายความสูง",
+    props: [
+      p("open / defaultOpen / onOpenChange", "boolean", "Controlled or uncontrolled open state.", "สถานะเปิด/ปิด"),
+      p("snapPoints", "number[]", "DrawerContent: resting heights as fractions of the screen, e.g. [0.4, 0.9].", "DrawerContent: ความสูงที่หยุดได้ เป็นสัดส่วนของจอ เช่น [0.4, 0.9]"),
+      p("defaultSnapPoint", "number", "DrawerContent: index of the height to open at.", "DrawerContent: ลำดับความสูงตอนเปิด", "0"),
+      p("onSnapPointChange", "(index: number) => void", "DrawerContent: called when it settles on a new height.", "DrawerContent: เรียกเมื่อหยุดที่ความสูงใหม่"),
+      p("snapLabels", "{ expand; collapse }", "DrawerContent: accessible names for the handle button.", "DrawerContent: ชื่อปุ่มที่จับสำหรับ screen reader"),
+    ],
     upstream: radix("Dialog"),
   },
   "tab-bar": {

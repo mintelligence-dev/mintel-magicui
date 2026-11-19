@@ -362,6 +362,39 @@
     ]
   },
   {
+    "name": "grouped-list",
+    "type": "registry:ui",
+    "title": "Grouped list",
+    "description": "Settings-style rounded sections of rows with icons, values, chevrons and trailing controls; separators start after the icon.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/grouped-list.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "collapsing-header",
+    "type": "registry:ui",
+    "title": "Collapsing header",
+    "description": "Big page title that hands off to a compact title in a translucent sticky bar as you scroll.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/collapsing-header.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
     "name": "tabs",
     "type": "registry:ui",
     "title": "Tabs",
@@ -1212,7 +1245,7 @@
     "name": "drawer",
     "type": "registry:ui",
     "title": "Drawer",
-    "description": "Mobile bottom sheet with drag-to-dismiss handle, safe-area padding; Radix Dialog accessibility.",
+    "description": "Mobile bottom sheet with drag-to-dismiss handle, safe-area padding; Radix Dialog accessibility. Optional snapPoints make it rest at several heights.",
     "dependencies": [
       "@radix-ui/react-dialog",
       "motion"
