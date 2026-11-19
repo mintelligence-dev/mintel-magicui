@@ -20,6 +20,7 @@
     "./tailwind.css": "./dist/tailwind.css",
     "./fonts.css": "./dist/fonts.css",
     "./shadcn-theme.json": "./dist/shadcn-theme.json",
+    "./themes/*": "./dist/themes/*",
     "./tokens.json": "./src/tokens.json",
     "./salesforce/*": "./salesforce/*",
     "./lwc/*": "./lwc/*"

@@ -116,7 +116,41 @@ const motionVars = [
   ]),
 ]
 const glass = { blur: src.glass.blur.$value, saturate: src.glass.saturate.$value }
-const glassVars = [`--mintel-glass-blur: ${glass.blur};`, `--mintel-glass-saturate: ${glass.saturate};`]
+const materialLevels = Object.fromEntries(
+  Object.entries(src.glass.levels).filter(([k]) => !k.startsWith("$")).map(([k, t]) => [k, t.$value])
+)
+const glassVars = [
+  `--mintel-glass-blur: ${glass.blur};`,
+  `--mintel-glass-saturate: ${glass.saturate};`,
+  ...Object.entries(materialLevels).map(([k, val]) => `--mintel-material-${k}-blur: ${val};`),
+]
+
+// Type scale shared by every theme (named by role, not by platform). [size, line-height, letter-spacing, weight]
+const TYPE_SCALE = {
+  display: ["2.125rem", "1.2", "-0.02em", "700"],
+  "title-1": ["1.75rem", "1.22", "-0.015em", "700"],
+  "title-2": ["1.375rem", "1.27", "-0.01em", "600"],
+  "title-3": ["1.25rem", "1.3", "-0.005em", "600"],
+  caption: ["0.75rem", "1.34", "0", "400"],
+}
+const typeThemeLines = Object.entries(TYPE_SCALE).flatMap(([k, [size, lh, ls, w]]) => [
+  `--text-${k}: ${size};`,
+  `--text-${k}--line-height: ${lh};`,
+  `--text-${k}--letter-spacing: ${ls};`,
+  `--text-${k}--font-weight: ${w};`,
+])
+// Translucent surfaces, thin -> thick. One backdrop-filter per element: never nest them.
+const materialUtilities = Object.keys(materialLevels)
+  .map(
+    (k) =>
+      `@utility material-${k} {
+  background-color: var(--material-${k});
+  -webkit-backdrop-filter: blur(var(--mintel-material-${k}-blur)) saturate(var(--mintel-glass-saturate));
+  backdrop-filter: blur(var(--mintel-material-${k}-blur)) saturate(var(--mintel-glass-saturate));
+}
+`
+  )
+  .join("\n")
 
 // ---------- helpers ----------
 const out = (rel, text) => {
@@ -171,6 +205,7 @@ const themeLines = [
   `--radius-xl: calc(var(--radius) + 4px);`,
   `--radius-2xl: calc(var(--radius) + 8px);`,
   `--blur-glass: var(--mintel-glass-blur);`,
+  ...typeThemeLines,
   ...Object.keys(easings).map((k) => `--ease-${k === "out" ? "decelerate" : k}: var(--mintel-ease-${k});`),
   ...Object.keys(springs).map((k) => `--ease-spring-${k}: var(--mintel-ease-spring-${k});`),
 ]
@@ -181,6 +216,8 @@ out(
     `@import "./tokens.css";\n\n` +
     `@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));\n\n` +
     block("@theme inline", themeLines) +
+    "\n" +
+    materialUtilities +
     "\n" +
     `@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  body {\n    @apply bg-background text-foreground font-sans antialiased;\n  }\n  /* Tailwind v4 resets buttons to the default cursor */\n  button:not(:disabled),\n  [role="button"]:not(:disabled) {\n    cursor: pointer;\n  }\n}\n`
 )
@@ -250,7 +287,16 @@ out(
         "color-success": "var(--success)",
         "color-warning": "var(--warning)",
         "color-info": "var(--info)",
+        "color-grouped": "var(--grouped)",
         "blur-glass": glass.blur,
+        ...Object.fromEntries(
+          Object.entries(TYPE_SCALE).flatMap(([k, [size, lh, ls, w]]) => [
+            [`text-${k}`, size],
+            [`text-${k}--line-height`, lh],
+            [`text-${k}--letter-spacing`, ls],
+            [`text-${k}--font-weight`, w],
+          ])
+        ),
         ...Object.fromEntries(Object.entries(easings).map(([k, e]) => [`ease-${k === "out" ? "decelerate" : k}`, e.css])),
         ...Object.fromEntries(Object.entries(springs).map(([k, sp]) => [`ease-spring-${k}`, sp.linear])),
       },
@@ -259,6 +305,17 @@ out(
         ...Object.fromEntries(semantic.map((s) => [s.name, s.light.value])),
       },
       dark: Object.fromEntries(semantic.map((s) => [s.name, s.dark.value])),
+      // Self-contained material utilities (consumers have no --mintel-* variables).
+      css: Object.fromEntries(
+        Object.entries(materialLevels).map(([k, blur]) => [
+          `@utility material-${k}`,
+          {
+            "background-color": `var(--material-${k})`,
+            "-webkit-backdrop-filter": `blur(${blur}) saturate(${glass.saturate})`,
+            "backdrop-filter": `blur(${blur}) saturate(${glass.saturate})`,
+          },
+        ])
+      ),
     },
     null,
     2
@@ -361,3 +418,70 @@ out(
 )
 
 console.log(`✓ ${primitives.length} primitives, ${semantic.length} semantic tokens`)
+
+// ---------- Themes: Mintel Clarity (dist/themes/clarity.css + clarity-shadcn.json) ----------
+// Overrides only. Switch with <html data-mintel-theme="clarity"> (data-theme is already the dark-mode switch).
+// Selectors are anchored on :root so they outrank both `.dark` and app-level `:root { ... }` font overrides.
+const clarity = JSON.parse(readFileSync(join(root, "src/themes/clarity.json"), "utf8"))
+for (const name of Object.keys(clarity.semantic)) {
+  if (!semantic.some((s) => s.name === name)) throw new Error(`clarity.json overrides unknown semantic token "${name}"`)
+}
+const CLARITY = `:root[${clarity.selector}="clarity"]`
+const CLARITY_DARK = `${CLARITY}:is(.dark, [data-theme="dark"])`
+// Line height as a unitless ratio (calc(length / length) is not supported everywhere yet).
+const ratio = (lh, size) => String(Math.round((parseFloat(lh) / parseFloat(size)) * 1000) / 1000)
+const clarityType = Object.entries(clarity.type)
+  .filter(([k]) => !k.startsWith("$"))
+  .flatMap(([k, [size, lh]]) => [`--text-${k}: ${size};`, `--text-${k}--line-height: ${ratio(lh, size)};`])
+const clarityCommon = [
+  `--mintel-font-sans: ${clarity.font.sans};`,
+  `--mintel-font-heading: ${clarity.font.heading};`,
+  `--mintel-font-mono: ${clarity.font.mono};`,
+  `--mintel-radius: ${clarity.radius};`,
+  `--mintel-glass-blur: ${clarity.glass.blur};`,
+  `--mintel-glass-saturate: ${clarity.glass.saturate};`,
+  ...Object.entries(clarity.glass.levels).map(([k, val]) => `--mintel-material-${k}-blur: ${val};`),
+  ...clarityType,
+  `--brand-gradient: ${clarity.brandGradient};`,
+]
+const squircleSelector = clarity.squircle.map((slot) => `[data-slot="${slot}"]`).join(",\n  ")
+out(
+  "dist/themes/clarity.css",
+  HEADER.replace("src/tokens.json", "src/themes/clarity.json") +
+    `/* Usage: import after tokens.css / tailwind.css, then set <html data-mintel-theme="clarity">. */\n` +
+    block(CLARITY, [...clarityCommon, ...Object.entries(clarity.semantic).map(([n, [light]]) => `--${n}: ${light};`)]) +
+    "\n" +
+    block(CLARITY_DARK, [...Object.entries(clarity.semantic).map(([n, [, dark]]) => `--${n}: ${dark};`), "color-scheme: dark;"]) +
+    "\n" +
+    `/* Continuous (squircle) corners where supported; elsewhere the normal radius applies.\n   Scoped to rectangular surfaces so pills and avatars stay round. */\n` +
+    `@supports (corner-shape: squircle) {\n  ${CLARITY} :is(\n  ${squircleSelector}\n  ) {\n    corner-shape: squircle;\n  }\n}\n`
+)
+out(
+  "dist/themes/clarity-shadcn.json",
+  JSON.stringify(
+    {
+      theme: {
+        "font-sans": clarity.font.sans,
+        "font-heading": clarity.font.heading,
+        "font-mono": clarity.font.mono,
+        "blur-glass": clarity.glass.blur,
+        ...Object.fromEntries(
+          Object.entries(clarity.type)
+            .filter(([k]) => !k.startsWith("$"))
+            .flatMap(([k, [size, lh]]) => [
+              [`text-${k}`, size],
+              [`text-${k}--line-height`, ratio(lh, size)],
+            ])
+        ),
+        "brand-gradient": clarity.brandGradient,
+      },
+      light: { radius: clarity.radius, ...Object.fromEntries(Object.entries(clarity.semantic).map(([n, [l]]) => [n, l])) },
+      dark: Object.fromEntries(Object.entries(clarity.semantic).map(([n, [, d]]) => [n, d])),
+      squircle: clarity.squircle,
+      materials: Object.fromEntries(Object.entries(clarity.glass.levels)),
+      saturate: clarity.glass.saturate,
+    },
+    null,
+    2
+  ) + "\n"
+)

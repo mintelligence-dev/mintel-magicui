@@ -105,7 +105,11 @@ export const tokens = {
     "glass-foreground": "#181B31",
     "glass-border": "rgba(255, 255, 255, 0.7)",
     "glass-highlight": "rgba(255, 255, 255, 0.9)",
-    "glass-shadow": "rgba(24, 27, 49, 0.12)"
+    "glass-shadow": "rgba(24, 27, 49, 0.12)",
+    "grouped": "#F2F3F8",
+    "material-thin": "rgba(255, 255, 255, 0.35)",
+    "material-regular": "rgba(255, 255, 255, 0.55)",
+    "material-thick": "rgba(255, 255, 255, 0.78)"
   },
   "dark": {
     "background": "#0C0E1E",
@@ -152,7 +156,11 @@ export const tokens = {
     "glass-foreground": "#F9FAFE",
     "glass-border": "rgba(255, 255, 255, 0.12)",
     "glass-highlight": "rgba(255, 255, 255, 0.2)",
-    "glass-shadow": "rgba(0, 0, 0, 0.45)"
+    "glass-shadow": "rgba(0, 0, 0, 0.45)",
+    "grouped": "#0C0E1E",
+    "material-thin": "rgba(23, 26, 49, 0.35)",
+    "material-regular": "rgba(23, 26, 49, 0.5)",
+    "material-thick": "rgba(23, 26, 49, 0.72)"
   },
   "font": {
     "sans": "Manrope, \"IBM Plex Sans Thai\", ui-sans-serif, system-ui, sans-serif",
