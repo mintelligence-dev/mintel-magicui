@@ -1,0 +1,81 @@
+@import 'c/mintelTokens';
+
+:host {
+    display: inline-block;
+}
+
+.shimmer {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    background-image: var(--mintel-brand-gradient);
+    color: var(--mintel-brand-foreground);
+    font-family: var(--mintel-font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: inset 0 -8px 10px rgba(255, 255, 255, 0.12), 0 8px 24px -10px var(--mintel-brand);
+    transition: transform var(--mintel-spring-snappy-duration) var(--mintel-ease-spring-snappy);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.shimmer:active {
+    transform: scale(0.96);
+}
+
+.shimmer:focus-visible {
+    outline: 3px solid color-mix(in oklab, var(--mintel-ring) 50%, transparent);
+    outline-offset: 2px;
+}
+
+.shimmer:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.spark {
+    position: absolute;
+    inset: -100%;
+    z-index: -1;
+    background: conic-gradient(from 0deg, transparent 0 75%, rgba(255, 255, 255, 0.55) 90%, transparent 100%);
+    animation: mintel-spin 3s linear infinite;
+}
+
+.label {
+    position: relative;
+}
+
+/* Inner fill keeps the sweep visible only on the edge. */
+.shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    z-index: -1;
+    border-radius: inherit;
+    background-image: var(--mintel-brand-gradient);
+}
+
+@keyframes mintel-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .spark {
+        animation: none;
+    }
+    .shimmer {
+        transition: none;
+    }
+    .shimmer:active {
+        transform: none;
+    }
+}

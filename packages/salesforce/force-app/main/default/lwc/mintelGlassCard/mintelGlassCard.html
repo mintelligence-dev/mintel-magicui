@@ -1,0 +1,15 @@
+<template>
+    <article class="glass" data-variant={variant}>
+        <template lwc:if={title}>
+            <header class="header">
+                <h2 class="title">{title}</h2>
+                <template lwc:if={subtitle}>
+                    <p class="subtitle">{subtitle}</p>
+                </template>
+            </header>
+        </template>
+        <div class="body">
+            <slot></slot>
+        </div>
+    </article>
+</template>

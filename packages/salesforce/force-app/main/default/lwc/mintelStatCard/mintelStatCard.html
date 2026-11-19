@@ -1,0 +1,12 @@
+<template>
+    <div class="stat">
+        <p class="label">{label}</p>
+        <p class="value">
+            <span class="number">{displayValue}</span>
+            <template lwc:if={suffix}><span class="suffix">{suffix}</span></template>
+        </p>
+        <template lwc:if={caption}>
+            <p class="caption">{caption}</p>
+        </template>
+    </div>
+</template>
