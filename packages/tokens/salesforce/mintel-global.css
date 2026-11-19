@@ -121,6 +121,10 @@
   --slds-c-button-brand-color-background-active: var(--mintel-color-blue-800);
   --slds-c-button-brand-text-color-hover: var(--mintel-primary-foreground);
   --slds-c-button-radius-border: var(--mintel-radius);
+  --slds-c-checkbox-toggle-color-background-checked: var(--mintel-primary);
+  --slds-c-checkbox-toggle-color-background-checked-hover: var(--mintel-color-blue-700);
+  --slds-c-checkbox-toggle-color-background-checked-focus: var(--mintel-color-blue-700);
+  --slds-c-tabs-item-color-border-active: var(--mintel-primary);
   /* SLDS global brand palette: drives links, focus rings, selected tabs, progress, etc. */
   --slds-g-color-brand-base-10: var(--mintel-color-blue-950);
   --slds-g-color-brand-base-15: var(--mintel-color-blue-950);

@@ -1,0 +1,229 @@
+import { readFileSync } from "node:fs"
+import { join } from "node:path"
+import { Cloud, LayoutTemplate, Palette, ShieldCheck } from "lucide-react"
+
+import { CopyCommand } from "@/components/copy-command"
+import { LwcSource } from "@/components/lwc-source"
+import { MobileNav } from "@/components/mobile-nav"
+import { SiteHeader } from "@/components/site-header"
+import { SldsPreview } from "@/components/slds-preview"
+import { getDict, type Lang } from "@/lib/i18n"
+import { AnimatedGradientText } from "@/registry/mintel/effects/animated-gradient-text"
+import { NumberTicker } from "@/registry/mintel/effects/number-ticker"
+import { ShimmerButton } from "@/registry/mintel/effects/shimmer-button"
+import { GlassCard } from "@/registry/mintel/glass/glass-card"
+import { Badge } from "@/registry/mintel/ui/badge"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/mintel/ui/card"
+
+// Source of truth for the LWC code shown on this page (read at build time).
+const LWC_DIR = join(process.cwd(), "../../packages/salesforce/force-app/main/default/lwc")
+
+function bundle(name: string) {
+  return (["html", "js", "css"] as const).flatMap((ext) => {
+    try {
+      return [{ name: `${name}.${ext}`, code: readFileSync(join(LWC_DIR, name, `${name}.${ext}`), "utf8") }]
+    } catch {
+      return []
+    }
+  })
+}
+
+const COMPONENTS = [
+  {
+    name: "mintelGlassCard",
+    usage: `<c-mintel-glass-card title="Case summary" subtitle="LINE OA" variant="brand">
+    <p>Customer asked about delivery status.</p>
+</c-mintel-glass-card>`,
+    preview: (
+      <div
+        className="relative flex min-h-40 w-full items-center justify-center overflow-hidden rounded-xl p-5"
+        style={{
+          background:
+            "radial-gradient(120% 120% at 20% 10%, var(--brand-cyan), transparent 55%), radial-gradient(120% 120% at 80% 80%, var(--brand-accent), transparent 55%), var(--brand)",
+        }}
+      >
+        <GlassCard className="w-full max-w-xs p-5">
+          <p className="font-heading font-semibold">Case summary</p>
+          <p className="text-sm text-muted-foreground">LINE OA</p>
+          <p className="mt-3 text-sm">Customer asked about delivery status.</p>
+        </GlassCard>
+      </div>
+    ),
+  },
+  {
+    name: "mintelShimmerButton",
+    usage: `<c-mintel-shimmer-button label="Create case" onclick={handleCreate}></c-mintel-shimmer-button>`,
+    preview: <ShimmerButton>Create case</ShimmerButton>,
+  },
+  {
+    name: "mintelGradientText",
+    usage: `<c-mintel-gradient-text text="Customer Experience" size="large"></c-mintel-gradient-text>`,
+    preview: <AnimatedGradientText className="font-heading text-3xl font-bold">Customer Experience</AnimatedGradientText>,
+  },
+  {
+    name: "mintelStatCard",
+    usage: `<c-mintel-stat-card label="Cases today" value={casesToday} suffix="cases"></c-mintel-stat-card>`,
+    preview: (
+      <div className="w-full max-w-xs rounded-xl border bg-card p-5">
+        <p className="text-sm text-muted-foreground">Cases today</p>
+        <p className="mt-1 flex items-baseline gap-1">
+          <NumberTicker value={1284} className="font-heading text-4xl font-bold text-brand dark:text-brand" />
+          <span className="font-semibold text-muted-foreground">cases</span>
+        </p>
+      </div>
+    ),
+  },
+] as const
+
+const LAYER_ICONS = [Palette, LayoutTemplate, Cloud]
+
+export function SalesforcePage({ lang }: { lang: Lang }) {
+  const d = getDict(lang)
+  const t = d.sf
+
+  return (
+    <main id="top" className="min-h-screen overflow-x-clip pb-24 sm:pb-0">
+      <SiteHeader lang={lang} />
+
+      <section className="mx-auto max-w-6xl px-4 pt-16 pb-10 sm:px-6 sm:pt-24">
+        <p className="text-sm font-semibold tracking-wide text-brand uppercase">{t.eyebrow}</p>
+        <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold tracking-tight sm:text-6xl">{t.title}</h1>
+        <p className="mt-5 max-w-2xl text-lg text-muted-foreground">{t.subtitle}</p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          {["Lightning Experience", "Salesforce mobile app", "Experience Cloud (LWR)", "SLDS"].map((x) => (
+            <Badge key={x} variant="soft">
+              {x}
+            </Badge>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+        <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">{t.layersTitle}</h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-3 [&>*]:min-w-0">
+          {t.layers.map((layer, i) => {
+            const Icon = LAYER_ICONS[i]
+            return (
+              <Card key={layer.title}>
+                <CardHeader>
+                  <span className="mb-2 inline-flex size-10 items-center justify-center rounded-xl bg-brand/10 text-brand">
+                    <Icon className="size-5" />
+                  </span>
+                  <CardTitle>{layer.title}</CardTitle>
+                  <CardDescription>{layer.body}</CardDescription>
+                </CardHeader>
+              </Card>
+            )
+          })}
+        </div>
+      </section>
+
+      <section id="preview" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-10 sm:px-6">
+        <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">{t.previewTitle}</h2>
+        <p className="mt-3 mb-6 max-w-3xl text-muted-foreground">{t.previewBody}</p>
+        <SldsPreview
+          labels={{ default: t.previewDefault, brand: t.previewBrand, caption: t.previewCaption, frame: t.previewLabel }}
+        />
+      </section>
+
+      <section id="lwc" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-10 sm:px-6">
+        <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">{t.componentsTitle}</h2>
+        <p className="mt-3 max-w-3xl text-muted-foreground">{t.componentsBody}</p>
+        <div className="mt-8 space-y-8">
+          {COMPONENTS.map((c) => (
+            <Card key={c.name} className="gap-0 overflow-hidden py-0">
+              <div className="grid gap-0 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+                <div className="flex min-h-48 items-center justify-center border-b bg-muted/30 p-6 lg:border-r lg:border-b-0">
+                  {c.preview}
+                </div>
+                <div className="min-w-0 space-y-4 p-5">
+                  <div>
+                    <p className="font-mono text-sm font-semibold">c-{c.name.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{t.components[c.name]}</p>
+                  </div>
+                  <div>
+                    <p className="mb-1.5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t.usage}</p>
+                    <pre className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs leading-relaxed">
+                      <code>{c.usage}</code>
+                    </pre>
+                  </div>
+                  <div>
+                    <p className="mb-1.5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t.source}</p>
+                    <LwcSource files={bundle(c.name)} />
+                  </div>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <section id="deploy" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-10 sm:px-6">
+        <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">{t.deployTitle}</h2>
+        <ol className="mt-6 grid gap-4 md:grid-cols-3 [&>*]:min-w-0">
+          {t.deploySteps.map((step, i) => (
+            <li key={step} className="rounded-xl border p-5">
+              <span className="inline-flex size-7 items-center justify-center rounded-full bg-[image:var(--brand-gradient)] text-sm font-bold text-white">
+                {i + 1}
+              </span>
+              <p className="mt-3 text-sm">{step}</p>
+            </li>
+          ))}
+        </ol>
+        <div className="mt-4 space-y-2">
+          <CopyCommand label={d.nav.copy} command="sf org login web --alias my-org" />
+          <CopyCommand
+            label={d.nav.copy}
+            command="sf project deploy start --source-dir packages/salesforce/force-app --target-org my-org"
+          />
+        </div>
+
+        <div className="mt-8 grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
+          <Card>
+            <CardHeader>
+              <CardTitle>{t.lwrTitle}</CardTitle>
+              <CardDescription>{t.lwrBody}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <pre className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs">
+                <code>{`<link rel="stylesheet" href="{basePath}/assets/mintelGlobal" />`}</code>
+              </pre>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>{t.ownTitle}</CardTitle>
+              <CardDescription>{t.ownBody}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <pre className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs leading-relaxed">
+                <code>{`@import 'c/mintelTokens';
+
+.panel {
+  background: var(--mintel-card);
+  border-radius: var(--mintel-radius);
+  transition: transform var(--mintel-spring-smooth-duration)
+    var(--mintel-ease-spring-smooth);
+}`}</code>
+              </pre>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+        <div className="flex gap-3 rounded-xl border bg-muted/30 p-5">
+          <ShieldCheck className="mt-0.5 size-5 shrink-0 text-brand" />
+          <div className="space-y-2 text-sm">
+            <p className="font-semibold">{t.statusTitle}</p>
+            <p className="text-muted-foreground">{t.status}</p>
+          </div>
+        </div>
+        <p className="mt-6 text-xs text-muted-foreground">{t.legal}</p>
+      </section>
+
+      <MobileNav lang={lang} page="salesforce" />
+      <footer className="border-t py-10 text-center text-sm text-muted-foreground">© 2026 {d.footer}</footer>
+    </main>
+  )
+}

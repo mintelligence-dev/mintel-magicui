@@ -119,6 +119,61 @@ const en = {
     cta: "Open the Salesforce guide",
   },
   footer: "M Intelligence Co., Ltd. · MIT License",
+  sf: {
+    metaTitle: "Salesforce",
+    eyebrow: "Salesforce",
+    title: "Mintel UI for Salesforce",
+    subtitle:
+      "Bring the Mintel brand to Lightning Experience, the Salesforce mobile app and Experience Cloud — with the same tokens as the React components.",
+    layersTitle: "Three layers",
+    layers: [
+      {
+        title: "Tokens in your LWC",
+        body: "A CSS-only module, c/mintelTokens, gives every component the brand colors, fonts, radius and spring easings as --mintel-* variables.",
+      },
+      {
+        title: "Rebrand standard components",
+        body: "The mintelGlobal static resource sets SLDS styling hooks, so lightning-button, tabs, path and links pick up the brand without code changes.",
+      },
+      {
+        title: "Ready-made Mintel LWC",
+        body: "Glass card, shimmer button, gradient text and stat card — drag them onto any Lightning or Experience Builder page.",
+      },
+    ],
+    previewTitle: "Live preview: standard SLDS components",
+    previewBody:
+      "Real SLDS markup and CSS in a sandboxed frame. Switch to “Mintel brand” to apply the mintelGlobal stylesheet — only styling hooks change, the markup stays the same.",
+    previewDefault: "SLDS default",
+    previewBrand: "Mintel brand",
+    previewCaption: "SLDS markup rebranded with Mintel tokens (SLDS 2.264 CSS from npm). Path keeps Salesforce blue: SLDS 1 gives it fixed colors with no styling hook. SLDS 2 (Cosmos)-only hooks are not shown here.",
+    previewLabel: "Preview of SLDS components",
+    componentsTitle: "Mintel Lightning Web Components",
+    componentsBody: "Each component is exposed to Lightning App Builder and Experience Builder, works on phones, and stops animating when users prefer reduced motion.",
+    usage: "Usage",
+    source: "Source",
+    looksLike: "Looks like",
+    components: {
+      mintelGlassCard: "Frosted glass card with a title, subtitle and any content.",
+      mintelShimmerButton: "Brand-gradient call to action with a light sweep; fires a normal click event.",
+      mintelGradientText: "Headline filled with a slowly moving brand gradient.",
+      mintelStatCard: "KPI card whose number counts up when it appears.",
+    },
+    deployTitle: "Deploy to your org",
+    deploySteps: [
+      "Log in to the org with the Salesforce CLI.",
+      "Deploy the SFDX project from packages/salesforce.",
+      "In Lightning App Builder, add “Mintel Brand Loader” once per page, then place the components you need.",
+    ],
+    lwrTitle: "Experience Cloud (LWR)",
+    lwrBody: "Instead of the loader, link the static resource from Settings → Advanced → Edit Head Markup:",
+    ownTitle: "Use the tokens in your own LWC",
+    ownBody: "Import the module at the top of the component's CSS. For dark mode, add class=\"mintel-dark\" on the host element.",
+    statusTitle: "Status",
+    status:
+      "All bundles compile with @lwc/compiler and the SLDS hook names are checked against the SLDS CSS. Not yet tested in a real org — report anything that differs, especially on SLDS 2 (Cosmos).",
+    legal:
+      "Salesforce, Lightning and SLDS are trademarks of Salesforce, Inc. This project is not affiliated with or endorsed by Salesforce. The preview uses the Salesforce Lightning Design System CSS (BSD-3-Clause).",
+  },
 }
 
 export type Dict = typeof en
@@ -220,6 +275,61 @@ const th: Dict = {
     cta: "เปิดคู่มือ Salesforce",
   },
   footer: "M Intelligence Co., Ltd. · MIT License",
+  sf: {
+    metaTitle: "Salesforce",
+    eyebrow: "Salesforce",
+    title: "Mintel UI สำหรับ Salesforce",
+    subtitle:
+      "ใช้แบรนด์ Mintel บน Lightning Experience, Salesforce mobile app และ Experience Cloud ด้วย token ชุดเดียวกับ React components",
+    layersTitle: "ใช้งานได้ 3 ชั้น",
+    layers: [
+      {
+        title: "Token ใน LWC ของทีม",
+        body: "CSS module c/mintelTokens ให้สี ฟอนต์ radius และ spring easing ของแบรนด์เป็นตัวแปร --mintel-* ใช้ได้ทุก component",
+      },
+      {
+        title: "เปลี่ยนสี component มาตรฐาน",
+        body: "Static resource mintelGlobal ตั้งค่า SLDS styling hooks ให้ lightning-button, tabs, path และลิงก์เป็นสีแบรนด์โดยไม่ต้องแก้โค้ด",
+      },
+      {
+        title: "LWC สำเร็จรูปของ Mintel",
+        body: "Glass card, shimmer button, gradient text และ stat card ลากวางบนหน้า Lightning หรือ Experience Builder ได้เลย",
+      },
+    ],
+    previewTitle: "ตัวอย่างจริง: component มาตรฐานของ SLDS",
+    previewBody:
+      "ใช้ markup และ CSS ของ SLDS จริงในกรอบแยก กด “Mintel brand” เพื่อใส่ stylesheet mintelGlobal — เปลี่ยนแค่ styling hooks ส่วน markup เหมือนเดิม",
+    previewDefault: "SLDS ปกติ",
+    previewBrand: "Mintel brand",
+    previewCaption: "Markup ของ SLDS ที่เปลี่ยนสีด้วย Mintel tokens (CSS ของ SLDS 2.264 จาก npm) ส่วน Path ยังเป็นสีน้ำเงินของ Salesforce เพราะ SLDS 1 กำหนดสีตายตัวโดยไม่มี styling hook และ hook ที่มีเฉพาะ SLDS 2 (Cosmos) จะไม่เห็นในตัวอย่างนี้",
+    previewLabel: "ตัวอย่าง component ของ SLDS",
+    componentsTitle: "Lightning Web Components ของ Mintel",
+    componentsBody: "ทุกตัวใช้ใน Lightning App Builder และ Experience Builder ได้ รองรับมือถือ และหยุด animation เมื่อผู้ใช้ตั้งค่าลดการเคลื่อนไหว",
+    usage: "วิธีใช้",
+    source: "Source",
+    looksLike: "หน้าตา",
+    components: {
+      mintelGlassCard: "การ์ดกระจกฝ้า ใส่หัวข้อ คำอธิบาย และเนื้อหาอะไรก็ได้",
+      mintelShimmerButton: "ปุ่ม call to action สีแบรนด์ มีแสงวิ่งรอบขอบ ส่ง click event ปกติ",
+      mintelGradientText: "หัวข้อที่เติมสีไล่เฉดแบรนด์ซึ่งค่อยๆ เคลื่อนที่",
+      mintelStatCard: "การ์ด KPI ที่ตัวเลขนับขึ้นตอนแสดงผล",
+    },
+    deployTitle: "Deploy เข้า org",
+    deploySteps: [
+      "Login เข้า org ด้วย Salesforce CLI",
+      "Deploy SFDX project จาก packages/salesforce",
+      "ใน Lightning App Builder ใส่ “Mintel Brand Loader” หน้าละ 1 ตัว แล้ววาง component ที่ต้องการ",
+    ],
+    lwrTitle: "Experience Cloud (LWR)",
+    lwrBody: "แทนการใช้ loader ให้ link static resource ที่ Settings → Advanced → Edit Head Markup:",
+    ownTitle: "ใช้ token ใน LWC ของทีมเอง",
+    ownBody: "Import module ที่บรรทัดแรกของ CSS ใน component ถ้าต้องการ dark mode ให้ใส่ class=\"mintel-dark\" ที่ host element",
+    statusTitle: "สถานะ",
+    status:
+      "ทุก bundle ผ่าน @lwc/compiler และตรวจชื่อ SLDS hook กับ CSS ของ SLDS แล้ว ยังไม่ได้ทดสอบใน org จริง — ถ้าเจออะไรต่างไป โดยเฉพาะบน SLDS 2 (Cosmos) แจ้งได้เลย",
+    legal:
+      "Salesforce, Lightning และ SLDS เป็นเครื่องหมายการค้าของ Salesforce, Inc. โปรเจกต์นี้ไม่ได้เกี่ยวข้องหรือได้รับการรับรองจาก Salesforce ตัวอย่างใช้ CSS ของ Salesforce Lightning Design System (BSD-3-Clause)",
+  },
 }
 
 export const dictionaries: Record<Lang, Dict> = { en, th }

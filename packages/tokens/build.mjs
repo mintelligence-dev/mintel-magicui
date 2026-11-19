@@ -296,6 +296,10 @@ const sldsHooks = [
   `--slds-c-button-brand-color-background-active: var(--mintel-color-blue-800);`,
   `--slds-c-button-brand-text-color-hover: ${L["primary-foreground"]};`,
   `--slds-c-button-radius-border: var(--mintel-radius);`,
+  `--slds-c-checkbox-toggle-color-background-checked: ${L.primary};`,
+  `--slds-c-checkbox-toggle-color-background-checked-hover: var(--mintel-color-blue-700);`,
+  `--slds-c-checkbox-toggle-color-background-checked-focus: var(--mintel-color-blue-700);`,
+  `--slds-c-tabs-item-color-border-active: ${L.primary};`,
   "/* SLDS global brand palette: drives links, focus rings, selected tabs, progress, etc. */",
   ...[
     [10, 950], [15, 950], [20, 900], [30, 800], [40, 700], [45, 700], [50, 600], [55, 500],
