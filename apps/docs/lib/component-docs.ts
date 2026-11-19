@@ -292,7 +292,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
   "file-upload": {
     th: "ลากไฟล์มาวางหรือกดเลือก ตรวจชนิดและขนาดไฟล์ แสดงรายการไฟล์และแถบความคืบหน้าของแต่ละไฟล์",
     props: [
-      p("files", "UploadFile[]", "Selected files (controlled).", "ไฟล์ที่เลือก (controlled)"),
+      p("files", "UploadFile[]", "Selected files (controlled). UploadFile is { file: File; id: string; progress?: number; error?: string } and is exported as a type. Files that fail accept or maxSize stay in the list with error set, so filter them out before uploading; set progress (0–100) yourself while uploading.", "ไฟล์ที่เลือก (controlled) โดย UploadFile คือ { file: File; id: string; progress?: number; error?: string } และ export เป็น type ไฟล์ที่ไม่ผ่าน accept หรือ maxSize จะยังอยู่ในรายการพร้อม error ให้กรองออกก่อนอัปโหลด ส่วน progress (0–100) ตั้งเองระหว่างอัปโหลด"),
       p("onFilesChange", "(files: UploadFile[]) => void", "Called when files are added or removed.", "เรียกเมื่อเพิ่มหรือลบไฟล์"),
       p("accept", "string", 'Like <input accept>: ".pdf,image/*".', 'เหมือน <input accept> เช่น ".pdf,image/*"'),
       p("maxSize", "number", "Max bytes per file.", "ขนาดสูงสุดต่อไฟล์ (ไบต์)"),
@@ -539,8 +539,20 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
   },
   label: { th: "ป้ายชื่อของช่องกรอก รองรับ accessibility", upstream: radix("Label") },
   textarea: { th: "ช่องข้อความหลายบรรทัด สูงขึ้นอัตโนมัติตามข้อความ" },
-  checkbox: { th: "ช่องติ๊ก มีสถานะ indeterminate กดแล้วเด้งแบบ spring พื้นที่กด 44px", upstream: radix("Checkbox") },
-  "radio-group": { th: "ตัวเลือกแบบเลือกได้ข้อเดียว พื้นที่กด 44px", upstream: radix("Radio Group") },
+  checkbox: {
+    th: "ช่องติ๊ก มีสถานะ indeterminate กดแล้วเด้งแบบ spring พื้นที่กด 44px",
+    props: [
+      p("checked / onCheckedChange", 'boolean | "indeterminate" / (checked) => void', "Controlled state. In a form: checked={field.value} onCheckedChange={field.onChange}.", "ควบคุมจาก state ในฟอร์มใช้ checked={field.value} onCheckedChange={field.onChange}"),
+    ],
+    upstream: radix("Checkbox"),
+  },
+  "radio-group": {
+    th: "ตัวเลือกแบบเลือกได้ข้อเดียว พื้นที่กด 44px",
+    props: [
+      p("value / onValueChange", "string / (value) => void", "On <RadioGroup>: controlled value. In a form: value={field.value} onValueChange={field.onChange}. Each <RadioGroupItem> takes value and id.", "ใส่ที่ <RadioGroup> เพื่อควบคุมค่า ในฟอร์มใช้ value={field.value} onValueChange={field.onChange} ส่วน <RadioGroupItem> แต่ละตัวรับ value และ id"),
+    ],
+    upstream: radix("Radio Group"),
+  },
   switch: {
     th: "สวิตช์เปิด/ปิด ตัวเลื่อนใช้ spring ของแบรนด์",
     props: [p("size", '"default" | "sm"', "Switch size.", "ขนาดสวิตช์", '"default"')],
