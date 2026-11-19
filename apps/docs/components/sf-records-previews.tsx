@@ -5,7 +5,7 @@ import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Timeline, TimelineItem } from "@/registry/mintel/ui/timeline"
 
-// Docs-only previews that mirror the record-page LWC (mintelRelatedCards, mintelActivityTimeline, mintelKanban).
+// Docs-only previews that mirror the record-page LWC (relatedCards, activityTimeline, kanban).
 
 export function RelatedCardsPreview() {
   const cases = [

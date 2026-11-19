@@ -1,0 +1,29 @@
+<template>
+    <section class="activity">
+        <header class="head">
+            <h2 class="title">{heading}</h2>
+            <div class="filters" role="radiogroup" aria-label={labels.show}>
+                <template for:each={filterOptions} for:item="f">
+                    <button key={f.value} type="button" role="radio" class={f.className} aria-checked={f.checked} data-value={f.value} onclick={handleFilter}>
+                        {f.label}
+                    </button>
+                </template>
+            </div>
+        </header>
+        <template lwc:if={errorText}>
+            <p class="error" role="alert">{errorText}</p>
+        </template>
+        <template lwc:elseif={isEmpty}>
+            <c-empty-state title={labels.empty} icon-name="utility:event"></c-empty-state>
+        </template>
+        <template lwc:else>
+            <c-timeline label={heading}>
+                <template for:each={items} for:item="it">
+                    <c-timeline-item key={it.id} title={it.title} time={it.time} variant={it.variant} current={it.current}>
+                        {it.description}
+                    </c-timeline-item>
+                </template>
+            </c-timeline>
+        </template>
+    </section>
+</template>

@@ -249,7 +249,7 @@ const en = {
     layers: [
       {
         title: "Tokens in your LWC",
-        body: "A CSS-only module, c/mintelTokens, gives every component the brand colors, fonts, radius and spring easings as --mintel-* variables.",
+        body: "A CSS-only module, c/tokens, gives every component the brand colors, fonts, radius and spring easings as --mintel-* variables.",
       },
       {
         title: "Rebrand standard components",
@@ -267,7 +267,7 @@ const en = {
       "Mintel brand = the same record page with the mintelGlobal stylesheet (brand blue #295DA8, rounder corners) plus Mintel LWC: shimmer button, gradient title, stat cards and a glass AI summary card.",
     previewDefault: "SLDS default",
     previewBrand: "Mintel brand",
-    previewCaption: "SLDS 2.264 CSS from npm. Mintel components are rendered with the real stylesheets of the LWC in packages/salesforce. The standard SLDS Path cannot be recolored (no styling hook), so the Mintel page uses mintelPath instead. SLDS 2 (Cosmos)-only hooks are not shown here.",
+    previewCaption: "SLDS 2.264 CSS from npm. Mintel components are rendered with the real stylesheets of the LWC in packages/salesforce. The standard SLDS Path cannot be recolored (no styling hook), so the Mintel page uses path instead. SLDS 2 (Cosmos)-only hooks are not shown here.",
     previewLabel: "Preview of SLDS components",
     componentsTitle: "Mintel Lightning Web Components",
     componentsBody: "Each component is exposed to Lightning App Builder and Experience Builder, works on phones, and stops animating when users prefer reduced motion.",
@@ -275,39 +275,39 @@ const en = {
     source: "Source",
     looksLike: "Looks like",
     components: {
-      mintelPath:
+      path:
         "Stage path in Mintel colors. On a record page it reads a picklist (e.g. Case Status), and changes it in two steps — select, then “Mark as current stage”. Works without a record too.",
-      mintelTabs:
-        "Tabs whose pill or underline springs to the active tab. Two parts, like lightning-tabset and lightning-tab: c-mintel-tabs is the tab bar (selection, indicator, arrow keys, tabchange); each c-mintel-tab holds one tab's label and content. For composing inside your own LWC.",
-      mintelSegmentedControl:
+      tabs:
+        "Tabs whose pill or underline springs to the active tab. Two parts, like lightning-tabset and lightning-tab: c-tabs is the tab bar (selection, indicator, arrow keys, tabchange); each c-tab holds one tab's label and content. For composing inside your own LWC.",
+      segmentedControl:
         "Segmented control with a sliding thumb, for switching views or ranges. Set options in App Builder as value:Label pairs, or pass an array from JS.",
-      mintelRecordHeader:
+      recordHeader:
         "Branded record header for record pages: object icon and label, the title in the brand gradient, a status badge and up to four highlight fields, with a slot for action buttons.",
-      mintelRelatedCards:
+      relatedCards:
         "A record page related list (Cases, Opportunities, Contacts…) as cards with a count and View all. Uses the UI API, so sharing and field security apply and there is no Apex.",
-      mintelKanban:
+      kanban:
         "Related records as a board grouped by a picklist, e.g. Opportunities by Stage. Drag a card or use its Move to menu (keyboard and mobile app); it saves at once and rolls back with Salesforce's message if a validation rule says no.",
-      mintelActivityTimeline:
+      activityTimeline:
         "Tasks and Events for the record in one timeline with an All / Tasks / Events filter. Overdue tasks are red, completed ones green. Reads through UI API GraphQL, no Apex.",
-      mintelSlaTimer:
+      slaTimer:
         "Countdown to a DateTime field such as a Case SLA. Green on track, amber inside the warning window, red and counting up once overdue; a bar shows time used; a Boolean field like IsClosed stops it.",
-      mintelConversation:
+      conversation:
         "Chat thread for LINE, Messenger, TikTok and WhatsApp on a Case or Messaging Session: day dividers, grouped bubbles, read receipts, attachments, typing and a composer. Compose it in your LWC with messages from Apex.",
-      mintelThaiAddress:
+      thaiAddress:
         "Thai address for Flow screens and pages: province, district, sub-district and postal code, or type the postal code first. Bangkok uses khet/khwaeng. In Flow the names and ids are outputs.",
-      mintelProgressRing:
+      progressRing:
         "Percentage ring that sweeps in, from a record field (e.g. Opportunity Probability) or a fixed value, in brand or red/amber/green colors.",
-      mintelEmptyState: "Branded empty state for related lists and pages: icon in a soft halo, title, description and an optional button.",
-      mintelAvatarGroup: "Overlapping avatars for a case team or account owners, with a +N bubble and a lift on hover.",
-      mintelStatusBadge:
+      emptyState: "Branded empty state for related lists and pages: icon in a soft halo, title, description and an optional button.",
+      avatarGroup: "Overlapping avatars for a case team or account owners, with a +N bubble and a lift on hover.",
+      statusBadge:
         "Status pill with a colored dot. On a record page it shows a field's label; colors come from your Value:variant list, then keyword guesses (Closed → success, Escalated → destructive …).",
-      mintelTimeline:
+      timeline:
         "Vertical event history: colored dots or icons, times, descriptions and a pulsing current step. For composing inside your own LWC.",
-      mintelGlassCard: "Frosted glass card with a title, subtitle and any content.",
-      mintelShimmerButton: "Brand-gradient call to action with a light sweep; fires a normal click event.",
-      mintelGradientText: "Headline filled with a slowly moving brand gradient.",
-      mintelStatCard: "KPI card whose number counts up when it appears.",
-      mintelFontSizeControl:
+      glassCard: "Frosted glass card with a title, subtitle and any content.",
+      shimmerButton: "Brand-gradient call to action with a light sweep; fires a normal click event.",
+      gradientText: "Headline filled with a slowly moving brand gradient.",
+      statCard: "KPI card whose number counts up when it appears.",
+      fontSizeControl:
         "Text-size control (ก- ก ก+) for Experience Cloud: scales the page and remembers the choice. Not for Lightning Experience, whose global font size should not change.",
     },
     deployTitle: "Deploy to your org",
@@ -557,7 +557,7 @@ const th: Dict = {
     layers: [
       {
         title: "Token ใน LWC ของทีม",
-        body: "CSS module c/mintelTokens ให้สี ฟอนต์ radius และ spring easing ของแบรนด์เป็นตัวแปร --mintel-* ใช้ได้ทุก component",
+        body: "CSS module c/tokens ให้สี ฟอนต์ radius และ spring easing ของแบรนด์เป็นตัวแปร --mintel-* ใช้ได้ทุก component",
       },
       {
         title: "เปลี่ยนสี component มาตรฐาน",
@@ -575,7 +575,7 @@ const th: Dict = {
       "Mintel brand = หน้า record เดิมที่ใส่ stylesheet mintelGlobal (น้ำเงินแบรนด์ #295DA8 มุมมนขึ้น) และวาง LWC ของ Mintel: ปุ่ม shimmer หัวข้อไล่สี การ์ด KPI และการ์ดกระจกสรุปเคสด้วย AI",
     previewDefault: "SLDS ปกติ",
     previewBrand: "Mintel brand",
-    previewCaption: "ใช้ CSS ของ SLDS 2.264 จาก npm ส่วน component ของ Mintel ใช้ stylesheet จริงของ LWC ใน packages/salesforce Path มาตรฐานของ SLDS เปลี่ยนสีไม่ได้ (ไม่มี styling hook) หน้า Mintel จึงใช้ mintelPath แทน ส่วน hook ที่มีเฉพาะ SLDS 2 (Cosmos) จะไม่เห็นในตัวอย่างนี้",
+    previewCaption: "ใช้ CSS ของ SLDS 2.264 จาก npm ส่วน component ของ Mintel ใช้ stylesheet จริงของ LWC ใน packages/salesforce Path มาตรฐานของ SLDS เปลี่ยนสีไม่ได้ (ไม่มี styling hook) หน้า Mintel จึงใช้ path แทน ส่วน hook ที่มีเฉพาะ SLDS 2 (Cosmos) จะไม่เห็นในตัวอย่างนี้",
     previewLabel: "ตัวอย่าง component ของ SLDS",
     componentsTitle: "Lightning Web Components ของ Mintel",
     componentsBody: "ทุกตัวใช้ใน Lightning App Builder และ Experience Builder ได้ รองรับมือถือ และหยุด animation เมื่อผู้ใช้ตั้งค่าลดการเคลื่อนไหว",
@@ -583,38 +583,38 @@ const th: Dict = {
     source: "Source",
     looksLike: "หน้าตา",
     components: {
-      mintelPath:
+      path:
         "แถบขั้นตอนสี Mintel บนหน้า record จะอ่าน picklist (เช่น Case Status) และเปลี่ยนค่าแบบ 2 ขั้น — เลือก แล้วกด “ตั้งเป็นขั้นปัจจุบัน” ใช้แบบไม่มี record ก็ได้",
-      mintelTabs:
-        "แท็บที่ตัวไฮไลต์ (pill หรือขีดเส้นใต้) เด้งไปหาแท็บที่เลือก มี 2 ส่วนเหมือน lightning-tabset กับ lightning-tab: c-mintel-tabs คือแถบแท็บ (จำแท็บที่เลือก ตัวไฮไลต์ ปุ่มลูกศร และ event tabchange) ส่วน c-mintel-tab แต่ละตัวคือ 1 แท็บ เก็บชื่อแท็บและเนื้อหา ใช้ประกอบใน LWC ของเราเอง",
-      mintelSegmentedControl:
+      tabs:
+        "แท็บที่ตัวไฮไลต์ (pill หรือขีดเส้นใต้) เด้งไปหาแท็บที่เลือก มี 2 ส่วนเหมือน lightning-tabset กับ lightning-tab: c-tabs คือแถบแท็บ (จำแท็บที่เลือก ตัวไฮไลต์ ปุ่มลูกศร และ event tabchange) ส่วน c-tab แต่ละตัวคือ 1 แท็บ เก็บชื่อแท็บและเนื้อหา ใช้ประกอบใน LWC ของเราเอง",
+      segmentedControl:
         "ตัวเลือกแบบแบ่งช่อง มีแถบเลื่อนไปยังช่องที่เลือก ใช้สลับมุมมองหรือช่วงเวลา ตั้ง options ใน App Builder เป็นคู่ value:Label หรือส่ง array จาก JS",
-      mintelRecordHeader:
+      recordHeader:
         "หัวหน้า record แบบมีแบรนด์ มีไอคอนและชื่อ object ชื่อ record สีไล่เฉด ป้ายสถานะ ฟิลด์สำคัญไม่เกิน 4 ช่อง และช่องใส่ปุ่มคำสั่ง",
-      mintelRelatedCards:
+      relatedCards:
         "related list บนหน้า record (เช่น Cases, Opportunities, Contacts) แสดงเป็นการ์ด มีจำนวนและปุ่มดูทั้งหมด ดึงผ่าน UI API จึงเคารพสิทธิ์และ field security และไม่ต้องเขียน Apex",
-      mintelKanban:
+      kanban:
         "บอร์ดของ record ที่เกี่ยวข้อง แบ่งคอลัมน์ตาม picklist เช่น Opportunity ตาม Stage ลากการ์ดหรือใช้เมนูย้ายไป (ใช้คีย์บอร์ดและแอปมือถือได้) บันทึกทันที และย้อนกลับพร้อมข้อความของ Salesforce ถ้าติด validation rule",
-      mintelActivityTimeline:
+      activityTimeline:
         "Task และ Event ของ record ในไทม์ไลน์เดียว กรองได้ ทั้งหมด/งาน/นัดหมาย งานเลยกำหนดเป็นสีแดง งานเสร็จเป็นสีเขียว ดึงผ่าน UI API GraphQL ไม่ต้องเขียน Apex",
-      mintelSlaTimer:
+      slaTimer:
         "นับถอยหลังถึงเวลาในฟิลด์ DateTime เช่น SLA ของเคส เขียวเมื่อทันเวลา เหลืองเมื่อใกล้ครบ แดงและนับเวลาที่เกินเมื่อเลยกำหนด มีแถบเวลาที่ใช้ไป และหยุดเมื่อฟิลด์ Boolean เช่น IsClosed เป็นจริง",
-      mintelConversation:
+      conversation:
         "หน้าแชต LINE, Messenger, TikTok และ WhatsApp บนหน้า Case หรือ Messaging Session มีตัวคั่นวัน จัดกลุ่มข้อความ สถานะอ่านแล้ว ไฟล์แนบ กำลังพิมพ์ และช่องพิมพ์ ใช้ประกอบใน LWC ของเราโดยส่งข้อความจาก Apex",
-      mintelThaiAddress:
+      thaiAddress:
         "ที่อยู่ไทยสำหรับ Flow screen และหน้าต่างๆ เลือกจังหวัด อำเภอ ตำบล แล้วได้รหัสไปรษณีย์ หรือพิมพ์รหัสไปรษณีย์ก่อน กรุงเทพฯ ใช้เขต/แขวง ใน Flow ได้ทั้งชื่อและ id เป็น output",
-      mintelProgressRing: "วงแหวนเปอร์เซ็นต์ที่กวาดเข้ามา อ่านจากฟิลด์ของ record (เช่น Probability ของ Opportunity) หรือใส่ค่าเอง สีแบรนด์หรือแดง/เหลือง/เขียวตามค่า",
-      mintelEmptyState: "หน้าว่างแบบมีแบรนด์สำหรับ related list และหน้าต่างๆ ไอคอนในแสงนุ่ม หัวข้อ คำอธิบาย และปุ่ม",
-      mintelAvatarGroup: "รูปโปรไฟล์ซ้อนกันสำหรับทีมดูแลเคสหรือเจ้าของลูกค้า รวมคนที่เหลือเป็น +N และยกขึ้นเมื่อชี้",
-      mintelStatusBadge:
+      progressRing: "วงแหวนเปอร์เซ็นต์ที่กวาดเข้ามา อ่านจากฟิลด์ของ record (เช่น Probability ของ Opportunity) หรือใส่ค่าเอง สีแบรนด์หรือแดง/เหลือง/เขียวตามค่า",
+      emptyState: "หน้าว่างแบบมีแบรนด์สำหรับ related list และหน้าต่างๆ ไอคอนในแสงนุ่ม หัวข้อ คำอธิบาย และปุ่ม",
+      avatarGroup: "รูปโปรไฟล์ซ้อนกันสำหรับทีมดูแลเคสหรือเจ้าของลูกค้า รวมคนที่เหลือเป็น +N และยกขึ้นเมื่อชี้",
+      statusBadge:
         "ป้ายสถานะมีจุดสี บนหน้า record จะแสดง label ของฟิลด์ สีมาจากรายการ Value:variant ที่ตั้งไว้ ถ้าไม่ได้ตั้งจะเดาจากคำ (Closed → เขียว, Escalated → แดง …)",
-      mintelTimeline:
+      timeline:
         "ประวัติเหตุการณ์แนวตั้ง จุดหรือไอคอนมีสีตามสถานะ มีเวลาและคำอธิบาย ขั้นปัจจุบันมีวงกระเพื่อม ใช้ประกอบใน LWC ของเราเอง",
-      mintelGlassCard: "การ์ดกระจกฝ้า ใส่หัวข้อ คำอธิบาย และเนื้อหาอะไรก็ได้",
-      mintelShimmerButton: "ปุ่ม call to action สีแบรนด์ มีแสงวิ่งรอบขอบ ส่ง click event ปกติ",
-      mintelGradientText: "หัวข้อที่เติมสีไล่เฉดแบรนด์ซึ่งค่อยๆ เคลื่อนที่",
-      mintelStatCard: "การ์ด KPI ที่ตัวเลขนับขึ้นตอนแสดงผล",
-      mintelFontSizeControl:
+      glassCard: "การ์ดกระจกฝ้า ใส่หัวข้อ คำอธิบาย และเนื้อหาอะไรก็ได้",
+      shimmerButton: "ปุ่ม call to action สีแบรนด์ มีแสงวิ่งรอบขอบ ส่ง click event ปกติ",
+      gradientText: "หัวข้อที่เติมสีไล่เฉดแบรนด์ซึ่งค่อยๆ เคลื่อนที่",
+      statCard: "การ์ด KPI ที่ตัวเลขนับขึ้นตอนแสดงผล",
+      fontSizeControl:
         "ปุ่มปรับขนาดตัวอักษร (ก- ก ก+) สำหรับ Experience Cloud ขยายทั้งหน้าและจำค่าที่เลือก ไม่ใช้กับ Lightning Experience เพราะไม่ควรเปลี่ยนขนาดฟอนต์ของทั้งระบบ",
     },
     deployTitle: "Deploy เข้า org",

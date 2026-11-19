@@ -1,0 +1,35 @@
+<template>
+    <section class="related">
+        <header class="head">
+            <h2 class="title">{heading}<template lwc:if={countText}><span class="count">{countText}</span></template></h2>
+            <template lwc:if={hasMore}>
+                <button type="button" class="link" onclick={handleViewAll}>{labels.viewAll}</button>
+            </template>
+        </header>
+        <template lwc:if={errorText}>
+            <p class="error" role="alert">{errorText}</p>
+        </template>
+        <template lwc:elseif={isEmpty}>
+            <c-empty-state title={labels.empty} icon-name={emptyIcon}></c-empty-state>
+        </template>
+        <template lwc:else>
+            <ul class="grid">
+                <template for:each={cards} for:item="card">
+                    <li key={card.id}>
+                        <button type="button" class="card" data-id={card.id} onclick={handleOpen}>
+                            <span class="card-title">{card.title}</span>
+                            <dl class="fields">
+                                <template for:each={card.fields} for:item="f">
+                                    <div key={f.key} class="field">
+                                        <dt>{f.label}</dt>
+                                        <dd>{f.value}</dd>
+                                    </div>
+                                </template>
+                            </dl>
+                        </button>
+                    </li>
+                </template>
+            </ul>
+        </template>
+    </section>
+</template>

@@ -1,0 +1,79 @@
+@import 'c/tokens';
+
+.control {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px;
+    border: 1px solid var(--mintel-border);
+    border-radius: 999px;
+    background: var(--mintel-background);
+    font-family: var(--mintel-font-sans);
+}
+
+.step {
+    position: relative;
+    min-width: 2.25rem;
+    height: 2rem;
+    padding: 0 0.625rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--mintel-muted-foreground);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--mintel-duration-fast) var(--mintel-ease-standard),
+        transform var(--mintel-spring-snappy-duration) var(--mintel-ease-spring-snappy);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.step:hover {
+    background: var(--mintel-accent);
+    color: var(--mintel-foreground);
+}
+.step:active {
+    transform: scale(0.9);
+}
+.step:focus-visible {
+    outline: 3px solid color-mix(in oklab, var(--mintel-ring) 50%, transparent);
+    outline-offset: 1px;
+}
+.step:disabled {
+    cursor: default;
+}
+.step:disabled:not(.active) {
+    opacity: 0.4;
+}
+
+.small {
+    font-size: 0.875rem;
+}
+.base {
+    font-size: 1rem;
+}
+.large {
+    font-size: 1.125rem;
+}
+.active {
+    background: var(--mintel-accent);
+    color: var(--mintel-accent-foreground);
+    box-shadow: inset 0 0 0 1px var(--mintel-border);
+}
+
+/* 44px touch target on touch screens */
+@media (pointer: coarse) {
+    .step::after {
+        content: '';
+        position: absolute;
+        inset: -6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .step {
+        transition: none;
+    }
+    .step:active {
+        transform: none;
+    }
+}

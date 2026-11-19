@@ -1,0 +1,110 @@
+@import 'c/tokens';
+
+:host {
+    display: block;
+    font-family: var(--mintel-font-sans);
+    color: var(--mintel-foreground);
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 2.5rem 1.5rem;
+    border: 1px dashed var(--mintel-border);
+    border-radius: calc(var(--mintel-radius) + 4px);
+    text-align: center;
+    animation: mintel-empty-in var(--mintel-duration-slower) var(--mintel-ease-out);
+}
+.halo {
+    position: relative;
+    display: flex;
+    width: 3.5rem;
+    height: 3.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+    animation: mintel-empty-pop 0.7s var(--mintel-ease-spring-bouncy);
+}
+.glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: var(--mintel-brand-gradient);
+    opacity: 0.18;
+    filter: blur(10px);
+}
+.tile {
+    position: relative;
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--mintel-border);
+    border-radius: 1rem;
+    background: var(--mintel-background);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+    --slds-c-icon-color-foreground-default: var(--mintel-brand);
+    --sds-c-icon-color-foreground-default: var(--mintel-brand);
+}
+.title {
+    margin: 0;
+    font-family: var(--mintel-font-heading);
+    font-weight: 600;
+}
+.description {
+    max-width: 24rem;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--mintel-muted-foreground);
+}
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+.actions:empty {
+    display: none;
+}
+.action {
+    min-height: 2.25rem;
+    padding: 0 1rem;
+    border: 0;
+    border-radius: var(--mintel-radius);
+    background: var(--mintel-brand-gradient);
+    color: var(--mintel-brand-foreground);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform var(--mintel-spring-snappy-duration) var(--mintel-ease-spring-snappy);
+}
+.action:active {
+    transform: scale(0.97);
+}
+
+@keyframes mintel-empty-in {
+    from {
+        opacity: 0;
+    }
+}
+@keyframes mintel-empty-pop {
+    from {
+        transform: scale(0.75);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .empty,
+    .halo {
+        animation: none;
+    }
+    .action {
+        transition: none;
+    }
+}

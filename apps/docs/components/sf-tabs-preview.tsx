@@ -14,7 +14,7 @@ const TABS = [
   { value: "settings", label: "Settings", body: "Notification and routing preferences." },
 ]
 
-/** React twin of mintelTabs, for the Salesforce guide preview. */
+/** React twin of tabs, for the Salesforce guide preview. */
 export function TabsPreview() {
   return (
     <AnimatedTabs defaultValue="overview" className="w-full max-w-sm">
@@ -34,7 +34,7 @@ export function TabsPreview() {
   )
 }
 
-/** React twin of mintelSegmentedControl, for the Salesforce guide preview. */
+/** React twin of segmentedControl, for the Salesforce guide preview. */
 export function SegmentedPreview() {
   return (
     <div className="flex flex-col items-center gap-3">
