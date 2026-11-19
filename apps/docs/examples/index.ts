@@ -21,6 +21,9 @@ import PaginationExample from "./pagination"
 import SheetExample from "./sheet"
 import FileUploadExample from "./file-upload"
 import ThaiAddressExample from "./thai-address"
+import ThaiIdInputExample from "./thai-id-input"
+import ThaiPhoneInputExample from "./thai-phone-input"
+import OtpInputExample from "./otp-input"
 import DataTableExample from "./data-table"
 import ChartExample from "./chart"
 import GroupedListExample from "./grouped-list"
@@ -84,6 +87,9 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "sheet": SheetExample,
   "file-upload": FileUploadExample,
   "thai-address": ThaiAddressExample,
+  "thai-id-input": ThaiIdInputExample,
+  "thai-phone-input": ThaiPhoneInputExample,
+  "otp-input": OtpInputExample,
   "data-table": DataTableExample,
   "chart": ChartExample,
   "grouped-list": GroupedListExample,

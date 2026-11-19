@@ -27,6 +27,17 @@
     transform: translateX(100%);
   }
 }
+@keyframes mintel-pop {
+  0% {
+    scale: 1;
+  }
+  40% {
+    scale: 1.12;
+  }
+  100% {
+    scale: 1;
+  }
+}
 @keyframes gradient {
   to {
     background-position: var(--bg-size, 300%) 0;

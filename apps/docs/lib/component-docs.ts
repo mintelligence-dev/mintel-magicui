@@ -36,7 +36,7 @@ type RawItem = {
 // Core UI items that belong to the "Forms" group in the docs navigation.
 const FORM_ITEMS = new Set([
   "input", "label", "textarea", "checkbox", "radio-group", "switch", "select", "combobox", "calendar", "date-picker", "form",
-  "file-upload", "thai-address",
+  "file-upload", "thai-address", "thai-id-input", "thai-phone-input", "otp-input",
 ])
 
 const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper", "grouped-list"])
@@ -194,6 +194,30 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("locale", '"th" | "en"', "Labels and place names.", "ภาษาของป้ายและชื่อสถานที่", '"th"'),
       p("dataUrl", "string", "Where the dataset is served.", "ที่อยู่ไฟล์ข้อมูล", '"/mintel/thai-address.json"'),
       p("disabled", "boolean", "Disable every field.", "ปิดการใช้งานทุกช่อง"),
+    ],
+  },
+  "thai-id-input": {
+    th: "ช่องเลขบัตรประชาชน จัดรูปแบบ 1-2345-67890-12-3 ระหว่างพิมพ์หรือวาง และเช็คเลขหลักสุดท้าย (check digit) เมื่อครบ 13 หลัก",
+    props: [
+      p("value / defaultValue", "string", "Digits only.", "ตัวเลขล้วน"),
+      p("onValueChange", "(digits, valid) => void", "Digits and whether the check digit matches.", "ตัวเลข และผลการเช็ค check digit"),
+      p("locale", '"th" | "en"', "Screen-reader status text.", "ภาษาข้อความสถานะ", '"th"'),
+    ],
+  },
+  "thai-phone-input": {
+    th: "ช่องเบอร์โทรไทย จัดรูปแบบ 081-234-5678 / 02-123-4567 วางเบอร์ +66 ได้ และได้รูปแบบ E.164 สำหรับส่ง SMS หรือ WhatsApp",
+    props: [
+      p("value / defaultValue", "string", "Local digits (0812345678).", "ตัวเลขแบบในประเทศ"),
+      p("onValueChange", "(digits, { e164, valid }) => void", "Local digits, +66 form and completeness.", "ตัวเลข รูปแบบ +66 และครบหรือยัง"),
+    ],
+  },
+  "otp-input": {
+    th: "ช่องรหัส OTP พิมพ์แล้วเลื่อนช่องเอง ลบย้อนได้ วางหรือเติมจาก SMS ได้ทีเดียว ตัวเลขเด้งตอนกรอก และสั่นเมื่อรหัสผิด",
+    props: [
+      p("length", "number", "Number of boxes.", "จำนวนช่อง", "6"),
+      p("value / onValueChange", "string", "Controlled code.", "รหัส (controlled)"),
+      p("onComplete", "(code) => void", "All boxes filled.", "เรียกเมื่อกรอกครบ"),
+      p("invalid", "boolean", "Shake and mark as invalid.", "สั่นและแสดงว่าผิด", "false"),
     ],
   },
   "data-table": {

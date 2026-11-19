@@ -645,6 +645,83 @@
       ]
     },
     {
+      "name": "thai-id-input",
+      "type": "registry:ui",
+      "title": "Thai ID input",
+      "description": "Thai national ID field that formats as 1-2345-67890-12-3 and checks the check digit.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/thai-id-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "thai-phone-input",
+      "type": "registry:ui",
+      "title": "Thai phone input",
+      "description": "Thai phone field: 081-234-5678 / 02-123-4567 formatting, accepts pasted +66 numbers, gives you the E.164 form.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/thai-phone-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "otp-input",
+      "type": "registry:ui",
+      "title": "OTP input",
+      "description": "One-time code boxes with auto-advance, paste and SMS autofill, a pop on each digit and a shake when wrong.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/otp-input.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "css": {
+        "@keyframes mintel-shake": {
+          "0%, 100%": {
+            "translate": "0"
+          },
+          "20%, 60%": {
+            "translate": "-4px"
+          },
+          "40%, 80%": {
+            "translate": "4px"
+          }
+        },
+        "@keyframes mintel-pop": {
+          "0%": {
+            "scale": "1"
+          },
+          "40%": {
+            "scale": "1.12"
+          },
+          "100%": {
+            "scale": "1"
+          }
+        }
+      }
+    },
+    {
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data table",

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "otp-input",
+  "title": "OTP input",
+  "description": "One-time code boxes with auto-advance, paste and SMS autofill, a pop on each digit and a shake when wrong.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/ui/otp-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/**\n * One-time code boxes (default 6). Typing moves forward, Backspace moves back, arrows move freely,\n * and pasting or SMS autofill (autocomplete=\"one-time-code\") fills every box at once. Calls\n * `onComplete` when all boxes are filled; `invalid` shakes the row and marks it for screen readers.\n */\nfunction OtpInput({\n  length = 6,\n  value: controlled,\n  onValueChange,\n  onComplete,\n  invalid = false,\n  disabled = false,\n  autoFocus = false,\n  className,\n  \"aria-label\": ariaLabel = \"One-time code\",\n}: {\n  length?: number\n  value?: string\n  onValueChange?: (value: string) => void\n  onComplete?: (value: string) => void\n  invalid?: boolean\n  disabled?: boolean\n  autoFocus?: boolean\n  className?: string\n  \"aria-label\"?: string\n}) {\n  const [uncontrolled, setUncontrolled] = React.useState(\"\")\n  const value = (controlled ?? uncontrolled).replace(/\\D/g, \"\").slice(0, length)\n  const refs = React.useRef<(HTMLInputElement | null)[]>([])\n\n  const commit = (next: string, focusIndex?: number) => {\n    const clean = next.replace(/\\D/g, \"\").slice(0, length)\n    if (controlled === undefined) setUncontrolled(clean)\n    onValueChange?.(clean)\n    if (clean.length === length && clean !== value) onComplete?.(clean)\n    if (focusIndex !== undefined) refs.current[Math.max(0, Math.min(length - 1, focusIndex))]?.focus()\n  }\n\n  const setAt = (i: number, digit: string) => {\n    const chars = value.padEnd(length, \" \").split(\"\")\n    chars[i] = digit\n    return chars.join(\"\").replace(/\\s+$/, \"\").replace(/\\s/g, \"\")\n  }\n\n  return (\n    <div\n      data-slot=\"otp-input\"\n      role=\"group\"\n      aria-label={ariaLabel}\n      data-invalid={invalid || undefined}\n      className={cn(\"flex gap-2 motion-safe:data-invalid:animate-[mintel-shake_0.4s_ease-in-out]\", className)}\n    >\n      {Array.from({ length }, (_, i) => {\n        const char = value[i] ?? \"\"\n        return (\n          <input\n            key={i}\n            ref={(el) => {\n              refs.current[i] = el\n            }}\n            value={char}\n            disabled={disabled}\n            autoFocus={autoFocus && i === 0}\n            inputMode=\"numeric\"\n            autoComplete={i === 0 ? \"one-time-code\" : \"off\"}\n            maxLength={i === 0 ? length : 1}\n            aria-label={`${ariaLabel} ${i + 1}/${length}`}\n            aria-invalid={invalid || undefined}\n            data-filled={char ? \"\" : undefined}\n            onFocus={(e) => e.target.select()}\n            onChange={(e) => {\n              const typed = e.target.value.replace(/\\D/g, \"\")\n              if (!typed) return\n              // Several digits at once (paste into one box, or SMS autofill): fill from here.\n              if (typed.length > 1) return commit(value.slice(0, i) + typed, i + typed.length)\n              commit(setAt(i, typed), i + 1)\n            }}\n            onKeyDown={(e) => {\n              if (e.key === \"Backspace\") {\n                e.preventDefault()\n                if (char) commit(setAt(i, \"\"), i)\n                else if (i > 0) commit(setAt(i - 1, \"\"), i - 1)\n              } else if (e.key === \"ArrowLeft\") {\n                e.preventDefault()\n                refs.current[i - 1]?.focus()\n              } else if (e.key === \"ArrowRight\") {\n                e.preventDefault()\n                refs.current[i + 1]?.focus()\n              }\n            }}\n            onPaste={(e) => {\n              const text = e.clipboardData.getData(\"text\").replace(/\\D/g, \"\")\n              if (!text) return\n              e.preventDefault()\n              commit(value.slice(0, i) + text, i + text.length)\n            }}\n            className={cn(\n              \"size-11 rounded-lg border border-input bg-transparent text-center font-mono text-lg font-semibold shadow-xs outline-none\",\n              \"transition-[border-color,box-shadow,scale] duration-300 ease-spring-snappy\",\n              \"focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50\",\n              \"data-filled:border-brand/50 motion-safe:data-filled:animate-[mintel-pop_0.3s_ease-out]\",\n              \"aria-invalid:border-destructive aria-invalid:ring-destructive/20 disabled:opacity-50 dark:bg-input/30\",\n              \"sm:size-12\"\n            )}\n          />\n        )\n      })}\n    </div>\n  )\n}\n\nexport { OtpInput }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "css": {
+    "@keyframes mintel-shake": {
+      "0%, 100%": {
+        "translate": "0"
+      },
+      "20%, 60%": {
+        "translate": "-4px"
+      },
+      "40%, 80%": {
+        "translate": "4px"
+      }
+    },
+    "@keyframes mintel-pop": {
+      "0%": {
+        "scale": "1"
+      },
+      "40%": {
+        "scale": "1.12"
+      },
+      "100%": {
+        "scale": "1"
+      }
+    }
+  },
+  "type": "registry:ui"
+}
