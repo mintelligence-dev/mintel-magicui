@@ -22,6 +22,8 @@ import SheetExample from "./sheet"
 import FileUploadExample from "./file-upload"
 import DataTableExample from "./data-table"
 import ChartExample from "./chart"
+import GroupedListExample from "./grouped-list"
+import CollapsingHeaderExample from "./collapsing-header"
 import TabsExample from "./tabs"
 import ToastExample from "./toast"
 import LabelExample from "./label"
@@ -82,6 +84,8 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "file-upload": FileUploadExample,
   "data-table": DataTableExample,
   "chart": ChartExample,
+  "grouped-list": GroupedListExample,
+  "collapsing-header": CollapsingHeaderExample,
   "tabs": TabsExample,
   "toast": ToastExample,
   "label": LabelExample,

@@ -66,6 +66,9 @@
   --mintel-spring-bouncy-duration: 985ms;
   --mintel-glass-blur: 16px;
   --mintel-glass-saturate: 1.8;
+  --mintel-material-thin-blur: 8px;
+  --mintel-material-regular-blur: 16px;
+  --mintel-material-thick-blur: 28px;
   --mintel-background: #FFFFFF;
   --mintel-foreground: var(--mintel-color-neutral-900);
   --mintel-card: #FFFFFF;
@@ -111,6 +114,10 @@
   --mintel-glass-border: rgba(255, 255, 255, 0.7);
   --mintel-glass-highlight: rgba(255, 255, 255, 0.9);
   --mintel-glass-shadow: rgba(24, 27, 49, 0.12);
+  --mintel-grouped: var(--mintel-color-neutral-100);
+  --mintel-material-thin: rgba(255, 255, 255, 0.35);
+  --mintel-material-regular: rgba(255, 255, 255, 0.55);
+  --mintel-material-thick: rgba(255, 255, 255, 0.78);
   --mintel-brand-gradient: linear-gradient(135deg, var(--mintel-brand) 0%, var(--mintel-brand-accent) 100%);
   /* SLDS component styling hooks: rebrand base lightning-* components */
   --slds-c-button-brand-color-background: var(--mintel-primary);
@@ -222,4 +229,8 @@
   --mintel-glass-border: rgba(255, 255, 255, 0.12);
   --mintel-glass-highlight: rgba(255, 255, 255, 0.2);
   --mintel-glass-shadow: rgba(0, 0, 0, 0.45);
+  --mintel-grouped: var(--mintel-color-neutral-950);
+  --mintel-material-thin: rgba(23, 26, 49, 0.35);
+  --mintel-material-regular: rgba(23, 26, 49, 0.5);
+  --mintel-material-thick: rgba(23, 26, 49, 0.72);
 }

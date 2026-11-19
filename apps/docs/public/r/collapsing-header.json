@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsing-header",
+  "title": "Collapsing header",
+  "description": "Big page title that hands off to a compact title in a translucent sticky bar as you scroll.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/ui/collapsing-header.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/**\n * Page header with a big title that scrolls away; once it slides under the bar, a compact title fades\n * into the bar and the bar turns translucent. Works with the window or any scrolling ancestor.\n * Under reduced motion the swap is instant.\n */\nfunction CollapsingHeader({\n  title,\n  leading,\n  trailing,\n  className,\n  children,\n}: {\n  title: React.ReactNode\n  /** Left of the bar, e.g. a back button. */\n  leading?: React.ReactNode\n  /** Right of the bar, e.g. actions. */\n  trailing?: React.ReactNode\n  className?: string\n  /** Optional content under the big title, e.g. a search field. */\n  children?: React.ReactNode\n}) {\n  const barRef = React.useRef<HTMLDivElement>(null)\n  const titleRef = React.useRef<HTMLHeadingElement>(null)\n  const [collapsed, setCollapsed] = React.useState(false)\n\n  React.useEffect(() => {\n    let frame = 0\n    const check = () => {\n      frame = 0\n      const bar = barRef.current?.getBoundingClientRect()\n      const big = titleRef.current?.getBoundingClientRect()\n      if (bar && big) setCollapsed(big.bottom <= bar.bottom + 4)\n    }\n    const onScroll = () => {\n      if (!frame) frame = requestAnimationFrame(check)\n    }\n    check()\n    // Capture catches scrolling in any ancestor, not just the window.\n    window.addEventListener(\"scroll\", onScroll, { capture: true, passive: true })\n    window.addEventListener(\"resize\", onScroll)\n    return () => {\n      window.removeEventListener(\"scroll\", onScroll, { capture: true })\n      window.removeEventListener(\"resize\", onScroll)\n      if (frame) cancelAnimationFrame(frame)\n    }\n  }, [])\n\n  return (\n    <header data-slot=\"collapsing-header\" data-collapsed={collapsed || undefined} className={cn(\"contents\", className)}>\n      <div\n        ref={barRef}\n        className={cn(\n          \"sticky top-0 z-20 grid h-12 grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 transition-[background-color,box-shadow] duration-300 motion-reduce:transition-none\",\n          collapsed ? \"material-thick shadow-[0_1px_0_var(--border)]\" : \"bg-transparent\"\n        )}\n      >\n        <div className=\"flex items-center justify-start gap-1\">{leading}</div>\n        <p\n          aria-hidden={!collapsed}\n          className={cn(\n            \"truncate text-center text-sm font-semibold transition-[opacity,translate] duration-300 ease-spring-snappy motion-reduce:transition-none\",\n            collapsed ? \"translate-y-0 opacity-100\" : \"translate-y-1 opacity-0\"\n          )}\n        >\n          {title}\n        </p>\n        <div className=\"flex items-center justify-end gap-1\">{trailing}</div>\n      </div>\n      <div className=\"px-4 pt-1 pb-3\">\n        <h1 ref={titleRef} className=\"text-display font-bold\">\n          {title}\n        </h1>\n        {children && <div className=\"mt-3\">{children}</div>}\n      </div>\n    </header>\n  )\n}\n\nexport { CollapsingHeader }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

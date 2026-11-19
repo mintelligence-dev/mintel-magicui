@@ -1,6 +1,7 @@
 import { CommandMenu } from "@/components/command-menu"
 import { GithubIcon } from "@/components/github-icon"
 import { LangSwitch } from "@/components/lang-switch"
+import { StyleSwitch } from "@/components/style-switch"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
 import { REPO_URL } from "@/lib/site"
@@ -57,6 +58,7 @@ export function SiteHeader({ lang, page = "home" }: { lang: Lang; page?: SitePag
               <GithubIcon />
             </a>
           </Button>
+          <StyleSwitch label={t.styleSwitch} />
           <ThemeToggle label={t.themeToggle} />
         </nav>
       </div>

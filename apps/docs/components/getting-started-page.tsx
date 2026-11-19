@@ -51,6 +51,12 @@ export function ThemeToggle() {
   )
 }`
 
+const THEME_CSS = `@import "tailwindcss";
+@import "@mintelligence-dev/tokens/tailwind.css";
+@import "@mintelligence-dev/tokens/themes/clarity.css";
+
+/* <html data-mintel-theme="clarity"> turns Clarity on; remove the attribute for Mintel. */`
+
 export function GettingStartedPage({ lang }: { lang: Lang }) {
   const d = getDict(lang)
   const t = d.docs.gs
@@ -95,6 +101,15 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
         <section className="space-y-3 rounded-xl border bg-muted/30 p-5">
           <p className="text-sm">{t.noConfig}</p>
           <CopyCommand label={copy} command={`npx shadcn@latest add ${REGISTRY_URL}/mintel-theme.json`} />
+        </section>
+
+        <section id="themes" className="scroll-mt-20 space-y-3">
+          <h2 className="font-heading text-2xl font-semibold tracking-tight">{t.themesTitle}</h2>
+          <p className="text-muted-foreground">{t.themesBody}</p>
+          <p className="text-sm">{t.themesWhole}</p>
+          <CopyCommand label={copy} command="npx shadcn@latest add @mintel/theme-clarity" />
+          <p className="text-sm">{t.themesSwitch}</p>
+          <CodeBlock title="app/globals.css" code={THEME_CSS} copyLabel={copy} />
         </section>
 
         <div className="flex flex-wrap gap-3">

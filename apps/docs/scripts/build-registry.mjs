@@ -11,6 +11,7 @@ import { fileURLToPath } from "node:url"
 const root = join(dirname(fileURLToPath(import.meta.url)), "..")
 const require = createRequire(import.meta.url)
 const theme = require("@mintelligence-dev/tokens/shadcn-theme.json")
+const clarity = require("@mintelligence-dev/tokens/themes/clarity-shadcn.json")
 const items = JSON.parse(readFileSync(join(root, "registry/items.json"), "utf8"))
 
 // Registry dependencies on our own items must point at THIS registry by URL — a bare name like
@@ -42,6 +43,8 @@ const themeItem = {
       // Tailwind v4 resets buttons to the default cursor.
       'button:not(:disabled), [role="button"]:not(:disabled)': { cursor: "pointer" },
     },
+    // material-thin / -regular / -thick surfaces
+    ...theme.css,
   },
   cssVars: {
     theme: {
@@ -52,6 +55,28 @@ const themeItem = {
     },
     light: theme.light,
     dark: theme.dark,
+  },
+}
+
+// Optional second theme, installed on top of mintel-theme. Rewrites the app's variables, so the
+// whole app takes the Clarity look (to switch at runtime instead, use tokens' themes/clarity.css).
+const clarityItem = {
+  name: "theme-clarity",
+  type: "registry:theme",
+  title: "Mintel Clarity Theme",
+  description:
+    "Calm, content-first theme: system fonts, larger reading sizes, layered dark mode and continuous corners. Install after mintel-theme.",
+  registryDependencies: [`${registryUrl}/mintel-theme.json`],
+  css: {
+    // Continuous corners where supported; rectangular surfaces only, so pills and avatars stay round.
+    "@supports (corner-shape: squircle)": {
+      [`:is(${clarity.squircle.map((slot) => `[data-slot="${slot}"]`).join(", ")})`]: { "corner-shape": "squircle" },
+    },
+  },
+  cssVars: {
+    theme: clarity.theme,
+    light: clarity.light,
+    dark: clarity.dark,
   },
 }
 
@@ -76,7 +101,7 @@ const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "mintel",
   homepage: "https://github.com/muisurasak/mintel-ui",
-  items: [themeItem, ...items, ...blocks],
+  items: [themeItem, clarityItem, ...items, ...blocks],
 }
 writeFileSync(join(root, "registry.json"), JSON.stringify(registry, null, 2) + "\n")
 

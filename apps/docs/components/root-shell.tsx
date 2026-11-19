@@ -3,6 +3,7 @@ import { IBM_Plex_Sans_Thai, JetBrains_Mono, Manrope, Rubik } from "next/font/go
 
 import { getDict, langPath, type Lang } from "@/lib/i18n"
 import { SITE_URL } from "@/lib/site"
+import { styleScript } from "@/lib/style-theme"
 import { FontScaleScript } from "@/registry/mintel/ui/font-size-control"
 import { Toaster } from "@/registry/mintel/ui/toast"
 
@@ -49,6 +50,7 @@ export function RootShell({ lang, children }: { lang: Lang; children: React.Reac
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: styleScript }} />
         <FontScaleScript />
       </head>
       <body>

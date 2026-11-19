@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "@mintelligence-dev/tokens/tailwind.css";
+@import "@mintelligence-dev/tokens/themes/clarity.css";
 @import "./registry.css";
 
 /* next/font exposes the brand fonts as CSS variables; point the token font stacks at them. */
