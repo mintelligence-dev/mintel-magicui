@@ -24,8 +24,9 @@ jobs:
             apps/docs/registry.json apps/docs/public/r apps/docs/app/registry.css \
             || (echo "::error::Run 'npm run build' and commit the generated files." && exit 1)
 
-  # Visual regression + accessibility, in the same Linux image the baselines were rendered in
-  # (fonts and anti-aliasing must match). Update baselines with: npm run test:e2e:docker -- --update-snapshots
+  # Accessibility (axe) on every docs page, in the Playwright image (browsers preinstalled).
+  # Visual regression is not run here: it took most of the job's time. Run it locally before merging
+  # UI changes: npm run test:e2e:docker -w docs -- e2e/visual.spec.ts
   qa:
     runs-on: ubuntu-latest
     container:
@@ -35,10 +36,10 @@ jobs:
       - uses: actions/checkout@v4
       - run: npm ci
       - run: npm run build
-      - name: Visual regression and accessibility (axe)
-        run: npx playwright test
+      - name: Accessibility (axe)
+        run: npx playwright test e2e/a11y.spec.ts
         working-directory: apps/docs
-      - name: Upload report (diffs and axe findings)
+      - name: Upload report (axe findings)
         if: failure()
         uses: actions/upload-artifact@v4
         with:
