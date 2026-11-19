@@ -36,7 +36,7 @@ type RawItem = {
 // Core UI items that belong to the "Forms" group in the docs navigation.
 const FORM_ITEMS = new Set([
   "input", "label", "textarea", "checkbox", "radio-group", "switch", "select", "combobox", "calendar", "date-picker", "form",
-  "file-upload",
+  "file-upload", "thai-address",
 ])
 
 const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper", "grouped-list"])
@@ -184,6 +184,16 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("maxSize", "number", "Max bytes per file.", "ขนาดสูงสุดต่อไฟล์ (ไบต์)"),
       p("multiple", "boolean", "Allow several files.", "เลือกได้หลายไฟล์", "true"),
       p("locale", '"en" | "th"', "Label language.", "ภาษาของป้าย", '"en"'),
+    ],
+  },
+  "thai-address": {
+    th: "ที่อยู่ไทย เลือกจังหวัด → อำเภอ → ตำบล แล้วเติมรหัสไปรษณีย์ให้ หรือพิมพ์รหัสไปรษณีย์ก่อนก็ได้ กรุงเทพฯ ใช้คำว่าเขต/แขวง ข้อมูลโหลดเมื่อใช้งานครั้งแรก",
+    props: [
+      p("value / defaultValue", "{ provinceId?; districtId?; subDistrictId?; zip? }", "Picked ids and postal code.", "id ที่เลือกและรหัสไปรษณีย์"),
+      p("onValueChange", "(value, names) => void", "Called with ids and the names in the chosen language.", "ได้ทั้ง id และชื่อตามภาษาที่เลือก"),
+      p("locale", '"th" | "en"', "Labels and place names.", "ภาษาของป้ายและชื่อสถานที่", '"th"'),
+      p("dataUrl", "string", "Where the dataset is served.", "ที่อยู่ไฟล์ข้อมูล", '"/mintel/thai-address.json"'),
+      p("disabled", "boolean", "Disable every field.", "ปิดการใช้งานทุกช่อง"),
     ],
   },
   "data-table": {

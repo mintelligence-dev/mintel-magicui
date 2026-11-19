@@ -1,0 +1,49 @@
+<template>
+    <div class="address">
+        <template lwc:if={errorText}>
+            <p class="error" role="alert">{errorText}</p>
+        </template>
+        <div class="grid">
+            <lightning-combobox
+                label={labels.province}
+                placeholder={labels.pick}
+                options={provinceOptions}
+                value={provinceValue}
+                disabled={notReady}
+                required={required}
+                onchange={handleProvince}
+            ></lightning-combobox>
+            <lightning-combobox
+                label={districtLabel}
+                placeholder={labels.pick}
+                options={districtOptions}
+                value={districtValue}
+                disabled={noProvince}
+                required={required}
+                onchange={handleDistrict}
+            ></lightning-combobox>
+            <lightning-combobox
+                label={subDistrictLabel}
+                placeholder={labels.pick}
+                options={subDistrictOptions}
+                value={subDistrictValue}
+                disabled={noSubDistrictChoices}
+                required={required}
+                onchange={handleSubDistrict}
+            ></lightning-combobox>
+            <lightning-input
+                label={labels.zip}
+                value={zip}
+                maxlength="5"
+                pattern="[0-9]{5}"
+                message-when-pattern-mismatch={labels.zipFormat}
+                disabled={notReady}
+                required={required}
+                onchange={handleZip}
+            ></lightning-input>
+        </div>
+        <template lwc:if={zipHint}>
+            <p class="hint">{zipHint}</p>
+        </template>
+    </div>
+</template>

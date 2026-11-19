@@ -334,6 +334,29 @@
     ]
   },
   {
+    "name": "thai-address",
+    "type": "registry:ui",
+    "title": "Thai address",
+    "description": "Province → district → sub-district with the postal code filled in, or type the postal code first. Bangkok uses khet/khwaeng. Ships the dataset to public/mintel/thai-address.json and loads it lazily.",
+    "registryDependencies": [
+      "utils",
+      "@mintel/combobox",
+      "@mintel/input",
+      "@mintel/label"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/thai-address.tsx",
+        "type": "registry:ui"
+      },
+      {
+        "path": "public/mintel/thai-address.json",
+        "type": "registry:file",
+        "target": "public/mintel/thai-address.json"
+      }
+    ]
+  },
+  {
     "name": "data-table",
     "type": "registry:ui",
     "title": "Data table",

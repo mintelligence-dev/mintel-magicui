@@ -33,3 +33,10 @@ SOFTWARE.
 
 `apps/docs/registry/mintel/ui/` follows the structure of [shadcn/ui](https://github.com/shadcn-ui/ui)
 components (MIT License, Copyright (c) 2023 shadcn).
+
+## Thai province data
+
+`apps/docs/public/mintel/thai-address.json` and
+`packages/salesforce/force-app/main/default/staticresources/mintelThaiAddress.json` are generated from
+[kongvut/thai-province-data](https://github.com/kongvut/thai-province-data) by
+`apps/docs/scripts/build-thai-address.mjs` (MIT License, Copyright (c) 2025 Kongvut Sangkla).
