@@ -1,4 +1,4 @@
-import { BookOpen, ChevronRight, Cloud, Component, FormInput, Layers, LayoutGrid, LayoutTemplate, Orbit, Smartphone, Sparkles } from "lucide-react"
+import { BookOpen, ChartColumn, ChevronRight, Cloud, Component, FormInput, Layers, LayoutGrid, LayoutTemplate, Orbit, PanelsTopLeft, Smartphone, Sparkles } from "lucide-react"
 
 import { CATEGORY_LABEL, ITEMS, itemsByCategory, type Category } from "@/lib/component-docs"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils"
 const CATEGORY_ICON: Record<Category, { icon: typeof Component; tone: string }> = {
   core: { icon: Component, tone: "text-brand bg-brand/10" },
   forms: { icon: FormInput, tone: "text-brand-cyan bg-brand-cyan/10" },
+  data: { icon: ChartColumn, tone: "text-brand bg-brand/10" },
+  navigation: { icon: PanelsTopLeft, tone: "text-brand-cyan bg-brand-cyan/10" },
   glass: { icon: Layers, tone: "text-brand-accent bg-brand-accent/10" },
   motion: { icon: Orbit, tone: "text-brand-accent bg-brand-accent/10" },
   mobile: { icon: Smartphone, tone: "text-brand-cyan bg-brand-cyan/10" },

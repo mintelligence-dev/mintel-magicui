@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react"
 
 import { DocsShell } from "@/components/docs-shell"
-import { CATEGORY_LABEL, COMPONENT_DOCS, itemsByCategory } from "@/lib/component-docs"
+import { CATEGORY_LABEL, COMPONENT_DOCS, countItems, itemsByCategory } from "@/lib/component-docs"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
 
 export function ComponentsIndexPage({ lang }: { lang: Lang }) {
@@ -10,7 +10,7 @@ export function ComponentsIndexPage({ lang }: { lang: Lang }) {
     <DocsShell lang={lang} current="components">
       <header className="space-y-3">
         <h1 className="font-heading text-4xl font-bold tracking-tight">{t.componentsIndexTitle}</h1>
-        <p className="max-w-3xl text-lg text-muted-foreground">{t.componentsIndexBody}</p>
+        <p className="max-w-3xl text-lg text-muted-foreground">{t.componentsIndexBody(countItems())}</p>
       </header>
       <div className="mt-10 space-y-12">
         {itemsByCategory().map(({ category, items }) => (

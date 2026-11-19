@@ -5,6 +5,10 @@
   "description": "Mintel UI for Salesforce: LWC token module, SLDS styling hooks static resource and branded Lightning Web Components.",
   "license": "MIT",
   "scripts": {
-    "deploy": "sf project deploy start --source-dir force-app"
+    "deploy": "sf project deploy start --source-dir force-app",
+    "test": "sfdx-lwc-jest"
+  },
+  "devDependencies": {
+    "@salesforce/sfdx-lwc-jest": "^7.9.0"
   }
 }

@@ -136,6 +136,13 @@ const BRAND_MARKUP = `
     </div>
   </div>
 
+  <div class="c-mintelPath slds-m-top_medium"><div class="path"><ol class="track" aria-label="Progress">
+    <li class="item"><button type="button" class="stage complete first"><svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg><span class="label">New</span></button></li>
+    <li class="item"><button type="button" class="stage current" aria-current="step"><span class="label">Working</span></button></li>
+    <li class="item"><button type="button" class="stage upcoming"><span class="label">Escalated</span></button></li>
+    <li class="item"><button type="button" class="stage upcoming last"><span class="label">Closed</span></button></li>
+  </ol></div></div>
+
   <div class="slds-grid slds-wrap slds-gutters_x-small slds-m-top_medium">
     <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_x-small"><div class="c-mintelStatCard"><div class="stat"><p class="label">Open cases</p><p class="value"><span class="number" data-count="37">37</span><span class="suffix">cases</span></p><p class="caption">3 due today</p></div></div></div>
     <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_x-small"><div class="c-mintelStatCard"><div class="stat"><p class="label">Messages today</p><p class="value"><span class="number" data-count="1284">1,284</span></p><p class="caption">LINE · Facebook · TikTok</p></div></div></div>

@@ -16,6 +16,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - run: npm test
       - name: Generated files are committed
         run: |
           git diff --exit-code -- packages/tokens/dist packages/tokens/lwc packages/tokens/salesforce \

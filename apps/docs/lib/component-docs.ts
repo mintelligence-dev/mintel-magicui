@@ -1,6 +1,6 @@
 import items from "@/registry/items.json"
 
-export type Category = "core" | "forms" | "effects" | "glass" | "motion" | "mobile"
+export type Category = "core" | "forms" | "data" | "navigation" | "effects" | "glass" | "motion" | "mobile"
 
 export type RegistryItem = {
   name: string
@@ -11,11 +11,13 @@ export type RegistryItem = {
   files: string[]
 }
 
-export const CATEGORY_ORDER: Category[] = ["core", "forms", "glass", "motion", "mobile", "effects"]
+export const CATEGORY_ORDER: Category[] = ["core", "forms", "data", "navigation", "glass", "motion", "mobile", "effects"]
 
 export const CATEGORY_LABEL: Record<Category, { en: string; th: string }> = {
   core: { en: "Core UI", th: "Core UI" },
   forms: { en: "Forms", th: "Forms" },
+  data: { en: "Data display", th: "แสดงข้อมูล" },
+  navigation: { en: "Navigation", th: "นำทาง" },
   effects: { en: "Effects", th: "Effects" },
   glass: { en: "Glass", th: "Glass" },
   motion: { en: "Fluid Motion", th: "Fluid Motion" },
@@ -36,17 +38,28 @@ const FORM_ITEMS = new Set([
   "input", "label", "textarea", "checkbox", "radio-group", "switch", "select", "combobox", "calendar", "date-picker", "form",
 ])
 
+const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper"])
+const NAV_ITEMS = new Set(["breadcrumb", "pagination", "accordion", "sheet"])
+
+const categoryOf = (it: RawItem): Category =>
+  (it.meta?.category as Category) ??
+  (FORM_ITEMS.has(it.name) ? "forms" : DATA_ITEMS.has(it.name) ? "data" : NAV_ITEMS.has(it.name) ? "navigation" : "core")
+
 export const ITEMS: RegistryItem[] = (items as RawItem[]).map((it) => ({
   name: it.name,
   title: it.title,
   description: it.description,
-  category: (it.meta?.category as Category) ?? (FORM_ITEMS.has(it.name) ? "forms" : "core"),
+  category: categoryOf(it),
   dependencies: it.dependencies ?? [],
   files: it.files.map((f) => f.path),
 }))
 
+/** Number of registry items in the given categories (all when omitted). */
+export const countItems = (...categories: Category[]) =>
+  categories.length ? ITEMS.filter((i) => categories.includes(i.category)).length : ITEMS.length
+
 export const itemsByCategory = () =>
-  CATEGORY_ORDER.map((c) => ({ category: c, items: ITEMS.filter((i) => i.category === c) }))
+  CATEGORY_ORDER.map((c) => ({ category: c, items: ITEMS.filter((i) => i.category === c) })).filter((g) => g.items.length)
 
 export type PropDoc = { name: string; type: string; default?: string; description: { en: string; th: string } }
 
@@ -87,6 +100,16 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
   dialog: { th: "หน้าต่าง modal พื้นหลังเบลอ เปิดแบบซูมเข้า", upstream: radix("Dialog") },
   select: { th: "dropdown เลือกค่า มีเครื่องหมายถูกสีแบรนด์", upstream: radix("Select") },
   table: { th: "ตารางข้อมูล มี header, body, footer, caption และไฮไลต์แถวเมื่อชี้" },
+  stepper: {
+    th: "แสดงความคืบหน้าเป็นขั้นตอน มีแบบลูกศร (เหมือน Path ของ Salesforce แต่เป็นสี Mintel) และแบบวงกลมตัวเลขสำหรับฟอร์มหลายขั้น",
+    props: [
+      p("steps", "{ value; label; description? }[]", "Stages in order.", "ขั้นตอนตามลำดับ"),
+      p("value", "string", "Current step.", "ขั้นปัจจุบัน"),
+      p("variant", '"arrow" | "steps"', "Chevron path or numbered wizard.", "แบบลูกศร หรือวงกลมตัวเลข", '"arrow"'),
+      p("onStepClick", "(value: string) => void", "Makes steps clickable.", "ทำให้กดเลือกขั้นได้"),
+      p("selected", "string", "A picked-but-unconfirmed step (for “Mark as current”).", "ขั้นที่เลือกไว้แต่ยังไม่ยืนยัน (ใช้กับปุ่ม “ตั้งเป็นขั้นปัจจุบัน”)"),
+    ],
+  },
   tabs: { th: "แท็บที่เลือกเป็นสีแบรนด์ เนื้อหาค่อยๆ ปรากฏ", upstream: radix("Tabs") },
   toast: {
     th: "แจ้งเตือนมุมจอ (sonner) วาง <Toaster /> ครั้งเดียวแล้วเรียก toast() ได้ทุกที่ สลับ dark mode ตามหน้า",

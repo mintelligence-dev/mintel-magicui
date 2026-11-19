@@ -9,6 +9,7 @@ import InputExample from "./input"
 import DialogExample from "./dialog"
 import SelectExample from "./select"
 import TableExample from "./table"
+import StepperExample from "./stepper"
 import TabsExample from "./tabs"
 import ToastExample from "./toast"
 import LabelExample from "./label"
@@ -56,6 +57,7 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "dialog": DialogExample,
   "select": SelectExample,
   "table": TableExample,
+  "stepper": StepperExample,
   "tabs": TabsExample,
   "toast": ToastExample,
   "label": LabelExample,

@@ -6,6 +6,7 @@ import { CopyCommand } from "@/components/copy-command"
 import { LwcSource } from "@/components/lwc-source"
 import { MobileNav } from "@/components/mobile-nav"
 import { SiteHeader } from "@/components/site-header"
+import { PathPreview } from "@/components/path-preview"
 import { SldsPreview } from "@/components/slds-preview"
 import { getDict, type Lang } from "@/lib/i18n"
 import { scopeLwcCss } from "@/lib/scope-css"
@@ -24,7 +25,7 @@ const BRAND_CSS = readFileSync(join(process.cwd(), "../../packages/tokens/salesf
 const LWC_DIR = join(process.cwd(), "../../packages/salesforce/force-app/main/default/lwc")
 
 // The Mintel LWC stylesheets, scoped so the preview renders them exactly as they look in an org.
-const MINTEL_LWC_CSS = ["mintelGlassCard", "mintelShimmerButton", "mintelGradientText", "mintelStatCard"]
+const MINTEL_LWC_CSS = ["mintelPath", "mintelGlassCard", "mintelShimmerButton", "mintelGradientText", "mintelStatCard"]
   .map((name) => scopeLwcCss(readFileSync(join(LWC_DIR, name, `${name}.css`), "utf8"), `.c-${name}`))
   .join("\n")
 
@@ -39,6 +40,15 @@ function bundle(name: string) {
 }
 
 const COMPONENTS = [
+  {
+    name: "mintelPath",
+    usage: `<!-- Record page: reads and updates a picklist (two steps, like the standard Path) -->
+<c-mintel-path record-id={recordId} object-api-name="Case" field-api-name="Status"></c-mintel-path>
+
+<!-- Without a record -->
+<c-mintel-path stages="New,Working,Escalated,Closed" current="Working" onstagechange={handleStage}></c-mintel-path>`,
+    preview: <PathPreview />,
+  },
   {
     name: "mintelGlassCard",
     usage: `<c-mintel-glass-card title="Case summary" subtitle="LINE OA" variant="brand">

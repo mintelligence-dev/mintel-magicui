@@ -172,7 +172,8 @@ const en = {
     noResults: "No results",
     pages: "Pages",
     componentsIndexTitle: "Components",
-    componentsIndexBody: "45 registry items: core UI and forms, glass, fluid motion, mobile and effects — all on Mintel brand tokens.",
+    componentsIndexBody: (n: number) =>
+      `${n} registry items: core UI, forms, data display, navigation, glass, fluid motion, mobile and effects — all on Mintel brand tokens.`,
     gs: {
       title: "Getting started",
       body: "Set up a Next.js app with the Mintel theme, fonts and components. Every step below was run in a fresh Next.js 16 project.",
@@ -217,7 +218,7 @@ const en = {
       "Mintel brand = the same record page with the mintelGlobal stylesheet (brand blue #295DA8, rounder corners) plus Mintel LWC: shimmer button, gradient title, stat cards and a glass AI summary card.",
     previewDefault: "SLDS default",
     previewBrand: "Mintel brand",
-    previewCaption: "SLDS 2.264 CSS from npm. Mintel components are rendered with the real stylesheets of the LWC in packages/salesforce. SLDS Path has fixed colors in SLDS 1 (no styling hook), and SLDS 2 (Cosmos)-only hooks are not shown here.",
+    previewCaption: "SLDS 2.264 CSS from npm. Mintel components are rendered with the real stylesheets of the LWC in packages/salesforce. The standard SLDS Path cannot be recolored (no styling hook), so the Mintel page uses mintelPath instead. SLDS 2 (Cosmos)-only hooks are not shown here.",
     previewLabel: "Preview of SLDS components",
     componentsTitle: "Mintel Lightning Web Components",
     componentsBody: "Each component is exposed to Lightning App Builder and Experience Builder, works on phones, and stops animating when users prefer reduced motion.",
@@ -225,6 +226,8 @@ const en = {
     source: "Source",
     looksLike: "Looks like",
     components: {
+      mintelPath:
+        "Stage path in Mintel colors. On a record page it reads a picklist (e.g. Case Status), and changes it in two steps — select, then “Mark as current stage”. Works without a record too.",
       mintelGlassCard: "Frosted glass card with a title, subtitle and any content.",
       mintelShimmerButton: "Brand-gradient call to action with a light sweep; fires a normal click event.",
       mintelGradientText: "Headline filled with a slowly moving brand gradient.",
@@ -402,7 +405,8 @@ const th: Dict = {
     noResults: "ไม่พบรายการ",
     pages: "หน้า",
     componentsIndexTitle: "Components",
-    componentsIndexBody: "45 รายการใน registry: core UI และฟอร์ม, glass, fluid motion, mobile และ effects — ใช้ brand tokens ของ Mintel ทั้งหมด",
+    componentsIndexBody: (n: number) =>
+      `${n} รายการใน registry: core UI, ฟอร์ม, แสดงข้อมูล, นำทาง, glass, fluid motion, mobile และ effects — ใช้ brand tokens ของ Mintel ทั้งหมด`,
     gs: {
       title: "เริ่มต้นใช้งาน",
       body: "ตั้งค่าโปรเจกต์ Next.js ให้ใช้ theme ฟอนต์ และ component ของ Mintel ทุกขั้นด้านล่างทดสอบในโปรเจกต์ Next.js 16 ที่สร้างใหม่แล้ว",
@@ -447,7 +451,7 @@ const th: Dict = {
       "Mintel brand = หน้า record เดิมที่ใส่ stylesheet mintelGlobal (น้ำเงินแบรนด์ #295DA8 มุมมนขึ้น) และวาง LWC ของ Mintel: ปุ่ม shimmer หัวข้อไล่สี การ์ด KPI และการ์ดกระจกสรุปเคสด้วย AI",
     previewDefault: "SLDS ปกติ",
     previewBrand: "Mintel brand",
-    previewCaption: "ใช้ CSS ของ SLDS 2.264 จาก npm ส่วน component ของ Mintel ใช้ stylesheet จริงของ LWC ใน packages/salesforce ทั้งนี้ Path ของ SLDS 1 กำหนดสีตายตัวโดยไม่มี styling hook และ hook ที่มีเฉพาะ SLDS 2 (Cosmos) จะไม่เห็นในตัวอย่างนี้",
+    previewCaption: "ใช้ CSS ของ SLDS 2.264 จาก npm ส่วน component ของ Mintel ใช้ stylesheet จริงของ LWC ใน packages/salesforce Path มาตรฐานของ SLDS เปลี่ยนสีไม่ได้ (ไม่มี styling hook) หน้า Mintel จึงใช้ mintelPath แทน ส่วน hook ที่มีเฉพาะ SLDS 2 (Cosmos) จะไม่เห็นในตัวอย่างนี้",
     previewLabel: "ตัวอย่าง component ของ SLDS",
     componentsTitle: "Lightning Web Components ของ Mintel",
     componentsBody: "ทุกตัวใช้ใน Lightning App Builder และ Experience Builder ได้ รองรับมือถือ และหยุด animation เมื่อผู้ใช้ตั้งค่าลดการเคลื่อนไหว",
@@ -455,6 +459,8 @@ const th: Dict = {
     source: "Source",
     looksLike: "หน้าตา",
     components: {
+      mintelPath:
+        "แถบขั้นตอนสี Mintel บนหน้า record จะอ่าน picklist (เช่น Case Status) และเปลี่ยนค่าแบบ 2 ขั้น — เลือก แล้วกด “ตั้งเป็นขั้นปัจจุบัน” ใช้แบบไม่มี record ก็ได้",
       mintelGlassCard: "การ์ดกระจกฝ้า ใส่หัวข้อ คำอธิบาย และเนื้อหาอะไรก็ได้",
       mintelShimmerButton: "ปุ่ม call to action สีแบรนด์ มีแสงวิ่งรอบขอบ ส่ง click event ปกติ",
       mintelGradientText: "หัวข้อที่เติมสีไล่เฉดแบรนด์ซึ่งค่อยๆ เคลื่อนที่",
