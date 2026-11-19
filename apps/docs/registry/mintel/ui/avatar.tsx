@@ -59,7 +59,7 @@ function Avatar({
 }
 
 function AvatarImage({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Image>) {
-  return <AvatarPrimitive.Image data-slot="avatar-image" className={cn("aspect-square size-full object-cover", className)} {...props} />
+  return <AvatarPrimitive.Image data-slot="avatar-image" className={cn("aspect-square size-full object-cover motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95 motion-safe:duration-300", className)} {...props} />
 }
 
 function AvatarFallback({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
@@ -83,7 +83,10 @@ function AvatarGroup({
   const shown = max ? items.slice(0, max) : items
   const extra = items.length - shown.length
   return (
-    <div data-slot="avatar-group" className={cn("flex items-center -space-x-2 [&>*]:ring-2 [&>*]:ring-background", className)} {...props}>
+    <div data-slot="avatar-group" className={cn(
+        "flex items-center -space-x-2 [&>*]:ring-2 [&>*]:ring-background [&>*]:transition-transform [&>*]:duration-300 [&>*]:ease-spring-snappy [&>*:hover]:z-10 [&>*:hover]:-translate-y-1 motion-reduce:[&>*:hover]:translate-y-0",
+        className
+      )} {...props}>
       {shown}
       {extra > 0 && (
         <span className="relative flex size-9 items-center justify-center rounded-full bg-muted text-xs font-semibold text-muted-foreground">

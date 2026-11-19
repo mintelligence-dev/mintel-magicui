@@ -96,8 +96,11 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     th: "ป้ายสถานะ มีแบบ brand, soft, success, warning และ destructive",
     props: [p("variant", '"default" | "brand" | "secondary" | "soft" | "success" | "warning" | "destructive" | "outline"', "Visual style.", "รูปแบบป้าย", '"default"')],
   },
-  card: { th: "การ์ด แบ่งเป็น header, title, description, action, content และ footer" },
-  input: { th: "ช่องกรอกข้อความ ใช้ตัวอักษร 16px บนมือถือเพื่อไม่ให้ iOS ซูม" },
+  card: {
+    th: "การ์ด แบ่งเป็น header, title, description, action, content และ footer ตั้ง interactive ให้ยกขึ้นตอนชี้",
+    props: [p("interactive", "boolean", "Lift on hover and press on click, for cards that open something.", "ยกขึ้นตอนชี้และยุบตอนกด สำหรับการ์ดที่กดได้", "false")],
+  },
+  input: { th: "ช่องกรอกข้อความ ใช้ตัวอักษร 16px บนมือถือเพื่อไม่ให้ iOS ซูม ขอบเปลี่ยนสีนุ่มๆ และสั่นเบาๆ เมื่อ aria-invalid" },
   dialog: { th: "หน้าต่าง modal พื้นหลังเบลอ เปิดแบบซูมเข้า", upstream: radix("Dialog") },
   select: { th: "dropdown เลือกค่า มีเครื่องหมายถูกสีแบรนด์", upstream: radix("Select") },
   table: { th: "ตารางข้อมูล มี header, body, footer, caption และไฮไลต์แถวเมื่อชี้" },
@@ -363,7 +366,10 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
   },
   "glass-navbar": {
     th: "แถบเมนูด้านบนแบบกระจก เต็มความกว้างหรือลอยเป็นแคปซูล เว้นที่ให้รอยบาก iPhone",
-    props: [p("floating", "boolean", "Floating pill instead of a full-width bar.", "แบบแคปซูลลอยแทนแถบเต็มจอ", "false")],
+    props: [
+      p("floating", "boolean", "Floating pill instead of a full-width bar.", "แบบแคปซูลลอยแทนแถบเต็มจอ", "false"),
+      p("hideOnScroll", "boolean", "Slide away while scrolling down, come back on the way up.", "ซ่อนตอนเลื่อนลง โผล่ตอนเลื่อนขึ้น", "false"),
+    ],
   },
   "segmented-control": {
     th: "ตัวเลือกแบบแบ่งช่อง ตัวที่เลือกเลื่อนแบบ spring ใช้ลูกศรคีย์บอร์ดได้",
