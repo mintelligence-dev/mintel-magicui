@@ -23,6 +23,7 @@ export function DocsSidebar({ lang, current }: { lang: Lang; current: string }) 
       <div className="space-y-0.5">
         {link("/getting-started", t.gettingStarted, "getting-started")}
         {link("/components", t.allComponents, "components")}
+        {link("/templates", t.templates, "templates")}
         {link("/salesforce", "Salesforce", "salesforce")}
       </div>
       {itemsByCategory().map(({ category, items }) => (

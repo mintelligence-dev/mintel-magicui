@@ -6,7 +6,7 @@ import { getDict, langPath, type Lang } from "@/lib/i18n"
 import { REPO_URL } from "@/lib/site"
 import { Button } from "@/registry/mintel/ui/button"
 
-export type SitePage = "home" | "docs" | "components" | "salesforce"
+export type SitePage = "home" | "docs" | "components" | "templates" | "salesforce"
 
 export function SiteHeader({ lang, page = "home" }: { lang: Lang; page?: SitePage }) {
   const d = getDict(lang)
@@ -14,6 +14,7 @@ export function SiteHeader({ lang, page = "home" }: { lang: Lang; page?: SitePag
   const links: { key: SitePage; href: string; label: string }[] = [
     { key: "docs", href: langPath(lang, "/getting-started"), label: d.docs.gettingStarted },
     { key: "components", href: langPath(lang, "/components"), label: t.components },
+    { key: "templates", href: langPath(lang, "/templates"), label: d.docs.templates },
     { key: "salesforce", href: langPath(lang, "/salesforce"), label: t.salesforce },
   ]
   return (

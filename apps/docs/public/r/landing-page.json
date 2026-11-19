@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "landing-page",
+  "title": "Landing page",
+  "description": "Marketing page: glass navbar, animated hero, logo marquee, feature cards with spotlight, stats and a call to action.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils",
+    "http://localhost:3000/r/mintel-theme.json",
+    "http://localhost:3000/r/animated-gradient-text.json",
+    "http://localhost:3000/r/aurora-text.json",
+    "http://localhost:3000/r/blur-fade.json",
+    "http://localhost:3000/r/dot-pattern.json",
+    "http://localhost:3000/r/magic-card.json",
+    "http://localhost:3000/r/marquee.json",
+    "http://localhost:3000/r/number-ticker.json",
+    "http://localhost:3000/r/shimmer-button.json",
+    "http://localhost:3000/r/glass-navbar.json",
+    "http://localhost:3000/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/blocks/landing-page.tsx",
+      "content": "\"use client\"\n\nimport { ArrowRight, BarChart3, Bot, MessageCircle, ShieldCheck, Sparkles, Zap } from \"lucide-react\"\n\nimport { AnimatedGradientText } from \"@/registry/mintel/effects/animated-gradient-text\"\nimport { AuroraText } from \"@/registry/mintel/effects/aurora-text\"\nimport { BlurFade } from \"@/registry/mintel/effects/blur-fade\"\nimport { DotPattern } from \"@/registry/mintel/effects/dot-pattern\"\nimport { MagicCard } from \"@/registry/mintel/effects/magic-card\"\nimport { Marquee } from \"@/registry/mintel/effects/marquee\"\nimport { NumberTicker } from \"@/registry/mintel/effects/number-ticker\"\nimport { ShimmerButton } from \"@/registry/mintel/effects/shimmer-button\"\nimport { GlassNavbar } from \"@/registry/mintel/glass/glass-navbar\"\nimport { Button } from \"@/registry/mintel/ui/button\"\n\nconst LOGOS = [\"Acme Retail\", \"Siam Foods\", \"Bangkok Air\", \"Nimit Co.\", \"Thai Home\", \"Chao Bank\"]\n\nconst FEATURES = [\n  { icon: MessageCircle, title: \"Every channel\", body: \"LINE, Facebook, TikTok and Pantip arrive as cases in one inbox.\" },\n  { icon: Bot, title: \"AI that helps\", body: \"Draft replies and summaries, then hand off to a person when it matters.\" },\n  { icon: BarChart3, title: \"Real-time insight\", body: \"SLA and satisfaction dashboards that update every minute.\" },\n  { icon: ShieldCheck, title: \"PDPA ready\", body: \"Consent, retention and audit trails built in from day one.\" },\n  { icon: Zap, title: \"Fast to launch\", body: \"Go live in weeks with templates for your industry.\" },\n  { icon: Sparkles, title: \"On brand\", body: \"Mintel UI tokens keep every screen consistent.\" },\n]\n\nexport default function LandingPage() {\n  return (\n    <div className=\"min-h-svh overflow-x-clip bg-background\">\n      <GlassNavbar floating className=\"flex h-14 items-center justify-between px-5\">\n        <span className=\"flex items-center gap-2 font-heading font-semibold\">\n          <Sparkles className=\"size-4 text-brand\" /> Mintel\n        </span>\n        <Button size=\"sm\" variant=\"brand\">\n          Book a demo\n        </Button>\n      </GlassNavbar>\n\n      <section className=\"relative isolate px-6 pt-24 pb-20 text-center\">\n        <DotPattern className=\"-z-10 text-brand/25 [mask-image:radial-gradient(480px_circle_at_center,white,transparent)]\" />\n        <BlurFade>\n          <AnimatedGradientText className=\"rounded-full border border-brand/20 px-4 py-1 text-sm font-medium\">\n            ✨ Customer Experience Platform\n          </AnimatedGradientText>\n        </BlurFade>\n        <BlurFade delay={0.1}>\n          <h1 className=\"mx-auto mt-6 max-w-3xl font-heading text-5xl leading-[1.05] font-bold tracking-tight sm:text-7xl\">\n            Talk to every customer, <AuroraText>everywhere.</AuroraText>\n          </h1>\n        </BlurFade>\n        <BlurFade delay={0.2}>\n          <p className=\"mx-auto mt-6 max-w-xl text-lg text-muted-foreground\">\n            One Salesforce-powered inbox for social, chat and phone — with AI that helps your team reply faster.\n          </p>\n        </BlurFade>\n        <BlurFade delay={0.3} className=\"mt-10 flex flex-wrap justify-center gap-3\">\n          <ShimmerButton className=\"font-semibold\">\n            Get started <ArrowRight className=\"ml-2 size-4\" />\n          </ShimmerButton>\n          <Button variant=\"outline\" size=\"lg\">\n            See how it works\n          </Button>\n        </BlurFade>\n      </section>\n\n      <div className=\"border-y bg-muted/30 py-6\">\n        <Marquee pauseOnHover className=\"[--duration:30s] [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]\">\n          {LOGOS.map((l) => (\n            <span key={l} className=\"mx-8 font-heading text-lg font-semibold text-muted-foreground\">\n              {l}\n            </span>\n          ))}\n        </Marquee>\n      </div>\n\n      <section className=\"mx-auto grid max-w-5xl gap-4 px-6 py-20 sm:grid-cols-2 lg:grid-cols-3\">\n        {FEATURES.map(({ icon: Icon, title, body }, i) => (\n          <BlurFade key={title} inView delay={i * 0.05}>\n            <MagicCard className=\"h-full rounded-2xl p-6\">\n              <span className=\"inline-flex size-10 items-center justify-center rounded-xl bg-brand/10 text-brand\">\n                <Icon className=\"size-5\" />\n              </span>\n              <h3 className=\"mt-4 font-heading text-lg font-semibold\">{title}</h3>\n              <p className=\"mt-1 text-sm text-muted-foreground\">{body}</p>\n            </MagicCard>\n          </BlurFade>\n        ))}\n      </section>\n\n      <section className=\"mx-auto grid max-w-4xl grid-cols-3 gap-4 px-6 pb-20 text-center\">\n        {[\n          { v: 120, s: \"+\", l: \"Brands\" },\n          { v: 98, s: \"%\", l: \"SLA met\" },\n          { v: 4, s: \"min\", l: \"First reply\" },\n        ].map((x) => (\n          <div key={x.l}>\n            <p className=\"flex items-baseline justify-center gap-1\">\n              <NumberTicker value={x.v} className=\"font-heading text-4xl font-bold text-brand dark:text-brand\" />\n              <span className=\"text-muted-foreground\">{x.s}</span>\n            </p>\n            <p className=\"text-sm text-muted-foreground\">{x.l}</p>\n          </div>\n        ))}\n      </section>\n\n      <section className=\"px-6 pb-24\">\n        <div\n          className=\"mx-auto max-w-4xl rounded-3xl p-10 text-center text-white\"\n          style={{ background: \"linear-gradient(135deg, var(--brand), var(--brand-accent))\" }}\n        >\n          <h2 className=\"font-heading text-3xl font-bold\">Ready to see it with your data?</h2>\n          <p className=\"mt-2 text-white/80\">A 30-minute demo, tailored to your channels.</p>\n          <Button size=\"lg\" variant=\"secondary\" className=\"mt-6\">\n            Book a demo\n          </Button>\n        </div>\n      </section>\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/landing/page.tsx"
+    }
+  ],
+  "meta": {
+    "category": "template",
+    "route": "landing"
+  },
+  "type": "registry:block"
+}

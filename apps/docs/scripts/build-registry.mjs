@@ -3,7 +3,7 @@
 //   - registry/items.json                         (component items)
 //   - @mintelligence-dev/tokens/shadcn-theme.json (theme item, generated from tokens)
 // Then `shadcn build` turns registry.json into public/r/*.json.
-import { existsSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { createRequire } from "node:module"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -19,6 +19,8 @@ const themeItem = {
   title: "Mintel Theme",
   description:
     "M-Intelligence brand theme: colors (light + dark), fonts and radius. Install this first.",
+  // Safety net for apps whose globals.css lacks shadcn's base layer (Tailwind v4 borders default to currentColor).
+  css: { "@layer base": { "*": { "border-color": "var(--border)" } } },
   cssVars: {
     theme: {
       ...theme.theme,
@@ -31,11 +33,34 @@ const themeItem = {
   },
 }
 
+// Page templates (registry:block). Their registry dependencies must point at THIS registry by URL —
+// a bare name like "button" would install shadcn's own component instead of the Mintel one.
+const vercelProduction = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? (vercelProduction ? `https://${vercelProduction}` : "http://localhost:3000")
+const registryUrl = process.env.NEXT_PUBLIC_REGISTRY_URL ?? `${siteUrl}/r`
+const blocks = JSON.parse(readFileSync(join(root, "registry/blocks.json"), "utf8")).map((b) => ({
+  name: b.name,
+  type: "registry:block",
+  title: b.title,
+  description: b.description,
+  dependencies: b.dependencies,
+  registryDependencies: ["utils", `${registryUrl}/mintel-theme.json`, ...b.registryDependencies.map((n) => `${registryUrl}/${n}.json`)],
+  files: [{ path: `registry/mintel/blocks/${b.name}.tsx`, type: "registry:page", target: `app/${b.route}/page.tsx` }],
+  meta: { category: "template", route: b.route },
+}))
+for (const b of blocks) {
+  for (const dep of b.registryDependencies.slice(2)) {
+    const name = dep.split("/").pop().replace(/\.json$/, "")
+    if (!items.some((i) => i.name === name)) throw new Error(`Template ${b.name} depends on unknown item "${name}"`)
+  }
+}
+
 const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "mintel",
   homepage: "https://github.com/muisurasak/mintel-ui",
-  items: [themeItem, ...items],
+  items: [themeItem, ...items, ...blocks],
 }
 writeFileSync(join(root, "registry.json"), JSON.stringify(registry, null, 2) + "\n")
 
@@ -72,8 +97,21 @@ writeFileSync(join(root, "app/registry.css"), css)
     if (!index.includes(`"${item.name}":`)) missing.push(`examples/index.ts → "${item.name}"`)
     if (!new RegExp(`^  "?${item.name}"?: \\{`, "m").test(docs)) missing.push(`lib/component-docs.ts → ${item.name}`)
   }
+  // shadcn's Base UI styles rewrite `asChild` to `render` on install, which breaks Radix primitives.
+  const allowed = /asChild = false|asChild\?: boolean|asChild \? Slot|No asChild here/
+  const walk = (dir) =>
+    readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+      e.isDirectory() ? walk(join(dir, e.name)) : e.name.endsWith(".tsx") ? [join(dir, e.name)] : []
+    )
+  for (const file of walk(join(root, "registry/mintel"))) {
+    readFileSync(file, "utf8")
+      .split("\n")
+      .forEach((line, n) => {
+        if (/\basChild\b/.test(line) && !allowed.test(line)) missing.push(`${file.slice(root.length + 1)}:${n + 1} uses asChild`)
+      })
+  }
   if (missing.length) {
-    console.error(`✗ Missing docs for registry items:\n  ${missing.join("\n  ")}`)
+    console.error(`✗ Registry checks failed:\n  ${missing.join("\n  ")}`)
     process.exit(1)
   }
 }

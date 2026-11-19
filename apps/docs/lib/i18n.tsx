@@ -144,6 +144,11 @@ const en = {
   footer: "M Intelligence Co., Ltd. · MIT License",
   docs: {
     gettingStarted: "Getting started",
+    templates: "Templates",
+    templatesBody: "Whole pages you can install in one command — they pull in the Mintel components they use and land at app/<route>/page.tsx.",
+    openPreview: "Open full preview",
+    backToTemplates: "Templates",
+    installsTo: "Installs to",
     components: "Components",
     allComponents: "All components",
     installation: "Installation",
@@ -367,6 +372,11 @@ const th: Dict = {
   footer: "M Intelligence Co., Ltd. · MIT License",
   docs: {
     gettingStarted: "เริ่มต้นใช้งาน",
+    templates: "Templates",
+    templatesBody: "หน้าเว็บสำเร็จรูปที่ติดตั้งได้ด้วยคำสั่งเดียว — ดึง component ของ Mintel ที่ใช้มาให้ครบ และวางไว้ที่ app/<route>/page.tsx",
+    openPreview: "เปิดดูเต็มจอ",
+    backToTemplates: "Templates",
+    installsTo: "ติดตั้งไปที่",
     components: "Components",
     allComponents: "Components ทั้งหมด",
     installation: "ติดตั้ง",

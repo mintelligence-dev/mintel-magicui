@@ -121,5 +121,12 @@
       "glass-shadow": "rgba(0, 0, 0, 0.45)"
     }
   },
+  "css": {
+    "@layer base": {
+      "*": {
+        "border-color": "var(--border)"
+      }
+    }
+  },
   "type": "registry:theme"
 }
