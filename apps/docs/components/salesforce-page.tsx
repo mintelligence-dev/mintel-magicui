@@ -83,7 +83,7 @@ export function SalesforcePage({ lang }: { lang: Lang }) {
 
   return (
     <main id="top" className="min-h-screen overflow-x-clip pb-24 sm:pb-0">
-      <SiteHeader lang={lang} />
+      <SiteHeader lang={lang} page="salesforce" />
 
       <section className="mx-auto max-w-6xl px-4 pt-16 pb-10 sm:px-6 sm:pt-24">
         <p className="text-sm font-semibold tracking-wide text-brand uppercase">{t.eyebrow}</p>

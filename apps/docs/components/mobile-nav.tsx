@@ -29,7 +29,7 @@ export function MobileNav({ lang, page = "home" }: { lang: Lang; page?: "home" |
 
   return (
     <TabBar
-      className="sm:hidden"
+      className="sm:hidden [view-transition-name:mobile-nav]"
       aria-label={t.label}
       value={active}
       onValueChange={setActive}
