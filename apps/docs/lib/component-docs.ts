@@ -150,7 +150,13 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     props: [p("type", '"single" | "multiple"', "One or many open at once.", "เปิดได้ทีละอันหรือหลายอัน"), p("collapsible", "boolean", "Single: allow closing the open item.", "แบบ single: กดปิดอันที่เปิดอยู่ได้")],
     upstream: radix("Accordion"),
   },
-  breadcrumb: { th: "เส้นทางไปยังหน้าปัจจุบัน คั่นด้วยลูกศร ย่อเป็น … ได้เมื่อยาว" },
+  breadcrumb: {
+    th: "เส้นทางไปยังหน้าปัจจุบัน คั่นด้วยลูกศร ย่อเป็น … ได้เมื่อยาว",
+    props: [
+      p("asChild", "boolean", "BreadcrumbLink: render your router's Link (its only child) instead of <a>.", "BreadcrumbLink: ใช้ Link ของ router (ลูกตัวเดียว) แทน <a>", "false"),
+      p("children", "ReactNode", "BreadcrumbSeparator: custom separator icon.", "BreadcrumbSeparator: ไอคอนคั่นแบบกำหนดเอง"),
+    ],
+  },
   pagination: {
     th: "ตัวแบ่งหน้า แสดงหน้าแรก/สุดท้ายเสมอ มี … เมื่อหน้าเยอะ หน้าปัจจุบันเป็นสีแบรนด์ มีป้ายภาษาไทย",
     props: [

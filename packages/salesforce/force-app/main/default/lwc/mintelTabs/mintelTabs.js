@@ -34,6 +34,22 @@ export default class MintelTabs extends LightningElement {
     renderedCallback() {
         if (!this.tabs.length) this.readTabs();
         this.positionIndicator();
+        this.observeSize();
+    }
+
+    disconnectedCallback() {
+        if (this._resizeObserver) this._resizeObserver.disconnect();
+        this._resizeObserver = undefined;
+    }
+
+    // Re-measure when the list changes size: first shown inside a hidden tabset or collapsed
+    // section, web fonts finishing loading, or the page resizing.
+    observeSize() {
+        if (this._resizeObserver || typeof ResizeObserver === 'undefined') return;
+        const list = this.template.querySelector('.list');
+        if (!list) return;
+        this._resizeObserver = new ResizeObserver(() => this.positionIndicator());
+        this._resizeObserver.observe(list);
     }
 
     handleSlotChange() {

@@ -66,10 +66,29 @@ export default class MintelSegmentedControl extends LightningElement {
     }
 
     renderedCallback() {
+        this.positionThumb();
+        this.observeSize();
+    }
+
+    disconnectedCallback() {
+        if (this._resizeObserver) this._resizeObserver.disconnect();
+        this._resizeObserver = undefined;
+    }
+
+    positionThumb() {
         const btn = this.template.querySelector('button.active');
         if (!btn) return;
         const style = `width:${btn.offsetWidth}px;transform:translateX(${btn.offsetLeft}px)`;
         if (style !== this.thumbStyle) this.thumbStyle = style;
+    }
+
+    // Re-measure when the track changes size (first shown while hidden, fonts loading, resizing).
+    observeSize() {
+        if (this._resizeObserver || typeof ResizeObserver === 'undefined') return;
+        const track = this.template.querySelector('.track');
+        if (!track) return;
+        this._resizeObserver = new ResizeObserver(() => this.positionThumb());
+        this._resizeObserver.observe(track);
     }
 
     choose(value, focus) {
@@ -91,9 +110,9 @@ export default class MintelSegmentedControl extends LightningElement {
 
     handleKeydown(event) {
         const dir = event.key === 'ArrowRight' || event.key === 'ArrowDown' ? 1 : event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? -1 : 0;
-        if (!dir) return;
-        event.preventDefault();
         const list = this.parsed;
+        if (!dir || !list.length) return;
+        event.preventDefault();
         const i = list.findIndex((o) => o.value === this.selectedValue);
         this.choose(list[(i + dir + list.length) % list.length].value, true);
     }
