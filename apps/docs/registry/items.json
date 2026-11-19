@@ -1,0 +1,998 @@
+[
+  {
+    "name": "button",
+    "type": "registry:ui",
+    "title": "Button",
+    "description": "Button with Mintel brand variants (default, brand gradient, secondary, outline, ghost, destructive, link).",
+    "dependencies": [
+      "@radix-ui/react-slot",
+      "class-variance-authority"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/button.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "badge",
+    "type": "registry:ui",
+    "title": "Badge",
+    "description": "Status badge with brand, soft, success, warning and destructive variants.",
+    "dependencies": [
+      "@radix-ui/react-slot",
+      "class-variance-authority"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/badge.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "card",
+    "type": "registry:ui",
+    "title": "Card",
+    "description": "Card container with header, title, description, action, content and footer slots.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/card.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "input",
+    "type": "registry:ui",
+    "title": "Input",
+    "description": "Text input styled with Mintel tokens.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/input.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "dialog",
+    "type": "registry:ui",
+    "title": "Dialog",
+    "description": "Modal dialog with blurred overlay and zoom-in animation.",
+    "dependencies": [
+      "@radix-ui/react-dialog",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/dialog.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "select",
+    "type": "registry:ui",
+    "title": "Select",
+    "description": "Accessible select dropdown with brand check indicator.",
+    "dependencies": [
+      "@radix-ui/react-select",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/select.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "table",
+    "type": "registry:ui",
+    "title": "Table",
+    "description": "Data table with header, body, footer, caption and row hover.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/table.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "tabs",
+    "type": "registry:ui",
+    "title": "Tabs",
+    "description": "Tabs with brand-colored active tab and fade-in content.",
+    "dependencies": [
+      "@radix-ui/react-tabs"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/tabs.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "toast",
+    "type": "registry:ui",
+    "title": "Toast",
+    "description": "Toast notifications (sonner) themed with brand tokens; follows the dark class on <html>. Render <Toaster /> once, then call toast().",
+    "dependencies": [
+      "sonner",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/toast.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "label",
+    "type": "registry:ui",
+    "title": "Label",
+    "description": "Accessible form label.",
+    "dependencies": [
+      "@radix-ui/react-label"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/label.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "textarea",
+    "type": "registry:ui",
+    "title": "Textarea",
+    "description": "Auto-growing textarea (field-sizing), 16px on phones to avoid iOS zoom.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/textarea.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "checkbox",
+    "type": "registry:ui",
+    "title": "Checkbox",
+    "description": "Checkbox with indeterminate state, spring press and 44px touch target.",
+    "dependencies": [
+      "@radix-ui/react-checkbox",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/checkbox.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "radio-group",
+    "type": "registry:ui",
+    "title": "Radio Group",
+    "description": "Radio group with spring press and 44px touch targets.",
+    "dependencies": [
+      "@radix-ui/react-radio-group"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/radio-group.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "switch",
+    "type": "registry:ui",
+    "title": "Switch",
+    "description": "Toggle switch with spring-eased thumb (default / sm).",
+    "dependencies": [
+      "@radix-ui/react-switch"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/switch.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "form",
+    "type": "registry:ui",
+    "title": "Form",
+    "description": "react-hook-form + zod building blocks with accessible labels, descriptions and errors.",
+    "dependencies": [
+      "@radix-ui/react-label",
+      "@radix-ui/react-slot",
+      "react-hook-form",
+      "@hookform/resolvers",
+      "zod"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/form.tsx",
+        "type": "registry:ui"
+      },
+      {
+        "path": "registry/mintel/ui/label.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "combobox",
+    "type": "registry:ui",
+    "title": "Combobox",
+    "description": "Searchable select (single / multiple chips / async) on Radix Popover + cmdk; Thai search.",
+    "dependencies": [
+      "@radix-ui/react-popover",
+      "cmdk",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/combobox.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "calendar",
+    "type": "registry:ui",
+    "title": "Calendar",
+    "description": "Thai calendar with Buddhist Era (BE) years by default; single, multiple and range modes.",
+    "dependencies": [
+      "react-day-picker",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/calendar.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "date-picker",
+    "type": "registry:ui",
+    "title": "Date Picker",
+    "description": "Date and date-range pickers showing Buddhist Era (BE) years by default; values stay JS Dates.",
+    "dependencies": [
+      "@radix-ui/react-popover",
+      "react-day-picker",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/date-picker.tsx",
+        "type": "registry:ui"
+      },
+      {
+        "path": "registry/mintel/ui/calendar.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "dropdown-menu",
+    "type": "registry:ui",
+    "title": "Dropdown Menu",
+    "description": "Menu with items, checkbox/radio items, submenus, shortcuts and destructive variant.",
+    "dependencies": [
+      "@radix-ui/react-dropdown-menu",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/dropdown-menu.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "tooltip",
+    "type": "registry:ui",
+    "title": "Tooltip",
+    "description": "Tooltip that works without a provider; dark-on-light, animated.",
+    "dependencies": [
+      "@radix-ui/react-tooltip"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/tooltip.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "popover",
+    "type": "registry:ui",
+    "title": "Popover",
+    "description": "Floating panel anchored to a trigger.",
+    "dependencies": [
+      "@radix-ui/react-popover"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/popover.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "animated-beam",
+    "type": "registry:ui",
+    "title": "Animated Beam",
+    "description": "An animated beam of light which travels along a path. Useful for showcasing the integration features of a website.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/animated-beam.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "effects"
+    }
+  },
+  {
+    "name": "animated-gradient-text",
+    "type": "registry:ui",
+    "title": "Animated Gradient Text",
+    "description": "An animated gradient background which transitions between colors for text.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/animated-gradient-text.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "cssVars": {
+      "theme": {
+        "animate-gradient": "gradient 8s linear infinite"
+      }
+    },
+    "css": {
+      "@keyframes gradient": {
+        "to": {
+          "background-position": "var(--bg-size, 300%) 0"
+        }
+      }
+    },
+    "meta": {
+      "category": "effects"
+    }
+  },
+  {
+    "name": "aurora-text",
+    "type": "registry:ui",
+    "title": "Aurora Text",
+    "description": "A beautiful aurora text effect",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/aurora-text.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "cssVars": {
+      "theme": {
+        "animate-aurora": "aurora 8s ease-in-out infinite alternate"
+      }
+    },
+    "css": {
+      "@keyframes aurora": {
+        "0%": {
+          "background-position": "0% 50%",
+          "transform": "rotate(-5deg) scale(0.9)"
+        },
+        "25%": {
+          "background-position": "50% 100%",
+          "transform": "rotate(5deg) scale(1.1)"
+        },
+        "50%": {
+          "background-position": "100% 50%",
+          "transform": "rotate(-3deg) scale(0.95)"
+        },
+        "75%": {
+          "background-position": "50% 0%",
+          "transform": "rotate(3deg) scale(1.05)"
+        },
+        "100%": {
+          "background-position": "0% 50%",
+          "transform": "rotate(-5deg) scale(0.9)"
+        }
+      }
+    },
+    "meta": {
+      "category": "effects"
+    }
+  },
+  {
+    "name": "blur-fade",
+    "type": "registry:ui",
+    "title": "Blur Fade",
+    "description": "Blur fade in and out animation. Used to smoothly fade in and out content.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/blur-fade.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "effects"
+    }
+  },
+  {
+    "name": "border-beam",
+    "type": "registry:ui",
+    "title": "Border Beam",
+    "description": "An animated beam of light which travels along the border of its container.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/border-beam.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "effects"
+    }
+  },
+  {
+    "name": "dot-pattern",
+    "type": "registry:ui",
+    "title": "Dot Pattern",
+    "description": "A background dot pattern made with SVGs, fully customizable using Tailwind CSS.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/dot-pattern.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "effects"
+    },
+    "cssVars": {
+      "theme": {
+        "animate-dot-glow": "dot-glow var(--dot-duration, 3s) ease-in-out infinite"
+      }
+    },
+    "css": {
+      "@keyframes dot-glow": {
+        "0%, 100%": {
+          "opacity": "0.4",
+          "transform": "scale(1)"
+        },
+        "50%": {
+          "opacity": "1",
+          "transform": "scale(1.5)"
+        }
+      }
+    }
+  },
+  {
+    "name": "magic-card",
+    "type": "registry:ui",
+    "title": "Magic Card",
+    "description": "A spotlight effect that follows your mouse cursor and highlights borders on hover.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/magic-card.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "effects"
+    }
+  },
+  {
+    "name": "marquee",
+    "type": "registry:ui",
+    "title": "Marquee",
+    "description": "An infinite scrolling component that can be used to display text, images, or videos.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/marquee.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "cssVars": {
+      "theme": {
+        "animate-marquee": "marquee var(--duration) infinite linear",
+        "animate-marquee-vertical": "marquee-vertical var(--duration) linear infinite"
+      }
+    },
+    "css": {
+      "@keyframes marquee": {
+        "from": {
+          "transform": "translateX(0)"
+        },
+        "to": {
+          "transform": "translateX(calc(-100% - var(--gap)))"
+        }
+      },
+      "@keyframes marquee-vertical": {
+        "from": {
+          "transform": "translateY(0)"
+        },
+        "to": {
+          "transform": "translateY(calc(-100% - var(--gap)))"
+        }
+      }
+    },
+    "meta": {
+      "category": "effects"
+    }
+  },
+  {
+    "name": "meteors",
+    "type": "registry:ui",
+    "title": "Meteors",
+    "description": "A meteor shower effect.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/meteors.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "cssVars": {
+      "theme": {
+        "animate-meteor": "meteor 5s linear infinite"
+      }
+    },
+    "css": {
+      "@keyframes meteor": {
+        "0%": {
+          "transform": "rotate(var(--angle)) translateX(0)",
+          "opacity": "1"
+        },
+        "70%": {
+          "opacity": "1"
+        },
+        "100%": {
+          "transform": "rotate(var(--angle)) translateX(-500px)",
+          "opacity": "0"
+        }
+      }
+    },
+    "meta": {
+      "category": "effects"
+    }
+  },
+  {
+    "name": "number-ticker",
+    "type": "registry:ui",
+    "title": "Number Ticker",
+    "description": "Animate numbers to count up or down to a target number",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/number-ticker.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "effects"
+    }
+  },
+  {
+    "name": "shimmer-button",
+    "type": "registry:ui",
+    "title": "Shimmer Button",
+    "description": "A button with a shimmering light which travels around the perimeter.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/shimmer-button.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "cssVars": {
+      "theme": {
+        "animate-shimmer-slide": "shimmer-slide var(--speed) ease-in-out infinite alternate",
+        "animate-spin-around": "spin-around calc(var(--speed) * 2) infinite linear"
+      }
+    },
+    "css": {
+      "@keyframes shimmer-slide": {
+        "to": {
+          "transform": "translate(calc(100cqw - 100%), 0)"
+        }
+      },
+      "@keyframes spin-around": {
+        "0%": {
+          "transform": "translateZ(0) rotate(0)"
+        },
+        "15%, 35%": {
+          "transform": "translateZ(0) rotate(90deg)"
+        },
+        "65%, 85%": {
+          "transform": "translateZ(0) rotate(270deg)"
+        },
+        "100%": {
+          "transform": "translateZ(0) rotate(360deg)"
+        }
+      }
+    },
+    "meta": {
+      "category": "effects"
+    }
+  },
+  {
+    "name": "shine-border",
+    "type": "registry:ui",
+    "title": "Shine Border",
+    "description": "Shine border is an animated background border effect.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/effects/shine-border.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "cssVars": {
+      "theme": {
+        "animate-shine": "shine var(--duration) infinite linear"
+      }
+    },
+    "css": {
+      "@keyframes shine": {
+        "0%": {
+          "background-position": "0% 0%"
+        },
+        "50%": {
+          "background-position": "100% 100%"
+        },
+        "to": {
+          "background-position": "0% 0%"
+        }
+      }
+    },
+    "meta": {
+      "category": "effects"
+    }
+  },
+  {
+    "name": "glass-card",
+    "type": "registry:ui",
+    "title": "Glass Card",
+    "description": "Frosted glass surface with optional edge-lens refraction (Chromium + mouse). Solid fallback for reduced transparency.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/glass/glass-card.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "glass"
+    }
+  },
+  {
+    "name": "glass-button",
+    "type": "registry:ui",
+    "title": "Glass Button",
+    "description": "Pill glass button with spring press feedback; default, tinted (brand) and accent variants.",
+    "dependencies": [
+      "@radix-ui/react-slot",
+      "class-variance-authority"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/glass/glass-button.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "glass"
+    }
+  },
+  {
+    "name": "glass-navbar",
+    "type": "registry:ui",
+    "title": "Glass Navbar",
+    "description": "Sticky frosted navigation bar, full-width or floating pill, safe-area aware.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/glass/glass-navbar.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "glass"
+    }
+  },
+  {
+    "name": "segmented-control",
+    "type": "registry:ui",
+    "title": "Segmented Control",
+    "description": "Segmented control with a spring-animated thumb and radiogroup keyboard support.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/glass/segmented-control.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "glass"
+    }
+  },
+  {
+    "name": "scroll-reveal-text",
+    "type": "registry:ui",
+    "title": "Scroll Reveal Text",
+    "description": "Paragraph that lights up word by word as you scroll (Thai-aware word segmentation).",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/motion/scroll-reveal-text.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "motion"
+    }
+  },
+  {
+    "name": "sticky-showcase",
+    "type": "registry:ui",
+    "title": "Sticky Showcase",
+    "description": "Sticky visual beside scrolling feature copy; stacks on mobile.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/motion/sticky-showcase.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "motion"
+    }
+  },
+  {
+    "name": "zoom-parallax",
+    "type": "registry:ui",
+    "title": "Zoom Parallax",
+    "description": "Full-bleed media that shrinks into a rounded card on scroll while the headline fades out.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/motion/zoom-parallax.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "motion"
+    }
+  },
+  {
+    "name": "dock",
+    "type": "registry:ui",
+    "title": "Dock",
+    "description": "Magnifying icon dock on glass; press feedback instead of magnification on touch.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/motion/dock.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "motion"
+    }
+  },
+  {
+    "name": "animated-tabs",
+    "type": "registry:ui",
+    "title": "Animated Tabs",
+    "description": "Radix tabs with a spring-animated indicator (pill or underline).",
+    "dependencies": [
+      "@radix-ui/react-tabs",
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/motion/animated-tabs.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "motion"
+    }
+  },
+  {
+    "name": "drawer",
+    "type": "registry:ui",
+    "title": "Drawer",
+    "description": "Mobile bottom sheet with drag-to-dismiss handle, safe-area padding; Radix Dialog accessibility.",
+    "dependencies": [
+      "@radix-ui/react-dialog",
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/mobile/drawer.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "mobile"
+    }
+  },
+  {
+    "name": "tab-bar",
+    "type": "registry:ui",
+    "title": "Tab Bar",
+    "description": "Glass bottom tab bar for mobile web/PWA with spring active pill and safe-area padding.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/mobile/tab-bar.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "mobile"
+    }
+  }
+]

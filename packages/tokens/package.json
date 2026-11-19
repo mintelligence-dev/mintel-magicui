@@ -1,0 +1,32 @@
+{
+  "name": "@mintelligence-dev/tokens",
+  "version": "0.1.0",
+  "description": "M-Intelligence design tokens — CSS variables, Tailwind v4 theme, JS tokens and Salesforce LWC/SLDS outputs from one source.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muisurasak/mintel-ui.git",
+    "directory": "packages/tokens"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./tailwind.css": "./dist/tailwind.css",
+    "./fonts.css": "./dist/fonts.css",
+    "./shadcn-theme.json": "./dist/shadcn-theme.json",
+    "./tokens.json": "./src/tokens.json",
+    "./salesforce/*": "./salesforce/*",
+    "./lwc/*": "./lwc/*"
+  },
+  "files": ["dist", "src", "lwc", "salesforce", "README.md"],
+  "sideEffects": ["*.css"],
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sticky-showcase",
+  "title": "Sticky Showcase",
+  "description": "Sticky visual beside scrolling feature copy; stacks on mobile.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/motion/sticky-showcase.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { AnimatePresence, motion, useInView, useReducedMotion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Same values as tokens.motion.spring.smooth in @mintelligence-dev/tokens.\nconst SPRING = { type: \"spring\", stiffness: 170, damping: 26, mass: 1 } as const\n\nexport type ShowcaseItem = {\n  title: React.ReactNode\n  description?: React.ReactNode\n  visual: React.ReactNode\n}\n\nfunction Step({\n  item,\n  index,\n  active,\n  onActive,\n}: {\n  item: ShowcaseItem\n  index: number\n  active: boolean\n  onActive: (i: number) => void\n}) {\n  const ref = React.useRef<HTMLDivElement>(null)\n  // \"Active\" when the step crosses the middle band of the viewport.\n  const inView = useInView(ref, { margin: \"-45% 0px -45% 0px\" })\n  React.useEffect(() => {\n    if (inView) onActive(index)\n  }, [inView, index, onActive])\n\n  return (\n    <div ref={ref} className=\"flex flex-col justify-center py-10 lg:min-h-[70svh] lg:py-0\">\n      {/* Mobile: visual inline above the text (no sticky column). */}\n      <div className=\"mb-6 overflow-hidden rounded-2xl border bg-muted/40 lg:hidden\">{item.visual}</div>\n      <h3\n        className={cn(\n          \"font-heading text-2xl font-semibold tracking-tight transition-opacity duration-500 sm:text-3xl\",\n          active ? \"opacity-100\" : \"lg:opacity-30\"\n        )}\n      >\n        {item.title}\n      </h3>\n      {item.description && (\n        <p\n          className={cn(\n            \"mt-3 max-w-md text-muted-foreground transition-opacity duration-500\",\n            active ? \"opacity-100\" : \"lg:opacity-30\"\n          )}\n        >\n          {item.description}\n        </p>\n      )}\n    </div>\n  )\n}\n\n/**\n * Sticky storytelling: a sticky visual on one side while feature copy scrolls past.\n * Below `lg` it becomes a simple stacked list (visual above each step), which reads better on phones.\n */\nfunction StickyShowcase({ items, className }: { items: ShowcaseItem[]; className?: string }) {\n  const [active, setActive] = React.useState(0)\n  const reduceMotion = useReducedMotion()\n  const onActive = React.useCallback((i: number) => setActive(i), [])\n\n  return (\n    <div className={cn(\"grid gap-x-16 lg:grid-cols-2\", className)}>\n      <div>\n        {items.map((item, i) => (\n          <Step key={i} item={item} index={i} active={active === i} onActive={onActive} />\n        ))}\n      </div>\n      <div className=\"hidden lg:block\">\n        <div className=\"sticky top-[15svh] h-[70svh] overflow-hidden rounded-3xl border bg-muted/40\">\n          <AnimatePresence mode=\"popLayout\" initial={false}>\n            <motion.div\n              key={active}\n              className=\"absolute inset-0\"\n              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 24 }}\n              animate={{ opacity: 1, scale: 1, y: 0 }}\n              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 1.02, y: -24 }}\n              transition={reduceMotion ? { duration: 0.15 } : SPRING}\n            >\n              {items[active]?.visual}\n            </motion.div>\n          </AnimatePresence>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport { StickyShowcase }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "motion"
+  },
+  "type": "registry:ui"
+}

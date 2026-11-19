@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@mintelligence-dev/tokens/tailwind.css";
+@import "./registry.css";
+
+/* next/font exposes the brand fonts as CSS variables; point the token font stacks at them. */
+:root {
+  --mintel-font-sans: var(--font-manrope), var(--font-plex-thai), ui-sans-serif, system-ui, sans-serif;
+  --mintel-font-heading: var(--font-rubik), var(--font-plex-thai), ui-sans-serif, system-ui, sans-serif;
+  --mintel-font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.08); }
+  66% { transform: translate(-30px, 25px) scale(0.95); }
+}
+
+/* Docs site only (not shipped in the registry theme): honour reduced motion everywhere. */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
