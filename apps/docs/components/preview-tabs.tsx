@@ -15,9 +15,9 @@ export function PreviewTabs({
   labels: { preview: string; code: string; copy: string }
   /**
    * "padded" (default): centered, padded, clipped. "unclipped": padded but not clipped, so position: sticky
-   * works. "bleed": edge to edge and not clipped.
+   * works. "bleed": edge to edge and not clipped. "section": full-width page section on the page background.
    */
-  frame?: "padded" | "unclipped" | "bleed"
+  frame?: "padded" | "unclipped" | "bleed" | "section"
   children: React.ReactNode
 }) {
   return (
@@ -30,7 +30,7 @@ export function PreviewTabs({
         <div
           className={cn(
             "relative flex w-full items-center justify-center rounded-xl border bg-muted/30",
-            frame === "bleed" ? "p-0" : frame === "unclipped" ? "px-6 py-6 sm:px-10 sm:py-10" : "min-h-72 overflow-hidden p-6 sm:p-10"
+            frame === "bleed" ? "p-0" : frame === "section" ? "block overflow-hidden bg-background p-0" : frame === "unclipped" ? "px-6 py-6 sm:px-10 sm:py-10" : "min-h-72 overflow-hidden p-6 sm:p-10"
           )}
         >
           {children}

@@ -7,18 +7,22 @@ import { CopyCommand } from "@/components/copy-command"
 import { DocsShell } from "@/components/docs-shell"
 import { PreviewTabs } from "@/components/preview-tabs"
 import { EXAMPLES } from "@/examples"
-import { CATEGORY_LABEL, COMPONENT_DOCS, ITEMS, itemsByCategory } from "@/lib/component-docs"
+import { CATEGORY_LABEL, COMPONENT_DOCS, ITEMS, isSection, itemsByCategory } from "@/lib/component-docs"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
 import { REGISTRY_URL } from "@/lib/site"
+import { ItemBadge } from "@/components/item-badge"
 import { Badge } from "@/registry/mintel/ui/badge"
 
 const ROOT = process.cwd()
 // Scroll-driven examples: no clipping (position: sticky). Zoom parallax also runs edge to edge.
-const FRAME: Record<string, "unclipped" | "bleed"> = { "sticky-showcase": "unclipped", "zoom-parallax": "bleed" }
+const FRAME: Record<string, "unclipped" | "bleed" | "section"> = { "sticky-showcase": "unclipped", "zoom-parallax": "bleed" }
+const frameOf = (name: string) => FRAME[name] ?? (isSection(name) ? "section" : undefined)
 
 /** Registry imports become what the app actually gets after `shadcn add`. */
 const toAppPaths = (code: string) =>
-  code.replace(/@\/registry\/mintel\/(?:ui|effects|glass|motion|mobile)\//g, "@/components/ui/")
+  code
+    .replace(/@\/registry\/mintel\/(?:ui|effects|glass|motion|mobile)\//g, "@/components/ui/")
+    .replace(/@\/registry\/mintel\/sections\//g, "@/components/")
 
 const read = (rel: string) => readFileSync(join(ROOT, rel), "utf8")
 
@@ -47,7 +51,10 @@ export function ComponentPage({ lang, name }: { lang: Lang; name: string }) {
             </a>{" "}
             / {CATEGORY_LABEL[item.category][lang]}
           </p>
-          <h1 className="font-heading text-4xl font-bold tracking-tight">{item.title}</h1>
+          <h1 className="flex flex-wrap items-center gap-3 font-heading text-4xl font-bold tracking-tight">
+            {item.title}
+            <ItemBadge name={item.name} lang={lang} className="text-sm leading-6 px-2.5" />
+          </h1>
           <p className="max-w-3xl text-lg text-muted-foreground">{lang === "th" ? doc.th : item.description}</p>
           {item.dependencies.length > 0 && (
             <div className="flex flex-wrap items-center gap-1.5 pt-1">
@@ -77,7 +84,7 @@ export function ComponentPage({ lang, name }: { lang: Lang; name: string }) {
         <section className="space-y-3">
           <PreviewTabs
             code={exampleCode}
-            frame={FRAME[name]}
+            frame={frameOf(name)}
             labels={{ preview: t.preview, code: t.code, copy: d.nav.copy }}
           >
             <Example />

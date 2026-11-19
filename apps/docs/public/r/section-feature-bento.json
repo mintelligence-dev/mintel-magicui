@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "section-feature-bento",
+  "title": "Feature bento",
+  "description": "Bento grid of feature cards in mixed sizes with small visuals.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/sections/section-feature-bento.tsx",
+      "content": "import * as React from \"react\"\nimport { BotIcon, ClockIcon, GlobeIcon, MessageCircleIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport type BentoItem = { title: string; description: string; icon: React.ReactNode; visual?: React.ReactNode; className?: string }\n\nconst CHANNELS = [\n  [\"LINE\", \"#06C755\"],\n  [\"Messenger\", \"#0866FF\"],\n  [\"TikTok\", \"#111111\"],\n  [\"WhatsApp\", \"#25D366\"],\n] as const\n\nconst DEFAULTS: BentoItem[] = [\n  {\n    title: \"Every channel\",\n    description: \"Four messaging apps, one queue.\",\n    icon: <MessageCircleIcon />,\n    className: \"md:col-span-2\",\n    visual: (\n      <div className=\"flex flex-wrap gap-2\">\n        {CHANNELS.map(([n, c]) => (\n          <span key={n} className=\"inline-flex items-center gap-1.5 rounded-full border bg-background px-3 py-1 text-sm font-medium\">\n            <span className=\"size-2 rounded-full ring-1 ring-foreground/20\" style={{ background: c }} />\n            {n}\n          </span>\n        ))}\n      </div>\n    ),\n  },\n  { title: \"AI copilot\", description: \"Drafts, summaries and tags.\", icon: <BotIcon />, visual: <p className=\"rounded-xl bg-brand/8 p-3 text-sm text-brand\">“Customer wants a refund for order #A-10293.”</p> },\n  { title: \"SLA timers\", description: \"Know what's at risk.\", icon: <ClockIcon />, visual: <p className=\"font-mono text-3xl font-semibold text-warning tabular-nums\">00:12:40</p> },\n  { title: \"Thai first\", description: \"Addresses, IDs, phone numbers and Buddhist-era dates built in.\", icon: <GlobeIcon />, className: \"md:col-span-2\", visual: <p className=\"text-sm text-muted-foreground\">99/1 ถ.สุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพฯ 10110</p> },\n]\n\n/** Bento grid of feature cards in mixed sizes, each with an icon, copy and a small visual. */\nexport function SectionFeatureBento({\n  title = \"Built for how your team works\",\n  items = DEFAULTS,\n  className,\n}: {\n  title?: React.ReactNode\n  items?: BentoItem[]\n  className?: string\n}) {\n  return (\n    <section data-slot=\"section-feature-bento\" className={cn(\"mx-auto max-w-6xl px-4 py-20 sm:px-6\", className)}>\n      <h2 className=\"mb-10 text-center font-heading text-3xl font-bold tracking-tight sm:text-4xl\">{title}</h2>\n      <ul className=\"grid gap-4 md:grid-cols-3\">\n        {items.map((it) => (\n          <li\n            key={it.title}\n            className={cn(\n              \"group relative flex flex-col justify-between gap-6 overflow-hidden rounded-3xl border bg-card p-6 transition-[border-color,box-shadow] duration-300 hover:border-brand/30 hover:shadow-lg hover:shadow-brand/10\",\n              it.className\n            )}\n          >\n            <span aria-hidden className=\"pointer-events-none absolute -top-16 -right-16 size-48 rounded-full bg-[image:var(--brand-gradient)] opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-20\" />\n            <div className=\"relative\">\n              <span className=\"mb-4 flex size-10 items-center justify-center rounded-xl bg-brand/10 text-brand [&_svg]:size-5\">{it.icon}</span>\n              <h3 className=\"font-heading text-lg font-semibold\">{it.title}</h3>\n              <p className=\"mt-1 text-sm text-muted-foreground\">{it.description}</p>\n            </div>\n            {it.visual && <div className=\"relative\">{it.visual}</div>}\n          </li>\n        ))}\n      </ul>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:block"
+}

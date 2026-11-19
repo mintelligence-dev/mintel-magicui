@@ -14,10 +14,11 @@ const SKIP: Record<string, string> = {
   "scroll-reveal-text": "scroll-driven; depends on scroll position",
   progress: "the example ticks on an interval",
   "magic-card": "spotlight follows the pointer",
+  "section-feature-scroll": "built on sticky-showcase (scroll-driven)",
 }
 
 // Extra settle time for JS-driven entrance animations that reduced motion does not cover.
-const SETTLE: Record<string, number> = { chart: 1800, "number-ticker": 1500, "progress-ring": 1400, "thai-address": 500 }
+const SETTLE: Record<string, number> = { "section-stats": 1500, chart: 1800, "number-ticker": 1500, "progress-ring": 1400, "thai-address": 500 }
 
 for (const name of COMPONENTS) {
   for (const dark of [false, true]) {

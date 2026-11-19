@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "section-feature-scroll",
+  "title": "Feature scroll",
+  "description": "Story told while scrolling: copy on one side, a sticky visual that changes with it.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils",
+    "http://localhost:3000/r/sticky-showcase.json"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/sections/section-feature-scroll.tsx",
+      "content": "import * as React from \"react\"\nimport { BotIcon, ClockIcon, MessageCircleIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { StickyShowcase, type ShowcaseItem } from \"@/registry/mintel/motion/sticky-showcase\"\n\nconst tile = (Icon: typeof BotIcon, from: string) => (\n  <div className=\"flex size-full min-h-56 items-center justify-center\" style={{ background: `linear-gradient(135deg, ${from}, var(--brand-accent))` }}>\n    <Icon className=\"size-16 text-white/90\" aria-hidden />\n  </div>\n)\n\n/** Story told while scrolling: copy on one side, a sticky visual that changes with it (stacked on phones). */\nexport function SectionFeatureScroll({\n  title = \"How it works\",\n  items = [\n    { title: \"Chats arrive in one place\", description: \"Every channel becomes a case with the full conversation attached.\", visual: tile(MessageCircleIcon, \"var(--brand)\") },\n    { title: \"AI drafts the reply\", description: \"Agents review, tweak and send, in Thai or English.\", visual: tile(BotIcon, \"var(--brand-cyan)\") },\n    { title: \"SLA stays on track\", description: \"Timers and alerts keep every case moving.\", visual: tile(ClockIcon, \"var(--brand)\") },\n  ],\n  className,\n}: {\n  title?: React.ReactNode\n  items?: ShowcaseItem[]\n  className?: string\n}) {\n  return (\n    <section data-slot=\"section-feature-scroll\" className={cn(\"mx-auto max-w-6xl px-4 py-20 sm:px-6\", className)}>\n      <h2 className=\"mb-6 font-heading text-3xl font-bold tracking-tight sm:text-4xl\">{title}</h2>\n      <StickyShowcase items={items} />\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:block"
+}

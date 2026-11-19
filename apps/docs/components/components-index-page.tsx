@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react"
+import { ItemBadge } from "@/components/item-badge"
 
 import { DocsShell } from "@/components/docs-shell"
 import { CATEGORY_LABEL, COMPONENT_DOCS, countItems, itemsByCategory } from "@/lib/component-docs"
@@ -25,7 +26,10 @@ export function ComponentsIndexPage({ lang }: { lang: Lang }) {
                   href={langPath(lang, `/components/${item.name}`)}
                   className="group relative rounded-xl border bg-card p-4 transition-[border-color,box-shadow,transform] duration-300 ease-spring-snappy hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md active:scale-[0.99] motion-reduce:transition-none"
                 >
-                  <p className="font-heading font-semibold">{item.title}</p>
+                  <p className="flex items-center gap-2 font-heading font-semibold">
+                    {item.title}
+                    <ItemBadge name={item.name} lang={lang} />
+                  </p>
                   <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
                     {lang === "th" ? COMPONENT_DOCS[item.name].th : item.description}
                   </p>

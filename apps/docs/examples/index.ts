@@ -74,6 +74,22 @@ import DockExample from "./dock"
 import AnimatedTabsExample from "./animated-tabs"
 import DrawerExample from "./drawer"
 import TabBarExample from "./tab-bar"
+import SectionHeaderExample from "./section-header"
+import SectionHeroSplitExample from "./section-hero-split"
+import SectionHeroCenteredExample from "./section-hero-centered"
+import SectionLogoCloudExample from "./section-logo-cloud"
+import SectionTestimonialsExample from "./section-testimonials"
+import SectionStatsExample from "./section-stats"
+import SectionFeatureGridExample from "./section-feature-grid"
+import SectionFeatureScrollExample from "./section-feature-scroll"
+import SectionFeatureSlideshowExample from "./section-feature-slideshow"
+import SectionFeatureBentoExample from "./section-feature-bento"
+import SectionCarouselExample from "./section-carousel"
+import SectionPricingExample from "./section-pricing"
+import SectionFaqExample from "./section-faq"
+import SectionCtaExample from "./section-cta"
+import SectionContactExample from "./section-contact"
+import SectionFooterExample from "./section-footer"
 
 export const EXAMPLES: Record<string, ComponentType> = {
   "button": ButtonExample,
@@ -148,4 +164,20 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "animated-tabs": AnimatedTabsExample,
   "drawer": DrawerExample,
   "tab-bar": TabBarExample,
+  "section-header": SectionHeaderExample,
+  "section-hero-split": SectionHeroSplitExample,
+  "section-hero-centered": SectionHeroCenteredExample,
+  "section-logo-cloud": SectionLogoCloudExample,
+  "section-testimonials": SectionTestimonialsExample,
+  "section-stats": SectionStatsExample,
+  "section-feature-grid": SectionFeatureGridExample,
+  "section-feature-scroll": SectionFeatureScrollExample,
+  "section-feature-slideshow": SectionFeatureSlideshowExample,
+  "section-feature-bento": SectionFeatureBentoExample,
+  "section-carousel": SectionCarouselExample,
+  "section-pricing": SectionPricingExample,
+  "section-faq": SectionFaqExample,
+  "section-cta": SectionCtaExample,
+  "section-contact": SectionContactExample,
+  "section-footer": SectionFooterExample,
 }
