@@ -1,11 +1,20 @@
 "use client"
 
 // Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.
-// Changes: default colors use M-Intelligence brand tokens. See THIRD_PARTY_NOTICES.md.
+// Changes: default colors use M-Intelligence brand tokens; respects prefers-reduced-motion. See THIRD_PARTY_NOTICES.md.
 import { useEffect, useId, useState, type RefObject } from "react"
-import { motion } from "motion/react"
+import { motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+
+// Hydration-safe: `useReducedMotion()` is null on the server but true/false on the client's first
+// render, so only act on it after mount to keep server and client markup identical.
+function useReducedMotionSafe() {
+  const prefersReduced = useReducedMotion()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  return mounted && prefersReduced === true
+}
 
 export interface AnimatedBeamProps {
   className?: string
@@ -51,6 +60,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   endYOffset = 0,
 }) => {
   const id = useId()
+  const reduceMotion = useReducedMotionSafe()
   const [pathD, setPathD] = useState("")
   const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 })
 
@@ -162,7 +172,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
             y1: "0%",
             y2: "0%",
           }}
-          animate={{
+          animate={reduceMotion ? undefined : {
             x1: gradientCoordinates.x1,
             x2: gradientCoordinates.x2,
             y1: gradientCoordinates.y1,

@@ -1,7 +1,7 @@
 "use client"
 
 // Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.
-// Changes: default colors use M-Intelligence brand tokens. See THIRD_PARTY_NOTICES.md.
+// Changes: default colors use M-Intelligence brand tokens; respects prefers-reduced-motion. See THIRD_PARTY_NOTICES.md.
 import React, { useEffect, useState } from "react"
 
 import { cn } from "@/lib/utils"
@@ -50,7 +50,7 @@ export const Meteors = ({
           key={idx}
           style={{ ...style }}
           className={cn(
-            "animate-meteor pointer-events-none absolute size-0.5 rotate-(--angle) rounded-full bg-brand shadow-[0_0_0_1px_#ffffff10]",
+            "animate-meteor motion-reduce:animate-none pointer-events-none absolute size-0.5 rotate-(--angle) rounded-full bg-brand shadow-[0_0_0_1px_#ffffff10]",
             className
           )}
         >

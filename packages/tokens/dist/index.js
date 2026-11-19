@@ -100,7 +100,12 @@ export const tokens = {
     "sidebar-accent": "#F2F3F8",
     "sidebar-accent-foreground": "#181B31",
     "sidebar-border": "#E5E6EA",
-    "sidebar-ring": "#5186D5"
+    "sidebar-ring": "#5186D5",
+    "glass": "rgba(255, 255, 255, 0.55)",
+    "glass-foreground": "#181B31",
+    "glass-border": "rgba(255, 255, 255, 0.7)",
+    "glass-highlight": "rgba(255, 255, 255, 0.9)",
+    "glass-shadow": "rgba(24, 27, 49, 0.12)"
   },
   "dark": {
     "background": "#0C0E1E",
@@ -142,13 +147,71 @@ export const tokens = {
     "sidebar-accent": "#272A3D",
     "sidebar-accent-foreground": "#F9FAFE",
     "sidebar-border": "#272A3D",
-    "sidebar-ring": "#72A3EB"
+    "sidebar-ring": "#72A3EB",
+    "glass": "rgba(23, 26, 49, 0.5)",
+    "glass-foreground": "#F9FAFE",
+    "glass-border": "rgba(255, 255, 255, 0.12)",
+    "glass-highlight": "rgba(255, 255, 255, 0.2)",
+    "glass-shadow": "rgba(0, 0, 0, 0.45)"
   },
   "font": {
     "sans": "Manrope, \"IBM Plex Sans Thai\", ui-sans-serif, system-ui, sans-serif",
     "heading": "Rubik, \"IBM Plex Sans Thai\", ui-sans-serif, system-ui, sans-serif",
     "mono": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, monospace"
   },
-  "radius": "0.625rem"
+  "radius": "0.625rem",
+  "glass": {
+    "blur": "16px",
+    "saturate": 1.8
+  },
+  "motion": {
+    "duration": {
+      "instant": 100,
+      "fast": 150,
+      "base": 250,
+      "slow": 400,
+      "slower": 600
+    },
+    "easing": {
+      "standard": [
+        0.2,
+        0,
+        0,
+        1
+      ],
+      "out": [
+        0.32,
+        0.72,
+        0,
+        1
+      ],
+      "in-out": [
+        0.65,
+        0,
+        0.35,
+        1
+      ]
+    },
+    "spring": {
+      "snappy": {
+        "type": "spring",
+        "stiffness": 400,
+        "damping": 32,
+        "mass": 1
+      },
+      "smooth": {
+        "type": "spring",
+        "stiffness": 170,
+        "damping": 26,
+        "mass": 1
+      },
+      "bouncy": {
+        "type": "spring",
+        "stiffness": 300,
+        "damping": 16,
+        "mass": 1
+      }
+    }
+  }
 }
 export default tokens

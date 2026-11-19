@@ -1,5 +1,5 @@
 // Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.
-// Changes: default colors use M-Intelligence brand tokens. See THIRD_PARTY_NOTICES.md.
+// Changes: default colors use M-Intelligence brand tokens; respects prefers-reduced-motion. See THIRD_PARTY_NOTICES.md.
 
 import { type ComponentPropsWithoutRef } from "react"
 
@@ -63,8 +63,8 @@ export function Marquee({
           <div
             key={i}
             className={cn("flex shrink-0 justify-around gap-(--gap)", {
-              "animate-marquee flex-row": !vertical,
-              "animate-marquee-vertical flex-col": vertical,
+              "animate-marquee flex-row motion-reduce:animate-none": !vertical,
+              "animate-marquee-vertical flex-col motion-reduce:animate-none": vertical,
               "group-hover:[animation-play-state:paused]": pauseOnHover,
               "[animation-direction:reverse]": reverse,
             })}

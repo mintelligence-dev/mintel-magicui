@@ -68,6 +68,56 @@ const fontStack = (key) =>
 const fonts = { sans: fontStack("sans"), heading: fontStack("heading"), mono: fontStack("mono") }
 const radius = src.radius.base.$value
 
+// ---------- motion ----------
+// Simulates a damped spring (0 -> 1) and returns a CSS linear() curve plus its settle time,
+// so CSS/LWC animations match the JS (motion) springs that use the same params.
+function springToLinear({ stiffness, damping, mass }) {
+  const dt = 1 / 1000
+  let x = 0, v = 0, t = 0
+  const samples = []
+  let settledFor = 0
+  while (t < 3) {
+    const a = (-stiffness * (x - 1) - damping * v) / mass
+    v += a * dt
+    x += v * dt
+    t += dt
+    samples.push(x)
+    settledFor = Math.abs(x - 1) < 0.001 && Math.abs(v) < 0.01 ? settledFor + dt : 0
+    if (settledFor > 0.05) break
+  }
+  const durationMs = Math.round(samples.length)
+  const points = 48
+  const pts = Array.from({ length: points + 1 }, (_, i) => {
+    const val = i === points ? 1 : samples[Math.min(samples.length - 1, Math.round((i / points) * (samples.length - 1)))]
+    return Number(val.toFixed(4))
+  })
+  return { linear: `linear(${[0, ...pts.slice(1)].join(", ")})`, durationMs }
+}
+const motion = src.motion
+const springs = Object.fromEntries(
+  Object.entries(motion.spring)
+    .filter(([k]) => !k.startsWith("$"))
+    .map(([k, tok]) => [k, { ...tok.$value, ...springToLinear(tok.$value) }])
+)
+const durations = Object.fromEntries(
+  Object.entries(motion.duration).filter(([k]) => !k.startsWith("$")).map(([k, t]) => [k, t.$value])
+)
+const easings = Object.fromEntries(
+  Object.entries(motion.easing)
+    .filter(([k]) => !k.startsWith("$"))
+    .map(([k, t]) => [k, { array: t.$value, css: `cubic-bezier(${t.$value.join(", ")})` }])
+)
+const motionVars = [
+  ...Object.entries(durations).map(([k, v]) => `--mintel-duration-${k}: ${v};`),
+  ...Object.entries(easings).map(([k, e]) => `--mintel-ease-${k}: ${e.css};`),
+  ...Object.entries(springs).flatMap(([k, sp]) => [
+    `--mintel-ease-spring-${k}: ${sp.linear};`,
+    `--mintel-spring-${k}-duration: ${sp.durationMs}ms;`,
+  ]),
+]
+const glass = { blur: src.glass.blur.$value, saturate: src.glass.saturate.$value }
+const glassVars = [`--mintel-glass-blur: ${glass.blur};`, `--mintel-glass-saturate: ${glass.saturate};`]
+
 // ---------- helpers ----------
 const out = (rel, text) => {
   const file = join(root, rel)
@@ -85,6 +135,8 @@ const commonVars = [
   `--mintel-font-heading: ${fonts.heading};`,
   `--mintel-font-mono: ${fonts.mono};`,
   `--mintel-radius: ${radius};`,
+  ...motionVars,
+  ...glassVars,
 ]
 const lightSemantic = semantic.map((s) => `--${s.name}: ${v(s.light)};`)
 const darkSemantic = semantic.map((s) => `--${s.name}: ${v(s.dark)};`)
@@ -118,6 +170,9 @@ const themeLines = [
   `--radius-lg: var(--radius);`,
   `--radius-xl: calc(var(--radius) + 4px);`,
   `--radius-2xl: calc(var(--radius) + 8px);`,
+  `--blur-glass: var(--mintel-glass-blur);`,
+  ...Object.keys(easings).map((k) => `--ease-${k === "out" ? "ios" : k}: var(--mintel-ease-${k});`),
+  ...Object.keys(springs).map((k) => `--ease-spring-${k}: var(--mintel-ease-spring-${k});`),
 ]
 out(
   "dist/tailwind.css",
@@ -154,6 +209,17 @@ const jsTokens = {
   dark: Object.fromEntries(semantic.map((s) => [s.name, s.dark.value])),
   font: fonts,
   radius,
+  glass,
+  motion: {
+    duration: Object.fromEntries(Object.entries(durations).map(([k, v]) => [k, parseInt(v, 10)])),
+    easing: Object.fromEntries(Object.entries(easings).map(([k, e]) => [k, e.array])),
+    spring: Object.fromEntries(
+      Object.entries(springs).map(([k, sp]) => [
+        k,
+        { type: "spring", stiffness: sp.stiffness, damping: sp.damping, mass: sp.mass },
+      ])
+    ),
+  },
 }
 out("dist/index.js", `${HEADER}export const tokens = ${JSON.stringify(jsTokens, null, 2)}\nexport default tokens\n`)
 out(
@@ -161,7 +227,7 @@ out(
   `${HEADER}export type SemanticToken = ${semantic.map((s) => JSON.stringify(s.name)).join(" | ")}\n` +
     `export interface MintelTokens {\n  color: Record<${Object.keys(src.color)
       .map((k) => JSON.stringify(k))
-      .join(" | ")}, Record<string, string>>\n  light: Record<SemanticToken, string>\n  dark: Record<SemanticToken, string>\n  font: { sans: string; heading: string; mono: string }\n  radius: string\n}\nexport declare const tokens: MintelTokens\nexport default tokens\n`
+      .join(" | ")}, Record<string, string>>\n  light: Record<SemanticToken, string>\n  dark: Record<SemanticToken, string>\n  font: { sans: string; heading: string; mono: string }\n  radius: string\n  glass: { blur: string; saturate: number }\n  motion: {\n    duration: Record<${Object.keys(durations).map((k) => JSON.stringify(k)).join(" | ")}, number>\n    easing: Record<${Object.keys(easings).map((k) => JSON.stringify(k)).join(" | ")}, [number, number, number, number]>\n    spring: Record<${Object.keys(springs).map((k) => JSON.stringify(k)).join(" | ")}, { type: "spring"; stiffness: number; damping: number; mass: number }>\n  }\n}\nexport declare const tokens: MintelTokens\nexport default tokens\n`
 )
 
 // ---------- dist/shadcn-theme.json ----------
@@ -182,6 +248,9 @@ out(
         "color-success": "var(--success)",
         "color-warning": "var(--warning)",
         "color-info": "var(--info)",
+        "blur-glass": glass.blur,
+        ...Object.fromEntries(Object.entries(easings).map(([k, e]) => [`ease-${k === "out" ? "ios" : k}`, e.css])),
+        ...Object.fromEntries(Object.entries(springs).map(([k, sp]) => [`ease-spring-${k}`, sp.linear])),
       },
       light: {
         radius,

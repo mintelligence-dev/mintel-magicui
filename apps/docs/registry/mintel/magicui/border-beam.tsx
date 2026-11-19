@@ -1,10 +1,20 @@
 "use client"
 
 // Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.
-// Changes: default colors use M-Intelligence brand tokens. See THIRD_PARTY_NOTICES.md.
-import { motion, type MotionStyle, type Transition } from "motion/react"
+// Changes: default colors use M-Intelligence brand tokens; respects prefers-reduced-motion. See THIRD_PARTY_NOTICES.md.
+import { useEffect, useState } from "react"
+import { motion, useReducedMotion, type MotionStyle, type Transition } from "motion/react"
 
 import { cn } from "@/lib/utils"
+
+// Hydration-safe: `useReducedMotion()` is null on the server but true/false on the client's first
+// render, so only act on it after mount to keep server and client markup identical.
+function useReducedMotionSafe() {
+  const prefersReduced = useReducedMotion()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  return mounted && prefersReduced === true
+}
 
 interface BorderBeamProps {
   /**
@@ -66,6 +76,9 @@ export const BorderBeam = ({
   initialOffset = 0,
   borderWidth = 1,
 }: BorderBeamProps) => {
+  // The beam is purely decorative: hide it when the user asks for reduced motion.
+  if (useReducedMotionSafe()) return null
+
   return (
     <div
       className="pointer-events-none absolute inset-0 rounded-[inherit] border-(length:--border-beam-width) border-transparent mask-[linear-gradient(transparent,transparent),linear-gradient(#000,#000)] mask-intersect [mask-clip:padding-box,border-box]"

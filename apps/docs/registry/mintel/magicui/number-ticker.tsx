@@ -1,9 +1,9 @@
 "use client"
 
 // Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.
-// Changes: default colors use M-Intelligence brand tokens. See THIRD_PARTY_NOTICES.md.
+// Changes: default colors use M-Intelligence brand tokens; respects prefers-reduced-motion. See THIRD_PARTY_NOTICES.md.
 import { useEffect, useRef, type ComponentPropsWithoutRef } from "react"
-import { useInView, useMotionValue, useSpring } from "motion/react"
+import { useInView, useMotionValue, useReducedMotion, useSpring } from "motion/react"
 
 import { cn } from "@/lib/utils"
 
@@ -31,14 +31,17 @@ export function NumberTicker({
     stiffness: 100,
   })
   const isInView = useInView(ref, { once: true, margin: "0px" })
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | null = null
 
     if (isInView) {
       timer = setTimeout(() => {
-        motionValue.set(direction === "down" ? startValue : value)
-      }, delay * 1000)
+        const target = direction === "down" ? startValue : value
+        if (reduceMotion) springValue.jump(target)
+        else motionValue.set(target)
+      }, reduceMotion ? 0 : delay * 1000)
     }
 
     return () => {
@@ -46,7 +49,7 @@ export function NumberTicker({
         clearTimeout(timer)
       }
     }
-  }, [motionValue, isInView, delay, value, direction, startValue])
+  }, [motionValue, springValue, reduceMotion, isInView, delay, value, direction, startValue])
 
   useEffect(
     () =>

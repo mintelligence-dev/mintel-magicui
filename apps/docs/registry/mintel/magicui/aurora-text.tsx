@@ -1,7 +1,7 @@
 "use client"
 
 // Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.
-// Changes: default colors use M-Intelligence brand tokens. See THIRD_PARTY_NOTICES.md.
+// Changes: default colors use M-Intelligence brand tokens; respects prefers-reduced-motion. See THIRD_PARTY_NOTICES.md.
 import React, { memo } from "react"
 
 interface AuroraTextProps {
@@ -31,7 +31,7 @@ export const AuroraText = memo(
       <span className={`relative inline-block ${className}`}>
         <span className="sr-only">{children}</span>
         <span
-          className="animate-aurora relative bg-size-[200%_auto] bg-clip-text text-transparent"
+          className="animate-aurora motion-reduce:animate-none relative bg-size-[200%_auto] bg-clip-text text-transparent"
           style={gradientStyle}
           aria-hidden="true"
         >

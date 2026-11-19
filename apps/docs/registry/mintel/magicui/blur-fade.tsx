@@ -1,16 +1,26 @@
 "use client"
 
 // Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.
-// Changes: default colors use M-Intelligence brand tokens. See THIRD_PARTY_NOTICES.md.
-import { useRef } from "react"
+// Changes: default colors use M-Intelligence brand tokens; respects prefers-reduced-motion. See THIRD_PARTY_NOTICES.md.
+import { useEffect, useRef, useState } from "react"
 import {
   AnimatePresence,
   motion,
   useInView,
+  useReducedMotion,
   type MotionProps,
   type UseInViewOptions,
   type Variants,
 } from "motion/react"
+
+// Hydration-safe: `useReducedMotion()` is null on the server but true/false on the client's first
+// render, so only act on it after mount to keep server and client markup identical.
+function useReducedMotionSafe() {
+  const prefersReduced = useReducedMotion()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  return mounted && prefersReduced === true
+}
 
 type MarginType = UseInViewOptions["margin"]
 
@@ -47,6 +57,7 @@ export function BlurFade({
   ...props
 }: BlurFadeProps) {
   const ref = useRef(null)
+  const reduceMotion = useReducedMotionSafe()
   const inViewResult = useInView(ref, { once: true, margin: inViewMargin })
   const isInView = !inView || inViewResult
   const defaultVariants: Variants = {
@@ -77,10 +88,10 @@ export function BlurFade({
       <motion.div
         ref={ref}
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        animate={reduceMotion || isInView ? "visible" : "hidden"}
         exit="hidden"
         variants={combinedVariants}
-        transition={{
+        transition={reduceMotion ? { duration: 0 } : {
           delay: 0.04 + delay,
           duration,
           ease: "easeOut",

@@ -45,6 +45,11 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-glass: var(--glass);
+  --color-glass-foreground: var(--glass-foreground);
+  --color-glass-border: var(--glass-border);
+  --color-glass-highlight: var(--glass-highlight);
+  --color-glass-shadow: var(--glass-shadow);
   --color-mintel-blue-50: var(--mintel-color-blue-50);
   --color-mintel-blue-100: var(--mintel-color-blue-100);
   --color-mintel-blue-200: var(--mintel-color-blue-200);
@@ -97,6 +102,13 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
+  --blur-glass: var(--mintel-glass-blur);
+  --ease-standard: var(--mintel-ease-standard);
+  --ease-ios: var(--mintel-ease-out);
+  --ease-in-out: var(--mintel-ease-in-out);
+  --ease-spring-snappy: var(--mintel-ease-spring-snappy);
+  --ease-spring-smooth: var(--mintel-ease-spring-smooth);
+  --ease-spring-bouncy: var(--mintel-ease-spring-bouncy);
 }
 
 @layer base {

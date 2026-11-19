@@ -1,5 +1,5 @@
 // Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.
-// Changes: default colors use M-Intelligence brand tokens. See THIRD_PARTY_NOTICES.md.
+// Changes: default colors use M-Intelligence brand tokens; respects prefers-reduced-motion. See THIRD_PARTY_NOTICES.md.
 
 import React, { type ComponentPropsWithoutRef, type CSSProperties } from "react"
 
@@ -60,9 +60,9 @@ export const ShimmerButton = React.forwardRef<
           )}
         >
           {/* spark */}
-          <div className="animate-shimmer-slide absolute inset-0 aspect-[1] h-[100cqh] rounded-none [mask:none]">
+          <div className="animate-shimmer-slide motion-reduce:animate-none absolute inset-0 aspect-[1] h-[100cqh] rounded-none [mask:none]">
             {/* spark before */}
-            <div className="animate-spin-around absolute -inset-full w-auto [translate:0_0] rotate-0 [background:conic-gradient(from_calc(270deg-(var(--spread)*0.5)),transparent_0,var(--shimmer-color)_var(--spread),transparent_var(--spread))]" />
+            <div className="animate-spin-around motion-reduce:animate-none absolute -inset-full w-auto [translate:0_0] rotate-0 [background:conic-gradient(from_calc(270deg-(var(--spread)*0.5)),transparent_0,var(--shimmer-color)_var(--spread),transparent_var(--spread))]" />
           </div>
         </div>
         {children}

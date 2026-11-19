@@ -1,5 +1,5 @@
 // Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.
-// Changes: default colors use M-Intelligence brand tokens. See THIRD_PARTY_NOTICES.md.
+// Changes: default colors use M-Intelligence brand tokens; respects prefers-reduced-motion. See THIRD_PARTY_NOTICES.md.
 
 import { type ComponentPropsWithoutRef } from "react"
 
@@ -29,7 +29,7 @@ export function AnimatedGradientText({
         } as React.CSSProperties
       }
       className={cn(
-        `animate-gradient inline bg-linear-to-r from-(--color-from) via-(--color-to) to-(--color-from) bg-size-[var(--bg-size)_100%] bg-clip-text text-transparent`,
+        `animate-gradient motion-reduce:animate-none inline bg-linear-to-r from-(--color-from) via-(--color-to) to-(--color-from) bg-size-[var(--bg-size)_100%] bg-clip-text text-transparent`,
         className
       )}
       {...props}

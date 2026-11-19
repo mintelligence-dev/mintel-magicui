@@ -27,6 +27,34 @@ Anchors come from the company website and logo. Text/background pairs meet WCAG 
 
 > Note: in shadcn, `--accent` is the subtle hover background. The brand purple is `--brand-accent`.
 
+## Motion
+
+| Token | Value | Use |
+|---|---|---|
+| `--mintel-duration-{instant,fast,base,slow,slower}` | 100 / 150 / 250 / 400 / 600ms | transitions |
+| `--mintel-ease-standard` · `--mintel-ease-out` · `--mintel-ease-in-out` | cubic-bezier | `ease-standard`, `ease-ios` in Tailwind |
+| `--mintel-ease-spring-{snappy,smooth,bouncy}` | CSS `linear()` spring curve | `ease-spring-smooth` in Tailwind |
+| `--mintel-spring-{name}-duration` | settle time of that spring | pair with the curve above |
+
+The same springs are exported for JS so React (motion) and CSS/LWC animations move identically:
+
+```ts
+import { tokens } from "@mintelligence-dev/tokens"
+<motion.div animate={{ x: 100 }} transition={tokens.motion.spring.smooth} />
+```
+
+```css
+.panel {
+  transition: transform var(--mintel-spring-smooth-duration) var(--mintel-ease-spring-smooth);
+}
+```
+
+## Glass
+
+`--glass`, `--glass-border`, `--glass-highlight`, `--glass-shadow`, `--glass-foreground` (light + dark) plus
+`--mintel-glass-blur` / `--mintel-glass-saturate`. Always provide a solid fallback (`--card`) for
+`prefers-reduced-transparency` and browsers without `backdrop-filter`.
+
 ## Web (Tailwind v4)
 
 ```css
