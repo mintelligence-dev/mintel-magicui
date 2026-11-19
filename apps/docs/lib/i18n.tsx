@@ -166,6 +166,8 @@ const en = {
     previewTitle: "Live preview: standard SLDS components",
     previewBody:
       "Real SLDS markup and CSS in a sandboxed frame. Switch to “Mintel brand” to apply the mintelGlobal stylesheet — only styling hooks change, the markup stays the same.",
+    previewChanges:
+      "Mintel brand changes the brand blue (#0176D3 → #295DA8) and the corner radius of buttons, cards, inputs and badges. The brand font hook applies in SLDS 2 orgs only.",
     previewDefault: "SLDS default",
     previewBrand: "Mintel brand",
     previewCaption: "SLDS markup rebranded with Mintel tokens (SLDS 2.264 CSS from npm). Path keeps Salesforce blue: SLDS 1 gives it fixed colors with no styling hook. SLDS 2 (Cosmos)-only hooks are not shown here.",
@@ -345,6 +347,8 @@ const th: Dict = {
     previewTitle: "ตัวอย่างจริง: component มาตรฐานของ SLDS",
     previewBody:
       "ใช้ markup และ CSS ของ SLDS จริงในกรอบแยก กด “Mintel brand” เพื่อใส่ stylesheet mintelGlobal — เปลี่ยนแค่ styling hooks ส่วน markup เหมือนเดิม",
+    previewChanges:
+      "Mintel brand เปลี่ยนสีน้ำเงินหลัก (#0176D3 → #295DA8) และความมนของมุมปุ่ม การ์ด ช่องกรอก และ badge ส่วน hook ฟอนต์ของแบรนด์มีผลเฉพาะใน org ที่ใช้ SLDS 2",
     previewDefault: "SLDS ปกติ",
     previewBrand: "Mintel brand",
     previewCaption: "Markup ของ SLDS ที่เปลี่ยนสีด้วย Mintel tokens (CSS ของ SLDS 2.264 จาก npm) ส่วน Path ยังเป็นสีน้ำเงินของ Salesforce เพราะ SLDS 1 กำหนดสีตายตัวโดยไม่มี styling hook และ hook ที่มีเฉพาะ SLDS 2 (Cosmos) จะไม่เห็นในตัวอย่างนี้",

@@ -3,7 +3,7 @@
 //   - registry/items.json                         (component items)
 //   - @mintelligence-dev/tokens/shadcn-theme.json (theme item, generated from tokens)
 // Then `shadcn build` turns registry.json into public/r/*.json.
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
+import { readFileSync, writeFileSync } from "node:fs"
 import { createRequire } from "node:module"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -62,10 +62,4 @@ const css =
   toCss(rules) +
   "\n"
 writeFileSync(join(root, "app/registry.css"), css)
-// Brand stylesheet for the Salesforce page's live SLDS preview (generated; source: packages/tokens).
-mkdirSync(join(root, "public/salesforce"), { recursive: true })
-copyFileSync(
-  require.resolve("@mintelligence-dev/tokens/salesforce/mintel-global.css"),
-  join(root, "public/salesforce/mintel-global.css")
-)
 console.log(`✓ registry.json (${registry.items.length} items), app/registry.css`)

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import { SegmentedControl } from "@/registry/mintel/glass/segmented-control"
 
@@ -108,10 +108,11 @@ const MARKUP = `
   </article>
 </div>`
 
-function srcDoc(withBrand: boolean, origin: string) {
+// The brand stylesheet is inlined (not fetched) so the preview also works on deployments behind login.
+function srcDoc(brandCss: string | null) {
   return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="${SLDS_CSS}">
-${withBrand ? `<link rel="stylesheet" href="${origin}/salesforce/mintel-global.css">` : ""}
+${brandCss ? `<style>${brandCss}</style>` : ""}
 <style>body{margin:0}a{cursor:default}</style></head>
 <body>${MARKUP}<script>document.addEventListener('click',function(e){e.preventDefault()})</script></body></html>`
 }
@@ -119,12 +120,13 @@ ${withBrand ? `<link rel="stylesheet" href="${origin}/salesforce/mintel-global.c
 /** Renders real SLDS markup/CSS in a sandboxed iframe, with and without the Mintel styling hooks. */
 export function SldsPreview({
   labels,
+  brandCss,
 }: {
-  labels: { default: string; brand: string; caption: string; frame: string }
+  labels: { default: string; brand: string; caption: string; frame: string; changes: string }
+  /** Contents of mintel-global.css (read at build time). */
+  brandCss: string
 }) {
   const [mode, setMode] = useState("brand")
-  const [origin, setOrigin] = useState<string | null>(null)
-  useEffect(() => setOrigin(window.location.origin), [])
 
   return (
     <div className="space-y-3">
@@ -138,17 +140,16 @@ export function SldsPreview({
           { value: "brand", label: labels.brand },
         ]}
       />
+      <p className="text-sm text-muted-foreground">{labels.changes}</p>
       <div className="overflow-hidden rounded-2xl border shadow-sm">
-        {origin && (
-          <iframe
-            key={mode}
-            title={labels.frame}
-            loading="lazy"
-            sandbox="allow-scripts"
-            srcDoc={srcDoc(mode === "brand", origin)}
-            className="block h-[640px] w-full bg-[#f3f3f3]"
-          />
-        )}
+        <iframe
+          key={mode}
+          title={labels.frame}
+          loading="lazy"
+          sandbox="allow-scripts"
+          srcDoc={srcDoc(mode === "brand" ? brandCss : null)}
+          className="block h-[640px] w-full bg-[#f3f3f3]"
+        />
       </div>
       <p className="text-xs text-muted-foreground">{labels.caption}</p>
     </div>

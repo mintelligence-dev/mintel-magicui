@@ -121,6 +121,12 @@
   --slds-c-button-brand-color-background-active: var(--mintel-color-blue-800);
   --slds-c-button-brand-text-color-hover: var(--mintel-primary-foreground);
   --slds-c-button-radius-border: var(--mintel-radius);
+  --slds-c-card-radius-border: calc(var(--mintel-radius) + 4px);
+  --slds-c-input-radius-border: var(--mintel-radius);
+  --slds-c-badge-radius-border: 999px;
+  --slds-g-radius-border-2: var(--mintel-radius);
+  /* Brand font: honored by SLDS 2 orgs (SLDS 1 CSS hard-codes the html font). Needs the font files: Static Resource or a CSP Trusted Site */
+  --slds-g-font-family-base: var(--mintel-font-sans);
   --slds-c-checkbox-toggle-color-background-checked: var(--mintel-primary);
   --slds-c-checkbox-toggle-color-background-checked-hover: var(--mintel-color-blue-700);
   --slds-c-checkbox-toggle-color-background-checked-focus: var(--mintel-color-blue-700);
