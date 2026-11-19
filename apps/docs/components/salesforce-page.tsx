@@ -8,6 +8,7 @@ import { MobileNav } from "@/components/mobile-nav"
 import { SiteHeader } from "@/components/site-header"
 import { SldsPreview } from "@/components/slds-preview"
 import { getDict, type Lang } from "@/lib/i18n"
+import { scopeLwcCss } from "@/lib/scope-css"
 import { AnimatedGradientText } from "@/registry/mintel/effects/animated-gradient-text"
 import { NumberTicker } from "@/registry/mintel/effects/number-ticker"
 import { ShimmerButton } from "@/registry/mintel/effects/shimmer-button"
@@ -20,6 +21,11 @@ const BRAND_CSS = readFileSync(join(process.cwd(), "../../packages/tokens/salesf
 
 // Source of truth for the LWC code shown on this page (read at build time).
 const LWC_DIR = join(process.cwd(), "../../packages/salesforce/force-app/main/default/lwc")
+
+// The Mintel LWC stylesheets, scoped so the preview renders them exactly as they look in an org.
+const MINTEL_LWC_CSS = ["mintelGlassCard", "mintelShimmerButton", "mintelGradientText", "mintelStatCard"]
+  .map((name) => scopeLwcCss(readFileSync(join(LWC_DIR, name, `${name}.css`), "utf8"), `.c-${name}`))
+  .join("\n")
 
 function bundle(name: string) {
   return (["html", "js", "css"] as const).flatMap((ext) => {
@@ -126,6 +132,7 @@ export function SalesforcePage({ lang }: { lang: Lang }) {
         <p className="mt-3 mb-6 max-w-3xl text-muted-foreground">{t.previewBody}</p>
         <SldsPreview
           brandCss={BRAND_CSS}
+          componentCss={MINTEL_LWC_CSS}
           labels={{
             default: t.previewDefault,
             brand: t.previewBrand,

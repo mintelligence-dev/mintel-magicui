@@ -131,6 +131,24 @@
   --slds-c-checkbox-toggle-color-background-checked-hover: var(--mintel-color-blue-700);
   --slds-c-checkbox-toggle-color-background-checked-focus: var(--mintel-color-blue-700);
   --slds-c-tabs-item-color-border-active: var(--mintel-primary);
+  --slds-c-tabs-item-color-border-hover: color-mix(in oklab, var(--mintel-primary) 40%, transparent);
+  --slds-c-tabs-item-text-color-active: var(--mintel-primary);
+  /* Cards and form fields follow the Mintel Card / Input design */
+  --slds-c-card-color-background: var(--mintel-card);
+  --slds-c-card-text-color: var(--mintel-card-foreground);
+  --slds-c-card-color-border: var(--mintel-border);
+  --slds-c-card-shadow: 0 1px 2px rgb(24 27 49 / 0.06), 0 8px 24px -12px var(--mintel-glass-shadow);
+  --slds-c-card-heading-font-weight: 600;
+  --slds-c-card-footer-color-border: var(--mintel-border);
+  --slds-c-input-color-background: var(--mintel-background);
+  --slds-c-input-color-border: var(--mintel-input);
+  --slds-c-input-color-border-focus: var(--mintel-ring);
+  --slds-c-input-shadow-focus: 0 0 0 3px color-mix(in oklab, var(--mintel-ring) 30%, transparent);
+  --slds-c-badge-color-background: color-mix(in oklab, var(--mintel-primary) 12%, transparent);
+  --slds-c-badge-text-color: var(--mintel-primary);
+  --slds-c-badge-color-border: transparent;
+  --slds-c-badge-inverse-color-background: var(--mintel-brand-accent);
+  --slds-c-badge-inverse-text-color: var(--mintel-brand-accent-foreground);
   /* SLDS global brand palette: drives links, focus rings, selected tabs, progress, etc. */
   --slds-g-color-brand-base-10: var(--mintel-color-blue-950);
   --slds-g-color-brand-base-15: var(--mintel-color-blue-950);
