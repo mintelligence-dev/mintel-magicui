@@ -1,7 +1,12 @@
 {
-  "packageDirectories": [{ "path": "force-app", "default": true }],
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
   "name": "mintel-ui-salesforce",
-  "namespace": "",
+  "namespace": "mintel",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "62.0"
 }
