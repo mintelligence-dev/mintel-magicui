@@ -35,7 +35,7 @@ export default function BreadcrumbExample() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbEllipsis />
+            <BreadcrumbEllipsis label="More levels" />
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>

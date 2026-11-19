@@ -4,9 +4,12 @@ import { getRelatedListRecords } from 'lightning/uiRelatedListApi';
 import { getObjectInfo, getPicklistValues } from 'lightning/uiObjectInfoApi';
 import { updateRecord } from 'lightning/uiRecordApi';
 
+/** Column for records whose picklist value is not offered here; cards can leave it but not enter it. */
+const OTHER = '__other';
+
 const STRINGS = {
-    th: { moveTo: 'ย้ายไป', moved: (t, c) => `ย้าย ${t} ไป ${c} แล้ว`, failed: 'ย้ายไม่สำเร็จ', loadFailed: 'โหลดข้อมูลไม่สำเร็จ', saving: 'กำลังบันทึก…' },
-    en: { moveTo: 'Move to', moved: (t, c) => `Moved ${t} to ${c}`, failed: 'Could not move', loadFailed: 'Could not load records', saving: 'Saving…' }
+    th: { moveTo: 'ย้ายไป', moved: (t, c) => `ย้าย ${t} ไป ${c} แล้ว`, failed: 'ย้ายไม่สำเร็จ', other: 'อื่นๆ', loadFailed: 'โหลดข้อมูลไม่สำเร็จ', saving: 'กำลังบันทึก…' },
+    en: { moveTo: 'Move to', moved: (t, c) => `Moved ${t} to ${c}`, failed: 'Could not move', other: 'Other', loadFailed: 'Could not load records', saving: 'Saving…' }
 };
 
 /**
@@ -46,7 +49,11 @@ export default class Kanban extends NavigationMixin(LightningElement) {
         return `${this.childObjectApiName}.${field}`;
     }
     get qualifiedFields() {
-        return [this.titleField, this.groupField, this.subtitleField].filter(Boolean).map((f) => this.q(f));
+        return [this.titleField, this.groupField].filter(Boolean).map((f) => this.q(f));
+    }
+    /** Optional, so a user without access to the second-line field still gets the board. */
+    get optionalFieldList() {
+        return [this.subtitleField].filter(Boolean).map((f) => this.q(f));
     }
     get picklistField() {
         return this.q(this.groupField);
@@ -69,6 +76,7 @@ export default class Kanban extends NavigationMixin(LightningElement) {
         parentRecordId: '$recordId',
         relatedListId: '$relatedListId',
         fields: '$qualifiedFields',
+        optionalFields: '$optionalFieldList',
         pageSize: '$pageSize'
     })
     wiredRecords({ data, error }) {
@@ -105,22 +113,30 @@ export default class Kanban extends NavigationMixin(LightningElement) {
     }
 
     get columns() {
-        return this.visibleValues.map((col) => {
-            const cards = this.records
-                .filter((r) => r.group === col.value)
-                .map((r) => ({
-                    ...r,
-                    className: `card${r.id === this.draggingId ? ' dragging' : ''}`,
-                    moveLabel: `${this.t.moveTo}… (${r.title})`,
-                    targets: this.visibleValues.filter((v) => v.value !== col.value)
-                }));
-            return {
-                ...col,
-                cards,
-                count: cards.length,
-                className: `column${this.overColumn === col.value ? ' over' : ''}`
-            };
-        });
+        const known = this.picklist.map((p) => p.value);
+        const columns = this.visibleValues.map((col) => this.toColumn(col, (r) => r.group === col.value));
+        // Records whose value is not in this picklist (another record type, an inactive value, or empty)
+        // would otherwise be in no column at all.
+        const strays = (r) => !known.includes(r.group);
+        if (this.picklist.length && this.records.some(strays)) columns.push(this.toColumn({ value: OTHER, label: this.t.other }, strays));
+        return columns;
+    }
+
+    toColumn(col, belongs) {
+        const cards = this.records
+            .filter(belongs)
+            .map((r) => ({
+                ...r,
+                className: `card${r.id === this.draggingId ? ' dragging' : ''}`,
+                moveLabel: `${this.t.moveTo}… (${r.title})`,
+                targets: this.visibleValues.filter((v) => v.value !== col.value)
+            }));
+        return {
+            ...col,
+            cards,
+            count: cards.length,
+            className: `column${this.overColumn === col.value ? ' over' : ''}`
+        };
     }
 
     handleDragStart(event) {
@@ -155,7 +171,7 @@ export default class Kanban extends NavigationMixin(LightningElement) {
     /** Optimistic move; reverted with the error message if the update fails. */
     async move(id, target) {
         const record = this.records.find((r) => r.id === id);
-        if (!record || record.group === target) return;
+        if (!record || record.group === target || target === OTHER) return;
         const previous = record.group;
         const targetLabel = (this.picklist.find((p) => p.value === target) || {}).label || target;
         this.records = this.records.map((r) => (r.id === id ? { ...r, group: target } : r));
@@ -168,7 +184,9 @@ export default class Kanban extends NavigationMixin(LightningElement) {
         } catch (error) {
             this.records = this.records.map((r) => (r.id === id ? { ...r, group: previous } : r));
             this.statusText = undefined;
-            const message = (error && error.body && (error.body.output?.errors?.[0]?.message || error.body.message)) || '';
+            const output = error && error.body && error.body.output;
+            const fieldError = output && output.fieldErrors && Object.values(output.fieldErrors)[0];
+            const message = (output && output.errors && output.errors[0] && output.errors[0].message) || (fieldError && fieldError[0] && fieldError[0].message) || (error && error.body && error.body.message) || '';
             this.errorText = `${this.t.failed}${message ? `: ${message}` : ''}`;
         }
     }

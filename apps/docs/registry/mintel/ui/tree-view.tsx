@@ -58,7 +58,9 @@ function TreeView({
   const selected = selectedProp !== undefined ? selectedProp : selectedState
   const rows = React.useMemo(() => flatten(items, expanded), [items, expanded])
   const [focused, setFocused] = React.useState<string | undefined>(undefined)
-  const focusId = rows.some((r) => r.node.id === focused) ? focused : (selected ?? rows[0]?.node.id)
+  // The tab stop must be a visible row: a selected node inside a collapsed branch cannot take it.
+  const visible = (id: string | null | undefined) => id != null && rows.some((r) => r.node.id === id)
+  const focusId = visible(focused) ? focused : visible(selected) ? selected! : rows[0]?.node.id
   const refs = React.useRef(new Map<string, HTMLLIElement>())
 
   const setExpanded = (next: Set<string>) => {

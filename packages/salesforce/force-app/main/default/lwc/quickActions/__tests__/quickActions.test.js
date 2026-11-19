@@ -44,4 +44,18 @@ describe('c-quick-actions', () => {
         buttons(el)[0].click();
         expect(handler.mock.calls[0][0].detail).toEqual({ name: 'escalate', label: 'Escalate' });
     });
+
+    it('treats a bare action name as global when the page has no object (app and home pages)', async () => {
+        const el = make({ recordId: undefined, objectApiName: undefined, actions: 'Task | utility:task | action | NewTask' });
+        await flush();
+        buttons(el)[0].click();
+        expect(getNavigateCalledWith()).toEqual({ type: 'standard__quickAction', attributes: { apiName: 'Global.NewTask' }, state: {} });
+    });
+
+    it('keeps an action name that already has its object', async () => {
+        const el = make({ actions: 'Call | utility:call | action | Global.LogACall' });
+        await flush();
+        buttons(el)[0].click();
+        expect(getNavigateCalledWith().attributes.apiName).toBe('Global.LogACall');
+    });
 });

@@ -15,7 +15,7 @@ const pad = (n) => String(n).padStart(2, '0');
 export default class SlaTimer extends LightningElement {
     @api recordId;
     @api objectApiName;
-    /** DateTime field with the deadline, e.g. "SlaExitDate" or "Due_At__c". */
+    /** DateTime field with the deadline, e.g. "Resolution_Due__c". (Case.SlaExitDate is not one: it is when the case left the entitlement process.) */
     @api deadlineField;
     /** Optional DateTime field the SLA started from, for the bar (e.g. "CreatedDate"). */
     @api startField;

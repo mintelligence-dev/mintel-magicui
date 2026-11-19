@@ -55,11 +55,11 @@ function BreadcrumbSeparator({ children, className, ...props }: React.ComponentP
   )
 }
 
-function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<"span">) {
+/** Stands for the levels left out of a long trail. `label` is what screen readers say (Thai by default). */
+function BreadcrumbEllipsis({ className, label = "ระดับที่ย่อไว้", ...props }: React.ComponentProps<"span"> & { label?: string }) {
   return (
-    <span data-slot="breadcrumb-ellipsis" role="presentation" aria-hidden="true" className={cn("flex size-6 items-center justify-center", className)} {...props}>
-      <MoreHorizontalIcon className="size-4" />
-      <span className="sr-only">More</span>
+    <span data-slot="breadcrumb-ellipsis" role="img" aria-label={label} className={cn("flex size-6 items-center justify-center", className)} {...props}>
+      <MoreHorizontalIcon aria-hidden className="size-4" />
     </span>
   )
 }

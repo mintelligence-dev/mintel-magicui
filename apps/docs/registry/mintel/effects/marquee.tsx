@@ -61,6 +61,9 @@ export function Marquee({
         .map((_, i) => (
           <div
             key={i}
+            // The copies only fill the loop: keep them away from screen readers and the tab order.
+            aria-hidden={i > 0 || undefined}
+            inert={i > 0 || undefined}
             className={cn("flex shrink-0 justify-around gap-(--gap)", {
               "animate-marquee flex-row motion-reduce:animate-none": !vertical,
               "animate-marquee-vertical flex-col motion-reduce:animate-none": vertical,

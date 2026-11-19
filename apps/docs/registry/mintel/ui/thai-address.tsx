@@ -114,7 +114,7 @@ function ThaiAddressPicker({
   locale = "th",
   dataUrl,
   disabled,
-  idPrefix = "thai-address",
+  idPrefix: idPrefixProp,
   className,
 }: {
   value?: ThaiAddressValue
@@ -128,6 +128,9 @@ function ThaiAddressPicker({
   className?: string
 }) {
   const t = LABELS[locale]
+  // Unique by default, so two pickers on one page (registered and current address) do not share ids.
+  const generatedId = React.useId()
+  const idPrefix = idPrefixProp ?? generatedId
   const { data, error } = useThaiAddressData(dataUrl)
   const [uncontrolled, setUncontrolled] = React.useState<ThaiAddressValue>(defaultValue ?? {})
   const value = controlled ?? uncontrolled
@@ -231,7 +234,9 @@ function ThaiAddressPicker({
             if (!data || zip.length < 5) return
             const matches = data.s.filter((s) => s[4] === zip)
             // One place: fill everything. Several in one district: fill up to the district.
-            if (matches.length === 1) set(fromSubDistrict(matches[0][0]))
+            // No such postal code: drop the old one (and its sub-district) so the parent does not keep a stale value.
+            if (matches.length === 0) set({ ...value, subDistrictId: undefined, zip: undefined })
+            else if (matches.length === 1) set(fromSubDistrict(matches[0][0]))
             else if (matches.length > 1) {
               const districtsHit = new Set(matches.map((m) => m[1]))
               const first = fromSubDistrict(matches[0][0])

@@ -45,8 +45,8 @@ function CommandList({ className, ...props }: React.ComponentProps<typeof Comman
   )
 }
 
-function CommandEmpty(props: React.ComponentProps<typeof CommandPrimitive.Empty>) {
-  return <CommandPrimitive.Empty data-slot="command-empty" className="py-8 text-center text-sm text-muted-foreground" {...props} />
+function CommandEmpty({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Empty>) {
+  return <CommandPrimitive.Empty data-slot="command-empty" className={cn("py-8 text-center text-sm text-muted-foreground", className)} {...props} />
 }
 
 function CommandGroup({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Group>) {

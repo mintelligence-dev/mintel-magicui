@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import * as PopoverPrimitive from "@radix-ui/react-popover"
-import { Command as CommandPrimitive } from "cmdk"
+import { Command as CommandPrimitive, defaultFilter } from "cmdk"
 import { CheckIcon, ChevronsUpDownIcon, SearchIcon, XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -161,7 +161,12 @@ function Combobox(props: SingleProps | MultipleProps) {
             "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:duration-150 data-[state=closed]:ease-in data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-90 data-[state=open]:duration-300 data-[state=open]:ease-spring-snappy motion-reduce:animate-none"
           )}
         >
-          <CommandPrimitive shouldFilter={shouldFilter} className="flex flex-col">
+          <CommandPrimitive
+            shouldFilter={shouldFilter}
+            // Match on labels and keywords only: option values are often ids, which should not be searchable.
+            filter={(_value, search, keywords) => defaultFilter((keywords ?? []).join(" "), search)}
+            className="flex flex-col"
+          >
             <div className="flex items-center gap-2 border-b px-3">
               <SearchIcon className="size-4 shrink-0 opacity-50" />
               <CommandPrimitive.Input

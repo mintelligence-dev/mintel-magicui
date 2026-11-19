@@ -23,6 +23,8 @@ const cases = [
   ["our earlier deploy", [{ DeveloperName: "tabs", Description: "[Mintel UI] Tabs with a spring-animated indicator." }], 0],
   ["someone else's tabs", [{ DeveloperName: "tabs", Description: "Account tabs" }], 1],
   ["someone else's path without description", [{ DeveloperName: "path", Description: null }], 1],
+  ["someone else's kanban in the org's own namespace", [{ DeveloperName: "kanban", NamespacePrefix: "acme", Description: "Deals board" }], 1],
+  ["our earlier deploy in a namespaced org", [{ DeveloperName: "kanban", NamespacePrefix: "mintel", Description: "[Mintel UI] Board." }], 0],
 ]
 let failed = 0
 for (const [name, records, expected] of cases) {

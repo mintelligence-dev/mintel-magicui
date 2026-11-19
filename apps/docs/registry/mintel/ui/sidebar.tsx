@@ -68,6 +68,15 @@ function SidebarProvider({
 
 function Sidebar({ className, children, ...props }: React.ComponentProps<"aside">) {
   const { mobileOpen, setMobileOpen } = useSidebar()
+  // Escape closes the off-canvas panel on phones.
+  React.useEffect(() => {
+    if (!mobileOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false)
+    }
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [mobileOpen, setMobileOpen])
   return (
     <>
       {/* Phones: dim the page behind the open panel. */}
@@ -84,11 +93,12 @@ function Sidebar({ className, children, ...props }: React.ComponentProps<"aside"
         data-mobile-open={mobileOpen || undefined}
         className={cn(
           "z-40 flex h-full shrink-0 flex-col overflow-hidden border-r bg-sidebar text-sidebar-foreground",
-          "transition-[width,translate] duration-500 ease-spring-smooth motion-reduce:transition-none",
+          "transition-[width,translate,visibility] duration-500 ease-spring-smooth motion-reduce:transition-none",
           // Desktop: full width or icon rail.
           "md:relative md:w-60 md:group-data-[collapsed]/shell:w-14",
           // Phones: off-canvas.
-          "absolute inset-y-0 left-0 w-[min(17rem,85%)] -translate-x-full data-[mobile-open]:translate-x-0 md:translate-x-0",
+          // `invisible` when closed, so the off-screen links leave the tab order and the accessibility tree.
+          "absolute inset-y-0 left-0 w-[min(17rem,85%)] -translate-x-full max-md:invisible data-[mobile-open]:translate-x-0 max-md:data-[mobile-open]:visible md:translate-x-0",
           className
         )}
         {...props}

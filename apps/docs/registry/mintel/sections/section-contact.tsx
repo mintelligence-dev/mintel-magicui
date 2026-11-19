@@ -32,6 +32,9 @@ export function SectionContact({
 }) {
   const [sent, setSent] = React.useState(false)
   const [phone, setPhone] = React.useState("")
+  const [phoneValid, setPhoneValid] = React.useState(true)
+  const [pending, setPending] = React.useState(false)
+  const [failed, setFailed] = React.useState(false)
   return (
     <section data-slot="section-contact" className={cn("reveal-on-scroll mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2", className)}>
       <div>
@@ -57,9 +60,19 @@ export function SectionContact({
             className="grid gap-4"
             onSubmit={async (e) => {
               e.preventDefault()
+              // One request at a time; the phone is optional, but a partial number is not sent.
+              if (pending || (phone && !phoneValid)) return
               const f = new FormData(e.currentTarget)
-              await onSubmit?.({ name: String(f.get("name")), email: String(f.get("email")), phone, message: String(f.get("message")) })
-              setSent(true)
+              setPending(true)
+              setFailed(false)
+              try {
+                await onSubmit?.({ name: String(f.get("name")), email: String(f.get("email")), phone, message: String(f.get("message")) })
+                setSent(true)
+              } catch {
+                setFailed(true)
+              } finally {
+                setPending(false)
+              }
             }}
           >
             <div className="grid gap-4 sm:grid-cols-2">
@@ -74,7 +87,15 @@ export function SectionContact({
             </div>
             <div className="grid gap-2">
               <Label htmlFor="contact-phone">Phone (optional)</Label>
-              <ThaiPhoneInput id="contact-phone" value={phone} onValueChange={(v) => setPhone(v)} />
+              <ThaiPhoneInput
+                id="contact-phone"
+                value={phone}
+                aria-invalid={Boolean(phone) && !phoneValid}
+                onValueChange={(v, info) => {
+                  setPhone(v)
+                  setPhoneValid(info.valid)
+                }}
+              />
             </div>
             <div className="grid gap-2">
               <Label htmlFor="contact-message">Message</Label>
@@ -82,10 +103,16 @@ export function SectionContact({
             </div>
             <button
               type="submit"
+              aria-disabled={pending}
               className="rounded-full bg-[image:var(--brand-gradient)] px-6 py-3 font-semibold text-brand-foreground shadow-md shadow-brand/25 transition-transform duration-300 ease-spring-snappy hover:-translate-y-0.5 active:scale-95 motion-reduce:transition-none"
             >
               Send message
             </button>
+            {failed && (
+              <p role="alert" className="text-sm text-destructive">
+                Could not send your message. Please try again.
+              </p>
+            )}
           </form>
         )}
       </div>

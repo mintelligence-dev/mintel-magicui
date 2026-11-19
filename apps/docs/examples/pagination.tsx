@@ -9,8 +9,8 @@ export default function PaginationExample() {
   const [small, setSmall] = useState(2)
   return (
     <div className="grid gap-6">
-      <Pagination page={page} pageCount={20} onPageChange={setPage} />
-      <Pagination page={small} pageCount={4} onPageChange={setSmall} />
+      <Pagination locale="en" page={page} pageCount={20} onPageChange={setPage} />
+      <Pagination locale="en" page={small} pageCount={4} onPageChange={setSmall} />
     </div>
   )
 }

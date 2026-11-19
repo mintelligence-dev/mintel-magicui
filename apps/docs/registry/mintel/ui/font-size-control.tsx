@@ -51,7 +51,11 @@ function FontSizeControl({
     try {
       const saved = Number(localStorage.getItem(storageKey))
       const i = steps.indexOf(saved)
-      if (i >= 0) setIndex(i)
+      if (i >= 0) {
+        setIndex(i)
+        // Also apply it: without <FontScaleScript /> in the head nothing else has.
+        if (i !== defaultStep) document.documentElement.style.fontSize = `${saved}%`
+      }
     } catch {}
     // Keep several controls on the same page in sync.
     const onChange = (e: Event) => {

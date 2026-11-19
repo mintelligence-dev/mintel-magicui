@@ -31,8 +31,13 @@ function SheetContent({
   className,
   children,
   side = "right",
+  closeLabel = "ปิด",
   ...props
-}: React.ComponentProps<typeof SheetPrimitive.Content> & { side?: keyof typeof SIDE }) {
+}: React.ComponentProps<typeof SheetPrimitive.Content> & {
+  side?: keyof typeof SIDE
+  /** Screen-reader name of the close button (Thai by default). */
+  closeLabel?: string
+}) {
   return (
     <SheetPrimitive.Portal>
       <SheetPrimitive.Overlay
@@ -52,7 +57,7 @@ function SheetContent({
         {children}
         <SheetPrimitive.Close className="absolute top-4 right-4 flex size-8 items-center justify-center rounded-full opacity-70 transition-opacity hover:bg-muted hover:opacity-100 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none">
           <XIcon className="size-4" />
-          <span className="sr-only">Close</span>
+          <span className="sr-only">{closeLabel}</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>
     </SheetPrimitive.Portal>

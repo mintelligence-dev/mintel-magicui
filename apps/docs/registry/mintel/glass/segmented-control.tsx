@@ -76,7 +76,8 @@ function SegmentedControl({
             type="button"
             role="radio"
             aria-checked={active}
-            tabIndex={active ? 0 : -1}
+            // If the value matches no option, keep the first one reachable by keyboard.
+            tabIndex={active || (i === 0 && !options.some((x) => x.value === value)) ? 0 : -1}
             onClick={() => select(o.value)}
             onKeyDown={(e) => onKeyDown(e, i)}
             className={cn(

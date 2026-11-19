@@ -43,6 +43,10 @@ export function SectionFeatureSlideshow({
   const [index, setIndex] = React.useState(0)
   const [playing, setPlaying] = React.useState(false)
   const [reduced, setReduced] = React.useState(true)
+  // Unique ids, so two slideshows can share a page.
+  const uid = React.useId()
+  // `slides` may be empty or shrink (data loading): never read past the end.
+  const current = Math.min(index, Math.max(0, slides.length - 1))
 
   React.useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -51,7 +55,7 @@ export function SectionFeatureSlideshow({
   }, [])
 
   React.useEffect(() => {
-    if (!playing || reduced) return
+    if (!playing || reduced || slides.length < 2) return
     const id = setTimeout(() => setIndex((i) => (i + 1) % slides.length), interval)
     return () => clearTimeout(id)
   }, [playing, reduced, index, interval, slides.length])
@@ -78,21 +82,21 @@ export function SectionFeatureSlideshow({
               key={s.title}
               type="button"
               role="tab"
-              id={`slide-tab-${i}`}
-              aria-selected={i === index}
-              aria-controls="slide-panel"
+              id={`${uid}-tab-${i}`}
+              aria-selected={i === current}
+              aria-controls={`${uid}-panel`}
               onClick={() => {
                 setIndex(i)
                 setPlaying(false)
               }}
               className={cn(
                 "relative overflow-hidden rounded-2xl border p-4 text-left transition-[background-color,border-color] duration-300",
-                i === index ? "border-brand/40 bg-brand/5" : "hover:bg-muted/60"
+                i === current ? "border-brand/40 bg-brand/5" : "hover:bg-muted/60"
               )}
             >
               <span className="block font-semibold">{s.title}</span>
               <span className="mt-1 block text-sm text-muted-foreground">{s.description}</span>
-              {i === index && playing && !reduced && (
+              {i === current && playing && !reduced && (
                 <span aria-hidden className="absolute inset-x-0 bottom-0 h-0.5 bg-brand/15">
                   <span
                     key={index}
@@ -105,13 +109,13 @@ export function SectionFeatureSlideshow({
           ))}
         </div>
         <div
-          id="slide-panel"
+          id={`${uid}-panel`}
           role="tabpanel"
-          aria-labelledby={`slide-tab-${index}`}
+          aria-labelledby={`${uid}-tab-${current}`}
           className="min-h-80 overflow-hidden rounded-3xl border bg-[radial-gradient(120%_120%_at_0%_0%,color-mix(in_oklab,var(--brand)_10%,transparent),transparent_60%)] bg-muted/30"
         >
-          <div key={index} className="size-full motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-right-4 motion-safe:duration-500">
-            {slides[index].visual}
+          <div key={current} className="size-full motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-right-4 motion-safe:duration-500">
+            {slides[current]?.visual}
           </div>
         </div>
       </div>

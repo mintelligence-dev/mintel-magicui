@@ -33,11 +33,12 @@ export default function MobileAppPage() {
   const [tab, setTab] = useState("chats")
   const [filter, setFilter] = useState("all")
   const [compose, setCompose] = useState(false)
+  const [draft, setDraft] = useState("")
   const chats = filter === "unread" ? CHATS.filter((c) => c.unread) : CHATS
 
   return (
     <div className="mx-auto min-h-svh max-w-md bg-muted/30 pb-28">
-      <GlassNavbar className="flex h-14 items-center justify-between px-4">
+      <GlassNavbar className="flex h-[calc(3.5rem+env(safe-area-inset-top))] items-center justify-between px-4">
         <h1 className="font-heading text-lg font-semibold">Chats</h1>
         <div className="flex gap-1">
           <GlassButton size="icon" aria-label="Search" className="size-9 shadow-none">
@@ -109,12 +110,14 @@ export default function MobileAppPage() {
             <DrawerTitle>New message</DrawerTitle>
             <DrawerDescription>Sent through LINE OA</DrawerDescription>
           </DrawerHeader>
-          <Textarea placeholder="Type a message..." />
+          <Textarea aria-label="Message" placeholder="Type a message..." value={draft} onChange={(e) => setDraft(e.target.value)} />
           <DrawerFooter>
             <Button
               variant="brand"
+              disabled={!draft.trim()}
               onClick={() => {
                 setCompose(false)
+                setDraft("")
                 toast.success("Message sent")
               }}
             >

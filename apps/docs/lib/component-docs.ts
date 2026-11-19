@@ -155,6 +155,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     th: "หน้าต่าง modal พื้นหลังเบลอ เปิดแบบซูมเข้า",
     props: [
       p("open / onOpenChange", "boolean / (open) => void", "On <Dialog>: control it from state instead of a <DialogTrigger>, e.g. one confirm dialog for a whole list.", "ใส่ที่ <Dialog> เพื่อควบคุมจาก state แทน <DialogTrigger> เช่น dialog ยืนยันตัวเดียวสำหรับทั้งรายการ"),
+      p("closeLabel", "string", 'DialogContent: screen-reader name of the close button. Pass "Close" on English pages.', 'DialogContent: ชื่อปุ่มปิดสำหรับ screen reader หน้าภาษาอังกฤษให้ใส่ "Close"', '"ปิด"'),
     ],
     upstream: radix("Dialog"),
   },
@@ -231,6 +232,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     props: [
       p("asChild", "boolean", "BreadcrumbLink: render your router's Link (its only child) instead of <a>.", "BreadcrumbLink: ใช้ Link ของ router (ลูกตัวเดียว) แทน <a>", "false"),
       p("children", "ReactNode", "BreadcrumbSeparator: custom separator icon.", "BreadcrumbSeparator: ไอคอนคั่นแบบกำหนดเอง"),
+      p("label", "string", 'BreadcrumbEllipsis: what screen readers say for the levels left out. Pass "More levels" on English pages.', 'BreadcrumbEllipsis: ข้อความที่ screen reader อ่านแทนระดับที่ย่อไว้ หน้าภาษาอังกฤษให้ใส่ "More levels"', '"ระดับที่ย่อไว้"'),
     ],
   },
   pagination: {
@@ -240,12 +242,15 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("pageCount", "number", "Total pages.", "จำนวนหน้าทั้งหมด"),
       p("onPageChange", "(page: number) => void", "Called with the new page.", "เรียกเมื่อเปลี่ยนหน้า"),
       p("siblings", "number", "Pages shown on each side of the current one.", "จำนวนหน้าข้างๆ หน้าปัจจุบัน", "1"),
-      p("locale", '"en" | "th"', "Label language.", "ภาษาของป้าย", '"en"'),
+      p("locale", '"th" | "en"', "Label language.", "ภาษาของป้าย", '"th"'),
     ],
   },
   sheet: {
     th: "แผงที่เลื่อนออกจากขอบจอ ใช้กับตัวกรอง รายละเอียด หรือแก้ไขเร็ว แบบล่างมีที่จับและเว้นขอบล่างของมือถือ",
-    props: [p("side", '"right" | "left" | "top" | "bottom"', "SheetContent: edge to slide from.", "SheetContent: ขอบที่เลื่อนออกมา", '"right"')],
+    props: [
+      p("side", '"right" | "left" | "top" | "bottom"', "SheetContent: edge to slide from.", "SheetContent: ขอบที่เลื่อนออกมา", '"right"'),
+      p("closeLabel", "string", 'SheetContent: screen-reader name of the close button. Pass "Close" on English pages.', 'SheetContent: ชื่อปุ่มปิดสำหรับ screen reader หน้าภาษาอังกฤษให้ใส่ "Close"', '"ปิด"'),
+    ],
     upstream: radix("Dialog"),
   },
   command: {
@@ -284,7 +289,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     th: "ช่องใส่แท็ก กด Enter หรือคอมมาเพื่อเพิ่ม Backspace ลบตัวท้าย วางหลายคำคั่นคอมมาได้ ไม่รับซ้ำ และมีคำแนะนำ",
     props: [
       p("value / defaultValue / onValueChange", "string[]", "Tags.", "รายการแท็ก"),
-      p("suggestions", "string[]", "Shown as you type.", "คำแนะนำตอนพิมพ์"),
+      p("suggestions", "string[]", "Shown as you type. Enter adds what was typed; press the arrow keys first to pick a suggestion.", "คำแนะนำตอนพิมพ์ กด Enter จะเพิ่มคำที่พิมพ์ ถ้าจะเลือกคำแนะนำให้กดลูกศรก่อน"),
       p("max", "number", "Most tags allowed.", "จำนวนแท็กสูงสุด"),
       p("locale", '"th" | "en"', "Built-in labels.", "ภาษาของป้าย", '"th"'),
     ],
@@ -350,7 +355,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("onChange", "(dataUrl | null) => void", "PNG data URL (transparent background), or null when empty.", "PNG แบบ data URL พื้นโปร่งใส หรือ null เมื่อยังไม่ลงชื่อ"),
       p("allowTyped", "boolean", "Offer a typed signature.", "เปิดให้พิมพ์ชื่อแทนการเขียน", "true"),
       p("height", "number", "Canvas height in px.", "ความสูงพื้นที่ลงชื่อ (px)", "180"),
-      p("color", "string", "Ink color.", "สีหมึก", "foreground"),
+      p("color", "string", "Ink color, on screen and in the exported PNG. Without it the on-screen ink follows the theme and the PNG is always dark (#181B31), so a signature made in dark mode stays visible on a white document.", "สีหมึกทั้งบนจอและในไฟล์ PNG ถ้าไม่ใส่ หมึกบนจอจะตามธีม ส่วน PNG เป็นสีเข้มเสมอ (#181B31) ลายเซ็นที่เขียนในโหมดมืดจึงยังเห็นบนเอกสารพื้นขาว", "foreground"),
       p("locale", '"th" | "en"', "Button and hint text.", "ภาษาของปุ่มและคำแนะนำ", '"th"'),
       p("disabled", "boolean", "Read only.", "ปิดการใช้งาน"),
     ],
@@ -377,8 +382,9 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("selectable", "boolean", "Add a checkbox column.", "เพิ่มคอลัมน์ช่องติ๊ก", "false"),
       p("pageSize", "number", "Rows per page.", "จำนวนแถวต่อหน้า", "10"),
       p("onSelectionChange", "(rows: TData[]) => void", "Selected rows.", "แถวที่เลือก"),
+      p("getRowId", "(row: TData) => string", "Stable id of a row. Pass it whenever rows can change (delete, refetch): without it selection is kept by position and lands on other rows.", "id ที่คงที่ของแต่ละแถว ควรใส่เมื่อข้อมูลเปลี่ยนได้ (ลบ โหลดใหม่) ถ้าไม่ใส่ การเลือกจะจำตามตำแหน่ง และไปติดแถวอื่นแทน"),
       p("toolbar", "ReactNode", "Extra controls next to search.", "ปุ่มหรือตัวกรองเพิ่มข้างช่องค้นหา"),
-      p("locale", '"en" | "th"', "Label language.", "ภาษาของป้าย", '"en"'),
+      p("locale", '"th" | "en"', "Label language.", "ภาษาของป้าย", '"th"'),
     ],
     upstream: { label: "TanStack Table", href: "https://tanstack.com/table" },
   },

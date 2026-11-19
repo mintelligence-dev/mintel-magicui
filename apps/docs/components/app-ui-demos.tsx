@@ -100,7 +100,7 @@ export function DialogDemo({ lang }: { lang: Lang }) {
       <DialogTrigger asChild>
         <Button variant="brand">{t.addConnector}</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent closeLabel="Close">
         <DialogHeader>
           <DialogTitle>{t.dialogTitle}</DialogTitle>
           <DialogDescription>{t.dialogDesc}</DialogDescription>

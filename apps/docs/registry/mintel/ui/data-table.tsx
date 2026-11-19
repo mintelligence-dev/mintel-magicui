@@ -76,8 +76,9 @@ function DataTable<TData, TValue>({
   searchable = true,
   selectable = false,
   pageSize = 10,
-  locale = "en",
+  locale = "th",
   onSelectionChange,
+  getRowId,
   toolbar,
   className,
 }: {
@@ -86,8 +87,13 @@ function DataTable<TData, TValue>({
   searchable?: boolean
   selectable?: boolean
   pageSize?: number
-  locale?: "en" | "th"
+  locale?: "th" | "en"
   onSelectionChange?: (rows: TData[]) => void
+  /**
+   * Stable id of a row. Without it, selection is kept by row position, so it lands on other rows
+   * when `data` changes (after deleting or refetching). Pass it whenever rows can change.
+   */
+  getRowId?: (row: TData) => string
   /** Extra controls shown next to the search box (filters, buttons …). */
   toolbar?: React.ReactNode
   className?: string
@@ -122,6 +128,7 @@ function DataTable<TData, TValue>({
     onGlobalFilterChange: setGlobalFilter,
     onRowSelectionChange: setRowSelection,
     enableRowSelection: selectable,
+    getRowId,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

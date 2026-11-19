@@ -13,7 +13,7 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
-            <property name="deadlineField" type="String" label="Deadline field (DateTime API name)" default="SlaExitDate" />
+            <property name="deadlineField" type="String" label="Deadline field (DateTime API name)" description="A DateTime field of this object that holds the target time, e.g. Resolution_Due__c" />
             <property name="startField" type="String" label="Start field (DateTime, for the bar)" default="CreatedDate" />
             <property name="completedField" type="String" label="Completed field (Boolean)" default="IsClosed" />
             <property name="warningMinutes" type="Integer" label="Turn amber this many minutes before" default="30" />

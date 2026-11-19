@@ -72,7 +72,8 @@ function ThaiIdInput({
         {...props}
         value={formatThaiId(digits)}
         aria-invalid={(complete && !valid) || props["aria-invalid"] || undefined}
-        aria-describedby={complete ? describedBy : props["aria-describedby"]}
+        // Keep the caller's description (form hint or error) alongside the check-digit status.
+        aria-describedby={[props["aria-describedby"], complete ? describedBy : undefined].filter(Boolean).join(" ") || undefined}
         className="pr-9 font-mono tracking-wide tabular-nums"
         onChange={(e) => {
           const el = e.target
@@ -82,7 +83,8 @@ function ThaiIdInput({
           onValueChange?.(next, next.length === 13 && isValidThaiId(next))
           requestAnimationFrame(() => {
             const pos = caretAfterDigits(formatThaiId(next), before)
-            ref.current?.setSelectionRange(pos, pos)
+            // `el`, not the internal ref: a caller's own ref (react-hook-form) replaces ours.
+            el.setSelectionRange(pos, pos)
           })
         }}
       />

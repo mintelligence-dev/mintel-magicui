@@ -81,7 +81,13 @@ function SnapPanel({
   onClose: () => void
   labels: { expand: string; collapse: string }
 }) {
-  const points = React.useMemo(() => [...snapPoints].sort((a, b) => a - b), [snapPoints])
+  // Keyed on the values, so an inline array (snapPoints={[0.4, 0.9]}) does not re-run the settle effect on every render.
+  const pointsKey = snapPoints.join(",")
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const points = React.useMemo(() => [...snapPoints].sort((a, b) => a - b), [pointsKey])
+  const placed = React.useRef(false)
+  // A mouse drag ends with a click on the handle; without this it would move the sheet a second time.
+  const dragged = React.useRef(false)
   const top = points[points.length - 1]
   const controls = useDragControls()
   const [height, setHeight] = React.useState(0)
@@ -99,8 +105,10 @@ function SnapPanel({
   React.useEffect(() => {
     if (!height) return
     const target = offset(index)
-    if (reduceMotion || y.get() === 0) y.set(target)
+    // Place it without animation the first time only (y is also 0 at the top snap point).
+    if (reduceMotion || !placed.current) y.set(target)
     else animate(y, target, SNAP_SPRING)
+    placed.current = true
   }, [height, index, offset, reduceMotion, y])
 
   const goTo = (i: number) => {
@@ -121,6 +129,9 @@ function SnapPanel({
       dragConstraints={{ top: 0, bottom: height }}
       dragElastic={{ top: 0.04, bottom: 0 }}
       dragMomentum={false}
+      onDragStart={() => {
+        dragged.current = true
+      }}
       onDragEnd={(_, info) => {
         // Velocity nudges the target, capped so a flick moves at most about one step.
         const fling = Math.max(-height * 0.2, Math.min(height * 0.2, info.velocity.y * 0.15))
@@ -141,8 +152,17 @@ function SnapPanel({
     >
       <button
         type="button"
-        onPointerDown={(e) => controls.start(e)}
-        onClick={() => goTo(index === points.length - 1 ? 0 : index + 1)}
+        onPointerDown={(e) => {
+          dragged.current = false
+          controls.start(e)
+        }}
+        onClick={() => {
+          if (dragged.current) {
+            dragged.current = false
+            return
+          }
+          goTo(index === points.length - 1 ? 0 : index + 1)
+        }}
         aria-label={index === points.length - 1 ? labels.collapse : labels.expand}
         className="flex shrink-0 cursor-grab touch-none justify-center rounded-t-3xl pt-3 pb-2 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 active:cursor-grabbing"
       >
