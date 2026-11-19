@@ -1,6 +1,6 @@
 "use client"
 
-// Portions Copyright (c) 2023 Magic UI — MIT License: https://github.com/mintelligence-dev/mintel-magicui/blob/main/THIRD_PARTY_NOTICES.md
+// Portions Copyright (c) 2023 Magic UI — MIT License: https://github.com/magicuidesign/magicui/blob/main/LICENSE.md
 import { useEffect, useState } from "react"
 import { motion, useReducedMotion, type MotionStyle, type Transition } from "motion/react"
 

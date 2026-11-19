@@ -20,13 +20,15 @@ src/tokens.json ──build──► CSS variables · Tailwind v4 theme · JS ·
 ## Use it in React / Next.js
 
 Requires a project set up with Tailwind v4 and shadcn (`npx shadcn@latest init`).
+`<docs-domain>` is wherever the docs site is deployed (e.g. the Vercel production URL) — the registry JSON is
+served from its `/r` path.
 
 ```bash
 # 1. Brand theme (colors light/dark, fonts, radius) → written into your globals.css
-npx shadcn@latest add https://raw.githubusercontent.com/mintelligence-dev/mintel-magicui/main/apps/docs/public/r/mintel-theme.json
+npx shadcn@latest add https://<docs-domain>/r/mintel-theme.json
 
 # 2. Any component — the source is copied into your project, edit freely
-npx shadcn@latest add https://raw.githubusercontent.com/mintelligence-dev/mintel-magicui/main/apps/docs/public/r/shimmer-button.json
+npx shadcn@latest add https://<docs-domain>/r/shimmer-button.json
 ```
 
 **Components** (45 registry items)
@@ -85,7 +87,17 @@ npm run build      # tokens → registry.json → public/r/*.json → static doc
 - Add a component: put the file in `apps/docs/registry/mintel/{ui,effects,glass,motion}/`, add an entry to
   `apps/docs/registry/items.json`, run `npm run build`.
 - Generated files (`packages/tokens/{dist,lwc,salesforce}`, `apps/docs/public/r`, `registry.json`)
-  are committed so they can be used straight from GitHub; CI fails if they are stale.
+  are committed; CI fails if they are stale.
+
+## Deploy (Vercel)
+
+- Import the repo, set **Root Directory** to `apps/docs` (framework: Next.js). Build and install commands can stay
+  default — npm workspaces are detected from the repo root.
+- The site is a static export; the registry is served at `https://<domain>/r/<item>.json`.
+- Install commands on the site use the production domain automatically (`NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL`).
+  Set `NEXT_PUBLIC_SITE_URL` when you add a custom domain.
+- `npx shadcn add` must be able to fetch `/r/*.json` without logging in: keep the production deployment public
+  (Vercel Authentication protects preview URLs by default).
 
 ## License
 

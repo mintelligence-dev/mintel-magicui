@@ -34,7 +34,7 @@ const themeItem = {
 const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "mintel",
-  homepage: "https://github.com/mintelligence-dev/mintel-magicui",
+  homepage: "https://github.com/muisurasak/mintel-ui",
   items: [themeItem, ...items],
 }
 writeFileSync(join(root, "registry.json"), JSON.stringify(registry, null, 2) + "\n")

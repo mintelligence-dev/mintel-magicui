@@ -1,5 +1,5 @@
 {
-  "name": "mintel-magicui",
+  "name": "mintel-ui",
   "private": true,
   "description": "M-Intelligence design system: brand tokens (React + Salesforce LWC) and a shadcn-compatible component registry with animated components.",
   "license": "MIT",

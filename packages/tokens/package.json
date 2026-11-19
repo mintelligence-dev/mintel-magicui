@@ -6,7 +6,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mintelligence-dev/mintel-magicui.git",
+    "url": "git+https://github.com/muisurasak/mintel-ui.git",
     "directory": "packages/tokens"
   },
   "main": "./dist/index.js",
