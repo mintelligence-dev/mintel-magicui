@@ -24,25 +24,36 @@ jobs:
             apps/docs/registry.json apps/docs/public/r apps/docs/app/registry.css \
             || (echo "::error::Run 'npm run build' and commit the generated files." && exit 1)
 
-  # Visual regression + accessibility, in the same Linux image the baselines were rendered in
-  # (fonts and anti-aliasing must match). Update baselines with: npm run test:e2e:docker -- --update-snapshots
+  # Accessibility (axe) and visual regression, in the same Linux image the baselines were rendered in
+  # (fonts and anti-aliasing must match). The axe suite is the slow part, so it is split across three
+  # parallel runners; visual regression runs on a fourth.
+  # Update baselines with: npm run test:e2e:docker -w docs -- e2e/visual.spec.ts --update-snapshots
   qa:
+    name: qa (${{ matrix.suite.name }})
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.65.1-noble
       options: --ipc=host
+    strategy:
+      fail-fast: false
+      matrix:
+        suite:
+          - { name: a11y-1, args: "e2e/a11y.spec.ts --shard=1/3" }
+          - { name: a11y-2, args: "e2e/a11y.spec.ts --shard=2/3" }
+          - { name: a11y-3, args: "e2e/a11y.spec.ts --shard=3/3" }
+          - { name: visual, args: "e2e/visual.spec.ts" }
     steps:
       - uses: actions/checkout@v4
       - run: npm ci
       - run: npm run build
-      - name: Visual regression and accessibility (axe)
-        run: npx playwright test
+      - name: Playwright (${{ matrix.suite.name }})
+        run: npx playwright test ${{ matrix.suite.args }}
         working-directory: apps/docs
       - name: Upload report (diffs and axe findings)
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.suite.name }}
           path: |
             apps/docs/playwright-report
             apps/docs/test-results
