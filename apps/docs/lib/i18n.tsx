@@ -320,7 +320,7 @@ const en = {
       siteFaq: "Frequently asked questions for Experience Cloud pages on native <details>: keyboard and screen-reader friendly with no script.",
       siteCta: "Closing call to action on a brand-gradient band for Experience Cloud pages.",
       brandLoader:
-        "Invisible helper: drop it once on an app, home or record page to load the mintelGlobal stylesheet, so standard lightning-* components switch to the Mintel brand.",
+        "Invisible helper: drop it once on an app, home or record page. Theme “brand” loads the mintelGlobal stylesheet, so standard lightning-* components switch to the Mintel brand; “follow-org” does the opposite and makes the Mintel components take the org's SLDS 2 theme.",
       fontSizeControl:
         "Text-size control (ก- ก ก+) for Experience Cloud: scales the page and remembers the choice. Not for Lightning Experience, whose global font size should not change.",
     },
@@ -333,7 +333,7 @@ const en = {
     lwrTitle: "Experience Cloud (LWR)",
     lwrBody: "Instead of the loader, link the static resource from Settings → Advanced → Edit Head Markup:",
     ownTitle: "Use the tokens in your own LWC",
-    ownBody: "Import the module at the top of the component's CSS. For dark mode, add class=\"mintel-dark\" on the host element.",
+    ownBody: "Import the module at the top of the component's CSS. For dark mode, add class=\"mintel-dark\" on the host element; to follow the org's SLDS 2 theme instead of the Mintel brand, add class=\"mintel-follow-org\".",
     statusTitle: "Status",
     status:
       "All bundles compile with @lwc/compiler and the SLDS hook names are checked against the SLDS CSS. Not yet tested in a real org — report anything that differs, especially on SLDS 2 (Cosmos).",
@@ -641,7 +641,7 @@ const th: Dict = {
       siteFaq: "คำถามที่พบบ่อยสำหรับหน้า Experience Cloud ใช้ <details> ของเบราว์เซอร์ ใช้คีย์บอร์ดและ screen reader ได้โดยไม่ต้องมีสคริปต์",
       siteCta: "แถบปิดท้ายสีแบรนด์ชวนให้ติดต่อ สำหรับหน้า Experience Cloud",
       brandLoader:
-        "ตัวช่วยที่มองไม่เห็น วางครั้งเดียวในหน้า app, home หรือ record เพื่อโหลด stylesheet mintelGlobal ให้ component มาตรฐาน lightning-* เป็นแบรนด์ Mintel",
+        "ตัวช่วยที่มองไม่เห็น วางครั้งเดียวในหน้า app, home หรือ record ถ้าตั้ง Theme เป็น “brand” จะโหลด stylesheet mintelGlobal ให้ component มาตรฐาน lightning-* เป็นแบรนด์ Mintel ส่วน “follow-org” กลับกัน คือให้ component ของ Mintel ใช้ธีม SLDS 2 ของ org แทน",
       fontSizeControl:
         "ปุ่มปรับขนาดตัวอักษร (ก- ก ก+) สำหรับ Experience Cloud ขยายทั้งหน้าและจำค่าที่เลือก ไม่ใช้กับ Lightning Experience เพราะไม่ควรเปลี่ยนขนาดฟอนต์ของทั้งระบบ",
     },
@@ -654,7 +654,7 @@ const th: Dict = {
     lwrTitle: "Experience Cloud (LWR)",
     lwrBody: "แทนการใช้ loader ให้ link static resource ที่ Settings → Advanced → Edit Head Markup:",
     ownTitle: "ใช้ token ใน LWC ของทีมเอง",
-    ownBody: "Import module ที่บรรทัดแรกของ CSS ใน component ถ้าต้องการ dark mode ให้ใส่ class=\"mintel-dark\" ที่ host element",
+    ownBody: "Import module ที่บรรทัดแรกของ CSS ใน component ถ้าต้องการ dark mode ให้ใส่ class=\"mintel-dark\" ที่ host element ถ้าอยากให้ใช้ธีม SLDS 2 ของ org แทนแบรนด์ Mintel ให้ใส่ class=\"mintel-follow-org\"",
     statusTitle: "สถานะ",
     status:
       "ทุก bundle ผ่าน @lwc/compiler และตรวจชื่อ SLDS hook กับ CSS ของ SLDS แล้ว ยังไม่ได้ทดสอบใน org จริง — ถ้าเจออะไรต่างไป โดยเฉพาะบน SLDS 2 (Cosmos) แจ้งได้เลย",
