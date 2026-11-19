@@ -99,7 +99,7 @@ function FontSizeControl({
     >
       <button
         type="button"
-        aria-label={t.smaller}
+        aria-label={`${t.glyph}- ${t.smaller}`}
         disabled={index === 0}
         onClick={() => apply(index - 1)}
         className={cn(button, "text-sm", state(level === "smaller"))}
@@ -108,7 +108,7 @@ function FontSizeControl({
       </button>
       <button
         type="button"
-        aria-label={t.reset}
+        aria-label={`${t.glyph} ${t.reset}`}
         aria-pressed={level === "default"}
         onClick={() => apply(defaultStep)}
         className={cn(button, "text-base", state(level === "default"))}
@@ -117,7 +117,7 @@ function FontSizeControl({
       </button>
       <button
         type="button"
-        aria-label={t.larger}
+        aria-label={`${t.glyph}+ ${t.larger}`}
         disabled={index === steps.length - 1}
         onClick={() => apply(index + 1)}
         className={cn(button, "text-lg", state(level === "larger"))}

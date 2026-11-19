@@ -5,6 +5,7 @@ import { BarChart3, Bell, Home, Inbox, MessageCircle, MoreHorizontal, Settings, 
 import type { DateRange } from "react-day-picker"
 
 import { NumberTicker } from "@/registry/mintel/effects/number-ticker"
+import { SegmentedControl } from "@/registry/mintel/glass/segmented-control"
 import { Badge } from "@/registry/mintel/ui/badge"
 import { Button, buttonVariants } from "@/registry/mintel/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/mintel/ui/card"
@@ -17,7 +18,6 @@ import {
   DropdownMenuTrigger,
 } from "@/registry/mintel/ui/dropdown-menu"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/registry/mintel/ui/table"
-import { Tabs, TabsList, TabsTrigger } from "@/registry/mintel/ui/tabs"
 
 const NAV = [
   { label: "Overview", icon: Home, active: true },
@@ -115,12 +115,14 @@ export default function DashboardPage() {
               <CardDescription>Latest conversations turned into cases</CardDescription>
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <Tabs defaultValue="all">
-                <TabsList>
-                  <TabsTrigger value="all">All</TabsTrigger>
-                  <TabsTrigger value="mine">Mine</TabsTrigger>
-                </TabsList>
-              </Tabs>
+              <SegmentedControl
+                aria-label="Show"
+                defaultValue="all"
+                options={[
+                  { value: "all", label: "All" },
+                  { value: "mine", label: "Mine" },
+                ]}
+              />
               <Combobox
                 locale="en"
                 multiple

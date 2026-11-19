@@ -13,7 +13,7 @@ import {
 export default function SelectExample() {
   return (
     <Select>
-      <SelectTrigger className="w-56">
+      <SelectTrigger className="w-56" aria-label="Channel">
         <SelectValue placeholder="Choose a channel" />
       </SelectTrigger>
       <SelectContent>

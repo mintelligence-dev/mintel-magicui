@@ -69,7 +69,7 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
       <CopyCommand label={copy} command="npx shadcn@latest add @mintel/mintel-theme" />
       <p className="text-sm text-muted-foreground">
         {t.themesMore}{" "}
-        <a href={langPath(lang, "/themes")} className="font-medium text-brand underline-offset-4 hover:underline">
+        <a href={langPath(lang, "/themes")} className="font-medium text-brand underline decoration-brand/40 underline-offset-4 hover:decoration-brand">
           {t.themesLink}
         </a>
       </p>

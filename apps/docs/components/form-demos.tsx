@@ -2,7 +2,7 @@
 
 import type { Lang } from "@/lib/i18n"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Copy, Info, MessageCircle, MoreHorizontal, Pencil, Trash2 } from "lucide-react"
 import type { DateRange } from "react-day-picker"
@@ -186,7 +186,9 @@ export function ComboboxDemo({ lang }: { lang: Lang }) {
 }
 
 export function DatePickerDemo({ lang }: { lang: Lang }) {
-  const [date, setDate] = useState<Date | undefined>(new Date())
+  // Today is picked after mount, so the prerendered HTML does not depend on the build date.
+  const [date, setDate] = useState<Date | undefined>()
+  useEffect(() => setDate(new Date()), [])
   const [range, setRange] = useState<DateRange | undefined>()
   return (
     <div className="grid w-full max-w-xs gap-3">

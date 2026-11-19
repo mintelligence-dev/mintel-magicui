@@ -63,7 +63,7 @@
     ],
     "primary": [
       "#295DA8",
-      "#72A3EB"
+      "#8DB6F2"
     ],
     "primary-foreground": [
       "#FFFFFF",
@@ -82,7 +82,7 @@
       "rgba(116, 118, 132, 0.18)"
     ],
     "muted-foreground": [
-      "rgba(61, 63, 77, 0.62)",
+      "rgba(61, 63, 77, 0.76)",
       "rgba(233, 234, 245, 0.62)"
     ],
     "accent": [
@@ -94,8 +94,8 @@
       "#9CC3FD"
     ],
     "destructive": [
-      "#E0383E",
-      "#FF6369"
+      "#B91C1C",
+      "#F87171"
     ],
     "destructive-foreground": [
       "#FFFFFF",
@@ -111,11 +111,11 @@
     ],
     "ring": [
       "#295DA8",
-      "#72A3EB"
+      "#8DB6F2"
     ],
     "brand": [
       "#295DA8",
-      "#72A3EB"
+      "#8DB6F2"
     ],
     "brand-foreground": [
       "#FFFFFF",
@@ -130,16 +130,16 @@
       "#051A39"
     ],
     "success": [
-      "#1F9254",
+      "#137038",
       "#3DD68C"
     ],
     "warning": [
-      "#C76A06",
+      "#A14A08",
       "#FBBF24"
     ],
     "info": [
       "#295DA8",
-      "#72A3EB"
+      "#8DB6F2"
     ],
     "sidebar": [
       "#F2F3F7",

@@ -58,21 +58,17 @@ type CommonProps = {
   "aria-invalid"?: boolean
 }
 
+/** A real button beside the trigger (not inside it: a button in a button is invalid and unreachable by keyboard). */
 function ClearButton({ onClear, label }: { onClear: () => void; label: string }) {
   return (
-    <span
-      role="button"
-      tabIndex={-1}
+    <button
+      type="button"
       aria-label={label}
-      onPointerDown={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        onClear()
-      }}
-      className="ml-auto rounded-full p-0.5 text-muted-foreground hover:bg-accent hover:text-foreground"
+      onClick={onClear}
+      className="absolute top-1/2 right-2 flex size-6 -translate-y-1/2 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none"
     >
       <XIcon className="size-3.5" />
-    </span>
+    </button>
   )
 }
 
@@ -128,18 +124,20 @@ function DatePicker({
   const [open, setOpen] = React.useState(false)
   return (
     <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
-      <PopoverPrimitive.Trigger
-        data-slot="date-picker-trigger"
-        disabled={disabled}
-        aria-invalid={rest["aria-invalid"]}
-        className={cn(triggerClass, className)}
-      >
-        <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
-        <span className={cn("truncate", !value && "text-muted-foreground")}>
-          {value ? formatThaiDate(value, era, "medium", locale) : placeholder}
-        </span>
-        {value && <ClearButton label={STRINGS[locale].clear} onClear={() => onValueChange?.(undefined)} />}
-      </PopoverPrimitive.Trigger>
+      <div className={cn("relative", className)}>
+        <PopoverPrimitive.Trigger
+          data-slot="date-picker-trigger"
+          disabled={disabled}
+          aria-invalid={rest["aria-invalid"]}
+          className={cn(triggerClass, "w-full", value && "pr-9")}
+        >
+          <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
+          <span className={cn("truncate", !value && "text-muted-foreground")}>
+            {value ? formatThaiDate(value, era, "medium", locale) : placeholder}
+          </span>
+        </PopoverPrimitive.Trigger>
+        {value && !disabled && <ClearButton label={STRINGS[locale].clear} onClear={() => onValueChange?.(undefined)} />}
+      </div>
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Content align="start" sideOffset={6} className={contentClass}>
           <SingleCalendar
@@ -196,16 +194,18 @@ function DateRangePicker({
     : placeholder
   return (
     <PopoverPrimitive.Root>
-      <PopoverPrimitive.Trigger
-        data-slot="date-range-picker-trigger"
-        disabled={disabled}
-        aria-invalid={rest["aria-invalid"]}
-        className={cn(triggerClass, className)}
-      >
-        <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
-        <span className={cn("truncate", !value?.from && "text-muted-foreground")}>{label}</span>
-        {value?.from && <ClearButton label={STRINGS[locale].clear} onClear={() => onValueChange?.(undefined)} />}
-      </PopoverPrimitive.Trigger>
+      <div className={cn("relative", className)}>
+        <PopoverPrimitive.Trigger
+          data-slot="date-range-picker-trigger"
+          disabled={disabled}
+          aria-invalid={rest["aria-invalid"]}
+          className={cn(triggerClass, "w-full", value?.from && "pr-9")}
+        >
+          <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
+          <span className={cn("truncate", !value?.from && "text-muted-foreground")}>{label}</span>
+        </PopoverPrimitive.Trigger>
+        {value?.from && !disabled && <ClearButton label={STRINGS[locale].clear} onClear={() => onValueChange?.(undefined)} />}
+      </div>
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Content align="start" sideOffset={6} className={contentClass}>
           <RangeCalendar era={era} locale={locale} value={value} onSelect={onValueChange} />

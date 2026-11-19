@@ -42,6 +42,8 @@ type BaseProps = {
   /** Id of the trigger, so a <Label htmlFor> can point at it. */
   id?: string
   "aria-labelledby"?: string
+  /** Name when there is no <Label htmlFor> / aria-labelledby; defaults to the placeholder. */
+  "aria-label"?: string
 }
 
 type SingleProps = BaseProps & {
@@ -103,6 +105,9 @@ function Combobox(props: SingleProps | MultipleProps) {
         aria-invalid={props["aria-invalid"]}
         id={props.id}
         aria-labelledby={props["aria-labelledby"]}
+        aria-label={props["aria-label"] ?? (props.id || props["aria-labelledby"] ? undefined : placeholder ?? strings.placeholder)}
+        // Radix points aria-controls at the list even while it is closed (and absent from the DOM).
+        {...(!open && { "aria-controls": undefined })}
         className={cn(
           "flex w-full items-center justify-between gap-2 rounded-md border border-input bg-transparent px-3 text-left text-sm shadow-xs outline-none transition-[color,box-shadow]",
           props.multiple ? "min-h-9 py-1" : "h-9",

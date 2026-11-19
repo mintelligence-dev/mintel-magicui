@@ -66,7 +66,7 @@ export function ComponentPage({ lang, name }: { lang: Lang; name: string }) {
           <CopyCommand label={d.nav.copy} command={`npx shadcn@latest add @mintel/${name}`} />
           <p className="text-sm text-muted-foreground">
             {t.setupHint}{" "}
-            <a href={langPath(lang, "/getting-started")} className="text-brand underline-offset-4 hover:underline">
+            <a href={langPath(lang, "/getting-started")} className="text-brand underline decoration-brand/40 underline-offset-4 hover:decoration-brand">
               {t.gettingStarted}
             </a>
             . {t.withUrl}
@@ -118,7 +118,7 @@ export function ComponentPage({ lang, name }: { lang: Lang; name: string }) {
                   href={doc.upstream.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-brand underline-offset-4 hover:underline"
+                  className="inline-flex items-center gap-1 text-brand underline decoration-brand/40 underline-offset-4 hover:decoration-brand"
                 >
                   {doc.upstream.label} <ExternalLink className="size-3" />
                 </a>

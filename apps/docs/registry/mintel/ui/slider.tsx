@@ -56,6 +56,11 @@ function Slider({
         <SliderPrimitive.Thumb
           key={i}
           data-slot="slider-thumb"
+          aria-label={
+            current.length > 1
+              ? `${props["aria-label"] ?? "Range"} ${i === 0 ? "minimum" : "maximum"}`
+              : (props["aria-label"] ?? "Value")
+          }
           className={cn(
             "group/thumb relative block size-5 shrink-0 cursor-grab rounded-full border-2 border-brand bg-background shadow-md outline-none",
             "transition-[scale,box-shadow] duration-300 ease-spring-bouncy hover:scale-110 active:scale-125 active:cursor-grabbing",

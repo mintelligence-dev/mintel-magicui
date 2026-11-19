@@ -27,14 +27,17 @@ const initial = (theme: ThemeInfo): State => ({
   font: "theme",
 })
 
-/** Lighter version for dark mode, so the color still reads on a dark background. */
-const forDark = (hex: string) => mix(hex, "#FFFFFF", 0.35)
+/** Lighter version for dark mode, so text in that color stays 4.5:1 on tinted dark surfaces. */
+const forDark = (hex: string) => mix(hex, "#FFFFFF", 0.5)
 
 /** The variables the builder changes, per mode. Everything else comes from the starting theme. */
 function overrides(s: State, theme: ThemeInfo) {
   const colors = (mode: "light" | "dark") => {
-    const p = mode === "light" ? s.primary : forDark(s.primary)
-    const a = mode === "light" ? s.accent : forDark(s.accent)
+    // Unchanged colors keep the theme's own tuned dark values.
+    const sameP = s.primary.toUpperCase() === theme.light.brand.toUpperCase()
+    const sameA = s.accent.toUpperCase() === theme.light["brand-accent"].toUpperCase()
+    const p = mode === "light" ? s.primary : sameP ? theme.dark.brand : forDark(s.primary)
+    const a = mode === "light" ? s.accent : sameA ? theme.dark["brand-accent"] : forDark(s.accent)
     const out: Record<string, string> = {
       primary: p,
       "primary-foreground": readableOn(p),

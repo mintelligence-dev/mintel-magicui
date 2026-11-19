@@ -132,7 +132,7 @@ export function ChannelSelect({ lang, className }: { lang: Lang; className?: str
   const t = COPY[lang]
   return (
     <Select>
-      <SelectTrigger className={className ?? "w-48"}>
+      <SelectTrigger className={className ?? "w-48"} aria-label={t.pickChannel}>
         <SelectValue placeholder={t.pickChannel} />
       </SelectTrigger>
       <SelectContent>

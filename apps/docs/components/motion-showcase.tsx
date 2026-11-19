@@ -83,6 +83,12 @@ export function MotionShowcase({ lang }: { lang: Lang }) {
                 <AnimatedTabsTrigger value="open">{t.caseTabs.open}</AnimatedTabsTrigger>
                 <AnimatedTabsTrigger value="closed">{t.caseTabs.closed}</AnimatedTabsTrigger>
               </AnimatedTabsList>
+              {/* Visually empty panels: tabs must point at panels (aria-controls) to be valid. */}
+              {(["all", "open", "closed"] as const).map((v) => (
+                <AnimatedTabsContent key={v} value={v} className="sr-only">
+                  {t.caseTabs[v]}
+                </AnimatedTabsContent>
+              ))}
             </AnimatedTabs>
             <AnimatedTabs defaultValue="chat" variant="underline">
               <AnimatedTabsList>
@@ -90,7 +96,11 @@ export function MotionShowcase({ lang }: { lang: Lang }) {
                 <AnimatedTabsTrigger value="ai"><Zap /> AI</AnimatedTabsTrigger>
                 <AnimatedTabsTrigger value="report"><BarChart3 /> Report</AnimatedTabsTrigger>
               </AnimatedTabsList>
-              <AnimatedTabsContent value="chat" className="hidden" />
+              {(["chat", "ai", "report"] as const).map((v) => (
+                <AnimatedTabsContent key={v} value={v} className="sr-only">
+                  {v}
+                </AnimatedTabsContent>
+              ))}
             </AnimatedTabs>
           </div>
           <CopyCommand command={installCmd("animated-tabs")} />

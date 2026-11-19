@@ -9,6 +9,9 @@ export default function AnimatedTabsExample() {
           <AnimatedTabsTrigger value="open">Open</AnimatedTabsTrigger>
           <AnimatedTabsTrigger value="closed">Closed</AnimatedTabsTrigger>
         </AnimatedTabsList>
+        <AnimatedTabsContent value="all" className="pt-3 text-center text-sm text-muted-foreground">37 cases</AnimatedTabsContent>
+        <AnimatedTabsContent value="open" className="pt-3 text-center text-sm text-muted-foreground">12 open</AnimatedTabsContent>
+        <AnimatedTabsContent value="closed" className="pt-3 text-center text-sm text-muted-foreground">25 closed</AnimatedTabsContent>
       </AnimatedTabs>
       <AnimatedTabs defaultValue="chat" variant="underline">
         <AnimatedTabsList>

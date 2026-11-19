@@ -290,7 +290,7 @@ export function SalesforcePage({ lang }: { lang: Lang }) {
                   </div>
                   <div>
                     <p className="mb-1.5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t.usage}</p>
-                    <pre className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs leading-relaxed">
+                    <pre tabIndex={0} className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs leading-relaxed">
                       <code>{c.usage}</code>
                     </pre>
                   </div>
@@ -332,7 +332,7 @@ export function SalesforcePage({ lang }: { lang: Lang }) {
               <CardDescription>{t.lwrBody}</CardDescription>
             </CardHeader>
             <CardContent>
-              <pre className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs">
+              <pre tabIndex={0} className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs">
                 <code>{`<link rel="stylesheet" href="{basePath}/assets/mintelGlobal" />`}</code>
               </pre>
             </CardContent>
@@ -343,7 +343,7 @@ export function SalesforcePage({ lang }: { lang: Lang }) {
               <CardDescription>{t.ownBody}</CardDescription>
             </CardHeader>
             <CardContent>
-              <pre className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs leading-relaxed">
+              <pre tabIndex={0} className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs leading-relaxed">
                 <code>{`@import 'c/mintelTokens';
 
 .panel {

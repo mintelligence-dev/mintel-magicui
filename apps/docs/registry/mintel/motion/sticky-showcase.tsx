@@ -38,8 +38,8 @@ function Step({
       <div className="mb-6 overflow-hidden rounded-2xl border bg-muted/40 lg:hidden">{item.visual}</div>
       <h3
         className={cn(
-          "font-heading text-2xl font-semibold tracking-tight transition-opacity duration-500 sm:text-3xl",
-          active ? "opacity-100" : "lg:opacity-30"
+          "font-heading text-2xl font-semibold tracking-tight transition-colors duration-500 sm:text-3xl",
+          active ? "text-foreground" : "lg:text-muted-foreground"
         )}
       >
         {item.title}
@@ -48,7 +48,7 @@ function Step({
         <p
           className={cn(
             "mt-3 max-w-md text-muted-foreground transition-opacity duration-500",
-            active ? "opacity-100" : "lg:opacity-30"
+            "opacity-100"
           )}
         >
           {item.description}

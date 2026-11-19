@@ -16,10 +16,10 @@ function Pill({ tone, children, solid }: { tone: keyof typeof TONES; children: s
     <span
       className={cn(
         "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold leading-5",
-        solid ? "bg-success text-white" : TONES[tone]
+        solid ? "bg-success text-white dark:text-background" : TONES[tone]
       )}
     >
-      <span aria-hidden className={cn("size-2 rounded-full", solid ? "bg-white/85" : "bg-current")} />
+      <span aria-hidden className={cn("size-2 rounded-full", solid ? "bg-current opacity-80" : "bg-current")} />
       {children}
     </span>
   )
