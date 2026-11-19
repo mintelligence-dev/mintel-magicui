@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "timeline",
+  "title": "Timeline",
+  "description": "Vertical event history with colored dots or icons, times, descriptions and a pulsing current step.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/ui/timeline.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\ntype TimelineVariant = \"default\" | \"brand\" | \"success\" | \"warning\" | \"destructive\"\n\nconst DOT: Record<TimelineVariant, string> = {\n  default: \"border-border bg-background text-muted-foreground\",\n  brand: \"border-transparent bg-[image:var(--brand-gradient)] text-brand-foreground\",\n  success: \"border-transparent bg-success text-white\",\n  warning: \"border-transparent bg-warning text-white\",\n  destructive: \"border-transparent bg-destructive text-white\",\n}\n\nconst RING: Record<TimelineVariant, string> = {\n  default: \"bg-muted-foreground/30\",\n  brand: \"bg-brand/40\",\n  success: \"bg-success/40\",\n  warning: \"bg-warning/40\",\n  destructive: \"bg-destructive/40\",\n}\n\n/** Vertical list of events, newest or oldest first — the order is yours. */\nfunction Timeline({ className, ...props }: React.ComponentProps<\"ol\">) {\n  return <ol data-slot=\"timeline\" className={cn(\"relative grid\", className)} {...props} />\n}\n\n/**\n * One event. `icon` replaces the dot's content; `current` adds a soft pulse (off under reduced motion).\n * Children are the event's description.\n */\nfunction TimelineItem({\n  title,\n  time,\n  icon,\n  variant = \"default\",\n  current = false,\n  className,\n  children,\n  ...props\n}: Omit<React.ComponentProps<\"li\">, \"title\"> & {\n  title: React.ReactNode\n  time?: React.ReactNode\n  icon?: React.ReactNode\n  variant?: TimelineVariant\n  current?: boolean\n}) {\n  return (\n    <li\n      data-slot=\"timeline-item\"\n      aria-current={current ? \"step\" : undefined}\n      className={cn(\"group/timeline relative grid grid-cols-[2rem_1fr] gap-x-3 pb-6 last:pb-0\", className)}\n      {...props}\n    >\n      {/* connector to the next item */}\n      <span aria-hidden className=\"absolute top-8 bottom-0 left-4 w-px -translate-x-1/2 bg-border group-last/timeline:hidden\" />\n      <span className=\"relative flex size-8 items-center justify-center\">\n        {current && (\n          <span aria-hidden className={cn(\"absolute inset-0 rounded-full motion-safe:animate-ping\", RING[variant])} />\n        )}\n        <span\n          className={cn(\n            \"relative flex items-center justify-center rounded-full border-2 [&_svg]:size-3.5\",\n            icon ? \"size-8\" : \"size-3.5\",\n            DOT[variant]\n          )}\n        >\n          {icon}\n        </span>\n      </span>\n      <div className=\"min-w-0 pt-1\">\n        <div className=\"flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5\">\n          <p className=\"font-medium leading-snug\">{title}</p>\n          {time && <time className=\"text-xs text-muted-foreground tabular-nums\">{time}</time>}\n        </div>\n        {children && <div className=\"mt-1 text-sm text-muted-foreground\">{children}</div>}\n      </div>\n    </li>\n  )\n}\n\nexport { Timeline, TimelineItem, type TimelineVariant }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

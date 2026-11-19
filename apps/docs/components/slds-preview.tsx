@@ -164,7 +164,7 @@ const BRAND_MARKUP = `
             <div class="slds-form-element__control"><input type="text" id="subject2" class="slds-input" value="LINE OA message not syncing" /></div>
           </div>
           <div class="slds-grid slds-gutters slds-m-top_small">
-            <div class="slds-col"><span class="slds-form-element__label">Channel</span><div><span class="slds-badge">LINE</span> <span class="slds-badge slds-badge_inverse">Priority</span></div></div>
+            <div class="slds-col"><span class="slds-form-element__label">Status</span><div><span class="c-mintelStatusBadge"><span class="badge brand soft"><span class="dot" aria-hidden="true"></span><span class="text">Working</span></span></span> <span class="c-mintelStatusBadge"><span class="badge destructive soft"><span class="dot" aria-hidden="true"></span><span class="text">High priority</span></span></span></div></div>
             <div class="slds-col">
               <label class="slds-checkbox_toggle slds-grid">
                 <span class="slds-form-element__label slds-m-bottom_none">Notify customer</span>

@@ -110,6 +110,16 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("selected", "string", "A picked-but-unconfirmed step (for “Mark as current”).", "ขั้นที่เลือกไว้แต่ยังไม่ยืนยัน (ใช้กับปุ่ม “ตั้งเป็นขั้นปัจจุบัน”)"),
     ],
   },
+  timeline: {
+    th: "ประวัติเหตุการณ์แนวตั้ง จุดหรือไอคอนมีสีตามสถานะ มีเวลาและคำอธิบาย ขั้นปัจจุบันมีวงกระเพื่อมเบาๆ",
+    props: [
+      p("title", "ReactNode", "Event title (TimelineItem).", "หัวข้อเหตุการณ์ (TimelineItem)"),
+      p("time", "ReactNode", "Time or date shown on the right.", "เวลาหรือวันที่ แสดงด้านขวา"),
+      p("icon", "ReactNode", "Icon inside a larger dot.", "ไอคอนในจุดขนาดใหญ่"),
+      p("variant", '"default" | "brand" | "success" | "warning" | "destructive"', "Dot color.", "สีของจุด", '"default"'),
+      p("current", "boolean", "Pulses the dot and sets aria-current.", "ให้จุดกระเพื่อม และตั้ง aria-current", "false"),
+    ],
+  },
   tabs: { th: "แท็บที่เลือกเป็นสีแบรนด์ เนื้อหาค่อยๆ ปรากฏ", upstream: radix("Tabs") },
   toast: {
     th: "แจ้งเตือนมุมจอ (sonner) วาง <Toaster /> ครั้งเดียวแล้วเรียก toast() ได้ทุกที่ สลับ dark mode ตามหน้า",

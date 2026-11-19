@@ -7,6 +7,7 @@ import { LwcSource } from "@/components/lwc-source"
 import { MobileNav } from "@/components/mobile-nav"
 import { SiteHeader } from "@/components/site-header"
 import { PathPreview } from "@/components/path-preview"
+import { StatusBadgePreview, TimelinePreview } from "@/components/sf-status-preview"
 import { SegmentedPreview, TabsPreview } from "@/components/sf-tabs-preview"
 import { SldsPreview } from "@/components/slds-preview"
 import { getDict, type Lang } from "@/lib/i18n"
@@ -26,7 +27,7 @@ const BRAND_CSS = readFileSync(join(process.cwd(), "../../packages/tokens/salesf
 const LWC_DIR = join(process.cwd(), "../../packages/salesforce/force-app/main/default/lwc")
 
 // The Mintel LWC stylesheets, scoped so the preview renders them exactly as they look in an org.
-const MINTEL_LWC_CSS = ["mintelPath", "mintelGlassCard", "mintelShimmerButton", "mintelGradientText", "mintelStatCard"]
+const MINTEL_LWC_CSS = ["mintelPath", "mintelStatusBadge", "mintelGlassCard", "mintelShimmerButton", "mintelGradientText", "mintelStatCard"]
   .map((name) => scopeLwcCss(readFileSync(join(LWC_DIR, name, `${name}.css`), "utf8"), `.c-${name}`))
   .join("\n")
 
@@ -71,6 +72,28 @@ const COMPONENTS = [
 <!-- From JS: an array of { value, label } -->
 <c-mintel-segmented-control options={views} variant="brand"></c-mintel-segmented-control>`,
     preview: <SegmentedPreview />,
+  },
+  {
+    name: "mintelStatusBadge",
+    usage: `<!-- Record page: shows the field's label, colored by its value -->
+<c-mintel-status-badge record-id={recordId} object-api-name="Case" field-api-name="Status"
+    variants="Escalated:destructive,On Hold:warning"></c-mintel-status-badge>
+
+<!-- Fixed value -->
+<c-mintel-status-badge value="Closed" appearance="solid"></c-mintel-status-badge>`,
+    preview: <StatusBadgePreview />,
+  },
+  {
+    name: "mintelTimeline",
+    sources: ["mintelTimeline", "mintelTimelineItem"],
+    usage: `<c-mintel-timeline label="Case history">
+    <c-mintel-timeline-item title="Case created" time="09:12">From LINE OA</c-mintel-timeline-item>
+    <c-mintel-timeline-item title="Assigned to Nina" time="09:15" variant="brand">
+        <lightning-icon slot="icon" icon-name="utility:user" size="x-small"></lightning-icon>
+    </c-mintel-timeline-item>
+    <c-mintel-timeline-item title="Resolved" variant="success" current></c-mintel-timeline-item>
+</c-mintel-timeline>`,
+    preview: <TimelinePreview />,
   },
   {
     name: "mintelGlassCard",

@@ -232,6 +232,10 @@ const en = {
         "Tabs whose pill or underline springs to the active tab. Wrap c-mintel-tab children; arrow keys move between tabs. For composing inside your own LWC.",
       mintelSegmentedControl:
         "Segmented control with a sliding thumb, for switching views or ranges. Set options in App Builder as value:Label pairs, or pass an array from JS.",
+      mintelStatusBadge:
+        "Status pill with a colored dot. On a record page it shows a field's label; colors come from your Value:variant list, then keyword guesses (Closed → success, Escalated → destructive …).",
+      mintelTimeline:
+        "Vertical event history: colored dots or icons, times, descriptions and a pulsing current step. For composing inside your own LWC.",
       mintelGlassCard: "Frosted glass card with a title, subtitle and any content.",
       mintelShimmerButton: "Brand-gradient call to action with a light sweep; fires a normal click event.",
       mintelGradientText: "Headline filled with a slowly moving brand gradient.",
@@ -469,6 +473,10 @@ const th: Dict = {
         "แท็บที่ตัวไฮไลต์ (pill หรือขีดเส้นใต้) เด้งไปหาแท็บที่เลือก ใส่ c-mintel-tab ไว้ข้างใน ใช้ปุ่มลูกศรเลื่อนแท็บได้ ใช้ประกอบใน LWC ของเราเอง",
       mintelSegmentedControl:
         "ตัวเลือกแบบแบ่งช่อง มีแถบเลื่อนไปยังช่องที่เลือก ใช้สลับมุมมองหรือช่วงเวลา ตั้ง options ใน App Builder เป็นคู่ value:Label หรือส่ง array จาก JS",
+      mintelStatusBadge:
+        "ป้ายสถานะมีจุดสี บนหน้า record จะแสดง label ของฟิลด์ สีมาจากรายการ Value:variant ที่ตั้งไว้ ถ้าไม่ได้ตั้งจะเดาจากคำ (Closed → เขียว, Escalated → แดง …)",
+      mintelTimeline:
+        "ประวัติเหตุการณ์แนวตั้ง จุดหรือไอคอนมีสีตามสถานะ มีเวลาและคำอธิบาย ขั้นปัจจุบันมีวงกระเพื่อม ใช้ประกอบใน LWC ของเราเอง",
       mintelGlassCard: "การ์ดกระจกฝ้า ใส่หัวข้อ คำอธิบาย และเนื้อหาอะไรก็ได้",
       mintelShimmerButton: "ปุ่ม call to action สีแบรนด์ มีแสงวิ่งรอบขอบ ส่ง click event ปกติ",
       mintelGradientText: "หัวข้อที่เติมสีไล่เฉดแบรนด์ซึ่งค่อยๆ เคลื่อนที่",

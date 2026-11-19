@@ -1,0 +1,20 @@
+<template>
+    <div class="item">
+        <span class="connector" aria-hidden="true"></span>
+        <span class="marker">
+            <template lwc:if={current}>
+                <span class={pulseClass} aria-hidden="true"></span>
+            </template>
+            <span class={dotClass}><slot name="icon" onslotchange={handleIconSlot}></slot></span>
+        </span>
+        <div class="body">
+            <div class="head">
+                <p class="title">{title}</p>
+                <template lwc:if={time}>
+                    <span class="time">{time}</span>
+                </template>
+            </div>
+            <div class="description"><slot></slot></div>
+        </div>
+    </div>
+</template>

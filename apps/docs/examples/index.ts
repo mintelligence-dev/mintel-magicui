@@ -10,6 +10,7 @@ import DialogExample from "./dialog"
 import SelectExample from "./select"
 import TableExample from "./table"
 import StepperExample from "./stepper"
+import TimelineExample from "./timeline"
 import TabsExample from "./tabs"
 import ToastExample from "./toast"
 import LabelExample from "./label"
@@ -58,6 +59,7 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "select": SelectExample,
   "table": TableExample,
   "stepper": StepperExample,
+  "timeline": TimelineExample,
   "tabs": TabsExample,
   "toast": ToastExample,
   "label": LabelExample,
