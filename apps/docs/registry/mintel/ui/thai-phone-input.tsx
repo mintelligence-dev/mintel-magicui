@@ -9,13 +9,18 @@ import { Input } from "@/registry/mintel/ui/input"
 /** Normalise to local digits: "+66 81 234 5678" or "6681..." -> "0812345678". */
 export function toThaiLocalDigits(text: string) {
   let d = text.replace(/\D/g, "")
-  if (text.trim().startsWith("+66") || (d.startsWith("66") && d.length >= 11)) d = "0" + d.slice(2)
-  return d.slice(0, 10)
+  // International forms: +66…, 0066…, or 66… (a local number always starts with 0, so a leading 66 is the country code).
+  if (d.startsWith("0066")) d = "0" + d.slice(4)
+  else if (text.trim().startsWith("+66") || (d.startsWith("66") && d.length >= 10)) d = "0" + d.slice(2)
+  // "+66 (0)81 234 5678": the optional trunk zero would otherwise be doubled.
+  if (d.startsWith("00")) d = d.slice(1)
+  // Bangkok landlines (02) have 9 digits; everything else is capped at 10.
+  return d.slice(0, d.startsWith("02") ? 9 : 10)
 }
 
-/** Mobile (06/08/09) has 10 digits; landlines (02-07) have 9. */
+/** Mobile (06/08/09) has 10 digits; landlines (02-05, 07) have 9. */
 export function isValidThaiPhone(digits: string) {
-  return /^0[689]\d{8}$/.test(digits) || /^0[2-7]\d{7}$/.test(digits)
+  return /^0[689]\d{8}$/.test(digits) || /^0[2-57]\d{7}$/.test(digits)
 }
 
 /** 0812345678 -> 081-234-5678, 021234567 -> 02-123-4567, 053123456 -> 053-123-456. */
@@ -76,7 +81,8 @@ function ThaiPhoneInput({
           onValueChange?.(next, { e164: toE164(next), valid: isValidThaiPhone(next) })
           requestAnimationFrame(() => {
             const pos = caretAfterDigits(formatThaiPhone(next), before)
-            ref.current?.setSelectionRange(pos, pos)
+            // `el`, not the internal ref: a caller's own ref (react-hook-form) replaces ours.
+            el.setSelectionRange(pos, pos)
           })
         }}
       />

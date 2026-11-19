@@ -30,28 +30,48 @@ export function SectionCarousel({
 }) {
   const track = React.useRef<HTMLUListElement>(null)
   const [active, setActive] = React.useState(0)
+  // Several cards fit on wide screens, so the track can reach its end before the last card is "active".
+  const [edge, setEdge] = React.useState({ start: true, end: false })
 
   const cardWidth = () => {
     const el = track.current
     const first = el?.querySelector("li")
     return first ? first.getBoundingClientRect().width + 16 : 300
   }
-  const go = (i: number) => {
+  const go = (direction: 1 | -1) => {
     const el = track.current
     if (!el) return
-    const next = Math.max(0, Math.min(items.length - 1, i))
-    el.scrollTo({ left: next * cardWidth(), behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })
+    el.scrollBy({ left: direction * cardWidth(), behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })
   }
+  const sync = React.useCallback(() => {
+    const el = track.current
+    if (!el) return
+    const max = el.scrollWidth - el.clientWidth
+    const start = el.scrollLeft <= 1
+    const end = el.scrollLeft >= max - 1
+    setEdge({ start, end })
+    // At the end, light the last dot even though fewer cards than that were scrolled past.
+    setActive(end && max > 1 ? items.length - 1 : Math.round(el.scrollLeft / cardWidth()))
+  }, [items.length])
+
+  React.useEffect(() => {
+    const el = track.current
+    if (!el) return
+    sync()
+    const observer = new ResizeObserver(sync)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [sync])
 
   return (
     <section data-slot="section-carousel" aria-roledescription="carousel" aria-label={typeof title === "string" ? title : "Carousel"} className={cn("reveal-on-scroll mx-auto max-w-6xl px-4 py-20 sm:px-6", className)}>
       <div className="mb-8 flex items-end justify-between gap-4">
         <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
         <div className="flex gap-2">
-          <button type="button" onClick={() => go(active - 1)} disabled={active === 0} aria-label="Previous" className="flex size-10 items-center justify-center rounded-full border transition-colors hover:bg-muted disabled:opacity-40">
+          <button type="button" onClick={() => !edge.start && go(-1)} aria-disabled={edge.start} aria-label="Previous" className="flex size-10 items-center justify-center rounded-full border transition-colors hover:bg-muted aria-disabled:cursor-default aria-disabled:opacity-40 aria-disabled:hover:bg-transparent">
             <ChevronLeftIcon className="size-4" />
           </button>
-          <button type="button" onClick={() => go(active + 1)} disabled={active >= items.length - 1} aria-label="Next" className="flex size-10 items-center justify-center rounded-full border transition-colors hover:bg-muted disabled:opacity-40">
+          <button type="button" onClick={() => !edge.end && go(1)} aria-disabled={edge.end} aria-label="Next" className="flex size-10 items-center justify-center rounded-full border transition-colors hover:bg-muted aria-disabled:cursor-default aria-disabled:opacity-40 aria-disabled:hover:bg-transparent">
             <ChevronRightIcon className="size-4" />
           </button>
         </div>
@@ -60,7 +80,7 @@ export function SectionCarousel({
         ref={track}
         tabIndex={0}
         aria-label="Slides"
-        onScroll={(e) => setActive(Math.round(e.currentTarget.scrollLeft / cardWidth()))}
+        onScroll={sync}
         className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-4 outline-none [scrollbar-width:none] focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:-mx-6 sm:scroll-px-6 sm:px-6"
       >
         {items.map((it, i) => (

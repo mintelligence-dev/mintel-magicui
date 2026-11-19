@@ -30,6 +30,9 @@ const LABELS = {
 
 type Point = { x: number; y: number; p: number }
 
+/** Ink of the exported PNG when no `color` is given (the on-screen ink follows the theme). */
+const EXPORT_INK = "#181B31"
+
 type SignaturePadProps = Omit<React.ComponentProps<"div">, "onChange"> & {
   /** PNG data URL of the signature, or null when empty. */
   onChange?: (dataUrl: string | null) => void
@@ -52,6 +55,7 @@ function SignaturePad({ onChange, locale = "th", height = 180, color, allowTyped
   const canvasRef = React.useRef<HTMLCanvasElement>(null)
   const strokes = React.useRef<Point[][]>([])
   const drawing = React.useRef(false)
+  const pointer = React.useRef<number | null>(null)
   const [mode, setMode] = React.useState<"draw" | "type">("draw")
   const [typed, setTyped] = React.useState("")
   const [count, setCount] = React.useState(0)
@@ -108,9 +112,24 @@ function SignaturePad({ onChange, locale = "th", height = 180, color, allowTyped
   modeRef.current = mode
   const typedRef = React.useRef(typed)
   typedRef.current = typed
+  const colorRef = React.useRef(color)
+  colorRef.current = color
   const emit = React.useCallback(() => {
     const empty = modeRef.current === "draw" ? strokes.current.length === 0 : !typedRef.current.trim()
-    onChangeRef.current?.(empty ? null : canvasRef.current!.toDataURL("image/png"))
+    if (empty) return onChangeRef.current?.(null)
+    // Export in a fixed dark ink: on screen the ink follows the theme, and light ink from dark mode
+    // would be invisible on a white document. Recolour the drawn pixels on a copy of the canvas.
+    const source = canvasRef.current!
+    const copy = document.createElement("canvas")
+    copy.width = source.width
+    copy.height = source.height
+    const ctx = copy.getContext("2d")
+    if (!ctx) return onChangeRef.current?.(source.toDataURL("image/png"))
+    ctx.drawImage(source, 0, 0)
+    ctx.globalCompositeOperation = "source-in"
+    ctx.fillStyle = colorRef.current ?? EXPORT_INK
+    ctx.fillRect(0, 0, copy.width, copy.height)
+    onChangeRef.current?.(copy.toDataURL("image/png"))
   }, [])
 
   // Size the backing store to the element (sharp on HiDPI) and redraw on resize.
@@ -185,23 +204,26 @@ function SignaturePad({ onChange, locale = "th", height = 180, color, allowTyped
           style={{ height }}
           className={cn("block w-full touch-none", mode === "draw" && !disabled ? "cursor-crosshair" : "pointer-events-none")}
           onPointerDown={(e) => {
-            if (disabled || mode !== "draw") return
+            // One pointer at a time: a second finger or a resting palm must not join the stroke.
+            if (disabled || mode !== "draw" || drawing.current) return
             e.currentTarget.setPointerCapture(e.pointerId)
+            pointer.current = e.pointerId
             drawing.current = true
             strokes.current.push([point(e)])
             redraw()
           }}
           onPointerMove={(e) => {
-            if (!drawing.current) return
+            if (!drawing.current || e.pointerId !== pointer.current) return
             strokes.current[strokes.current.length - 1].push(point(e))
             redraw()
           }}
-          onPointerUp={() => {
-            if (!drawing.current) return
+          onPointerUp={(e) => {
+            if (!drawing.current || e.pointerId !== pointer.current) return
             drawing.current = false
             change()
           }}
-          onPointerCancel={() => {
+          onPointerCancel={(e) => {
+            if (e.pointerId !== pointer.current) return
             drawing.current = false
             change()
           }}

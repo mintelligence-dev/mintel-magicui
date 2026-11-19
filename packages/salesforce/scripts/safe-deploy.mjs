@@ -31,11 +31,16 @@ const ours = readdirSync(lwcDir, { withFileTypes: true })
   .filter((e) => e.isDirectory())
   .map((e) => e.name)
 
-/** Existing bundles in the default namespace with one of our names. */
+/**
+ * Existing bundles with one of our names, in any namespace. An org with its own namespace (a Developer
+ * Edition with one registered, a namespaced scratch org) keeps its local bundles under that prefix, so
+ * filtering on "no namespace" would miss them. A same-named bundle from an installed package is also
+ * reported: that is a false alarm on the safe side.
+ */
 function existingBundles() {
   if (fromJson) return JSON.parse(execFileSync("cat", [fromJson], { encoding: "utf8" }))
   const names = ours.map((n) => `'${n}'`).join(",")
-  const query = `SELECT DeveloperName, Description FROM LightningComponentBundle WHERE NamespacePrefix = null AND DeveloperName IN (${names})`
+  const query = `SELECT DeveloperName, NamespacePrefix, Description FROM LightningComponentBundle WHERE DeveloperName IN (${names})`
   const out = execFileSync("sf", ["data", "query", "--use-tooling-api", "--json", "--target-org", org, "--query", query], {
     encoding: "utf8",
     stdio: ["ignore", "pipe", "inherit"],
@@ -49,7 +54,7 @@ const updates = existing.length - conflicts.length
 
 if (conflicts.length) {
   console.error(`✗ ${org ?? "org"} already has components with these names that are not Mintel UI:`)
-  for (const c of conflicts) console.error(`  - c:${c.DeveloperName}${c.Description ? ` (${c.Description})` : ""}`)
+  for (const c of conflicts) console.error(`  - ${c.NamespacePrefix || "c"}:${c.DeveloperName}${c.Description ? ` (${c.Description})` : ""}`)
   console.error("Nothing was deployed. Rename or remove those components, or install Mintel UI as a package (namespace mintel).")
   process.exit(1)
 }

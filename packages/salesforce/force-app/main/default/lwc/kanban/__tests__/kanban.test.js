@@ -83,4 +83,20 @@ describe('c-kanban', () => {
         await flush();
         expect(titles(el, 'Proposal')).toEqual(['Acme renewal', 'Siam upsell']);
     });
+
+    it('asks for the second-line field as optional, so losing access to it does not fail the board', async () => {
+        await make();
+        const config = getRelatedListRecords.getLastConfig();
+        expect(config.fields).toEqual(['Opportunity.Name', 'Opportunity.StageName']);
+        expect(config.optionalFields).toEqual(['Opportunity.Amount']);
+    });
+
+    it('puts records whose value is not in the picklist in an Other column instead of dropping them', async () => {
+        const el = await make();
+        expect(column(el, '__other')).toBeNull();
+        getRelatedListRecords.emit({ records: [opp('006a', 'Acme renewal', 'Prospecting', 1000), opp('006c', 'Old process deal', 'Qualification', 700), opp('006d', 'No stage', null, 0)] });
+        await flush();
+        expect(titles(el, '__other')).toEqual(['Old process deal', 'No stage']);
+        expect(column(el, '__other').querySelector('.col-name').textContent).toBe('Other');
+    });
 });

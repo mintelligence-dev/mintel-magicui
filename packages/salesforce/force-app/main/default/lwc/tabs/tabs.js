@@ -56,8 +56,13 @@ export default class Tabs extends LightningElement {
         this.readTabs();
     }
 
+    /** The tab children, whatever namespace they are in (<c-tab> here, <mintel-tab> once packaged). */
+    tabElements() {
+        return Array.from(this.children).filter((el) => el.tagName.toLowerCase().endsWith('-tab'));
+    }
+
     readTabs() {
-        const children = Array.from(this.querySelectorAll('c-tab'));
+        const children = this.tabElements();
         if (!children.length) return;
         if (!this._active || !children.some((c) => c.value === this._active)) this._active = children[0].value;
         this.tabs = children.map((c) => this.toTab(c.label, c.value));
@@ -76,7 +81,7 @@ export default class Tabs extends LightningElement {
     }
 
     syncChildren() {
-        Array.from(this.querySelectorAll('c-tab')).forEach((c) => {
+        this.tabElements().forEach((c) => {
             c.active = c.value === this._active;
         });
         if (this.tabs.length) this.tabs = this.tabs.map((t) => this.toTab(t.label, t.value));

@@ -37,5 +37,5 @@ const data: Case[] = Array.from({ length: 23 }, (_, i) => ({
 }))
 
 export default function DataTableExample() {
-  return <DataTable className="w-full" columns={columns} data={data} selectable pageSize={5} />
+  return <DataTable locale="en" className="w-full" columns={columns} data={data} selectable pageSize={5} />
 }

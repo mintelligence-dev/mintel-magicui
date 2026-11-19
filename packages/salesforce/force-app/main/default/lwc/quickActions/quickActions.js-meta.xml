@@ -12,7 +12,7 @@
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage">
             <property name="heading" type="String" label="Heading" />
-            <property name="actions" type="String" label="Actions (Label | icon | flow/action/url/event | target; …)" default="New task | utility:task | action | NewTask; Log a call | utility:call | action | LogACall; Help | utility:help | url | https://help.salesforce.com" description="Buttons separated by semicolons. Type: flow (target = Flow API name; opens it with recordId), action (target = quick action API name, e.g. NewTask or Case.LogACall; a name without a dot uses this page's object), url (target = a URL), event (target = any name; for a parent LWC)." />
+            <property name="actions" type="String" label="Actions (Label | icon | flow/action/url/event | target; …)" default="New task | utility:task | action | Global.NewTask; Log a call | utility:call | action | Global.LogACall; Help | utility:help | url | https://help.salesforce.com" description="Buttons separated by semicolons. Type: flow (target = Flow API name; opens it with recordId), action (target = quick action API name, e.g. Global.NewTask or Case.LogACall; a name without a dot uses this page's object), url (target = a URL), event (target = any name; for a parent LWC)." />
             <supportedFormFactors>
                 <supportedFormFactor type="Large" />
                 <supportedFormFactor type="Small" />

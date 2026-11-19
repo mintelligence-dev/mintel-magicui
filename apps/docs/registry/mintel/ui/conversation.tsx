@@ -145,9 +145,13 @@ function Conversation({
   React.useLayoutEffect(() => {
     scrollToEnd(false)
   }, [])
+  const seenId = React.useRef(lastId)
   React.useEffect(() => {
+    const arrived = seenId.current !== lastId
+    seenId.current = lastId
     if (atBottom.current) scrollToEnd(true)
-    else setUnseen(true)
+    // Only a new message counts: the typing indicator alone must not raise "New messages".
+    else if (arrived) setUnseen(true)
   }, [lastId, typing])
 
   const send = () => {

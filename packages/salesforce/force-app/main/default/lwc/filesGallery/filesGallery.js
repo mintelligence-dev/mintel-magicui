@@ -27,7 +27,7 @@ export default class FilesGallery extends NavigationMixin(LightningElement) {
     @api locale = 'th';
 
     files = [];
-    total;
+    more = false;
     loaded = false;
     errorText;
 
@@ -38,7 +38,7 @@ export default class FilesGallery extends NavigationMixin(LightningElement) {
         return this.label || this.labels.title;
     }
     get countText() {
-        return this.loaded && !this.errorText ? String(this.total ?? this.files.length) : '';
+        return this.loaded && !this.errorText ? `${this.files.length}${this.more ? '+' : ''}` : '';
     }
     get isEmpty() {
         return this.loaded && !this.errorText && this.files.length === 0;
@@ -47,13 +47,16 @@ export default class FilesGallery extends NavigationMixin(LightningElement) {
     @wire(getRelatedListRecords, {
         parentRecordId: '$recordId',
         relatedListId: 'AttachedContentDocuments',
-        fields: [
-            'AttachedContentDocument.Title',
+        fields: ['AttachedContentDocument.Title'],
+        // Optional: one unreadable or unknown field must not fail the whole list. The version id is asked for
+        // on both paths, since which of them the UI API offers here has not been confirmed in an org.
+        optionalFields: [
             'AttachedContentDocument.FileExtension',
             'AttachedContentDocument.ContentSize',
             'AttachedContentDocument.ContentDocumentId',
+            'AttachedContentDocument.LastModifiedDate',
             'AttachedContentDocument.LatestPublishedVersionId',
-            'AttachedContentDocument.LastModifiedDate'
+            'AttachedContentDocument.ContentDocument.LatestPublishedVersionId'
         ],
         sortBy: ['-AttachedContentDocument.LastModifiedDate'],
         pageSize: '$pageSize'
@@ -63,7 +66,10 @@ export default class FilesGallery extends NavigationMixin(LightningElement) {
             const v = (r, f) => (r.fields[f] ? r.fields[f].value : null);
             this.files = (data.records || []).map((r) => {
                 const ext = (v(r, 'FileExtension') || '').toLowerCase();
-                const versionId = v(r, 'LatestPublishedVersionId');
+                const document = r.fields.ContentDocument && r.fields.ContentDocument.value;
+                const versionId =
+                    v(r, 'LatestPublishedVersionId') ||
+                    (document && document.fields && document.fields.LatestPublishedVersionId ? document.fields.LatestPublishedVersionId.value : null);
                 return {
                     id: v(r, 'ContentDocumentId') || r.id,
                     title: v(r, 'Title') || '—',
@@ -73,7 +79,8 @@ export default class FilesGallery extends NavigationMixin(LightningElement) {
                     meta: [ext.toUpperCase(), size(v(r, 'ContentSize'))].filter(Boolean).join(' · ')
                 };
             });
-            this.total = data.count;
+            // `count` is the size of this page, not of the list.
+            this.more = Boolean(data.nextPageToken);
             this.errorText = undefined;
             this.loaded = true;
         } else if (error) {

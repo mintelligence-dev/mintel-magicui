@@ -39,6 +39,8 @@ export function SectionHeader({
       const el = ref.current
       if (el) setScrolled(el.getBoundingClientRect().top <= 0 && (window.scrollY > 4 || (el.parentElement?.scrollTop ?? 0) > 4))
     }
+    // A page restored part-way down has no scroll event yet.
+    onScroll()
     window.addEventListener("scroll", onScroll, { capture: true, passive: true })
     return () => window.removeEventListener("scroll", onScroll, { capture: true })
   }, [])
@@ -103,10 +105,10 @@ export function SectionHeader({
             ))}
           </ul>
           <div className="grid gap-2">
-            <a href={secondary.href} className="rounded-full border px-4 py-2.5 text-center font-medium">
+            <a href={secondary.href} onClick={() => setOpen(false)} className="rounded-full border px-4 py-2.5 text-center font-medium">
               {secondary.label}
             </a>
-            <a href={cta.href} className="rounded-full bg-[image:var(--brand-gradient)] px-4 py-2.5 text-center font-semibold text-brand-foreground">
+            <a href={cta.href} onClick={() => setOpen(false)} className="rounded-full bg-[image:var(--brand-gradient)] px-4 py-2.5 text-center font-semibold text-brand-foreground">
               {cta.label}
             </a>
           </div>

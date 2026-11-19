@@ -179,7 +179,14 @@ export default class ThaiAddress extends LightningElement {
                 const d = this.data.d.find((x) => x[0] === this.zipMatches[0][1]);
                 this.provinceId = d[1];
                 this.districtId = d[0];
+            } else {
+                // Several districts share this code: the earlier choice may no longer match it.
+                this.provinceId = undefined;
+                this.districtId = undefined;
             }
+            this.subDistrictId = undefined;
+        } else if (zip.length === 5) {
+            // Unknown postal code: the earlier sub-district must not pass validation with it.
             this.subDistrictId = undefined;
         }
         this.emit();

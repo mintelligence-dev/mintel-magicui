@@ -24,17 +24,19 @@ describe('c-related-cards', () => {
     it('asks the UI API for qualified fields and renders cards with field labels', async () => {
         const el = make({ pageSize: 2 });
         getObjectInfo.emit({ labelPlural: 'Cases', fields: { Subject: { label: 'Subject' }, Status: { label: 'Status' } } });
-        getRelatedListRecords.emit({ count: 5, records: [rec('500a', '00012345', 'Late delivery', 'New'), rec('500b', '00012346', 'Refund', 'Closed')] });
+        getRelatedListRecords.emit({ count: 2, nextPageToken: 'next', records: [rec('500a', '00012345', 'Late delivery', 'New'), rec('500b', '00012346', 'Refund', 'Closed')] });
         await flush();
         const config = getRelatedListRecords.getLastConfig();
-        expect(config.fields).toEqual(['Case.CaseNumber', 'Case.Subject', 'Case.Status']);
+        // Only the title is required: a field the user cannot read must not fail the whole list.
+        expect(config.fields).toEqual(['Case.CaseNumber']);
+        expect(config.optionalFields).toEqual(['Case.Subject', 'Case.Status']);
         expect(config.sortBy).toEqual(['-Case.CreatedDate']);
         const root = el.shadowRoot;
         expect(root.querySelector('.title').textContent).toContain('Cases');
-        expect(root.querySelector('.count').textContent).toBe('5');
+        expect(root.querySelector('.count').textContent).toBe('2+'); // page size, plus a next page
         expect(Array.from(root.querySelectorAll('.card-title')).map((n) => n.textContent)).toEqual(['00012345', '00012346']);
         expect(root.querySelector('dt').textContent).toBe('Subject');
-        expect(root.querySelector('.link')).not.toBeNull(); // 5 > 2 shown
+        expect(root.querySelector('.link')).not.toBeNull(); // there is a next page
     });
 
     it('shows the empty state', async () => {
@@ -49,5 +51,13 @@ describe('c-related-cards', () => {
         getRelatedListRecords.error();
         await flush();
         expect(el.shadowRoot.querySelector('.error').textContent).toBe('Could not load records');
+    });
+
+    it('shows the plain count and no View all when everything fits on one page', async () => {
+        const el = make();
+        getRelatedListRecords.emit({ count: 1, records: [rec('500a', '00012345', 'Late delivery', 'New')] });
+        await flush();
+        expect(el.shadowRoot.querySelector('.count').textContent).toBe('1');
+        expect(el.shadowRoot.querySelector('.link')).toBeNull();
     });
 });

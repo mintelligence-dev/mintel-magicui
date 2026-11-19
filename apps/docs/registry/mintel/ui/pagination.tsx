@@ -29,7 +29,7 @@ function Pagination({
   pageCount,
   onPageChange,
   siblings = 1,
-  locale = "en",
+  locale = "th",
   className,
   ...props
 }: Omit<React.ComponentProps<"nav">, "onChange"> & {
@@ -37,7 +37,7 @@ function Pagination({
   pageCount: number
   onPageChange: (page: number) => void
   siblings?: number
-  locale?: "en" | "th"
+  locale?: "th" | "en"
 }) {
   const t = LABELS[locale]
   const go = (p: number) => onPageChange(Math.min(pageCount, Math.max(1, p)))

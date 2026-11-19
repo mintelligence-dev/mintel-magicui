@@ -118,7 +118,18 @@ function VirtualTable<TData>({ columns, data, height = 480, rowHeight = 44, labe
                 ref={virtualizer.measureElement}
                 aria-rowindex={v.index + 2}
                 onClick={onRowClick ? () => onRowClick(row.original) : undefined}
-                className={cn("transition-colors hover:bg-muted/60", onRowClick && "cursor-pointer")}
+                // Clickable rows must work from the keyboard too.
+                tabIndex={onRowClick ? 0 : undefined}
+                onKeyDown={
+                  onRowClick
+                    ? (e) => {
+                        if (e.target !== e.currentTarget || (e.key !== "Enter" && e.key !== " ")) return
+                        e.preventDefault()
+                        onRowClick(row.original)
+                      }
+                    : undefined
+                }
+                className={cn("transition-colors hover:bg-muted/60", onRowClick && "cursor-pointer outline-none focus-visible:bg-muted/60 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring")}
               >
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id} className="border-b px-3 py-2.5 align-middle">

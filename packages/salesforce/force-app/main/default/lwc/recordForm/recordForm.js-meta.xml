@@ -15,7 +15,7 @@
         <targetConfig targets="lightning__RecordPage">
             <property name="title" type="String" label="Title" />
             <property name="sections" type="String" label="Sections and fields" default="Details: Name" description="Section: Field, Field | Section: Field — API names of the object's fields; a list without a section name makes one untitled section" />
-            <property name="columns" type="Integer" label="Columns on wide screens" datasource="1,2" default="2" />
+            <property name="columns" type="String" label="Columns on wide screens" datasource="1,2" default="2" />
             <property name="showCancel" type="Boolean" label="Show Cancel (reset)" default="false" />
             <property name="saveLabel" type="String" label="Save button label" />
             <property name="locale" type="String" label="Language" datasource="th,en" default="th" />
@@ -28,7 +28,7 @@
             <property name="objectApiName" type="String" label="Object API name (new record)" default="Lead" />
             <property name="title" type="String" label="Title" default="New lead" />
             <property name="sections" type="String" label="Sections and fields" default="Contact: FirstName, LastName, Phone, Email | Company: Company, Industry" description="Section: Field, Field | Section: Field — API names of the object's fields; a list without a section name makes one untitled section" />
-            <property name="columns" type="Integer" label="Columns on wide screens" datasource="1,2" default="2" />
+            <property name="columns" type="String" label="Columns on wide screens" datasource="1,2" default="2" />
             <property name="saveLabel" type="String" label="Save button label" />
             <property name="locale" type="String" label="Language" datasource="th,en" default="th" />
             <supportedFormFactors>
@@ -41,7 +41,7 @@
             <property name="objectApiName" type="String" label="Object API name (new record)" />
             <property name="title" type="String" label="Title" />
             <property name="sections" type="String" label="Sections and fields" description="Section: Field, Field | Section: Field — API names of the object's fields; a list without a section name makes one untitled section" />
-            <property name="columns" type="Integer" label="Columns on wide screens" datasource="1,2" default="2" />
+            <property name="columns" type="String" label="Columns on wide screens" datasource="1,2" default="2" />
             <property name="saveLabel" type="String" label="Save button label" />
             <property name="locale" type="String" label="Language" datasource="th,en" default="th" />
         </targetConfig>

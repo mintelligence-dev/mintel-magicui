@@ -34,7 +34,7 @@ export function SectionTestimonials({
           <li key={t.name} className="reveal-on-scroll">
             <figure className="relative flex h-full flex-col gap-4 rounded-2xl border bg-card p-6 shadow-sm transition-[translate,box-shadow] duration-300 ease-spring-snappy hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/10 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
               <QuoteIcon aria-hidden className="absolute top-5 right-5 size-8 text-brand/15" />
-              {t.rating && (
+              {t.rating != null && (
                 <div className="flex gap-0.5" role="img" aria-label={`${t.rating} out of 5`}>
                   {Array.from({ length: 5 }, (_, i) => (
                     <StarIcon key={i} aria-hidden className={cn("size-4", i < t.rating! ? "fill-warning text-warning" : "text-muted-foreground/40")} />

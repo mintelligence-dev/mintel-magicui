@@ -20,7 +20,7 @@ export default function DialogExample() {
       <DialogTrigger asChild>
         <Button variant="brand">Add connector</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent closeLabel="Close">
         <DialogHeader>
           <DialogTitle>Add a social connector</DialogTitle>
           <DialogDescription>Connect a social channel to your Salesforce org.</DialogDescription>

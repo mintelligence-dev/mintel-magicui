@@ -5,7 +5,7 @@ import { NavigationMixin } from 'lightning/navigation';
  * Big tap targets for the actions people use most on a page. Each line of `actions` is
  * "Label | icon | type | target", where type is:
  *   flow    target = Flow API name (opens /flow/<name>?recordId=…)
- *   action  target = quick action API name, e.g. "NewTask" or "Global.NewCase"
+ *   action  target = quick action API name with its object, e.g. "Global.NewTask" or "Case.LogACall"
  *   url     target = a URL
  *   event   target = any name; fires an `action` event for a parent LWC
  * Lines are separated by semicolons. Unknown lines are skipped.
@@ -14,7 +14,7 @@ export default class QuickActions extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
     @api heading;
-    @api actions = 'New task | utility:task | action | NewTask; Log a call | utility:call | action | LogACall; Help | utility:help | url | https://help.salesforce.com';
+    @api actions = 'New task | utility:task | action | Global.NewTask; Log a call | utility:call | action | Global.LogACall; Help | utility:help | url | https://help.salesforce.com';
 
     get items() {
         return String(this.actions || '')
@@ -38,7 +38,8 @@ export default class QuickActions extends NavigationMixin(LightningElement) {
                 ? { type: 'standard__webPage', attributes: { url: `/flow/${encodeURIComponent(a.target)}${this.recordId ? `?recordId=${this.recordId}` : ''}` } }
                 : {
                       type: 'standard__quickAction',
-                      attributes: { apiName: a.target.includes('.') ? a.target : `${this.objectApiName}.${a.target}` },
+                      // "Object.Action" as given; a bare name belongs to this page's object, or is global where there is none.
+                      attributes: { apiName: a.target.includes('.') ? a.target : `${this.objectApiName || 'Global'}.${a.target}` },
                       state: this.recordId ? { recordId: this.recordId } : {}
                   };
         this[NavigationMixin.Navigate](pageReference);

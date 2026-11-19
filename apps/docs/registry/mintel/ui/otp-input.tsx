@@ -74,9 +74,13 @@ function OtpInput({
             aria-invalid={invalid || undefined}
             data-filled={char ? "" : undefined}
             onFocus={(e) => e.target.select()}
+            // Clicking a box that already has focus fires no focus event: select again so typing replaces the digit.
+            onClick={(e) => e.currentTarget.select()}
             onChange={(e) => {
               const typed = e.target.value.replace(/\D/g, "")
               if (!typed) return
+              // One digit typed next to the existing one (caret not selecting it): replace, do not treat as a paste.
+              if (typed.length === 2 && char && typed.includes(char)) return commit(setAt(i, typed.replace(char, "") || char), i + 1)
               // Several digits at once (paste into one box, or SMS autofill): fill from here.
               if (typed.length > 1) return commit(value.slice(0, i) + typed, i + typed.length)
               commit(setAt(i, typed), i + 1)

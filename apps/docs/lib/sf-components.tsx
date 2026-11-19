@@ -265,7 +265,7 @@ export const SF_COMPONENTS: SfComponent[] = [
     group: "record",
     usage: `<!-- One text value; buttons are separated by semicolons: "Label | icon | flow/action/url/event | target" -->
 <c-quick-actions record-id={recordId} object-api-name="Case"
-    actions="New task | utility:task | action | NewTask; Send LINE | utility:chat | flow | Send_Line_Message; Help | utility:help | url | https://help.example.com; Escalate | utility:priority | event | escalate"
+    actions="New task | utility:task | action | Global.NewTask; Send LINE | utility:chat | flow | Send_Line_Message; Help | utility:help | url | https://help.example.com; Escalate | utility:priority | event | escalate"
     onaction={handleAction}></c-quick-actions>
 
 <!-- handleAction(event) runs only for "event" buttons: event.detail is { name: "escalate", label: "Escalate" }.

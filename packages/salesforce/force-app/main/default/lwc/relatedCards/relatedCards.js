@@ -30,7 +30,7 @@ export default class RelatedCards extends NavigationMixin(LightningElement) {
     @api locale = 'th';
 
     records = [];
-    total;
+    more = false;
     childInfo;
     errorText;
     loaded = false;
@@ -46,7 +46,11 @@ export default class RelatedCards extends NavigationMixin(LightningElement) {
             .slice(0, 3);
     }
     get qualifiedFields() {
-        return [this.titleField, ...this.fieldList].map((f) => `${this.childObjectApiName}.${f}`);
+        return [`${this.childObjectApiName}.${this.titleField}`];
+    }
+    /** Optional, so a user without access to one of the extra fields still gets the cards. */
+    get optionalFieldList() {
+        return this.fieldList.map((f) => `${this.childObjectApiName}.${f}`);
     }
     get sortList() {
         if (!this.sortBy) return undefined;
@@ -64,13 +68,15 @@ export default class RelatedCards extends NavigationMixin(LightningElement) {
         parentRecordId: '$recordId',
         relatedListId: '$relatedListId',
         fields: '$qualifiedFields',
+        optionalFields: '$optionalFieldList',
         sortBy: '$sortList',
         pageSize: '$pageSize'
     })
     wiredRecords({ data, error }) {
         if (data) {
             this.records = data.records || [];
-            this.total = data.count;
+            // `count` is the size of this page, not of the list: a next page is the only sign there are more.
+            this.more = Boolean(data.nextPageToken);
             this.errorText = undefined;
             this.loaded = true;
         } else if (error) {
@@ -83,10 +89,10 @@ export default class RelatedCards extends NavigationMixin(LightningElement) {
         return this.label || (this.childInfo ? this.childInfo.labelPlural : this.relatedListId);
     }
     get countText() {
-        return this.loaded && !this.errorText ? String(this.total ?? this.records.length) : '';
+        return this.loaded && !this.errorText ? `${this.records.length}${this.more ? '+' : ''}` : '';
     }
     get hasMore() {
-        return this.loaded && (this.total ?? this.records.length) > this.records.length;
+        return this.loaded && this.more;
     }
     get isEmpty() {
         return this.loaded && this.records.length === 0;

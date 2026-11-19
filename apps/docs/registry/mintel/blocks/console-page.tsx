@@ -249,7 +249,8 @@ export default function ConsolePage() {
             </div>
             <ul className="min-h-0 flex-1 overflow-y-auto p-2">
               {visible.map((c) => {
-                const last = c.messages[c.messages.length - 1]
+                // A chat can have no messages yet.
+                const last = c.messages[c.messages.length - 1] as (typeof c.messages)[number] | undefined
                 return (
                   <li key={c.id}>
                     <button
@@ -267,10 +268,10 @@ export default function ConsolePage() {
                       <span className="min-w-0 flex-1">
                         <span className="flex items-center justify-between gap-2">
                           <span className="truncate font-medium">{c.name}</span>
-                          <span className="shrink-0 text-xs text-muted-foreground tabular-nums">{hhmm(last.time)}</span>
+                          <span className="shrink-0 text-xs text-muted-foreground tabular-nums">{last ? hhmm(last.time) : ""}</span>
                         </span>
                         <span className="flex items-center justify-between gap-2">
-                          <span className="truncate text-sm text-muted-foreground">{last.text}</span>
+                          <span className="truncate text-sm text-muted-foreground">{last?.text}</span>
                           {c.unread > 0 && (
                             <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-brand text-[0.6875rem] font-semibold text-brand-foreground">{c.unread}</span>
                           )}

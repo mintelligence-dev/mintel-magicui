@@ -42,7 +42,9 @@ function TagInput({
   const [uncontrolled, setUncontrolled] = React.useState(defaultValue)
   const tags = controlled ?? uncontrolled
   const [draft, setDraft] = React.useState("")
-  const [active, setActive] = React.useState(0)
+  // -1: nothing picked, so Enter adds what was typed; arrow keys move into the suggestions.
+  const [active, setActive] = React.useState(-1)
+  const [open, setOpen] = React.useState(false)
   const inputRef = React.useRef<HTMLInputElement>(null)
   const listId = React.useId()
   const full = max !== undefined && tags.length >= max
@@ -61,10 +63,10 @@ function TagInput({
     }
     if (next.length !== tags.length) set(next)
     setDraft("")
-    setActive(0)
+    setActive(-1)
   }
 
-  const matches = draft
+  const matches = draft && open
     ? suggestions.filter((s) => s.toLowerCase().includes(draft.toLowerCase()) && !tags.some((t) => t.toLowerCase() === s.toLowerCase())).slice(0, 6)
     : []
 
@@ -88,6 +90,7 @@ function TagInput({
             <button
               type="button"
               aria-label={`${t.remove} ${tag}`}
+              disabled={disabled}
               onClick={(e) => {
                 e.stopPropagation()
                 set(tags.filter((x) => x !== tag))
@@ -101,7 +104,16 @@ function TagInput({
         <input
           ref={inputRef}
           value={draft}
-          disabled={disabled || full}
+          disabled={disabled}
+          // At the limit the field stays focusable (read-only), so focus is not thrown to the page.
+          readOnly={full}
+          aria-activedescendant={active >= 0 && matches[active] ? `${listId}-${active}` : undefined}
+          onFocus={() => setOpen(true)}
+          onBlur={() => {
+            // Keep what was typed, but close the suggestions.
+            setOpen(false)
+            setActive(-1)
+          }}
           aria-label={ariaLabel ?? placeholder ?? t.placeholder}
           aria-autocomplete={suggestions.length ? "list" : undefined}
           aria-controls={matches.length ? listId : undefined}
@@ -113,7 +125,7 @@ function TagInput({
             if (v.includes(",")) add(v.split(","))
             else {
               setDraft(v)
-              setActive(0)
+              setActive(-1)
             }
           }}
           onPaste={(e) => {
@@ -130,7 +142,7 @@ function TagInput({
               setActive((a) => (a + 1) % matches.length)
             } else if (e.key === "ArrowUp" && matches.length) {
               e.preventDefault()
-              setActive((a) => (a - 1 + matches.length) % matches.length)
+              setActive((a) => (a <= 0 ? matches.length - 1 : a - 1))
             } else if (e.key === "Enter" || (e.key === "Tab" && draft)) {
               if (!draft && e.key === "Enter") return
               e.preventDefault()
@@ -154,6 +166,7 @@ function TagInput({
           {matches.map((m, i) => (
             <li
               key={m}
+              id={`${listId}-${i}`}
               role="option"
               aria-selected={i === active}
               onMouseDown={(e) => {

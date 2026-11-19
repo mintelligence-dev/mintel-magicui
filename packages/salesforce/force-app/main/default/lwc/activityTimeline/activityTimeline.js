@@ -123,7 +123,9 @@ export default class ActivityTimeline extends LightningElement {
     }
 
     get items() {
-        const today = new Date().toISOString().slice(0, 10);
+        // Today in the user's time zone (toISOString would give the UTC date: wrong before 07:00 in Thailand).
+        const now = new Date();
+        const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
         const fmt = (iso, withTime) =>
             iso
                 ? new Date(iso).toLocaleString(this.dateLocale, withTime ? { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' } : { day: 'numeric', month: 'short', year: 'numeric' })

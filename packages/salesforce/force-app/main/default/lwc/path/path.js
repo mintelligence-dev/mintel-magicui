@@ -18,7 +18,16 @@ const STRINGS = {
 };
 
 const errorText = (error) =>
-    (error && error.body && (error.body.message || (error.body.output && error.body.output.errors && error.body.output.errors[0] && error.body.output.errors[0].message))) ||
+    // Validation rules answer in output.errors or output.fieldErrors; body.message is only the generic text.
+    (error &&
+        error.body &&
+        ((error.body.output &&
+            ((error.body.output.errors && error.body.output.errors[0] && error.body.output.errors[0].message) ||
+                (error.body.output.fieldErrors &&
+                    Object.values(error.body.output.fieldErrors)[0] &&
+                    Object.values(error.body.output.fieldErrors)[0][0] &&
+                    Object.values(error.body.output.fieldErrors)[0][0].message))) ||
+            error.body.message)) ||
     (error && error.message) ||
     '';
 

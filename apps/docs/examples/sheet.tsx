@@ -19,7 +19,7 @@ export default function SheetExample() {
         <SheetTrigger className="inline-flex h-9 items-center rounded-md bg-primary px-4 text-sm font-semibold text-primary-foreground">
           Edit contact
         </SheetTrigger>
-        <SheetContent>
+        <SheetContent closeLabel="Close">
           <SheetHeader>
             <SheetTitle>Edit contact</SheetTitle>
             <SheetDescription>Changes sync to Salesforce when you save.</SheetDescription>
@@ -43,7 +43,7 @@ export default function SheetExample() {
 
       <Sheet>
         <SheetTrigger className="inline-flex h-9 items-center rounded-md border px-4 text-sm font-semibold">Bottom sheet</SheetTrigger>
-        <SheetContent side="bottom">
+        <SheetContent side="bottom" closeLabel="Close">
           <SheetHeader>
             <SheetTitle>Share case</SheetTitle>
             <SheetDescription>Great for mobile: it rises from the bottom and respects the safe area.</SheetDescription>

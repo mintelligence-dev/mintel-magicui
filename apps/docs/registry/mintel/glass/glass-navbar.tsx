@@ -63,12 +63,13 @@ function GlassNavbar({
       data-slot="glass-navbar"
       data-hidden={hidden || undefined}
       className={cn(
-        "sticky top-0 z-40 border-glass-border bg-glass text-glass-foreground backdrop-blur-glass backdrop-saturate-180",
+        "sticky z-40 border-glass-border bg-glass text-glass-foreground backdrop-blur-glass backdrop-saturate-180",
         "not-supports-[backdrop-filter:blur(1px)]:bg-background [@media(prefers-reduced-transparency:reduce)]:bg-background",
         "transition-[translate,opacity] duration-500 ease-spring-smooth motion-reduce:transition-none",
         floating
-          ? "mx-auto mt-[max(env(safe-area-inset-top),0.75rem)] w-[min(100%-1.5rem,64rem)] rounded-full border shadow-[inset_0_1px_0_0_var(--glass-highlight),0_12px_40px_-12px_var(--glass-shadow)] data-hidden:-translate-y-[calc(100%+1.5rem)]"
-          : "border-b pt-[env(safe-area-inset-top)] data-hidden:-translate-y-full",
+          ? // The sticky offset repeats the margin, so the pill keeps its gap (and clears the notch) once it sticks.
+            "top-[max(env(safe-area-inset-top),0.75rem)] mx-auto mt-[max(env(safe-area-inset-top),0.75rem)] w-[min(100%-1.5rem,64rem)] rounded-full border shadow-[inset_0_1px_0_0_var(--glass-highlight),0_12px_40px_-12px_var(--glass-shadow)] data-hidden:-translate-y-[calc(100%+1.5rem)]"
+          : "top-0 border-b pt-[env(safe-area-inset-top)] data-hidden:-translate-y-full",
         "data-hidden:pointer-events-none",
         className
       )}
