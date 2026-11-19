@@ -1,0 +1,19 @@
+<template>
+    <template lwc:if={visible}>
+        <div class={rootClass} role={role}>
+            <span class="icon" aria-hidden="true"></span>
+            <div class="text">
+                <template lwc:if={title}><strong class="title">{title}</strong></template>
+                <span class="message">{message}</span>
+            </div>
+            <template lwc:if={linkUrl}>
+                <a class="link" href={linkUrl} target={linkTarget}>{linkLabel}</a>
+            </template>
+            <template lwc:if={dismissible}>
+                <button type="button" class="close" aria-label={closeLabel} onclick={handleDismiss}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+                </button>
+            </template>
+        </div>
+    </template>
+</template>

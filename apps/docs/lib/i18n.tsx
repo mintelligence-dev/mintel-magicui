@@ -307,6 +307,20 @@ const en = {
       shimmerButton: "Brand-gradient call to action with a light sweep; fires a normal click event.",
       gradientText: "Headline filled with a slowly moving brand gradient.",
       statCard: "KPI card whose number counts up when it appears.",
+      quickActions:
+        "Big buttons for the actions people use most on a page: start a Flow, open a quick action (New task, Log a call), go to a URL, or tell your own LWC. Configured in App Builder, one line per button.",
+      filesGallery:
+        "The record's files as cards with image thumbnails or a file-type tile; a click opens Salesforce's own file preview. Reads the Files related list through the UI API, no Apex.",
+      kpiTrend:
+        "KPI card with a sparkline that draws itself and a change badge (green or red depending on whether higher is good). The value comes from a record's number field or App Builder.",
+      announcement:
+        "Page banner for maintenance, news or policy messages, with a link. When dismissed it stays hidden on that device until you change its version.",
+      siteHero: "Centered hero for Experience Cloud pages: eyebrow, a title with gradient words, copy and two buttons.",
+      siteFeatures: "Feature grid for Experience Cloud pages; cards rise in one after another. Set features in Experience Builder as text.",
+      siteFaq: "Frequently asked questions for Experience Cloud pages on native <details>: keyboard and screen-reader friendly with no script.",
+      siteCta: "Closing call to action on a brand-gradient band for Experience Cloud pages.",
+      brandLoader:
+        "Invisible helper: drop it once on an app, home or record page to load the mintelGlobal stylesheet, so standard lightning-* components switch to the Mintel brand.",
       fontSizeControl:
         "Text-size control (ก- ก ก+) for Experience Cloud: scales the page and remembers the choice. Not for Lightning Experience, whose global font size should not change.",
     },
@@ -614,6 +628,20 @@ const th: Dict = {
       shimmerButton: "ปุ่ม call to action สีแบรนด์ มีแสงวิ่งรอบขอบ ส่ง click event ปกติ",
       gradientText: "หัวข้อที่เติมสีไล่เฉดแบรนด์ซึ่งค่อยๆ เคลื่อนที่",
       statCard: "การ์ด KPI ที่ตัวเลขนับขึ้นตอนแสดงผล",
+      quickActions:
+        "ปุ่มใหญ่สำหรับงานที่ทำบ่อยบนหน้า: เปิด Flow, เปิด quick action (สร้าง Task, บันทึกการโทร), ไปที่ลิงก์ หรือส่ง event ให้ LWC ของเรา ตั้งใน App Builder บรรทัดละปุ่ม",
+      filesGallery:
+        "ไฟล์ของ record เป็นการ์ด รูปภาพมีภาพย่อ ไฟล์อื่นแสดงชนิดไฟล์ กดแล้วเปิดหน้าดูไฟล์ของ Salesforce ดึงจาก related list Files ผ่าน UI API ไม่ใช้ Apex",
+      kpiTrend:
+        "การ์ด KPI พร้อมกราฟเส้นเล็กที่ค่อยๆ วาดตัวเอง และป้ายบอกการเปลี่ยนแปลง (เขียวหรือแดงตามว่าค่าสูงดีหรือไม่ดี) ค่าดึงจากฟิลด์ตัวเลขของ record หรือตั้งใน App Builder",
+      announcement:
+        "แถบประกาศบนหน้า เช่นปิดปรับปรุง ข่าว หรือนโยบาย ใส่ลิงก์ได้ ถ้าผู้ใช้ปิดแล้วจะไม่แสดงบนเครื่องนั้นจนกว่าจะเปลี่ยน version",
+      siteHero: "Hero ตรงกลางสำหรับหน้า Experience Cloud มีข้อความนำ หัวข้อที่มีคำสีไล่เฉด คำอธิบาย และปุ่ม 2 ปุ่ม",
+      siteFeatures: "ตารางฟีเจอร์สำหรับหน้า Experience Cloud การ์ดค่อยๆ เลื่อนขึ้นทีละใบ ตั้งรายการฟีเจอร์เป็นข้อความใน Experience Builder",
+      siteFaq: "คำถามที่พบบ่อยสำหรับหน้า Experience Cloud ใช้ <details> ของเบราว์เซอร์ ใช้คีย์บอร์ดและ screen reader ได้โดยไม่ต้องมีสคริปต์",
+      siteCta: "แถบปิดท้ายสีแบรนด์ชวนให้ติดต่อ สำหรับหน้า Experience Cloud",
+      brandLoader:
+        "ตัวช่วยที่มองไม่เห็น วางครั้งเดียวในหน้า app, home หรือ record เพื่อโหลด stylesheet mintelGlobal ให้ component มาตรฐาน lightning-* เป็นแบรนด์ Mintel",
       fontSizeControl:
         "ปุ่มปรับขนาดตัวอักษร (ก- ก ก+) สำหรับ Experience Cloud ขยายทั้งหน้าและจำค่าที่เลือก ไม่ใช้กับ Lightning Experience เพราะไม่ควรเปลี่ยนขนาดฟอนต์ของทั้งระบบ",
     },

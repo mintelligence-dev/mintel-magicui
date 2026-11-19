@@ -1,0 +1,14 @@
+<template>
+    <section class="hero">
+        <span class="glow" aria-hidden="true"></span>
+        <div class="wrap reveal">
+            <template lwc:if={eyebrow}><p class="eyebrow">{eyebrow}</p></template>
+            <h1 class="heading title">{title}<template lwc:if={highlight}> <span class="highlight">{highlight}</span></template></h1>
+            <template lwc:if={description}><p class="sub">{description}</p></template>
+            <div class="ctas">
+                <template lwc:if={primaryLabel}><a class="btn primary" href={primaryUrl}>{primaryLabel}</a></template>
+                <template lwc:if={secondaryLabel}><a class="btn secondary" href={secondaryUrl}>{secondaryLabel}</a></template>
+            </div>
+        </div>
+    </section>
+</template>

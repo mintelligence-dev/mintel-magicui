@@ -1,0 +1,14 @@
+<template>
+    <section class="wrap">
+        <div class="band reveal">
+            <span class="blob one" aria-hidden="true"></span>
+            <span class="blob two" aria-hidden="true"></span>
+            <h2 class="heading">{title}</h2>
+            <template lwc:if={description}><p class="sub">{description}</p></template>
+            <div class="ctas">
+                <template lwc:if={primaryLabel}><a class="btn light" href={primaryUrl}>{primaryLabel}</a></template>
+                <template lwc:if={secondaryLabel}><a class="btn ghost" href={secondaryUrl}>{secondaryLabel}</a></template>
+            </div>
+        </div>
+    </section>
+</template>

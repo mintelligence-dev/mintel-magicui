@@ -1,0 +1,33 @@
+<template>
+    <section class="files">
+        <header class="head">
+            <h2 class="title">{heading}<template lwc:if={countText}><span class="count">{countText}</span></template></h2>
+        </header>
+        <template lwc:if={errorText}>
+            <p class="error" role="alert">{errorText}</p>
+        </template>
+        <template lwc:elseif={isEmpty}>
+            <c-empty-state title={labels.empty} icon-name="utility:file"></c-empty-state>
+        </template>
+        <template lwc:else>
+            <ul class="grid">
+                <template for:each={files} for:item="f">
+                    <li key={f.id}>
+                        <button type="button" class="file" data-id={f.id} onclick={handleOpen}>
+                            <span class="thumb">
+                                <template lwc:if={f.isImage}>
+                                    <img src={f.thumbUrl} alt="" loading="lazy" />
+                                </template>
+                                <template lwc:else>
+                                    <span class="ext">{f.ext}</span>
+                                </template>
+                            </span>
+                            <span class="name">{f.title}</span>
+                            <span class="meta">{f.meta}</span>
+                        </button>
+                    </li>
+                </template>
+            </ul>
+        </template>
+    </section>
+</template>

@@ -1,0 +1,16 @@
+<template>
+    <section class="wrap faq">
+        <div class="intro reveal">
+            <h2 class="heading">{title}</h2>
+            <template lwc:if={description}><p class="sub">{description}</p></template>
+        </div>
+        <div class="list reveal">
+            <template for:each={items} for:item="q">
+                <details key={q.key} class="item" open={q.open}>
+                    <summary class="question">{q.question}<span class="chev" aria-hidden="true"></span></summary>
+                    <p class="answer">{q.answer}</p>
+                </details>
+            </template>
+        </div>
+    </section>
+</template>
