@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Command } from "cmdk"
-import { BookOpen, Cloud, Component, Home, LayoutTemplate, Search } from "lucide-react"
+import { BookOpen, Palette, Cloud, Component, Home, LayoutTemplate, Search } from "lucide-react"
 
 import { CATEGORY_LABEL, ITEMS } from "@/lib/component-docs"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
@@ -33,6 +33,7 @@ export function CommandMenu({ lang }: { lang: Lang }) {
   const pages = [
     { label: "Mintel UI", path: "/", icon: Home },
     { label: t.docs.gettingStarted, path: "/getting-started", icon: BookOpen },
+    { label: t.docs.themes, path: "/themes", icon: Palette },
     { label: t.docs.allComponents, path: "/components", icon: Component },
     { label: t.docs.templates, path: "/templates", icon: LayoutTemplate },
     { label: "Salesforce", path: "/salesforce", icon: Cloud },

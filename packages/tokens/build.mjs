@@ -11,7 +11,7 @@
 //
 // No dependencies on purpose — run with `node build.mjs`.
 
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -419,69 +419,115 @@ out(
 
 console.log(`✓ ${primitives.length} primitives, ${semantic.length} semantic tokens`)
 
-// ---------- Themes: Mintel Clarity (dist/themes/clarity.css + clarity-shadcn.json) ----------
-// Overrides only. Switch with <html data-mintel-theme="clarity"> (data-theme is already the dark-mode switch).
-// Selectors are anchored on :root so they outrank both `.dark` and app-level `:root { ... }` font overrides.
-const clarity = JSON.parse(readFileSync(join(root, "src/themes/clarity.json"), "utf8"))
-for (const name of Object.keys(clarity.semantic)) {
-  if (!semantic.some((s) => s.name === name)) throw new Error(`clarity.json overrides unknown semantic token "${name}"`)
-}
-const CLARITY = `:root[${clarity.selector}="clarity"]`
-const CLARITY_DARK = `${CLARITY}:is(.dark, [data-theme="dark"])`
+// ---------- Themes (src/themes/*.json -> dist/themes/<id>.css + <id>-shadcn.json + index.json) ----------
+// Each file holds overrides only; the file name is the theme id. Switch at runtime with
+// <html data-mintel-theme="<id>"> (data-theme is already the dark-mode switch). Selectors are anchored on
+// :root so a theme outranks both `.dark` and app-level `:root { ... }` font overrides.
 // Line height as a unitless ratio (calc(length / length) is not supported everywhere yet).
 const ratio = (lh, size) => String(Math.round((parseFloat(lh) / parseFloat(size)) * 1000) / 1000)
-const clarityType = Object.entries(clarity.type)
-  .filter(([k]) => !k.startsWith("$"))
-  .flatMap(([k, [size, lh]]) => [`--text-${k}: ${size};`, `--text-${k}--line-height: ${ratio(lh, size)};`])
-const clarityCommon = [
-  `--mintel-font-sans: ${clarity.font.sans};`,
-  `--mintel-font-heading: ${clarity.font.heading};`,
-  `--mintel-font-mono: ${clarity.font.mono};`,
-  `--mintel-radius: ${clarity.radius};`,
-  `--mintel-glass-blur: ${clarity.glass.blur};`,
-  `--mintel-glass-saturate: ${clarity.glass.saturate};`,
-  ...Object.entries(clarity.glass.levels).map(([k, val]) => `--mintel-material-${k}-blur: ${val};`),
-  ...clarityType,
-  `--brand-gradient: ${clarity.brandGradient};`,
+const themeFiles = readdirSync(join(root, "src/themes")).filter((f) => f.endsWith(".json")).sort()
+const themeIndex = [
+  {
+    id: "mintel",
+    title: "Mintel",
+    description: {
+      en: "The M-Intelligence brand: blue-to-purple gradient, Manrope + Rubik, expressive motion.",
+      th: "แบรนด์ M-Intelligence สีไล่เฉดน้ำเงิน-ม่วง ฟอนต์ Manrope + Rubik การเคลื่อนไหวเด่น",
+    },
+    base: true,
+    font: fonts.heading,
+    radius,
+    light: Object.fromEntries(semantic.map((s) => [s.name, s.light.value])),
+    dark: Object.fromEntries(semantic.map((s) => [s.name, s.dark.value])),
+    gradient: "linear-gradient(135deg, var(--brand) 0%, var(--brand-accent) 100%)",
+    type: {},
+    glassBlur: glass.blur,
+  },
 ]
-const squircleSelector = clarity.squircle.map((slot) => `[data-slot="${slot}"]`).join(",\n  ")
-out(
-  "dist/themes/clarity.css",
-  HEADER.replace("src/tokens.json", "src/themes/clarity.json") +
-    `/* Usage: import after tokens.css / tailwind.css, then set <html data-mintel-theme="clarity">. */\n` +
-    block(CLARITY, [...clarityCommon, ...Object.entries(clarity.semantic).map(([n, [light]]) => `--${n}: ${light};`)]) +
-    "\n" +
-    block(CLARITY_DARK, [...Object.entries(clarity.semantic).map(([n, [, dark]]) => `--${n}: ${dark};`), "color-scheme: dark;"]) +
-    "\n" +
-    `/* Continuous (squircle) corners where supported; elsewhere the normal radius applies.\n   Scoped to rectangular surfaces so pills and avatars stay round. */\n` +
-    `@supports (corner-shape: squircle) {\n  ${CLARITY} :is(\n  ${squircleSelector}\n  ) {\n    corner-shape: squircle;\n  }\n}\n`
-)
-out(
-  "dist/themes/clarity-shadcn.json",
-  JSON.stringify(
-    {
-      theme: {
-        "font-sans": clarity.font.sans,
-        "font-heading": clarity.font.heading,
-        "font-mono": clarity.font.mono,
-        "blur-glass": clarity.glass.blur,
-        ...Object.fromEntries(
-          Object.entries(clarity.type)
-            .filter(([k]) => !k.startsWith("$"))
-            .flatMap(([k, [size, lh]]) => [
+const themeCssFiles = []
+for (const file of themeFiles) {
+  const id = file.replace(/\.json$/, "")
+  if (!/^[a-z][a-z0-9-]*$/.test(id) || id === "mintel") throw new Error(`Bad theme file name "${file}"`)
+  const th = JSON.parse(readFileSync(join(root, "src/themes", file), "utf8"))
+  for (const name of Object.keys(th.semantic)) {
+    if (!semantic.some((s) => s.name === name)) throw new Error(`${file} overrides unknown semantic token "${name}"`)
+  }
+  const SEL = `:root[data-mintel-theme="${id}"]`
+  const SEL_DARK = `${SEL}:is(.dark, [data-theme="dark"])`
+  const typeEntries = Object.entries(th.type ?? {}).filter(([k]) => !k.startsWith("$"))
+  const common = [
+    `--mintel-font-sans: ${th.font.sans};`,
+    `--mintel-font-heading: ${th.font.heading};`,
+    `--mintel-font-mono: ${th.font.mono};`,
+    `--mintel-radius: ${th.radius};`,
+    `--mintel-glass-blur: ${th.glass.blur};`,
+    `--mintel-glass-saturate: ${th.glass.saturate};`,
+    ...Object.entries(th.glass.levels).map(([k, val]) => `--mintel-material-${k}-blur: ${val};`),
+    ...typeEntries.flatMap(([k, [size, lh]]) => [`--text-${k}: ${size};`, `--text-${k}--line-height: ${ratio(lh, size)};`]),
+    `--brand-gradient: ${th.brandGradient};`,
+  ]
+  const squircleSelector = (th.squircle ?? []).map((slot) => `[data-slot="${slot}"]`).join(",\n  ")
+  out(
+    `dist/themes/${id}.css`,
+    HEADER.replace("src/tokens.json", `src/themes/${file}`) +
+      `/* Usage: import after tokens.css / tailwind.css, then set <html data-mintel-theme="${id}">. */\n` +
+      block(SEL, [...common, ...Object.entries(th.semantic).map(([n, [light]]) => `--${n}: ${light};`)]) +
+      "\n" +
+      block(SEL_DARK, [...Object.entries(th.semantic).map(([n, [, dark]]) => `--${n}: ${dark};`), "color-scheme: dark;"]) +
+      (squircleSelector
+        ? "\n" +
+          `/* Continuous (squircle) corners where supported; elsewhere the normal radius applies.\n   Scoped to rectangular surfaces so pills and avatars stay round. */\n` +
+          `@supports (corner-shape: squircle) {\n  ${SEL} :is(\n  ${squircleSelector}\n  ) {\n    corner-shape: squircle;\n  }\n}\n`
+        : "")
+  )
+  themeCssFiles.push(`${id}.css`)
+  out(
+    `dist/themes/${id}-shadcn.json`,
+    JSON.stringify(
+      {
+        title: th.title,
+        description: th.description,
+        theme: {
+          "font-sans": th.font.sans,
+          "font-heading": th.font.heading,
+          "font-mono": th.font.mono,
+          "blur-glass": th.glass.blur,
+          ...Object.fromEntries(
+            typeEntries.flatMap(([k, [size, lh]]) => [
               [`text-${k}`, size],
               [`text-${k}--line-height`, ratio(lh, size)],
             ])
-        ),
-        "brand-gradient": clarity.brandGradient,
+          ),
+          "brand-gradient": th.brandGradient,
+        },
+        light: { radius: th.radius, ...Object.fromEntries(Object.entries(th.semantic).map(([n, [l]]) => [n, l])) },
+        dark: Object.fromEntries(Object.entries(th.semantic).map(([n, [, d]]) => [n, d])),
+        squircle: th.squircle ?? [],
       },
-      light: { radius: clarity.radius, ...Object.fromEntries(Object.entries(clarity.semantic).map(([n, [l]]) => [n, l])) },
-      dark: Object.fromEntries(Object.entries(clarity.semantic).map(([n, [, d]]) => [n, d])),
-      squircle: clarity.squircle,
-      materials: Object.fromEntries(Object.entries(clarity.glass.levels)),
-      saturate: clarity.glass.saturate,
-    },
-    null,
-    2
-  ) + "\n"
+      null,
+      2
+    ) + "\n"
+  )
+  const base = themeIndex[0]
+  themeIndex.push({
+    id,
+    title: th.title,
+    description: th.description,
+    base: false,
+    font: th.font.heading,
+    radius: th.radius,
+    light: { ...base.light, ...Object.fromEntries(Object.entries(th.semantic).map(([n, [l]]) => [n, l])) },
+    dark: { ...base.dark, ...Object.fromEntries(Object.entries(th.semantic).map(([n, [, d]]) => [n, d])) },
+    gradient: th.brandGradient,
+    type: Object.fromEntries(typeEntries.map(([k, [size, lh]]) => [k, [size, ratio(lh, size)]])),
+    glassBlur: th.glass.blur,
+  })
+}
+out("dist/themes/index.json", JSON.stringify(themeIndex, null, 2) + "\n")
+out(
+  "dist/themes/all.css",
+  HEADER.replace("src/tokens.json", "src/themes/*.json") +
+    `/* Every theme, for apps that let people switch at runtime. */\n` +
+    themeCssFiles.map((f) => `@import "./${f}";`).join("\n") +
+    "\n"
 )

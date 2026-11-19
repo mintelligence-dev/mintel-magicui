@@ -1,4 +1,9 @@
 {
+  "title": "Clarity",
+  "description": {
+    "en": "Calm and content-first: system font, larger reading sizes, layered dark mode, continuous corners.",
+    "th": "เรียบและสงบ เน้นเนื้อหา ฟอนต์ระบบ ตัวอักษรใหญ่ขึ้น dark mode แยกชั้น มุมโค้งต่อเนื่อง"
+  },
   "theme": {
     "font-sans": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, var(--font-plex-thai, \"IBM Plex Sans Thai\"), sans-serif",
     "font-heading": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, var(--font-plex-thai, \"IBM Plex Sans Thai\"), sans-serif",
@@ -102,11 +107,5 @@
     "button",
     "table-container",
     "glass-card"
-  ],
-  "materials": {
-    "thin": "10px",
-    "regular": "20px",
-    "thick": "32px"
-  },
-  "saturate": 1.9
+  ]
 }

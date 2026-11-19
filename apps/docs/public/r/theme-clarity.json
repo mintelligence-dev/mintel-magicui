@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme-clarity",
   "title": "Mintel Clarity Theme",
-  "description": "Calm, content-first theme: system fonts, larger reading sizes, layered dark mode and continuous corners. Install after mintel-theme.",
+  "description": "Calm and content-first: system font, larger reading sizes, layered dark mode, continuous corners. Install after mintel-theme.",
   "registryDependencies": [
     "http://localhost:3000/r/mintel-theme.json"
   ],

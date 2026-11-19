@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url"
 const root = join(dirname(fileURLToPath(import.meta.url)), "..")
 const require = createRequire(import.meta.url)
 const theme = require("@mintelligence-dev/tokens/shadcn-theme.json")
-const clarity = require("@mintelligence-dev/tokens/themes/clarity-shadcn.json")
+const themeIndex = require("@mintelligence-dev/tokens/themes/index.json")
 const items = JSON.parse(readFileSync(join(root, "registry/items.json"), "utf8"))
 
 // Registry dependencies on our own items must point at THIS registry by URL — a bare name like
@@ -58,27 +58,32 @@ const themeItem = {
   },
 }
 
-// Optional second theme, installed on top of mintel-theme. Rewrites the app's variables, so the
-// whole app takes the Clarity look (to switch at runtime instead, use tokens' themes/clarity.css).
-const clarityItem = {
-  name: "theme-clarity",
-  type: "registry:theme",
-  title: "Mintel Clarity Theme",
-  description:
-    "Calm, content-first theme: system fonts, larger reading sizes, layered dark mode and continuous corners. Install after mintel-theme.",
-  registryDependencies: [`${registryUrl}/mintel-theme.json`],
-  css: {
-    // Continuous corners where supported; rectangular surfaces only, so pills and avatars stay round.
-    "@supports (corner-shape: squircle)": {
-      [`:is(${clarity.squircle.map((slot) => `[data-slot="${slot}"]`).join(", ")})`]: { "corner-shape": "squircle" },
-    },
-  },
-  cssVars: {
-    theme: clarity.theme,
-    light: clarity.light,
-    dark: clarity.dark,
-  },
-}
+// Optional themes (packages/tokens/src/themes/*.json), each installed on top of mintel-theme. Installing one
+// rewrites the app's variables, so the whole app takes that look (to switch at runtime instead, use
+// tokens' themes/<id>.css with <html data-mintel-theme="<id>">).
+const extraThemeItems = themeIndex
+  .filter((t) => !t.base)
+  .map((t) => {
+    const th = require(`@mintelligence-dev/tokens/themes/${t.id}-shadcn.json`)
+    return {
+      name: `theme-${t.id}`,
+      type: "registry:theme",
+      title: `Mintel ${th.title} Theme`,
+      description: `${th.description.en} Install after mintel-theme.`,
+      registryDependencies: [`${registryUrl}/mintel-theme.json`],
+      ...(th.squircle.length
+        ? {
+            css: {
+              // Continuous corners where supported; rectangular surfaces only, so pills and avatars stay round.
+              "@supports (corner-shape: squircle)": {
+                [`:is(${th.squircle.map((slot) => `[data-slot="${slot}"]`).join(", ")})`]: { "corner-shape": "squircle" },
+              },
+            },
+          }
+        : {}),
+      cssVars: { theme: th.theme, light: th.light, dark: th.dark },
+    }
+  })
 
 const blocks = JSON.parse(readFileSync(join(root, "registry/blocks.json"), "utf8")).map((b) => ({
   name: b.name,
@@ -101,7 +106,7 @@ const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "mintel",
   homepage: "https://github.com/muisurasak/mintel-ui",
-  items: [themeItem, clarityItem, ...items, ...blocks],
+  items: [themeItem, ...extraThemeItems, ...items, ...blocks],
 }
 writeFileSync(join(root, "registry.json"), JSON.stringify(registry, null, 2) + "\n")
 
