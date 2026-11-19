@@ -2,6 +2,14 @@
 
 The shadcn registry (`@mintel/*`) and the documentation site.
 
+## 0.2.1 — 2026-11-20
+
+### Patch Changes
+
+- 3f1edd2: /llms.txt now has setup steps for React and Salesforce, a "Use for / Not for" note per component, and each LWC's App Builder name and where it can be placed. New /llms-full.txt adds props, example code, LWC properties, events and usage for every component, so AI coding assistants can write code with them.
+- 2bb6fd9: The docs site now serves /llms.txt (a map of every component, template and LWC with install instructions, for AI coding assistants), /sitemap.xml (English and Thai pages with hreflang) and /robots.txt.
+- @mintelligence-dev/tokens@0.2.1
+
 ## 0.2.0 — 2026-11-20
 
 ### Minor Changes

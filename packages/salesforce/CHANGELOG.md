@@ -2,6 +2,12 @@
 
 Lightning Web Components, static resources and deploy scripts for Salesforce.
 
+## 0.2.1 — 2026-11-20
+
+### Patch Changes
+
+- App Builder now shows descriptions for the Kanban properties (related list, card title, card second line, values to hide) and for Record Form's "Sections and fields". No behavior change.
+
 ## 0.2.0 — 2026-11-20
 
 ### Minor Changes
