@@ -5,7 +5,15 @@ import { Check, Copy } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-export function CopyCommand({ command, className }: { command: string; className?: string }) {
+export function CopyCommand({
+  command,
+  className,
+  label = "Copy command",
+}: {
+  command: string
+  className?: string
+  label?: string
+}) {
   const [copied, setCopied] = useState(false)
   const copy = async () => {
     try {
@@ -26,7 +34,7 @@ export function CopyCommand({ command, className }: { command: string; className
       <button
         type="button"
         onClick={copy}
-        aria-label="คัดลอกคำสั่ง"
+        aria-label={label}
         className="shrink-0 rounded p-1 text-muted-foreground transition hover:bg-background hover:text-foreground"
       >
         {copied ? <Check className="size-3.5 text-success" /> : <Copy className="size-3.5" />}

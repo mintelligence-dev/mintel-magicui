@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Bell, Home, MessageCircle, User } from "lucide-react"
 
 import { CopyCommand } from "@/components/copy-command"
+import { getDict, type Lang } from "@/lib/i18n"
 import { installCmd } from "@/lib/site"
 import { Button } from "@/registry/mintel/ui/button"
 import { Input } from "@/registry/mintel/ui/input"
@@ -29,17 +30,18 @@ function Phone({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function MobileShowcase() {
+export function MobileShowcase({ lang }: { lang: Lang }) {
+  const t = getDict(lang).mobile
   const [tab, setTab] = useState("home")
   return (
     <div className="grid gap-8 md:grid-cols-2 [&>*]:min-w-0">
       <div className="space-y-4">
         <p className="font-heading text-lg font-semibold">Drawer</p>
-        <p className="text-sm text-muted-foreground">Bottom sheet ลากที่แถบด้านบนลงเพื่อปิด — ใช้บนมือถือแทน dialog</p>
+        <p className="text-sm text-muted-foreground">{t.drawerDesc}</p>
         <div className="flex min-h-40 items-center justify-center rounded-2xl border bg-muted/30 p-6">
           <Drawer>
             <DrawerTrigger asChild>
-              <Button variant="brand">เปิด Drawer</Button>
+              <Button variant="brand">{t.openDrawer}</Button>
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
@@ -62,7 +64,7 @@ export function MobileShowcase() {
       </div>
       <div className="space-y-4">
         <p className="font-heading text-lg font-semibold">Tab Bar</p>
-        <p className="text-sm text-muted-foreground">แถบแท็บด้านล่างแบบกระจก เว้นที่ให้ home indicator อัตโนมัติ</p>
+        <p className="text-sm text-muted-foreground">{t.tabBarDesc}</p>
         <Phone>
           <TabBar
             className="absolute"

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Bell, Search, Sparkles } from "lucide-react"
 
 import { CopyCommand } from "@/components/copy-command"
+import { getDict, type Lang } from "@/lib/i18n"
 import { installCmd } from "@/lib/site"
 import { GlassButton } from "@/registry/mintel/glass/glass-button"
 import { GlassCard } from "@/registry/mintel/glass/glass-card"
@@ -26,7 +27,8 @@ function Backdrop() {
   )
 }
 
-export function GlassShowcase() {
+export function GlassShowcase({ lang }: { lang: Lang }) {
+  const t = getDict(lang).glass
   const [period, setPeriod] = useState("week")
   const stats = { day: "1,284", week: "8,902", month: "36,417" } as Record<string, string>
 
@@ -65,14 +67,14 @@ export function GlassShowcase() {
               ]}
             />
             <p className="mt-4 text-xs text-muted-foreground">
-              การ์ดนี้เปิด <code>refraction</code> — บน Chrome/Edge (เมาส์) ขอบจะหักเหภาพด้านหลัง
+              {t.refraction}
             </p>
           </GlassCard>
 
           <GlassCard className="flex flex-col justify-between gap-6 p-6">
             <div>
               <p className="font-heading text-xl font-semibold">Glass Button</p>
-              <p className="mt-1 text-sm text-muted-foreground">กดค้างเพื่อดู spring press</p>
+              <p className="mt-1 text-sm text-muted-foreground">{t.pressHint}</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <GlassButton>Default</GlassButton>
