@@ -113,6 +113,41 @@ export function FilesGalleryPreview() {
   )
 }
 
+/** recordForm: sections of fields, two columns on wide screens, a sticky save bar. */
+export function RecordFormPreview() {
+  const sections = [
+    { title: "Contact", fields: [["First name", "Somchai"], ["Last name", "Jaidee"], ["Phone", "081-234-5678"], ["Email", "somchai@acme.co.th"]] },
+    { title: "Company", fields: [["Company", "Acme Retail"], ["Industry", "Retail"]] },
+  ]
+  return (
+    <form onSubmit={(e) => e.preventDefault()} className="w-full max-w-xl overflow-hidden rounded-2xl border bg-card text-left">
+      <p className="px-5 pt-4 font-heading text-lg font-semibold">New lead</p>
+      {sections.map((s, i) => (
+        <fieldset key={s.title} className={cn("px-5 pt-4 pb-1", i > 0 && "mt-2 border-t border-dashed")}>
+          <legend className="sr-only">{s.title}</legend>
+          <p aria-hidden className="mb-2 flex items-center gap-2 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+            <span className="size-1.5 rounded-full bg-[image:var(--brand-gradient)]" />
+            {s.title}
+          </p>
+          <div className="grid gap-x-4 gap-y-3 sm:grid-cols-2">
+            {s.fields.map(([label, value]) => (
+              <label key={label} className="grid gap-1 text-xs text-muted-foreground">
+                {label}
+                <input defaultValue={value} className="h-9 rounded-md border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30" />
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      ))}
+      <div className="mt-4 flex justify-end gap-2 border-t bg-card/90 px-5 py-3 backdrop-blur">
+        <button type="submit" className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground transition-[translate,box-shadow] duration-300 ease-spring-snappy hover:-translate-y-0.5 hover:shadow-md active:translate-y-0">
+          Save
+        </button>
+      </div>
+    </form>
+  )
+}
+
 /** Brand Loader: the same stat card under Theme = brand and Theme = follow-org (values from an SLDS 2 Cosmos org). */
 export function BrandLoaderPreview() {
   const themes = [

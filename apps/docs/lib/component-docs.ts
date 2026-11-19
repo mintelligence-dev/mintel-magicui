@@ -37,10 +37,10 @@ type RawItem = {
 // Core UI items that belong to the "Forms" group in the docs navigation.
 const FORM_ITEMS = new Set([
   "input", "label", "textarea", "checkbox", "radio-group", "switch", "select", "combobox", "calendar", "date-picker", "form",
-  "file-upload", "thai-address", "thai-id-input", "thai-phone-input", "otp-input", "slider", "toggle-group", "tag-input",
+  "file-upload", "thai-address", "thai-id-input", "thai-phone-input", "otp-input", "slider", "toggle-group", "tag-input", "signature-pad",
 ])
 
-const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper", "grouped-list", "conversation"])
+const DATA_ITEMS = new Set(["table", "data-table", "virtual-table", "tree-view", "chart", "timeline", "stepper", "grouped-list", "conversation"])
 const NAV_ITEMS = new Set(["breadcrumb", "pagination", "accordion", "sheet", "collapsing-header", "command", "sidebar"])
 
 // Page sections (registry:block items in registry/mintel/sections).
@@ -78,6 +78,9 @@ export const BADGES: Record<string, "new" | "updated"> = {
   "thai-id-input": "new",
   "thai-phone-input": "new",
   "otp-input": "new",
+  "tree-view": "new",
+  "signature-pad": "new",
+  "virtual-table": "new",
   conversation: "new",
   command: "new",
   sidebar: "new",
@@ -90,6 +93,7 @@ export const BADGES: Record<string, "new" | "updated"> = {
     (items as RawItem[]).filter((i) => isSection(i.name)).map((i) => [i.name, "new" as const])
   ),
   "sf:quickActions": "new",
+  "sf:recordForm": "new",
   "sf:filesGallery": "new",
   "sf:kpiTrend": "new",
   "sf:announcement": "new",
@@ -323,6 +327,39 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("onComplete", "(code) => void", "All boxes filled.", "เรียกเมื่อกรอกครบ"),
       p("invalid", "boolean", "Shake and mark as invalid.", "สั่นและแสดงว่าผิด", "false"),
     ],
+  },
+  "tree-view": {
+    th: "รายการแบบลำดับชั้น เช่น โฟลเดอร์ หน่วยงาน หรือหมวดหมู่ ใช้ลูกศรเลื่อนและเปิดปิด พิมพ์ตัวอักษรเพื่อกระโดดไปหา เลือกรายการได้ และกิ่งย่อยเปิดแบบ spring",
+    props: [
+      p("items", "TreeNode[]", "{ id, label, icon?, children?, disabled? }.", "{ id, label, icon?, children?, disabled? }"),
+      p("defaultExpanded / expanded", "string[]", "Open node ids (uncontrolled / controlled).", "id ที่เปิดอยู่ (uncontrolled / controlled)"),
+      p("onExpandedChange", "(ids) => void", "Open nodes changed.", "เรียกเมื่อเปิดหรือปิดกิ่ง"),
+      p("selected / defaultSelected", "string | null", "Selected node id.", "id ที่เลือกอยู่"),
+      p("onSelect", "(id, node) => void", "Click, Enter or Space on a node.", "เรียกเมื่อคลิก กด Enter หรือ Space"),
+    ],
+  },
+  "signature-pad": {
+    th: "ช่องลงชื่อ เขียนด้วยเมาส์ ปากกา หรือนิ้ว (เส้นเรียบ รับแรงกดปากกา) ย้อนกลับและล้างได้ หรือพิมพ์ชื่อแทนสำหรับคนที่ใช้คีย์บอร์ดหรือ screen reader ได้ผลเป็นรูป PNG",
+    props: [
+      p("onChange", "(dataUrl | null) => void", "PNG data URL (transparent background), or null when empty.", "PNG แบบ data URL พื้นโปร่งใส หรือ null เมื่อยังไม่ลงชื่อ"),
+      p("allowTyped", "boolean", "Offer a typed signature.", "เปิดให้พิมพ์ชื่อแทนการเขียน", "true"),
+      p("height", "number", "Canvas height in px.", "ความสูงพื้นที่ลงชื่อ (px)", "180"),
+      p("color", "string", "Ink color.", "สีหมึก", "foreground"),
+      p("locale", '"th" | "en"', "Button and hint text.", "ภาษาของปุ่มและคำแนะนำ", '"th"'),
+      p("disabled", "boolean", "Read only.", "ปิดการใช้งาน"),
+    ],
+  },
+  "virtual-table": {
+    th: "ตารางสำหรับข้อมูลหลักพันถึงหลักหมื่นแถว แสดงเฉพาะแถวที่อยู่บนจอ หัวตารางติดด้านบน และกดหัวคอลัมน์เพื่อเรียงได้ ยังเป็น <table> จริงสำหรับ screen reader",
+    props: [
+      p("columns", "ColumnDef<TData>[]", "TanStack column definitions.", "นิยามคอลัมน์ของ TanStack"),
+      p("data", "TData[]", "All rows.", "ข้อมูลทุกแถว"),
+      p("label", "string", "Accessible name of the table.", "ชื่อของตารางสำหรับ screen reader"),
+      p("height", "number", "Scroll area height in px.", "ความสูงของพื้นที่เลื่อน (px)", "480"),
+      p("rowHeight", "number", "Estimated row height; rows are measured.", "ความสูงแถวโดยประมาณ (วัดจริงภายหลัง)", "44"),
+      p("onRowClick", "(row) => void", "Row clicked.", "เรียกเมื่อคลิกแถว"),
+    ],
+    upstream: { label: "TanStack Virtual", href: "https://tanstack.com/virtual/latest" },
   },
   "data-table": {
     th: "ตารางข้อมูลจาก TanStack Table มีช่องค้นหา กดหัวคอลัมน์เพื่อเรียง เลือกแถว และแบ่งหน้า",

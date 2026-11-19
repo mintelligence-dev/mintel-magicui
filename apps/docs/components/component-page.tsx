@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react"
+import { ArrowLeft, ArrowRight, CircleCheck, CircleX, ExternalLink } from "lucide-react"
 
 import { CodeBlock } from "@/components/code-block"
 import { CopyCommand } from "@/components/copy-command"
@@ -8,6 +8,8 @@ import { DocsShell } from "@/components/docs-shell"
 import { PreviewTabs } from "@/components/preview-tabs"
 import { EXAMPLES } from "@/examples"
 import { CATEGORY_LABEL, COMPONENT_DOCS, ITEMS, isSection, itemsByCategory } from "@/lib/component-docs"
+import { COMPONENT_GUIDES } from "@/lib/component-guides"
+import { cn } from "@/lib/utils"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
 import { REGISTRY_URL } from "@/lib/site"
 import { ItemBadge } from "@/components/item-badge"
@@ -36,6 +38,7 @@ export function ComponentPage({ lang, name }: { lang: Lang; name: string }) {
   const t = d.docs
   const item = ITEMS.find((i) => i.name === name)!
   const doc = COMPONENT_DOCS[name]
+  const guide = COMPONENT_GUIDES[name]
   const Example = EXAMPLES[name]
   const exampleCode = toAppPaths(read(`examples/${name}.tsx`))
   const sources = item.files.map((f) => ({ name: f.split("/").pop()!, code: toAppPaths(read(f)) }))
@@ -95,6 +98,37 @@ export function ComponentPage({ lang, name }: { lang: Lang; name: string }) {
             <Example />
           </PreviewTabs>
         </section>
+
+        {guide && (
+          <section className="space-y-4">
+            <h2 className="font-heading text-xl font-semibold">{t.whenToUse}</h2>
+            <div className="grid gap-4 md:grid-cols-2 [&>*]:min-w-0">
+              {([["use", guide.use], ["avoid", guide.avoid]] as const).map(([kind, lines]) => (
+                <div key={kind} className={cn("rounded-2xl border p-5", kind === "use" ? "border-success/30 bg-success/5" : "border-destructive/25 bg-destructive/5")}>
+                  <h3 className={cn("flex items-center gap-2 text-sm font-semibold", kind === "use" ? "text-success" : "text-destructive")}>
+                    {kind === "use" ? <CircleCheck className="size-4" /> : <CircleX className="size-4" />}
+                    {kind === "use" ? t.use : t.avoid}
+                  </h3>
+                  <ul className="mt-3 space-y-2.5 text-sm">
+                    {lines.map((line) => (
+                      <li key={line.en} className="text-muted-foreground">
+                        {line[lang]}
+                        {line.alt && (
+                          <>
+                            {" "}
+                            <a href={langPath(lang, `/components/${line.alt}`)} className="font-medium text-brand underline-offset-2 hover:underline">
+                              → {ITEMS.find((i) => i.name === line.alt)!.title}
+                            </a>
+                          </>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {(doc.props?.length || doc.upstream) && (
           <section className="space-y-3">

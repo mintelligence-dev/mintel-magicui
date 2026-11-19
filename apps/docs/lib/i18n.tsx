@@ -148,6 +148,9 @@ const en = {
     gettingStarted: "Getting started",
     themes: "Themes",
     changelog: "Changelog",
+    whenToUse: "When to use",
+    use: "Use it for",
+    avoid: "Not for",
     templates: "Templates",
     templatesBody: "Whole pages you can install in one command — they pull in the Mintel components they use and land at app/<route>/page.tsx.",
     openPreview: "Open full preview",
@@ -320,6 +323,8 @@ const en = {
       siteFeatures: "Feature grid for Experience Cloud pages; cards rise in one after another. Set features in Experience Builder as text.",
       siteFaq: "Frequently asked questions for Experience Cloud pages on native <details>: keyboard and screen-reader friendly with no script.",
       siteCta: "Closing call to action on a brand-gradient band for Experience Cloud pages.",
+      recordForm:
+        "Edit or create a record with fields grouped in sections, two columns on wide screens and a save bar that stays in view. Built on lightning-record-edit-form, so field types, validation and field-level security come from Salesforce; no Apex.",
       brandLoader:
         "Invisible helper: drop it once on an app, home or record page. Theme “brand” loads the mintelGlobal stylesheet, so standard lightning-* components switch to the Mintel brand; “follow-org” does the opposite and makes the Mintel components take the org's SLDS 2 theme.",
       fontSizeControl:
@@ -471,6 +476,9 @@ const th: Dict = {
     gettingStarted: "เริ่มต้นใช้งาน",
     themes: "ธีม",
     changelog: "บันทึกการเปลี่ยนแปลง",
+    whenToUse: "ควรใช้เมื่อไหร่",
+    use: "เหมาะกับ",
+    avoid: "ไม่เหมาะกับ",
     templates: "Templates",
     templatesBody: "หน้าเว็บสำเร็จรูปที่ติดตั้งได้ด้วยคำสั่งเดียว — ดึง component ของ Mintel ที่ใช้มาให้ครบ และวางไว้ที่ app/<route>/page.tsx",
     openPreview: "เปิดดูเต็มจอ",
@@ -642,6 +650,8 @@ const th: Dict = {
       siteFeatures: "ตารางฟีเจอร์สำหรับหน้า Experience Cloud การ์ดค่อยๆ เลื่อนขึ้นทีละใบ ตั้งรายการฟีเจอร์เป็นข้อความใน Experience Builder",
       siteFaq: "คำถามที่พบบ่อยสำหรับหน้า Experience Cloud ใช้ <details> ของเบราว์เซอร์ ใช้คีย์บอร์ดและ screen reader ได้โดยไม่ต้องมีสคริปต์",
       siteCta: "แถบปิดท้ายสีแบรนด์ชวนให้ติดต่อ สำหรับหน้า Experience Cloud",
+      recordForm:
+        "ฟอร์มแก้ไขหรือสร้าง record จัดฟิลด์เป็นหมวด จอกว้างแสดง 2 คอลัมน์ และแถบปุ่มบันทึกติดด้านล่างเสมอ ใช้ lightning-record-edit-form ของ Salesforce จึงได้ชนิดฟิลด์ การตรวจค่า และสิทธิ์ระดับฟิลด์มาเอง ไม่ใช้ Apex",
       brandLoader:
         "ตัวช่วยที่มองไม่เห็น วางครั้งเดียวในหน้า app, home หรือ record ถ้าตั้ง Theme เป็น “brand” จะโหลด stylesheet mintelGlobal ให้ component มาตรฐาน lightning-* เป็นแบรนด์ Mintel ส่วน “follow-org” กลับกัน คือให้ component ของ Mintel ใช้ธีม SLDS 2 ของ org แทน",
       fontSizeControl:

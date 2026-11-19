@@ -854,6 +854,62 @@
       }
     },
     {
+      "name": "tree-view",
+      "type": "registry:ui",
+      "title": "Tree view",
+      "description": "Folders, org units or categories as an expandable tree: arrow keys, type-ahead, selection, and children that open with a spring.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/tree-view.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "signature-pad",
+      "type": "registry:ui",
+      "title": "Signature pad",
+      "description": "Sign with mouse, pen or finger (smooth, pressure-aware strokes), undo and clear, or type a name instead. Returns a PNG.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/signature-pad.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "virtual-table",
+      "type": "registry:ui",
+      "title": "Virtual table",
+      "description": "Table for thousands of rows: renders only what is in view, with a sticky header and sortable columns.",
+      "dependencies": [
+        "@tanstack/react-table@^8.21.3",
+        "@tanstack/react-virtual@^3.14.26",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/virtual-table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data table",
