@@ -156,6 +156,16 @@ writeFileSync(join(root, "app/registry.css"), css)
         if (/\basChild\b/.test(line) && !allowed.test(line)) missing.push(`${file.slice(root.length + 1)}:${n + 1} uses asChild`)
       })
   }
+  // Scaffolds (npm run new:component / new:lwc) leave TODO markers: fine while developing, not in CI.
+  for (const f of ["registry/items.json", "lib/component-docs.ts", "lib/sf-index.ts", "lib/sf-components.tsx", "lib/i18n.tsx"]) {
+    readFileSync(join(root, f), "utf8")
+      .split("\n")
+      .forEach((line, n) => {
+        if (!/TODO:/.test(line)) return
+        if (process.env.CI) missing.push(`${f}:${n + 1} still has a TODO`)
+        else console.warn(`! ${f}:${n + 1} still has a TODO (CI will fail)`)
+      })
+  }
   if (missing.length) {
     console.error(`✗ Registry checks failed:\n  ${missing.join("\n  ")}`)
     process.exit(1)

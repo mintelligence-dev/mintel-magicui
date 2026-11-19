@@ -14,35 +14,38 @@ src/tokens.json ──build──► CSS variables · Tailwind v4 theme · JS ·
 
 | Package | What it is | How you get it |
 |---|---|---|
-| [`packages/tokens`](packages/tokens) | `@mintelligence-dev/tokens` — colors, fonts, radius (light + dark) | npm (planned) / copy files |
-| [`apps/docs`](apps/docs) | Docs site (English `/`, Thai `/th`) + shadcn registry (`public/r/*.json`) | `npx shadcn add <url>` |
-| [`packages/salesforce`](packages/salesforce) | SFDX project: LWC tokens, SLDS hooks static resource, branded LWC | `sf project deploy start` |
+| [`packages/tokens`](packages/tokens) | `@mintelligence-dev/tokens` — colors, fonts, radius, motion (light + dark) | Through the registry theme (`@mintel/mintel-theme`). **Not on npm yet**; see the package README |
+| [`apps/docs`](apps/docs) | Docs site (English `/`, Thai `/th`) + shadcn registry (`public/r/*.json`) | `npx shadcn add @mintel/<name>` |
+| [`packages/salesforce`](packages/salesforce) | SFDX project: LWC tokens, SLDS hooks static resource, branded LWC | `npm run deploy` (checks for name conflicts first) |
 
 ## Use it in React / Next.js
 
-Requires a project set up with Tailwind v4 and shadcn (`npx shadcn@latest init`).
-`<docs-domain>` is wherever the docs site is deployed (e.g. the Vercel production URL) — the registry JSON is
-served from its `/r` path.
+Docs and registry: **https://mintel-ui.vercel.app** (Thai at `/th`). Full steps, verified in a fresh Next.js
+app, are in [Getting started](https://mintel-ui.vercel.app/getting-started).
+
+Requires a project with Tailwind v4 and shadcn (`npx shadcn@latest init`). Add the registry to
+`components.json`:
+
+```json
+{ "registries": { "@mintel": "https://mintel-ui.vercel.app/r/{name}.json" } }
+```
 
 ```bash
 # 1. Brand theme (colors light/dark, fonts, radius) → written into your globals.css
-npx shadcn@latest add https://<docs-domain>/r/mintel-theme.json
+npx shadcn@latest add @mintel/mintel-theme
 
 # 2. Any component — the source is copied into your project, edit freely
-npx shadcn@latest add https://<docs-domain>/r/shimmer-button.json
+npx shadcn@latest add @mintel/button @mintel/data-table @mintel/thai-address
 ```
 
-**Components** (45 registry items)
+What is available:
 
-| Category | Items |
-|---|---|
-| Theme | `mintel-theme` — install first |
-| Core UI | `button`, `badge`, `card`, `input`, `dialog`, `select`, `table`, `tabs`, `toast` (sonner — render `<Toaster />` once, then call `toast()`), `dropdown-menu`, `tooltip`, `popover` |
-| Forms | `label`, `textarea`, `checkbox`, `radio-group`, `switch`, `form` (react-hook-form + zod), `combobox` (searchable, multiple, async), `calendar` + `date-picker` (Thai, พ.ศ. by default; values stay JS `Date`) |
-| Effects | `shimmer-button`, `aurora-text`, `animated-gradient-text`, `magic-card`, `border-beam`, `shine-border`, `number-ticker`, `meteors`, `marquee`, `dot-pattern`, `blur-fade`, `animated-beam` |
-| Glass | `glass-card` (optional refraction), `glass-button`, `glass-navbar`, `segmented-control` |
-| Fluid Motion | `scroll-reveal-text`, `sticky-showcase`, `zoom-parallax`, `dock`, `animated-tabs` |
-| Mobile | `drawer` (bottom sheet, drag to dismiss), `tab-bar` |
+- [Components](https://mintel-ui.vercel.app/components): core UI, forms (including Thai ID, phone and
+  address), data display, navigation, glass, motion, mobile and effects.
+- Page sections and [templates](https://mintel-ui.vercel.app/templates).
+- [Themes](https://mintel-ui.vercel.app/themes): Mintel and Clarity, plus a theme builder.
+- For AI coding assistants: [`/llms.txt`](https://mintel-ui.vercel.app/llms.txt) (index) and
+  [`/llms-full.txt`](https://mintel-ui.vercel.app/llms-full.txt) (props, examples, LWC properties).
 
 All default colors point at brand tokens (`--brand`, `--brand-accent`, `--brand-cyan`, `--brand-gradient`),
 so components follow the theme — including dark mode — without passing colors.
@@ -59,20 +62,25 @@ so components follow the theme — including dark mode — without passing color
   (backdrop blur is recomputed every frame).
 
 Brand fonts are **Manrope** (Latin) + **IBM Plex Sans Thai** (Thai), headings in **Rubik**. Load them with
-`next/font` or `@import "@mintelligence-dev/tokens/fonts.css"`.
+`next/font` (the Getting started guide has the layout code).
 
 ## Use it in Salesforce
 
 [`packages/salesforce`](packages/salesforce) is a deployable SFDX project: the `c/tokens` CSS module, the
-`mintelGlobal` static resource (SLDS styling hooks that rebrand standard `lightning-*` components) and branded LWC
-(`glassCard`, `shimmerButton`, `gradientText`, `statCard`, `brandLoader`).
+`mintelGlobal` static resource (SLDS styling hooks that rebrand standard `lightning-*` components) and the
+Mintel LWC (record pages, KPIs, kanban, timelines, Thai address, chat, Experience Cloud sections). No Apex.
 
 ```bash
-sf project deploy start --source-dir packages/salesforce/force-app --target-org my-org
+sf org login web --alias my-org
+npm run deploy:check -w @mintelligence-dev/salesforce -- --target-org my-org   # name conflicts only
+npm run deploy -w @mintelligence-dev/salesforce -- --target-org my-org         # checks, then deploys
 ```
 
-The docs site has a Salesforce guide (`/salesforce`, Thai at `/th/salesforce`) with a live before/after preview of
-real SLDS components. Details: [`packages/salesforce/README.md`](packages/salesforce/README.md).
+Guide: [Salesforce getting started](https://mintel-ui.vercel.app/salesforce/get-started). Every component
+has a page under [/salesforce](https://mintel-ui.vercel.app/salesforce). Details:
+[`packages/salesforce/README.md`](packages/salesforce/README.md).
+
+**Status:** the LWC are covered by jest and compile checks, but have not been verified in a real org yet.
 
 ## Develop
 
@@ -83,8 +91,8 @@ npm run build      # tokens → registry.json → public/r/*.json → static doc
 ```
 
 - Change colors/fonts only in `packages/tokens/src/tokens.json`, then `npm run build`.
-- Add a component: put the file in `apps/docs/registry/mintel/{ui,effects,glass,motion}/`, add an entry to
-  `apps/docs/registry/items.json`, run `npm run build`.
+- Add a component: `npm run new:component -- <name>` or `npm run new:lwc -- <name>` scaffolds every file
+  and entry the build checks for. See [CONTRIBUTING.md](CONTRIBUTING.md).
 - Generated files (`packages/tokens/{dist,lwc,salesforce}`, `apps/docs/public/r`, `registry.json`)
   are committed; CI fails if they are stale.
 
