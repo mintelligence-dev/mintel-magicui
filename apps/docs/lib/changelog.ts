@@ -47,8 +47,8 @@ function parse(md: string) {
       .flatMap((g) => {
         const [title, ...body] = g.split("\n")
         const kind = KIND[title.trim().toLowerCase()]
-        // Drop the "- @scope/pkg@1.2.3" lines Changesets adds for internal dependency bumps.
-        const list = items(body.join("\n")).filter((x) => !/^@[\w-]+\/[\w-]+@\d/.test(x))
+        // Drop the "Updated dependencies" / "@scope/pkg@1.2.3" lines Changesets adds for internal dependency bumps.
+        const list = items(body.join("\n")).filter((x) => !/^(Updated dependencies|@[\w-]+\/[\w-]+@\d)/.test(x))
         return kind && list.length ? [{ kind, items: list }] : []
       })
     versions.push({ version: m[1], date: m[2], groups })

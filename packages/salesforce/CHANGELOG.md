@@ -2,6 +2,17 @@
 
 Lightning Web Components, static resources and deploy scripts for Salesforce.
 
+## 0.2.0 — 2026-11-20
+
+### Minor Changes
+
+- New components: tree view, signature pad (draw or type, PNG output) and virtual table (thousands of rows, sticky header, sorting) in the registry, and the recordForm LWC (edit or create a record with fields in sections, built on lightning-record-edit-form, no Apex). Component pages now say when to use each of the main components and what to use instead.
+- 00c5e7c: Mintel LWC can follow the org's SLDS 2 theme: Brand Loader gets a Theme property (brand or follow-org), the new mintelFollowOrg stylesheet maps the components to the SLDS 2 global styling hooks, and class="mintel-follow-org" opts in a single component. Without the opt-in nothing changes. Also fixes the Brand Loader, which threw an error and never loaded the brand stylesheet after the components were renamed.
+
+### Patch Changes
+
+- 7f1b205: Salesforce docs use readable component names (Record Header, SLA Timer, KPI Trend) in the menu, cards and search, matching what App Builder shows; the tag name stays on each page. Added "when to use" guidance for 15 LWC, a dotted preview canvas on every component page, previews that match the LWC more closely (related cards, SLA timer, KPI trend), and jest tests for the seven LWC that had none.
+
 ## 0.1.0 — 2026-11-19
 
 ### Minor Changes

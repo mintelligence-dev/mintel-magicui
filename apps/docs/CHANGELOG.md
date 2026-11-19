@@ -2,6 +2,21 @@
 
 The shadcn registry (`@mintel/*`) and the documentation site.
 
+## 0.2.0 — 2026-11-20
+
+### Minor Changes
+
+- New components: tree view, signature pad (draw or type, PNG output) and virtual table (thousands of rows, sticky header, sorting) in the registry, and the recordForm LWC (edit or create a record with fields in sections, built on lightning-record-edit-form, no Apex). Component pages now say when to use each of the main components and what to use instead.
+
+### Patch Changes
+
+- a93a208: Changelog page at /changelog (EN/TH) built from the package CHANGELOG.md files, and Changesets for versioning tokens, the registry and the Salesforce components together.
+- 45ae1fd: Salesforce docs: the kanban preview now uses the same corner "Move to" menu as the LWC instead of a full-width select.
+- Salesforce docs: redesigned overview (record page preview, component icons and group colors), previous/next links on component pages, and a new getting started guide at /salesforce/get-started covering install, the name-conflict check, deploy, App Builder and Experience Cloud.
+- 7f1b205: Salesforce docs use readable component names (Record Header, SLA Timer, KPI Trend) in the menu, cards and search, matching what App Builder shows; the tag name stays on each page. Added "when to use" guidance for 15 LWC, a dotted preview canvas on every component page, previews that match the LWC more closely (related cards, SLA timer, KPI trend), and jest tests for the seven LWC that had none.
+- Updated dependencies [00c5e7c]
+  - @mintelligence-dev/tokens@0.2.0
+
 ## 0.1.0 — 2026-11-19
 
 ### Minor Changes
