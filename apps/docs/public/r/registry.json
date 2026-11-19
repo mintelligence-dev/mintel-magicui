@@ -10,9 +10,9 @@
       "description": "M-Intelligence brand theme: colors (light + dark), fonts and radius. Install this first.",
       "cssVars": {
         "theme": {
-          "font-sans": "Manrope, \"IBM Plex Sans Thai\", ui-sans-serif, system-ui, sans-serif",
-          "font-heading": "Rubik, \"IBM Plex Sans Thai\", ui-sans-serif, system-ui, sans-serif",
-          "font-mono": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, monospace",
+          "font-sans": "var(--font-manrope, Manrope), var(--font-plex-thai, \"IBM Plex Sans Thai\"), ui-sans-serif, system-ui, sans-serif",
+          "font-heading": "var(--font-rubik, Rubik), var(--font-plex-thai, \"IBM Plex Sans Thai\"), ui-sans-serif, system-ui, sans-serif",
+          "font-mono": "var(--font-jetbrains, \"JetBrains Mono\"), ui-monospace, SFMono-Regular, Menlo, monospace",
           "color-brand": "var(--brand)",
           "color-brand-foreground": "var(--brand-foreground)",
           "color-brand-accent": "var(--brand-accent)",
