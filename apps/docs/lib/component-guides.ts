@@ -612,6 +612,33 @@ export const COMPONENT_GUIDES: Record<string, ComponentGuide> = {
     use: [l("The footer of a marketing or company site.", "footer ของเว็บ marketing หรือเว็บบริษัท")],
     avoid: [l("App screens.", "หน้าจอในแอป")],
   },
+  "confirm-dialog": {
+    use: [
+      l("Asking before an action that cannot be undone: delete, cancel an order, send to many people.", "ถามก่อนทำสิ่งที่ย้อนกลับไม่ได้ เช่น ลบ ยกเลิกออเดอร์ ส่งถึงคนจำนวนมาก"),
+    ],
+    avoid: [
+      l("Routine actions: asking every time teaches people to click Confirm without reading. Offer undo in a toast instead.", "งานประจำ เพราะถามทุกครั้งจะทำให้คนกดยืนยันโดยไม่อ่าน ควรให้ undo ผ่าน toast แทน", "toast"),
+      l("A form or anything with fields: use a dialog.", "ฟอร์มหรือสิ่งที่มีช่องกรอก ควรใช้ dialog", "dialog"),
+    ],
+  },
+  "number-input": {
+    use: [
+      l("Amounts and quantities people type: prices in baht, a discount, a headcount.", "จำนวนเงินและปริมาณที่ต้องพิมพ์ เช่น ราคาเป็นบาท ส่วนลด จำนวนคน"),
+    ],
+    avoid: [
+      l("Numbers that are not quantities, such as phone, ID or postal codes: separators would be wrong.", "ตัวเลขที่ไม่ใช่ปริมาณ เช่น เบอร์โทร เลขบัตร รหัสไปรษณีย์ เพราะจะมีคอมมาคั่นผิดที่", "input"),
+      l("An approximate value in a range: use a slider.", "ค่าโดยประมาณในช่วง ควรใช้ slider", "slider"),
+    ],
+  },
+  "time-picker": {
+    use: [
+      l("A time of day in a form: an appointment, opening hours, a deadline.", "เวลาในฟอร์ม เช่น เวลานัด เวลาเปิดทำการ กำหนดส่ง"),
+    ],
+    avoid: [
+      l("A date: use the date picker, and put the two side by side for date and time.", "วันที่ ควรใช้ date picker และวางคู่กันถ้าต้องการทั้งวันและเวลา", "date-picker"),
+      l("A duration (2 h 30 min): use number inputs.", "ระยะเวลา (2 ชม. 30 นาที) ควรใช้ number input", "number-input"),
+    ],
+  },
 }
 
 // Build-time check: every guide and every "use instead" link points at a real registry item.

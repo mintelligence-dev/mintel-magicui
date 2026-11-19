@@ -163,16 +163,35 @@ function RangeCalendar({
   era,
   locale,
   value,
+  dropdowns,
+  fromYear,
+  toYear,
   onSelect,
 }: {
   era: CalendarEra
   locale: PickerLocale
   value?: DateRange
+  dropdowns?: boolean
+  fromYear?: number
+  toYear?: number
   onSelect?: (range: DateRange | undefined) => void
 }) {
   const [months] = React.useState(() => (window.matchMedia("(min-width: 640px)").matches ? 2 : 1))
+  const thisYear = new Date().getFullYear()
   return (
-    <Calendar mode="range" era={era} locale={dayPickerLocale(locale)} selected={value} defaultMonth={value?.from} numberOfMonths={months} onSelect={onSelect} />
+    <Calendar
+      mode="range"
+      era={era}
+      locale={dayPickerLocale(locale)}
+      selected={value}
+      defaultMonth={value?.from}
+      numberOfMonths={months}
+      onSelect={onSelect}
+      // Same month/year dropdowns as the single picker.
+      {...(dropdowns
+        ? { captionLayout: "dropdown" as const, startMonth: new Date(fromYear ?? thisYear - 100, 0), endMonth: new Date(toYear ?? thisYear + 10, 11) }
+        : {})}
+    />
   )
 }
 
@@ -208,7 +227,7 @@ function DateRangePicker({
       </div>
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Content align="start" sideOffset={6} className={contentClass}>
-          <RangeCalendar era={era} locale={locale} value={value} onSelect={onValueChange} />
+          <RangeCalendar era={era} locale={locale} value={value} dropdowns={rest.dropdowns} fromYear={rest.fromYear} toYear={rest.toYear} onSelect={onValueChange} />
         </PopoverPrimitive.Content>
       </PopoverPrimitive.Portal>
     </PopoverPrimitive.Root>

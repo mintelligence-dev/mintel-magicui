@@ -93,6 +93,9 @@ import SectionFaqExample from "./section-faq"
 import SectionCtaExample from "./section-cta"
 import SectionContactExample from "./section-contact"
 import SectionFooterExample from "./section-footer"
+import ConfirmDialogExample from "./confirm-dialog"
+import NumberInputExample from "./number-input"
+import TimePickerExample from "./time-picker"
 
 export const EXAMPLES: Record<string, ComponentType> = {
   "button": ButtonExample,
@@ -186,4 +189,7 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "section-cta": SectionCtaExample,
   "section-contact": SectionContactExample,
   "section-footer": SectionFooterExample,
+  "confirm-dialog": ConfirmDialogExample,
+  "number-input": NumberInputExample,
+  "time-picker": TimePickerExample,
 }

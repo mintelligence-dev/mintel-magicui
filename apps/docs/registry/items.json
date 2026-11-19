@@ -2122,5 +2122,57 @@
         }
       }
     }
+  },
+  {
+    "name": "confirm-dialog",
+    "type": "registry:ui",
+    "title": "Confirm dialog",
+    "description": "Asks \"are you sure?\" before an action: waits for the action to finish, shows an error if it fails, and starts on Cancel for destructive actions.",
+    "registryDependencies": [
+      "utils",
+      "@mintel/dialog",
+      "@mintel/button"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/confirm-dialog.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "number-input",
+    "type": "registry:ui",
+    "title": "Number input",
+    "description": "Number or money field: thousands separators while typing, decimals, min/max, a prefix or suffix (฿, %), and a real number as the value.",
+    "registryDependencies": [
+      "utils",
+      "@mintel/input"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/number-input.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "time-picker",
+    "type": "registry:ui",
+    "title": "Time picker",
+    "description": "Time field on the 24-hour clock: type it (930, 9:30, 14) or pick from a list of slots, with earliest and latest times.",
+    "dependencies": [
+      "@radix-ui/react-popover",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/time-picker.tsx",
+        "type": "registry:ui"
+      }
+    ]
   }
 ]

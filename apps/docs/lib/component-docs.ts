@@ -35,7 +35,7 @@ type RawItem = {
 }
 
 // Core UI items that belong to the "Forms" group in the docs navigation.
-const FORM_ITEMS = new Set([
+const FORM_ITEMS = new Set(["time-picker", "number-input", 
   "input", "label", "textarea", "checkbox", "radio-group", "switch", "select", "combobox", "calendar", "date-picker", "form",
   "file-upload", "thai-address", "thai-id-input", "thai-phone-input", "otp-input", "slider", "toggle-group", "tag-input", "signature-pad",
 ])
@@ -74,6 +74,9 @@ export type PropDoc = { name: string; type: string; default?: string; descriptio
  * depend on when it runs); remove an entry once it is no longer news.
  */
 export const BADGES: Record<string, "new" | "updated"> = {
+  "time-picker": "new",
+  "number-input": "new",
+  "confirm-dialog": "new",
   "thai-address": "new",
   "thai-id-input": "new",
   "thai-phone-input": "new",
@@ -268,6 +271,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("defaultCollapsed", "boolean", "SidebarProvider: start as an icon rail.", "SidebarProvider: เริ่มแบบแถบไอคอน", "false"),
       p("shortcut", "boolean", "SidebarProvider: toggle with ⌘B / Ctrl+B.", "SidebarProvider: สลับด้วย ⌘B", "true"),
       p("icon / label / href / active / badge", "—", "SidebarItem: one nav link (label becomes the tooltip in the rail).", "SidebarItem: ลิงก์เมนู (ตอนย่อ label เป็น tooltip)"),
+      p("linkComponent", "ElementType", "SidebarItem: rendered instead of <a> when href is set, e.g. Link from next/link, so navigation stays client-side.", "SidebarItem: ใช้แทน <a> เมื่อมี href เช่น Link จาก next/link เพื่อไม่ให้โหลดหน้าใหม่ทั้งหน้า", '"a"'),
       p("label", "ReactNode", "SidebarGroup: section heading.", "SidebarGroup: หัวข้อกลุ่ม"),
     ],
   },
@@ -403,6 +407,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("icon / iconTone", 'ReactNode / "brand" | "blue" | "purple" | "cyan" | "green" | "amber" | "red" | "gray"', "GroupedRow: icon in a colored tile.", "GroupedRow: ไอคอนในกล่องสี", '"brand"'),
       p("title / description", "ReactNode", "GroupedRow: main text and a smaller line.", "GroupedRow: ข้อความหลักและบรรทัดรอง"),
       p("value", "ReactNode", "GroupedRow: short value on the right.", "GroupedRow: ค่าด้านขวา"),
+      p("linkComponent", "ElementType", "GroupedRow: rendered instead of <a> when href is set, e.g. Link from next/link.", "GroupedRow: ใช้แทน <a> เมื่อมี href เช่น Link จาก next/link", '"a"'),
       p("trailing", "ReactNode", "GroupedRow: control on the right (switch …); hides the chevron.", "GroupedRow: ตัวควบคุมด้านขวา (เช่นสวิตช์) แทนลูกศร"),
       p("href / onClick", "string / () => void", "GroupedRow: makes the row a link or button with a chevron.", "GroupedRow: ทำให้แถวกดได้ เป็นลิงก์หรือปุ่ม"),
       p("destructive", "boolean", "GroupedRow: red title for actions like sign out.", "GroupedRow: หัวข้อสีแดง เช่น ออกจากระบบ", "false"),
@@ -753,5 +758,39 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("items", "{ value; label; icon; href? }[]", "Tabs; with `href` they render as links.", "แท็บ ถ้ามี `href` จะเป็นลิงก์"),
       p("value / onValueChange", "string", "Active tab.", "แท็บที่เลือก"),
     ],
+  },
+  "confirm-dialog": {
+    th: "ถาม \"แน่ใจไหม\" ก่อนทำรายการ รอจนงานเสร็จ แสดงข้อผิดพลาดถ้าไม่สำเร็จ และถ้าเป็นการลบ focus จะเริ่มที่ปุ่มยกเลิก",
+    props: [
+      p("open / onOpenChange", "boolean / (open) => void", "Controlled: keep the row being asked about in state, so one dialog serves a whole list.", "ควบคุมจาก state เก็บแถวที่กำลังถามไว้ใน state จึงใช้ dialog ตัวเดียวกับทั้งรายการได้"),
+      p("title", "ReactNode", "The question.", "คำถาม"),
+      p("description", "ReactNode", "What will happen, and whether it can be undone.", "จะเกิดอะไรขึ้น และย้อนกลับได้ไหม"),
+      p("onConfirm", "() => void | Promise<void>", "Runs on confirm. With a promise, the buttons wait: it closes on success and stays open with an error on failure.", "ทำงานเมื่อกดยืนยัน ถ้าคืน promise ปุ่มจะรอ สำเร็จแล้วปิด ไม่สำเร็จจะค้างไว้พร้อมข้อความผิดพลาด"),
+      p("destructive", "boolean", "Red confirm button; focus starts on Cancel.", "ปุ่มยืนยันสีแดง และ focus เริ่มที่ปุ่มยกเลิก", "false"),
+      p("confirmLabel / cancelLabel", "string", "Button text.", "ข้อความบนปุ่ม", '"ยืนยัน" / "ยกเลิก"'),
+      p("locale", '"th" | "en"', "Built-in text.", "ภาษาของข้อความในตัว", '"th"'),
+    ],
+  },
+  "number-input": {
+    th: "ช่องกรอกตัวเลขหรือจำนวนเงิน ใส่คอมมาคั่นหลักพันระหว่างพิมพ์ กำหนดทศนิยม ค่าต่ำสุด/สูงสุด และคำนำหน้าหรือต่อท้าย (฿, %) ได้ ค่าที่ได้เป็นตัวเลขจริง",
+    props: [
+      p("value / defaultValue", "number | null", "The number; null when empty.", "ตัวเลข หรือ null เมื่อว่าง"),
+      p("onValueChange", "(value: number | null) => void", "Called while typing with the parsed number.", "เรียกระหว่างพิมพ์ พร้อมตัวเลขที่แปลงแล้ว"),
+      p("decimals", "number", "Digits after the decimal point.", "จำนวนหลักทศนิยม", "0"),
+      p("min / max", "number", "Limits, applied when the field loses focus.", "ค่าต่ำสุด/สูงสุด ปรับให้เมื่อออกจากช่อง"),
+      p("allowNegative", "boolean", "Accept a leading minus.", "รับค่าติดลบ", "false"),
+      p("prefix / suffix", "ReactNode", "Shown inside the field, e.g. ฿ or %. Not read by screen readers: say the unit in the label too.", "แสดงในช่อง เช่น ฿ หรือ % screen reader ไม่อ่าน จึงควรบอกหน่วยใน label ด้วย"),
+    ],
+  },
+  "time-picker": {
+    th: "ช่องเลือกเวลาแบบ 24 ชั่วโมง พิมพ์เองได้ (930, 9:30, 14) หรือเลือกจากรายการช่วงเวลา กำหนดเวลาเร็วสุดและช้าสุดได้",
+    props: [
+      p("value / defaultValue", "string", '24-hour "HH:mm", or "" when empty.', 'เวลาแบบ 24 ชั่วโมง "HH:mm" หรือ "" เมื่อว่าง'),
+      p("onValueChange", "(time: string) => void", "Called with a complete time, on blur, Enter or a pick from the list.", "เรียกเมื่อได้เวลาครบ ตอนออกจากช่อง กด Enter หรือเลือกจากรายการ"),
+      p("step", "number", "Minutes between the times in the list. Typed times can be any minute.", "ระยะห่างเป็นนาทีของเวลาในรายการ ส่วนเวลาที่พิมพ์เป็นนาทีไหนก็ได้", "30"),
+      p("min / max", "string", 'Earliest and latest time, "HH:mm". A typed time outside them is marked invalid.', 'เวลาเร็วสุดและช้าสุด "HH:mm" ถ้าพิมพ์นอกช่วงจะขึ้นว่าไม่ถูกต้อง', '"00:00" / "23:59"'),
+      p("locale", '"th" | "en"', "Built-in text.", "ภาษาของข้อความในตัว", '"th"'),
+    ],
+    upstream: radix("Popover"),
   },
 }

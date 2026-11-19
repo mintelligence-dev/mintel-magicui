@@ -87,9 +87,16 @@ function RowInner({ icon, iconTone = "brand", title, description, value, trailin
 function GroupedRow({
   href,
   onClick,
+  linkComponent: LinkComponent = "a",
   className,
   ...content
-}: RowContent & { href?: string; onClick?: () => void; className?: string }) {
+}: RowContent & {
+  href?: string
+  onClick?: () => void
+  /** Rendered instead of <a> when `href` is set, e.g. your router's Link, so navigation stays client-side. */
+  linkComponent?: React.ElementType
+  className?: string
+}) {
   const pressable = href !== undefined || onClick !== undefined
   const inner = cn(
     "flex w-full items-center gap-3 pl-4 text-left text-sm outline-none",
@@ -98,9 +105,9 @@ function GroupedRow({
   return (
     <li data-slot="grouped-row" className={cn("group/row", className)}>
       {href !== undefined ? (
-        <a href={href} className={inner}>
+        <LinkComponent href={href} className={inner}>
           <RowInner {...content} chevron />
-        </a>
+        </LinkComponent>
       ) : onClick ? (
         <button type="button" onClick={onClick} className={inner}>
           <RowInner {...content} chevron />
