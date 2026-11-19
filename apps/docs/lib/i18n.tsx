@@ -147,6 +147,7 @@ const en = {
   docs: {
     gettingStarted: "Getting started",
     themes: "Themes",
+    changelog: "Changelog",
     templates: "Templates",
     templatesBody: "Whole pages you can install in one command — they pull in the Mintel components they use and land at app/<route>/page.tsx.",
     openPreview: "Open full preview",
@@ -469,6 +470,7 @@ const th: Dict = {
   docs: {
     gettingStarted: "เริ่มต้นใช้งาน",
     themes: "ธีม",
+    changelog: "บันทึกการเปลี่ยนแปลง",
     templates: "Templates",
     templatesBody: "หน้าเว็บสำเร็จรูปที่ติดตั้งได้ด้วยคำสั่งเดียว — ดึง component ของ Mintel ที่ใช้มาให้ครบ และวางไว้ที่ app/<route>/page.tsx",
     openPreview: "เปิดดูเต็มจอ",

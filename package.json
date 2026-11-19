@@ -12,9 +12,14 @@
     "build:registry": "npm run registry:build -w docs",
     "build": "npm run build:tokens && npm run build -w docs",
     "dev": "npm run build:tokens && npm run dev -w docs",
-    "test": "npm test -w @mintelligence-dev/salesforce"
+    "test": "npm test -w @mintelligence-dev/salesforce",
+    "changeset": "changeset",
+    "version-packages": "changeset version && node scripts/date-changelogs.mjs"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.3"
   }
 }
