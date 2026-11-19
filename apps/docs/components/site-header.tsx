@@ -35,16 +35,23 @@ export function SiteHeader({ lang, page = "home" }: { lang: Lang; page?: SitePag
               aria-current={page === l.key ? "page" : undefined}
               className={
                 page === l.key
-                  ? "hidden rounded-md bg-accent px-3 py-1.5 font-medium text-accent-foreground md:block"
-                  : "hidden rounded-md px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground md:block"
+                  ? "hidden rounded-md bg-accent px-3 py-1.5 font-medium whitespace-nowrap text-accent-foreground md:block"
+                  : "hidden rounded-md px-3 py-1.5 whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground md:block"
               }
             >
               {l.label}
             </a>
           ))}
-          <FontSizeControl locale={lang} className="hidden xl:inline-flex" />
           <CommandMenu lang={lang} />
-          <LangSwitch lang={lang} groupLabel={t.language} />
+          {/* Reading settings side by side: text size + language */}
+          <div className="flex items-center gap-1.5">
+            <FontSizeControl
+              locale={lang}
+              // Same track as the language switch: 36px pill, 4px padding, 28px buttons.
+              className="hidden h-9 gap-1 border-0 bg-muted p-1 shadow-none lg:inline-flex [&_button]:h-7 [&_button]:min-w-7 [&_button]:px-2"
+            />
+            <LangSwitch lang={lang} groupLabel={t.language} />
+          </div>
           <Button variant="ghost" size="icon" asChild className="hidden sm:inline-flex">
             <a href={REPO_URL} aria-label="GitHub">
               <GithubIcon />
