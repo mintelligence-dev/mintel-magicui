@@ -1,0 +1,268 @@
+import items from "@/registry/items.json"
+
+export type Category = "core" | "effects" | "glass" | "motion" | "mobile"
+
+export type RegistryItem = {
+  name: string
+  title: string
+  description: string
+  category: Category
+  dependencies: string[]
+  files: string[]
+}
+
+export const CATEGORY_ORDER: Category[] = ["core", "glass", "motion", "mobile", "effects"]
+
+export const CATEGORY_LABEL: Record<Category, { en: string; th: string }> = {
+  core: { en: "Core UI", th: "Core UI" },
+  effects: { en: "Effects", th: "Effects" },
+  glass: { en: "Glass", th: "Glass" },
+  motion: { en: "Fluid Motion", th: "Fluid Motion" },
+  mobile: { en: "Mobile", th: "Mobile" },
+}
+
+type RawItem = {
+  name: string
+  title: string
+  description: string
+  dependencies?: string[]
+  files: { path: string }[]
+  meta?: { category?: string }
+}
+
+export const ITEMS: RegistryItem[] = (items as RawItem[]).map((it) => ({
+  name: it.name,
+  title: it.title,
+  description: it.description,
+  category: (it.meta?.category as Category) ?? "core",
+  dependencies: it.dependencies ?? [],
+  files: it.files.map((f) => f.path),
+}))
+
+export const itemsByCategory = () =>
+  CATEGORY_ORDER.map((c) => ({ category: c, items: ITEMS.filter((i) => i.category === c) }))
+
+export type PropDoc = { name: string; type: string; default?: string; description: { en: string; th: string } }
+
+export type ComponentDoc = {
+  /** Thai version of the registry description. */
+  th: string
+  /** Props Mintel adds or changes. Primitive props are documented upstream (see `upstream`). */
+  props?: PropDoc[]
+  /** Docs for the underlying primitive. */
+  upstream?: { label: string; href: string }
+}
+
+const p = (name: string, type: string, en: string, th: string, def?: string): PropDoc => ({
+  name,
+  type,
+  default: def,
+  description: { en, th },
+})
+
+const radix = (part: string) => ({ label: `Radix ${part}`, href: `https://www.radix-ui.com/primitives/docs/components/${part.toLowerCase().replace(/ /g, "-")}` })
+
+/** One entry per registry item — enforced at build time by scripts/build-registry.mjs. */
+export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
+  button: {
+    th: "ปุ่มพร้อม variant ของแบรนด์ (default, brand gradient, secondary, outline, ghost, destructive, link) กดแล้วยุบแบบ spring",
+    props: [
+      p("variant", '"default" | "brand" | "secondary" | "outline" | "ghost" | "destructive" | "link"', "Visual style. `brand` uses the brand gradient.", "รูปแบบปุ่ม `brand` ใช้ gradient ของแบรนด์", '"default"'),
+      p("size", '"default" | "sm" | "lg" | "icon"', "Size. `icon` gets a 44px touch target on touch screens.", "ขนาด `icon` มีพื้นที่กด 44px บนจอสัมผัส", '"default"'),
+      p("asChild", "boolean", "Render the child element (e.g. a link) with button styles.", "ใช้ element ลูก (เช่นลิงก์) แต่แต่งเป็นปุ่ม", "false"),
+    ],
+  },
+  badge: {
+    th: "ป้ายสถานะ มีแบบ brand, soft, success, warning และ destructive",
+    props: [p("variant", '"default" | "brand" | "secondary" | "soft" | "success" | "warning" | "destructive" | "outline"', "Visual style.", "รูปแบบป้าย", '"default"')],
+  },
+  card: { th: "การ์ด แบ่งเป็น header, title, description, action, content และ footer" },
+  input: { th: "ช่องกรอกข้อความ ใช้ตัวอักษร 16px บนมือถือเพื่อไม่ให้ iOS ซูม" },
+  dialog: { th: "หน้าต่าง modal พื้นหลังเบลอ เปิดแบบซูมเข้า", upstream: radix("Dialog") },
+  select: { th: "dropdown เลือกค่า มีเครื่องหมายถูกสีแบรนด์", upstream: radix("Select") },
+  table: { th: "ตารางข้อมูล มี header, body, footer, caption และไฮไลต์แถวเมื่อชี้" },
+  tabs: { th: "แท็บที่เลือกเป็นสีแบรนด์ เนื้อหาค่อยๆ ปรากฏ", upstream: radix("Tabs") },
+  toast: {
+    th: "แจ้งเตือนมุมจอ (sonner) วาง <Toaster /> ครั้งเดียวแล้วเรียก toast() ได้ทุกที่ สลับ dark mode ตามหน้า",
+    upstream: { label: "sonner", href: "https://sonner.emilkowal.ski" },
+  },
+  label: { th: "ป้ายชื่อของช่องกรอก รองรับ accessibility", upstream: radix("Label") },
+  textarea: { th: "ช่องข้อความหลายบรรทัด สูงขึ้นอัตโนมัติตามข้อความ" },
+  checkbox: { th: "ช่องติ๊ก มีสถานะ indeterminate กดแล้วเด้งแบบ spring พื้นที่กด 44px", upstream: radix("Checkbox") },
+  "radio-group": { th: "ตัวเลือกแบบเลือกได้ข้อเดียว พื้นที่กด 44px", upstream: radix("Radio Group") },
+  switch: {
+    th: "สวิตช์เปิด/ปิด ตัวเลื่อนใช้ spring ของแบรนด์",
+    props: [p("size", '"default" | "sm"', "Switch size.", "ขนาดสวิตช์", '"default"')],
+    upstream: radix("Switch"),
+  },
+  form: {
+    th: "ชุดประกอบฟอร์มสำหรับ react-hook-form + zod ผูก label, คำอธิบาย และ error ให้ screen reader อ่านได้ถูก",
+    upstream: { label: "react-hook-form", href: "https://react-hook-form.com" },
+  },
+  combobox: {
+    th: "select ที่พิมพ์ค้นหาได้ (ไทย/อังกฤษ) เลือกหลายค่าเป็น chip และดึงตัวเลือกจาก API ได้",
+    props: [
+      p("options", "{ value; label; keywords?; icon?; disabled? }[]", "Options. `keywords` are searchable but hidden (e.g. the Thai or English name).", "ตัวเลือก `keywords` ใช้ค้นหาได้แต่ไม่แสดง (เช่นชื่อไทย/อังกฤษ)"),
+      p("multiple", "boolean", "Select several values (shown as chips).", "เลือกได้หลายค่า แสดงเป็น chip", "false"),
+      p("value / onValueChange", "string | string[]", "Controlled value (array when `multiple`).", "ค่าที่เลือก (เป็น array เมื่อ `multiple`)"),
+      p("locale", '"th" | "en"', "Language of built-in strings.", "ภาษาของข้อความในตัว", '"th"'),
+      p("onSearchChange", "(search: string) => void", "Called as the user types — fetch options here.", "เรียกตอนพิมพ์ ใช้ดึงตัวเลือกจาก API"),
+      p("shouldFilter", "boolean", "Set false when filtering on the server.", "ตั้ง false เมื่อกรองฝั่ง server", "true"),
+      p("loading", "boolean", "Show the loading row.", "แสดงสถานะกำลังโหลด", "false"),
+      p("maxChips", "number", "Chips shown before “+N” (multiple only).", "จำนวน chip ก่อนแสดง “+N”", "3"),
+    ],
+    upstream: { label: "cmdk", href: "https://cmdk.paco.me" },
+  },
+  calendar: {
+    th: "ปฏิทินภาษาไทย แสดงปี พ.ศ. เป็นค่าเริ่มต้น รองรับเลือกวันเดียว หลายวัน และช่วงวันที่",
+    props: [
+      p("era", '"buddhist" | "gregorian"', "Year display. Defaults to BE for Thai, CE for other locales.", "รูปแบบปี ค่าเริ่มต้น พ.ศ. สำหรับไทย และ ค.ศ. สำหรับภาษาอื่น"),
+      p("locale", "DayPickerLocale", "Any react-day-picker locale.", "locale ของ react-day-picker", "th"),
+    ],
+    upstream: { label: "react-day-picker", href: "https://daypicker.dev" },
+  },
+  "date-picker": {
+    th: "เลือกวันที่และช่วงวันที่ ภาษาไทยแสดง พ.ศ. ภาษาอังกฤษแสดง ค.ศ. ค่าที่ได้เป็น Date ปกติ",
+    props: [
+      p("value / onValueChange", "Date | DateRange", "Controlled value — always a normal JS Date.", "ค่าวันที่ (เป็น Date ปกติเสมอ)"),
+      p("locale", '"th" | "en"', "Calendar language and built-in strings.", "ภาษาปฏิทินและข้อความในตัว", '"th"'),
+      p("era", '"buddhist" | "gregorian"', "Defaults to BE for Thai and CE for English.", "ค่าเริ่มต้น พ.ศ. สำหรับไทย ค.ศ. สำหรับอังกฤษ"),
+      p("dropdowns", "boolean", "Month/year dropdowns (good for birth dates).", "มี dropdown เดือน/ปี (เหมาะกับวันเกิด)", "false"),
+      p("fromYear / toYear", "number", "Year range for dropdowns.", "ช่วงปีของ dropdown"),
+    ],
+  },
+  "dropdown-menu": { th: "เมนู dropdown มีเมนูย่อย ติ๊กเลือก แสดงคีย์ลัด และแบบสีแดงสำหรับคำสั่งลบ", upstream: radix("Dropdown Menu") },
+  tooltip: { th: "คำอธิบายเมื่อชี้ ใช้ได้โดยไม่ต้องครอบ provider", upstream: radix("Tooltip") },
+  popover: { th: "กล่องลอยที่ผูกกับปุ่ม", upstream: radix("Popover") },
+
+  "animated-beam": {
+    th: "เส้นแสงวิ่งเชื่อมระหว่างกล่อง เหมาะทำแผนภาพ flow",
+    props: [
+      p("containerRef / fromRef / toRef", "RefObject<HTMLElement>", "Container and the two ends of the beam.", "กล่องหลักและปลายทั้งสองของเส้น"),
+      p("curvature", "number", "Bend of the path in px.", "ความโค้งของเส้น (px)", "0"),
+      p("reverse", "boolean", "Animate in the opposite direction.", "วิ่งกลับทิศ", "false"),
+    ],
+  },
+  "animated-gradient-text": {
+    th: "ตัวอักษร gradient ที่สีเลื่อนไปเรื่อยๆ",
+    props: [p("colorFrom / colorTo", "string", "Gradient colors.", "สีของ gradient", "brand → brand-accent")],
+  },
+  "aurora-text": {
+    th: "ตัวอักษรไล่สีแบบแสงออโรร่า",
+    props: [p("colors", "string[]", "Gradient stops.", "สีที่ใช้ไล่", "brand colors"), p("speed", "number", "Animation speed multiplier.", "ตัวคูณความเร็ว", "1")],
+  },
+  "blur-fade": {
+    th: "ค่อยๆ ปรากฏแบบเบลอ เมื่อ scroll มาถึง",
+    props: [
+      p("inView", "boolean", "Animate when scrolled into view.", "เล่นเมื่อ scroll มาถึง", "false"),
+      p("delay / duration", "number", "Seconds.", "วินาที", "0 / 0.4"),
+      p("direction", '"up" | "down" | "left" | "right"', "Entry direction.", "ทิศทางที่เข้ามา", '"down"'),
+    ],
+  },
+  "border-beam": {
+    th: "ลำแสงวิ่งรอบกรอบ",
+    props: [p("size", "number", "Beam length in px.", "ความยาวลำแสง (px)", "50"), p("duration", "number", "Seconds per loop.", "วินาทีต่อรอบ", "6"), p("reverse", "boolean", "Run backwards.", "วิ่งกลับทิศ", "false")],
+  },
+  "dot-pattern": {
+    th: "พื้นหลังลายจุด มีโหมด glow ให้จุดกะพริบ",
+    props: [p("glow", "boolean", "Pulsing dots (CSS animation).", "จุดกะพริบ (CSS animation)", "false"), p("width / height / cr", "number", "Spacing and dot radius.", "ระยะห่างและขนาดจุด", "16 / 16 / 1")],
+  },
+  "magic-card": {
+    th: "การ์ดที่มี spotlight วิ่งตามเมาส์",
+    props: [p("mode", '"gradient" | "orb"', "Spotlight style.", "รูปแบบ spotlight", '"gradient"')],
+  },
+  marquee: {
+    th: "แถบเลื่อนวนไม่สิ้นสุด เช่น โลโก้ลูกค้า",
+    props: [p("pauseOnHover", "boolean", "Pause while hovered.", "หยุดเมื่อชี้", "false"), p("reverse", "boolean", "Scroll the other way.", "เลื่อนกลับทิศ", "false"), p("vertical", "boolean", "Scroll vertically.", "เลื่อนแนวตั้ง", "false")],
+  },
+  meteors: {
+    th: "ดาวตกวิ่งผ่านพื้นหลัง",
+    props: [p("number", "number", "How many meteors.", "จำนวนดาวตก", "20")],
+  },
+  "number-ticker": {
+    th: "ตัวเลขวิ่งนับขึ้นจนถึงค่าที่กำหนด",
+    props: [p("value", "number", "Target number.", "ตัวเลขเป้าหมาย"), p("decimalPlaces", "number", "Decimals shown.", "จำนวนทศนิยม", "0"), p("delay", "number", "Seconds before counting.", "หน่วงก่อนเริ่ม (วินาที)", "0")],
+  },
+  "shimmer-button": {
+    th: "ปุ่มที่มีแสงวิ่งรอบขอบ พื้นเป็น gradient ของแบรนด์",
+    props: [p("shimmerColor", "string", "Color of the sweep.", "สีของแสง", '"#ffffff"'), p("background", "string", "Button fill.", "พื้นปุ่ม", "brand gradient")],
+  },
+  "shine-border": {
+    th: "ขอบไล่สีแบรนด์ที่เคลื่อนไหว",
+    props: [p("borderWidth", "number", "Border width in px.", "ความหนาขอบ (px)", "1"), p("shineColor", "string | string[]", "Colors of the shine.", "สีของขอบ", "brand colors")],
+  },
+
+  "glass-card": {
+    th: "การ์ดกระจกฝ้า เปิดการหักเหแสงที่ขอบได้ (Chrome/Edge + เมาส์) มีพื้นทึบสำรองเมื่อผู้ใช้ลดความโปร่งใส",
+    props: [
+      p("refraction", "boolean", "Edge-lens distortion (Chromium + mouse only).", "การหักเหแสงที่ขอบ (เฉพาะ Chromium + เมาส์)", "false"),
+      p("refractionStrength", "number", "Displacement in px.", "ระดับการบิดภาพ (px)", "40"),
+    ],
+  },
+  "glass-button": {
+    th: "ปุ่มกระจกทรงแคปซูล กดแล้วยุบแบบ spring",
+    props: [
+      p("variant", '"default" | "tinted" | "accent"', "Clear, brand-tinted or accent-tinted glass.", "กระจกใส สีแบรนด์ หรือสี accent", '"default"'),
+      p("size", '"default" | "sm" | "lg" | "icon"', "`icon` is 44px.", "`icon` ขนาด 44px", '"default"'),
+    ],
+  },
+  "glass-navbar": {
+    th: "แถบเมนูด้านบนแบบกระจก เต็มความกว้างหรือลอยเป็นแคปซูล เว้นที่ให้รอยบาก iPhone",
+    props: [p("floating", "boolean", "Floating pill instead of a full-width bar.", "แบบแคปซูลลอยแทนแถบเต็มจอ", "false")],
+  },
+  "segmented-control": {
+    th: "ตัวเลือกแบบแบ่งช่อง ตัวที่เลือกเลื่อนแบบ spring ใช้ลูกศรคีย์บอร์ดได้",
+    props: [
+      p("options", "{ value; label }[]", "Segments.", "ช่องตัวเลือก"),
+      p("value / defaultValue / onValueChange", "string", "Selected segment.", "ค่าที่เลือก"),
+      p("variant", '"default" | "brand"', "White thumb or brand-colored thumb.", "ตัวเลือกสีขาว หรือสีแบรนด์", '"default"'),
+    ],
+  },
+
+  "scroll-reveal-text": {
+    th: "ข้อความค่อยๆ สว่างขึ้นทีละคำตามการ scroll ตัดคำภาษาไทยได้ถูก",
+    props: [
+      p("text", "string", "Text to reveal.", "ข้อความ"),
+      p("locale", "string", "Word segmentation locale (Thai has no spaces).", "locale สำหรับตัดคำ", '"th"'),
+      p("dim", "number", "Opacity of words not yet revealed.", "ความจางของคำที่ยังไม่ถึง", "0.15"),
+      p("as", '"p" | "h2" | "h3" | "div"', "Element to render.", "แท็กที่ใช้", '"p"'),
+    ],
+  },
+  "sticky-showcase": {
+    th: "ภาพค้างอยู่กับที่ขณะเนื้อหาด้านข้างเลื่อนผ่าน บนมือถือเรียงต่อกันลงมา",
+    props: [p("items", "{ title; description?; visual }[]", "Steps and their visuals.", "ขั้นตอนและภาพของแต่ละขั้น")],
+  },
+  "zoom-parallax": {
+    th: "ภาพเต็มจอที่ย่อเข้าเป็นการ์ดตาม scroll ขณะที่หัวข้อจางหาย",
+    props: [
+      p("overlay", "ReactNode", "Content over the media that fades out.", "เนื้อหาที่ซ้อนบนภาพและจางหาย"),
+      p("height", "string", "Scroll distance of the effect.", "ระยะ scroll ของเอฟเฟกต์", '"200svh"'),
+      p("toScale / radius", "number", "Final scale and corner radius.", "ขนาดและความมนสุดท้าย", "0.82 / 28"),
+    ],
+  },
+  dock: {
+    th: "แถบไอคอนที่ขยายตามเมาส์ บนจอสัมผัสเป็นการกดแบบ spring แทน",
+    props: [
+      p("size / magnification / distance", "number", "Resting size, size under the pointer, and reach in px.", "ขนาดปกติ ขนาดตอนขยาย และระยะที่มีผล (px)", "44 / 68 / 140"),
+      p("DockItem label", "string", "Accessible name and tooltip.", "ชื่อสำหรับ screen reader และ tooltip"),
+    ],
+  },
+  "animated-tabs": {
+    th: "แท็บที่ตัวชี้เลื่อนตามด้วย spring มีแบบ pill และ underline",
+    props: [p("variant", '"pill" | "underline"', "Indicator style.", "รูปแบบตัวชี้", '"pill"')],
+    upstream: radix("Tabs"),
+  },
+
+  drawer: {
+    th: "bottom sheet สำหรับมือถือ ลากที่แถบด้านบนลงเพื่อปิด เว้นที่ให้ home indicator",
+    props: [p("open / defaultOpen / onOpenChange", "boolean", "Controlled or uncontrolled open state.", "สถานะเปิด/ปิด")],
+    upstream: radix("Dialog"),
+  },
+  "tab-bar": {
+    th: "แถบแท็บด้านล่างแบบกระจกสำหรับ mobile web/PWA ตัวชี้เลื่อนแบบ spring",
+    props: [
+      p("items", "{ value; label; icon; href? }[]", "Tabs; with `href` they render as links.", "แท็บ ถ้ามี `href` จะเป็นลิงก์"),
+      p("value / onValueChange", "string", "Active tab.", "แท็บที่เลือก"),
+    ],
+  },
+}

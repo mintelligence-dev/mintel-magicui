@@ -3,7 +3,7 @@
 //   - registry/items.json                         (component items)
 //   - @mintelligence-dev/tokens/shadcn-theme.json (theme item, generated from tokens)
 // Then `shadcn build` turns registry.json into public/r/*.json.
-import { readFileSync, writeFileSync } from "node:fs"
+import { existsSync, readFileSync, writeFileSync } from "node:fs"
 import { createRequire } from "node:module"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -62,4 +62,19 @@ const css =
   toCss(rules) +
   "\n"
 writeFileSync(join(root, "app/registry.css"), css)
+// Every registry item needs an example (preview + shown code) and a docs entry.
+{
+  const missing = []
+  const docs = readFileSync(join(root, "lib/component-docs.ts"), "utf8")
+  const index = readFileSync(join(root, "examples/index.ts"), "utf8")
+  for (const item of items) {
+    if (!existsSync(join(root, "examples", `${item.name}.tsx`))) missing.push(`examples/${item.name}.tsx`)
+    if (!index.includes(`"${item.name}":`)) missing.push(`examples/index.ts → "${item.name}"`)
+    if (!new RegExp(`^  "?${item.name}"?: \\{`, "m").test(docs)) missing.push(`lib/component-docs.ts → ${item.name}`)
+  }
+  if (missing.length) {
+    console.error(`✗ Missing docs for registry items:\n  ${missing.join("\n  ")}`)
+    process.exit(1)
+  }
+}
 console.log(`✓ registry.json (${registry.items.length} items), app/registry.css`)

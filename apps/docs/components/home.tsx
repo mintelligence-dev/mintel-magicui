@@ -87,9 +87,11 @@ function Preview({
   className,
   wrapperClassName,
   copyLabel,
+  lang,
   children,
 }: {
   copyLabel?: string
+  lang: Lang
   name: string
   title: string
   className?: string
@@ -107,7 +109,13 @@ function Preview({
         {children}
       </div>
       <div className="flex flex-col gap-3 p-4">
-        <p className="font-heading text-sm font-semibold">{title}</p>
+        <a
+          href={langPath(lang, `/components/${name}`)}
+          className="group inline-flex w-fit items-center gap-1 font-heading text-sm font-semibold hover:text-brand"
+        >
+          {title}
+          <ArrowRight className="size-3.5 opacity-0 transition-[opacity,transform] group-hover:translate-x-0.5 group-hover:opacity-100" />
+        </a>
         <CopyCommand command={installCmd(name)} label={copyLabel} />
       </div>
     </Card>
@@ -307,7 +315,7 @@ export function Home({ lang }: { lang: Lang }) {
 
         <h3 id="core" className="mb-4 scroll-mt-20 font-heading text-xl font-semibold">Core UI</h3>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-0">
-          <Preview copyLabel={t.nav.copy} name="button" title="Button">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="button" title="Button">
             <div className="flex flex-wrap justify-center gap-2">
               <Button>Default</Button>
               <Button variant="brand">Brand</Button>
@@ -317,7 +325,7 @@ export function Home({ lang }: { lang: Lang }) {
               <Button variant="destructive">Delete</Button>
             </div>
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="badge" title="Badge">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="badge" title="Badge">
             <div className="flex flex-wrap justify-center gap-2">
               <Badge>Default</Badge>
               <Badge variant="brand">Brand</Badge>
@@ -328,40 +336,40 @@ export function Home({ lang }: { lang: Lang }) {
               <Badge variant="outline">Outline</Badge>
             </div>
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="input" title="Input">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="input" title="Input">
             <Input placeholder={t.components.inputPlaceholder} className="max-w-xs bg-background" />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="dialog" title="Dialog">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="dialog" title="Dialog">
             <DialogDemo lang={lang} />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="select" title="Select">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="select" title="Select">
             <ChannelSelect lang={lang} />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="tabs" title="Tabs">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="tabs" title="Tabs">
             <TabsDemo lang={lang} />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="toast" title="Toast">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="toast" title="Toast">
             <ToastDemo lang={lang} />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="table" title="Table" className="p-4" wrapperClassName="md:col-span-2">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="table" title="Table" className="p-4" wrapperClassName="md:col-span-2">
             <TableDemo lang={lang} />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="combobox" title={t.components.comboboxTitle}>
+          <Preview lang={lang} copyLabel={t.nav.copy} name="combobox" title={t.components.comboboxTitle}>
             <ComboboxDemo lang={lang} />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="date-picker" title={t.components.datePickerTitle}>
+          <Preview lang={lang} copyLabel={t.nav.copy} name="date-picker" title={t.components.datePickerTitle}>
             <DatePickerDemo lang={lang} />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="switch" title="Switch · Checkbox · Radio">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="switch" title="Switch · Checkbox · Radio">
             <ChoiceDemo lang={lang} />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="dropdown-menu" title="Dropdown Menu">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="dropdown-menu" title="Dropdown Menu">
             <DropdownMenuDemo lang={lang} />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="tooltip" title="Tooltip · Popover">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="tooltip" title="Tooltip · Popover">
             <TooltipPopoverDemo lang={lang} />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="card" title="Card" className="p-4">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="card" title="Card" className="p-4">
             <Card className="w-full max-w-xs gap-3 py-4">
               <CardHeader className="px-4">
                 <CardTitle>Salesforce Connector</CardTitle>
@@ -391,43 +399,43 @@ export function Home({ lang }: { lang: Lang }) {
           <Sparkles className="size-5 text-brand-accent" /> Effects
         </h3>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-0">
-          <Preview copyLabel={t.nav.copy} name="shimmer-button" title="Shimmer Button">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="shimmer-button" title="Shimmer Button">
             <ShimmerButton>Get Started</ShimmerButton>
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="aurora-text" title="Aurora Text">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="aurora-text" title="Aurora Text">
             <span className="font-heading text-4xl font-bold">
               <AuroraText>Mintel</AuroraText>
             </span>
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="animated-gradient-text" title="Animated Gradient Text">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="animated-gradient-text" title="Animated Gradient Text">
             <AnimatedGradientText className="text-2xl font-semibold">Customer Experience</AnimatedGradientText>
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="magic-card" title="Magic Card" className="p-4">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="magic-card" title="Magic Card" className="p-4">
             <MagicCard className="flex h-36 w-full flex-col items-center justify-center rounded-xl p-4 text-center">
               <p className="font-heading font-semibold">{t.components.magicCard}</p>
               <p className="text-sm text-muted-foreground">{t.components.magicCardSub}</p>
             </MagicCard>
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="border-beam" title="Border Beam">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="border-beam" title="Border Beam">
             <div className="relative flex h-28 w-full items-center justify-center rounded-xl border bg-card">
               <span className="text-sm text-muted-foreground">{t.components.borderBeam}</span>
               <BorderBeam size={80} duration={6} />
             </div>
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="shine-border" title="Shine Border">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="shine-border" title="Shine Border">
             <div className="relative flex h-28 w-full items-center justify-center overflow-hidden rounded-xl bg-card">
               <ShineBorder borderWidth={2} />
               <span className="text-sm text-muted-foreground">{t.components.shineBorder}</span>
             </div>
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="number-ticker" title="Number Ticker">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="number-ticker" title="Number Ticker">
             <NumberTicker value={98765} className="font-heading text-5xl font-bold text-brand dark:text-brand" />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="meteors" title="Meteors">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="meteors" title="Meteors">
             <Meteors number={10} />
             <span className="font-heading text-lg font-semibold">Meteors</span>
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="marquee" title="Marquee" className="px-0">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="marquee" title="Marquee" className="px-0">
             <Marquee pauseOnHover className="[--duration:18s]">
               {["LINE", "Facebook", "TikTok", "Instagram", "X", "Pantip"].map((s) => (
                 <Badge key={s} variant="soft" className="mx-1 px-3 py-1 text-sm">
@@ -436,15 +444,15 @@ export function Home({ lang }: { lang: Lang }) {
               ))}
             </Marquee>
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="dot-pattern" title="Dot Pattern">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="dot-pattern" title="Dot Pattern">
             <DotPattern glow cr={1.5} className="text-brand/70 [mask-image:radial-gradient(160px_circle_at_center,white,transparent)]" />
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="blur-fade" title="Blur Fade">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="blur-fade" title="Blur Fade">
             <BlurFade inView delay={0.2}>
               <p className="font-heading text-xl font-semibold">{t.components.blurFade}</p>
             </BlurFade>
           </Preview>
-          <Preview copyLabel={t.nav.copy} name="animated-beam" title="Animated Beam" className="p-0">
+          <Preview lang={lang} copyLabel={t.nav.copy} name="animated-beam" title="Animated Beam" className="p-0">
             <div className="w-full scale-90">
               <BeamDemo />
             </div>
