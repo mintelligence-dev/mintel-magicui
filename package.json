@@ -14,7 +14,9 @@
     "dev": "npm run build:tokens && npm run dev -w docs",
     "test": "npm test -w @mintelligence-dev/salesforce",
     "changeset": "changeset",
-    "version-packages": "changeset version && node scripts/date-changelogs.mjs"
+    "version-packages": "changeset version && node scripts/date-changelogs.mjs",
+    "new:component": "node scripts/new-component.mjs",
+    "new:lwc": "node scripts/new-lwc.mjs"
   },
   "engines": {
     "node": ">=20"
