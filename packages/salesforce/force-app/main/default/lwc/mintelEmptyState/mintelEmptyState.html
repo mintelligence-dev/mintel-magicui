@@ -1,0 +1,16 @@
+<template>
+    <div class="empty">
+        <div class="halo">
+            <span class="glow" aria-hidden="true"></span>
+            <span class="tile"><lightning-icon icon-name={iconName} size="small" alternative-text=""></lightning-icon></span>
+        </div>
+        <p class="title">{title}</p>
+        <template lwc:if={description}><p class="description">{description}</p></template>
+        <div class="actions">
+            <template lwc:if={actionLabel}>
+                <button type="button" class="action" onclick={handleAction}>{actionLabel}</button>
+            </template>
+            <slot></slot>
+        </div>
+    </div>
+</template>

@@ -39,6 +39,9 @@ type BaseProps = {
   /** Set false when filtering on the server (onSearchChange). */
   shouldFilter?: boolean
   "aria-invalid"?: boolean
+  /** Id of the trigger, so a <Label htmlFor> can point at it. */
+  id?: string
+  "aria-labelledby"?: string
 }
 
 type SingleProps = BaseProps & {
@@ -98,6 +101,8 @@ function Combobox(props: SingleProps | MultipleProps) {
         role="combobox"
         aria-expanded={open}
         aria-invalid={props["aria-invalid"]}
+        id={props.id}
+        aria-labelledby={props["aria-labelledby"]}
         className={cn(
           "flex w-full items-center justify-between gap-2 rounded-md border border-input bg-transparent px-3 text-left text-sm shadow-xs outline-none transition-[color,box-shadow]",
           props.multiple ? "min-h-9 py-1" : "h-9",

@@ -1,0 +1,17 @@
+<template>
+    <div class="group" role="list" aria-label={label}>
+        <template for:each={shown} for:item="person">
+            <span key={person.key} class="avatar" role="listitem" title={person.name} style={person.style}>
+                <template lwc:if={person.photoUrl}>
+                    <img src={person.photoUrl} alt={person.name} />
+                </template>
+                <template lwc:else>
+                    <span class="initials" aria-label={person.name}>{person.initials}</span>
+                </template>
+            </span>
+        </template>
+        <template lwc:if={extra}>
+            <span class="avatar more" role="listitem" title={extraTitle}>+{extra}</span>
+        </template>
+    </div>
+</template>

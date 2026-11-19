@@ -208,6 +208,46 @@
     }
   },
   {
+    "name": "progress",
+    "type": "registry:ui",
+    "title": "Progress",
+    "description": "Linear progress that eases to its value, with brand/success/warning/destructive tones and an indeterminate sweep.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/progress.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "css": {
+      "@keyframes mintel-progress-sweep": {
+        "0%": {
+          "left": "-40%"
+        },
+        "100%": {
+          "left": "100%"
+        }
+      }
+    }
+  },
+  {
+    "name": "progress-ring",
+    "type": "registry:ui",
+    "title": "Progress ring",
+    "description": "Percentage ring that sweeps to its value, in the brand gradient or status colors.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/progress-ring.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
     "name": "alert",
     "type": "registry:ui",
     "title": "Alert",
@@ -316,6 +356,98 @@
     ]
   },
   {
+    "name": "command",
+    "type": "registry:ui",
+    "title": "Command palette",
+    "description": "⌘K command palette in a dialog: groups, icons, shortcuts, Thai search, animated list height.",
+    "dependencies": [
+      "@radix-ui/react-dialog",
+      "cmdk",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/command.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "sidebar",
+    "type": "registry:ui",
+    "title": "Sidebar",
+    "description": "App shell: a sidebar that collapses to an icon rail (⌘B) and becomes an off-canvas panel on phones, with groups, badges and an active marker.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/sidebar.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "slider",
+    "type": "registry:ui",
+    "title": "Slider",
+    "description": "Single or range slider with a brand-gradient track and a thumb that grows and shows its value while dragged.",
+    "dependencies": [
+      "@radix-ui/react-slider"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/slider.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "toggle-group",
+    "type": "registry:ui",
+    "title": "Toggle group",
+    "description": "Buttons that stay pressed, one or many at a time, with a brand tint and a small spring.",
+    "dependencies": [
+      "@radix-ui/react-toggle-group"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/toggle-group.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "tag-input",
+    "type": "registry:ui",
+    "title": "Tag input",
+    "description": "Free-form tags: Enter/comma adds, Backspace removes, paste splits, duplicates ignored, optional suggestions.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/tag-input.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
     "name": "file-upload",
     "type": "registry:ui",
     "title": "File upload",
@@ -332,6 +464,106 @@
         "type": "registry:ui"
       }
     ]
+  },
+  {
+    "name": "thai-address",
+    "type": "registry:ui",
+    "title": "Thai address",
+    "description": "Province → district → sub-district with the postal code filled in, or type the postal code first. Bangkok uses khet/khwaeng. Ships the dataset to public/mintel/thai-address.json and loads it lazily.",
+    "registryDependencies": [
+      "utils",
+      "@mintel/combobox",
+      "@mintel/input",
+      "@mintel/label"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/thai-address.tsx",
+        "type": "registry:ui"
+      },
+      {
+        "path": "public/mintel/thai-address.json",
+        "type": "registry:file",
+        "target": "public/mintel/thai-address.json"
+      }
+    ]
+  },
+  {
+    "name": "thai-id-input",
+    "type": "registry:ui",
+    "title": "Thai ID input",
+    "description": "Thai national ID field that formats as 1-2345-67890-12-3 and checks the check digit.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils",
+      "@mintel/input"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/thai-id-input.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "thai-phone-input",
+    "type": "registry:ui",
+    "title": "Thai phone input",
+    "description": "Thai phone field: 081-234-5678 / 02-123-4567 formatting, accepts pasted +66 numbers, gives you the E.164 form.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils",
+      "@mintel/input"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/thai-phone-input.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "otp-input",
+    "type": "registry:ui",
+    "title": "OTP input",
+    "description": "One-time code boxes with auto-advance, paste and SMS autofill, a pop on each digit and a shake when wrong.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/otp-input.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "css": {
+      "@keyframes mintel-shake": {
+        "0%, 100%": {
+          "translate": "0"
+        },
+        "20%, 60%": {
+          "translate": "-4px"
+        },
+        "40%, 80%": {
+          "translate": "4px"
+        }
+      },
+      "@keyframes mintel-pop": {
+        "0%": {
+          "scale": "1"
+        },
+        "40%": {
+          "scale": "1.12"
+        },
+        "100%": {
+          "scale": "1"
+        }
+      }
+    }
   },
   {
     "name": "data-table",
@@ -388,6 +620,24 @@
     "files": [
       {
         "path": "registry/mintel/ui/grouped-list.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "conversation",
+    "type": "registry:ui",
+    "title": "Conversation",
+    "description": "Chat thread for LINE / Messenger / TikTok / WhatsApp: day dividers, grouped bubbles, read receipts, attachments, typing indicator, composer and a new-messages pill.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/conversation.tsx",
         "type": "registry:ui"
       }
     ]

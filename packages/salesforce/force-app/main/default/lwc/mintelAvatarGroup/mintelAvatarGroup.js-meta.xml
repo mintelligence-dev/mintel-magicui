@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Mintel Avatar Group</masterLabel>
+    <description>Overlapping avatars with a +N bubble.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage,lightningCommunity__Default">
+            <property name="names" type="String" label="Names (comma-separated)" default="Nina Park, Somchai K, Beam T, Ploy S, Nok R" />
+            <property name="max" type="Integer" label="Show at most" default="4" />
+            <property name="size" type="String" label="Size" datasource="small,medium,large" default="medium" />
+            <property name="label" type="String" label="Accessible label" default="People" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

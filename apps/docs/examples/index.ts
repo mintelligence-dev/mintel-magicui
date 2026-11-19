@@ -13,16 +13,28 @@ import StepperExample from "./stepper"
 import TimelineExample from "./timeline"
 import AvatarExample from "./avatar"
 import SkeletonExample from "./skeleton"
+import ProgressExample from "./progress"
+import ProgressRingExample from "./progress-ring"
 import AlertExample from "./alert"
 import EmptyStateExample from "./empty-state"
 import AccordionExample from "./accordion"
 import BreadcrumbExample from "./breadcrumb"
 import PaginationExample from "./pagination"
 import SheetExample from "./sheet"
+import CommandExample from "./command"
+import SidebarExample from "./sidebar"
+import SliderExample from "./slider"
+import ToggleGroupExample from "./toggle-group"
+import TagInputExample from "./tag-input"
 import FileUploadExample from "./file-upload"
+import ThaiAddressExample from "./thai-address"
+import ThaiIdInputExample from "./thai-id-input"
+import ThaiPhoneInputExample from "./thai-phone-input"
+import OtpInputExample from "./otp-input"
 import DataTableExample from "./data-table"
 import ChartExample from "./chart"
 import GroupedListExample from "./grouped-list"
+import ConversationExample from "./conversation"
 import CollapsingHeaderExample from "./collapsing-header"
 import TabsExample from "./tabs"
 import ToastExample from "./toast"
@@ -75,16 +87,28 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "timeline": TimelineExample,
   "avatar": AvatarExample,
   "skeleton": SkeletonExample,
+  "progress": ProgressExample,
+  "progress-ring": ProgressRingExample,
   "alert": AlertExample,
   "empty-state": EmptyStateExample,
   "accordion": AccordionExample,
   "breadcrumb": BreadcrumbExample,
   "pagination": PaginationExample,
   "sheet": SheetExample,
+  "command": CommandExample,
+  "sidebar": SidebarExample,
+  "slider": SliderExample,
+  "toggle-group": ToggleGroupExample,
+  "tag-input": TagInputExample,
   "file-upload": FileUploadExample,
+  "thai-address": ThaiAddressExample,
+  "thai-id-input": ThaiIdInputExample,
+  "thai-phone-input": ThaiPhoneInputExample,
+  "otp-input": OtpInputExample,
   "data-table": DataTableExample,
   "chart": ChartExample,
   "grouped-list": GroupedListExample,
+  "conversation": ConversationExample,
   "collapsing-header": CollapsingHeaderExample,
   "tabs": TabsExample,
   "toast": ToastExample,

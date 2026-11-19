@@ -8,6 +8,15 @@ import { MobileNav } from "@/components/mobile-nav"
 import { SiteHeader } from "@/components/site-header"
 import { PathPreview } from "@/components/path-preview"
 import { StatusBadgePreview, TimelinePreview } from "@/components/sf-status-preview"
+import {
+  AvatarGroupPreview,
+  ConversationPreview,
+  EmptyStatePreview,
+  ProgressRingPreview,
+  RecordHeaderPreview,
+  SlaTimerPreview,
+  ThaiAddressPreview,
+} from "@/components/sf-more-previews"
 import { SegmentedPreview, TabsPreview } from "@/components/sf-tabs-preview"
 import { SldsPreview } from "@/components/slds-preview"
 import { getDict, type Lang } from "@/lib/i18n"
@@ -74,6 +83,50 @@ const COMPONENTS = [
     preview: <SegmentedPreview />,
   },
   {
+    name: "mintelRecordHeader",
+    usage: `<!-- Record page (App Builder): title, status and up to four highlight fields -->
+<c-mintel-record-header record-id={recordId} object-api-name="Case" title-field="CaseNumber"
+    fields="Account.Name,Priority,Origin" status-field="Status">
+    <lightning-button slot="actions" label="Escalate"></lightning-button>
+</c-mintel-record-header>`,
+    preview: <RecordHeaderPreview />,
+  },
+  {
+    name: "mintelSlaTimer",
+    usage: `<!-- Record page: counts down to a DateTime field; amber inside 30 min, red when overdue -->
+<c-mintel-sla-timer record-id={recordId} object-api-name="Case" deadline-field="SlaExitDate"
+    start-field="CreatedDate" completed-field="IsClosed" warning-minutes="30"></c-mintel-sla-timer>`,
+    preview: <SlaTimerPreview />,
+  },
+  {
+    name: "mintelConversation",
+    usage: `<!-- In your LWC, with messages from Apex -->
+<c-mintel-conversation title="Somchai K" channel="line" messages={messages}
+    typing={customerTyping} show-composer onsend={handleSend}></c-mintel-conversation>
+
+// messages: [{ id, direction: 'in' | 'out' | 'system', text, time, author: { name }, status, attachments }]`,
+    preview: <ConversationPreview />,
+  },
+  {
+    name: "mintelThaiAddress",
+    usage: `<!-- Flow screen: outputs province, district, subDistrict, zip (+ ids) -->
+<!-- In your LWC: -->
+<c-mintel-thai-address locale="th" required onchange={handleAddress}></c-mintel-thai-address>
+
+// Data: static resource mintelThaiAddress (77 provinces, 7,436 sub-districts, postal codes)`,
+    preview: <ThaiAddressPreview />,
+  },
+  {
+    name: "mintelProgressRing",
+    usage: `<!-- Record page: a percent field, e.g. Opportunity Probability -->
+<c-mintel-progress-ring record-id={recordId} object-api-name="Opportunity" field-api-name="Probability"
+    label="Probability"></c-mintel-progress-ring>
+
+<!-- Fixed value, red / amber / green by value -->
+<c-mintel-progress-ring value="34" variant="status" size="small"></c-mintel-progress-ring>`,
+    preview: <ProgressRingPreview />,
+  },
+  {
     name: "mintelStatusBadge",
     usage: `<!-- Record page: shows the field's label, colored by its value -->
 <c-mintel-status-badge record-id={recordId} object-api-name="Case" field-api-name="Status"
@@ -94,6 +147,20 @@ const COMPONENTS = [
     <c-mintel-timeline-item title="Resolved" variant="success" current></c-mintel-timeline-item>
 </c-mintel-timeline>`,
     preview: <TimelinePreview />,
+  },
+  {
+    name: "mintelEmptyState",
+    usage: `<c-mintel-empty-state title="No open cases" description="New chats will appear here."
+    icon-name="utility:inbox" action-label="New case" onaction={handleNew}></c-mintel-empty-state>`,
+    preview: <EmptyStatePreview />,
+  },
+  {
+    name: "mintelAvatarGroup",
+    usage: `<!-- App Builder: names="Nina Park, Somchai K, ..." -->
+<c-mintel-avatar-group people={caseTeam} max="4"></c-mintel-avatar-group>
+
+// caseTeam: [{ name, photoUrl }]`,
+    preview: <AvatarGroupPreview />,
   },
   {
     name: "mintelGlassCard",

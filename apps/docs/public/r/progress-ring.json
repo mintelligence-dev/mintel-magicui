@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress-ring",
+  "title": "Progress ring",
+  "description": "Percentage ring that sweeps to its value, in the brand gradient or status colors.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/ui/progress-ring.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst SIZES = { sm: 72, default: 112, lg: 160 } as const\nconst R = 42\nconst C = 2 * Math.PI * R\n\n/**\n * Percentage ring that sweeps to its value when it appears (and when the value changes). `tone=\"status\"`\n * colors it red below 40, amber below 70 and green above; the default uses the brand gradient.\n */\nfunction ProgressRing({\n  value,\n  label,\n  size = \"default\",\n  tone = \"brand\",\n  className,\n}: {\n  value: number\n  label?: React.ReactNode\n  size?: keyof typeof SIZES\n  tone?: \"brand\" | \"status\"\n  className?: string\n}) {\n  const v = Math.max(0, Math.min(100, Math.round(value)))\n  const [shown, setShown] = React.useState(0)\n  React.useEffect(() => {\n    const id = requestAnimationFrame(() => setShown(v))\n    return () => cancelAnimationFrame(id)\n  }, [v])\n  const gradientId = `ring-${React.useId().replace(/[^a-zA-Z0-9_-]/g, \"\")}`\n  const stroke =\n    tone === \"status\" ? (v < 40 ? \"var(--destructive)\" : v < 70 ? \"var(--warning)\" : \"var(--success)\") : `url(#${gradientId})`\n  const px = SIZES[size]\n\n  return (\n    <div\n      data-slot=\"progress-ring\"\n      role=\"progressbar\"\n      aria-valuemin={0}\n      aria-valuemax={100}\n      aria-valuenow={v}\n      aria-label={typeof label === \"string\" ? label : undefined}\n      className={cn(\"relative inline-grid place-items-center\", className)}\n      style={{ width: px, height: px }}\n    >\n      <svg viewBox=\"0 0 100 100\" className=\"absolute inset-0 -rotate-90\" aria-hidden>\n        <defs>\n          <linearGradient id={gradientId} x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n            <stop offset=\"0%\" stopColor=\"var(--brand)\" />\n            <stop offset=\"100%\" stopColor=\"var(--brand-accent)\" />\n          </linearGradient>\n        </defs>\n        <circle cx=\"50\" cy=\"50\" r={R} fill=\"none\" strokeWidth=\"9\" className=\"stroke-muted\" />\n        <circle\n          cx=\"50\"\n          cy=\"50\"\n          r={R}\n          fill=\"none\"\n          strokeWidth=\"9\"\n          strokeLinecap=\"round\"\n          stroke={stroke}\n          strokeDasharray={C}\n          strokeDashoffset={C * (1 - shown / 100)}\n          className=\"transition-[stroke-dashoffset,stroke] duration-1000 ease-spring-smooth motion-reduce:transition-none\"\n        />\n      </svg>\n      <div className=\"relative grid text-center leading-tight\">\n        <span className={cn(\"font-heading font-bold tabular-nums\", { sm: \"text-base\", default: \"text-2xl\", lg: \"text-4xl\" }[size])}>\n          {v}\n          <span className=\"text-[0.6em] font-semibold text-muted-foreground\">%</span>\n        </span>\n        {label && size !== \"sm\" && <span className=\"text-xs text-muted-foreground\">{label}</span>}\n      </div>\n    </div>\n  )\n}\n\nexport { ProgressRing }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

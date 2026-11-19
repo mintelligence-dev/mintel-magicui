@@ -1,0 +1,17 @@
+<template>
+    <div class={rootClass}>
+        <div class="top">
+            <span class="label">{label}</span>
+            <span class="state">{stateText}</span>
+        </div>
+        <p class="clock" role="timer" aria-live="off">{clockText}</p>
+        <template lwc:if={showBar}>
+            <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={elapsedPercent} aria-label={label}>
+                <span class="fill" style={fillStyle}></span>
+            </div>
+        </template>
+        <template lwc:if={deadlineText}>
+            <p class="due">{deadlineText}</p>
+        </template>
+    </div>
+</template>

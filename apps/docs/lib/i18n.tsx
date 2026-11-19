@@ -281,6 +281,18 @@ const en = {
         "Tabs whose pill or underline springs to the active tab. Two parts, like lightning-tabset and lightning-tab: c-mintel-tabs is the tab bar (selection, indicator, arrow keys, tabchange); each c-mintel-tab holds one tab's label and content. For composing inside your own LWC.",
       mintelSegmentedControl:
         "Segmented control with a sliding thumb, for switching views or ranges. Set options in App Builder as value:Label pairs, or pass an array from JS.",
+      mintelRecordHeader:
+        "Branded record header for record pages: object icon and label, the title in the brand gradient, a status badge and up to four highlight fields, with a slot for action buttons.",
+      mintelSlaTimer:
+        "Countdown to a DateTime field such as a Case SLA. Green on track, amber inside the warning window, red and counting up once overdue; a bar shows time used; a Boolean field like IsClosed stops it.",
+      mintelConversation:
+        "Chat thread for LINE, Messenger, TikTok and WhatsApp on a Case or Messaging Session: day dividers, grouped bubbles, read receipts, attachments, typing and a composer. Compose it in your LWC with messages from Apex.",
+      mintelThaiAddress:
+        "Thai address for Flow screens and pages: province, district, sub-district and postal code, or type the postal code first. Bangkok uses khet/khwaeng. In Flow the names and ids are outputs.",
+      mintelProgressRing:
+        "Percentage ring that sweeps in, from a record field (e.g. Opportunity Probability) or a fixed value, in brand or red/amber/green colors.",
+      mintelEmptyState: "Branded empty state for related lists and pages: icon in a soft halo, title, description and an optional button.",
+      mintelAvatarGroup: "Overlapping avatars for a case team or account owners, with a +N bubble and a lift on hover.",
       mintelStatusBadge:
         "Status pill with a colored dot. On a record page it shows a field's label; colors come from your Value:variant list, then keyword guesses (Closed → success, Escalated → destructive …).",
       mintelTimeline:
@@ -571,6 +583,17 @@ const th: Dict = {
         "แท็บที่ตัวไฮไลต์ (pill หรือขีดเส้นใต้) เด้งไปหาแท็บที่เลือก มี 2 ส่วนเหมือน lightning-tabset กับ lightning-tab: c-mintel-tabs คือแถบแท็บ (จำแท็บที่เลือก ตัวไฮไลต์ ปุ่มลูกศร และ event tabchange) ส่วน c-mintel-tab แต่ละตัวคือ 1 แท็บ เก็บชื่อแท็บและเนื้อหา ใช้ประกอบใน LWC ของเราเอง",
       mintelSegmentedControl:
         "ตัวเลือกแบบแบ่งช่อง มีแถบเลื่อนไปยังช่องที่เลือก ใช้สลับมุมมองหรือช่วงเวลา ตั้ง options ใน App Builder เป็นคู่ value:Label หรือส่ง array จาก JS",
+      mintelRecordHeader:
+        "หัวหน้า record แบบมีแบรนด์ มีไอคอนและชื่อ object ชื่อ record สีไล่เฉด ป้ายสถานะ ฟิลด์สำคัญไม่เกิน 4 ช่อง และช่องใส่ปุ่มคำสั่ง",
+      mintelSlaTimer:
+        "นับถอยหลังถึงเวลาในฟิลด์ DateTime เช่น SLA ของเคส เขียวเมื่อทันเวลา เหลืองเมื่อใกล้ครบ แดงและนับเวลาที่เกินเมื่อเลยกำหนด มีแถบเวลาที่ใช้ไป และหยุดเมื่อฟิลด์ Boolean เช่น IsClosed เป็นจริง",
+      mintelConversation:
+        "หน้าแชต LINE, Messenger, TikTok และ WhatsApp บนหน้า Case หรือ Messaging Session มีตัวคั่นวัน จัดกลุ่มข้อความ สถานะอ่านแล้ว ไฟล์แนบ กำลังพิมพ์ และช่องพิมพ์ ใช้ประกอบใน LWC ของเราโดยส่งข้อความจาก Apex",
+      mintelThaiAddress:
+        "ที่อยู่ไทยสำหรับ Flow screen และหน้าต่างๆ เลือกจังหวัด อำเภอ ตำบล แล้วได้รหัสไปรษณีย์ หรือพิมพ์รหัสไปรษณีย์ก่อน กรุงเทพฯ ใช้เขต/แขวง ใน Flow ได้ทั้งชื่อและ id เป็น output",
+      mintelProgressRing: "วงแหวนเปอร์เซ็นต์ที่กวาดเข้ามา อ่านจากฟิลด์ของ record (เช่น Probability ของ Opportunity) หรือใส่ค่าเอง สีแบรนด์หรือแดง/เหลือง/เขียวตามค่า",
+      mintelEmptyState: "หน้าว่างแบบมีแบรนด์สำหรับ related list และหน้าต่างๆ ไอคอนในแสงนุ่ม หัวข้อ คำอธิบาย และปุ่ม",
+      mintelAvatarGroup: "รูปโปรไฟล์ซ้อนกันสำหรับทีมดูแลเคสหรือเจ้าของลูกค้า รวมคนที่เหลือเป็น +N และยกขึ้นเมื่อชี้",
       mintelStatusBadge:
         "ป้ายสถานะมีจุดสี บนหน้า record จะแสดง label ของฟิลด์ สีมาจากรายการ Value:variant ที่ตั้งไว้ ถ้าไม่ได้ตั้งจะเดาจากคำ (Closed → เขียว, Escalated → แดง …)",
       mintelTimeline:

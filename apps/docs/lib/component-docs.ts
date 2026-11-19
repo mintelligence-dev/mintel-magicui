@@ -36,11 +36,11 @@ type RawItem = {
 // Core UI items that belong to the "Forms" group in the docs navigation.
 const FORM_ITEMS = new Set([
   "input", "label", "textarea", "checkbox", "radio-group", "switch", "select", "combobox", "calendar", "date-picker", "form",
-  "file-upload",
+  "file-upload", "thai-address", "thai-id-input", "thai-phone-input", "otp-input", "slider", "toggle-group", "tag-input",
 ])
 
-const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper", "grouped-list"])
-const NAV_ITEMS = new Set(["breadcrumb", "pagination", "accordion", "sheet", "collapsing-header"])
+const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper", "grouped-list", "conversation"])
+const NAV_ITEMS = new Set(["breadcrumb", "pagination", "accordion", "sheet", "collapsing-header", "command", "sidebar"])
 
 const categoryOf = (it: RawItem): Category =>
   (it.meta?.category as Category) ??
@@ -134,6 +134,23 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     ],
     upstream: radix("Avatar"),
   },
+  progress: {
+    th: "แถบความคืบหน้า เลื่อนนุ่มไปยังค่าใหม่ มีโทนแบรนด์ สำเร็จ เตือน ผิดพลาด และแบบไม่ทราบค่า (แถบวิ่ง)",
+    props: [
+      p("value", "number | null", "0–100; leave out for indeterminate.", "0–100 ไม่ใส่ = ไม่ทราบค่า"),
+      p("tone", '"brand" | "success" | "warning" | "destructive"', "Bar color.", "สีแถบ", '"brand"'),
+      p("size", '"sm" | "default" | "lg"', "Bar height.", "ความสูง", '"default"'),
+    ],
+  },
+  "progress-ring": {
+    th: "วงแหวนเปอร์เซ็นต์ที่กวาดไปยังค่าเมื่อแสดงหรือเปลี่ยนค่า สีแบรนด์ หรือสีตามสถานะ (แดง/เหลือง/เขียว)",
+    props: [
+      p("value", "number", "0–100.", "0–100"),
+      p("label", "ReactNode", "Caption under the number.", "คำอธิบายใต้ตัวเลข"),
+      p("size", '"sm" | "default" | "lg"', "Ring size.", "ขนาด", '"default"'),
+      p("tone", '"brand" | "status"', "Gradient or red/amber/green by value.", "ไล่สีแบรนด์ หรือสีตามค่า", '"brand"'),
+    ],
+  },
   skeleton: { th: "กล่องรอโหลด มีแสงวิ่งผ่านเบาๆ ถ้าผู้ใช้ปิด motion จะเป็นการกะพริบช้าๆ แทน" },
   alert: {
     th: "ข้อความแจ้งในหน้า มีโทนปกติ แบรนด์ สำเร็จ เตือน และผิดพลาด ใส่ไอคอนได้",
@@ -175,6 +192,47 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     props: [p("side", '"right" | "left" | "top" | "bottom"', "SheetContent: edge to slide from.", "SheetContent: ขอบที่เลื่อนออกมา", '"right"')],
     upstream: radix("Dialog"),
   },
+  command: {
+    th: "กล่องคำสั่งแบบ ⌘K ในหน้าต่าง มีกลุ่ม ไอคอน ปุ่มลัด ค้นหาภาษาไทยได้ ความสูงรายการเปลี่ยนนุ่มๆ ตอนพิมพ์",
+    props: [
+      p("open / onOpenChange", "boolean", "CommandDialog: controlled open state.", "CommandDialog: สถานะเปิด/ปิด"),
+      p("shortcut", "boolean", "CommandDialog: open with ⌘K / Ctrl+K.", "CommandDialog: เปิดด้วย ⌘K / Ctrl+K", "true"),
+      p("keywords", "string[]", "CommandItem: extra search words (e.g. Thai).", "CommandItem: คำค้นเพิ่ม เช่นภาษาไทย"),
+      p("onSelect", "() => void", "CommandItem: run the command.", "CommandItem: คำสั่งที่จะทำ"),
+    ],
+  },
+  sidebar: {
+    th: "โครงหน้าแอปพร้อมเมนูซ้าย ย่อเป็นแถบไอคอนได้ (⌘B) บนมือถือเป็นแผงเลื่อนออกมา มีกลุ่ม ตัวเลขแจ้งเตือน และแถบบอกหน้าปัจจุบัน",
+    props: [
+      p("defaultCollapsed", "boolean", "SidebarProvider: start as an icon rail.", "SidebarProvider: เริ่มแบบแถบไอคอน", "false"),
+      p("shortcut", "boolean", "SidebarProvider: toggle with ⌘B / Ctrl+B.", "SidebarProvider: สลับด้วย ⌘B", "true"),
+      p("icon / label / href / active / badge", "—", "SidebarItem: one nav link (label becomes the tooltip in the rail).", "SidebarItem: ลิงก์เมนู (ตอนย่อ label เป็น tooltip)"),
+      p("label", "ReactNode", "SidebarGroup: section heading.", "SidebarGroup: หัวข้อกลุ่ม"),
+    ],
+  },
+  slider: {
+    th: "แถบเลื่อนเลือกค่าเดียวหรือช่วง แถบสีไล่เฉด ปุ่มขยายตอนลากและแสดงค่าเป็นบับเบิล",
+    props: [
+      p("value / defaultValue", "number[]", "One value, or two for a range.", "ค่าเดียว หรือ 2 ค่าสำหรับช่วง"),
+      p("formatValue", "(v) => ReactNode", "Text in the bubble.", "ข้อความในบับเบิล"),
+      p("showValue", "boolean", "Show the bubble while dragging.", "แสดงบับเบิลตอนลาก", "true"),
+    ],
+    upstream: radix("Slider"),
+  },
+  "toggle-group": {
+    th: "กลุ่มปุ่มกดค้าง เลือกได้ทีละอันหรือหลายอัน เช่นจัดตำแหน่ง ตัวหนา หรือกรองช่องทาง",
+    props: [p("type", '"single" | "multiple"', "One or many pressed.", "กดค้างได้ทีละอันหรือหลายอัน")],
+    upstream: radix("Toggle Group"),
+  },
+  "tag-input": {
+    th: "ช่องใส่แท็ก กด Enter หรือคอมมาเพื่อเพิ่ม Backspace ลบตัวท้าย วางหลายคำคั่นคอมมาได้ ไม่รับซ้ำ และมีคำแนะนำ",
+    props: [
+      p("value / defaultValue / onValueChange", "string[]", "Tags.", "รายการแท็ก"),
+      p("suggestions", "string[]", "Shown as you type.", "คำแนะนำตอนพิมพ์"),
+      p("max", "number", "Most tags allowed.", "จำนวนแท็กสูงสุด"),
+      p("locale", '"th" | "en"', "Built-in labels.", "ภาษาของป้าย", '"th"'),
+    ],
+  },
   "file-upload": {
     th: "ลากไฟล์มาวางหรือกดเลือก ตรวจชนิดและขนาดไฟล์ แสดงรายการไฟล์และแถบความคืบหน้าของแต่ละไฟล์",
     props: [
@@ -184,6 +242,40 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("maxSize", "number", "Max bytes per file.", "ขนาดสูงสุดต่อไฟล์ (ไบต์)"),
       p("multiple", "boolean", "Allow several files.", "เลือกได้หลายไฟล์", "true"),
       p("locale", '"en" | "th"', "Label language.", "ภาษาของป้าย", '"en"'),
+    ],
+  },
+  "thai-address": {
+    th: "ที่อยู่ไทย เลือกจังหวัด → อำเภอ → ตำบล แล้วเติมรหัสไปรษณีย์ให้ หรือพิมพ์รหัสไปรษณีย์ก่อนก็ได้ กรุงเทพฯ ใช้คำว่าเขต/แขวง ข้อมูลโหลดเมื่อใช้งานครั้งแรก",
+    props: [
+      p("value / defaultValue", "{ provinceId?; districtId?; subDistrictId?; zip? }", "Picked ids and postal code.", "id ที่เลือกและรหัสไปรษณีย์"),
+      p("onValueChange", "(value, names) => void", "Called with ids and the names in the chosen language.", "ได้ทั้ง id และชื่อตามภาษาที่เลือก"),
+      p("locale", '"th" | "en"', "Labels and place names.", "ภาษาของป้ายและชื่อสถานที่", '"th"'),
+      p("dataUrl", "string", "Where the dataset is served.", "ที่อยู่ไฟล์ข้อมูล", '"/mintel/thai-address.json"'),
+      p("disabled", "boolean", "Disable every field.", "ปิดการใช้งานทุกช่อง"),
+    ],
+  },
+  "thai-id-input": {
+    th: "ช่องเลขบัตรประชาชน จัดรูปแบบ 1-2345-67890-12-3 ระหว่างพิมพ์หรือวาง และเช็คเลขหลักสุดท้าย (check digit) เมื่อครบ 13 หลัก",
+    props: [
+      p("value / defaultValue", "string", "Digits only.", "ตัวเลขล้วน"),
+      p("onValueChange", "(digits, valid) => void", "Digits and whether the check digit matches.", "ตัวเลข และผลการเช็ค check digit"),
+      p("locale", '"th" | "en"', "Screen-reader status text.", "ภาษาข้อความสถานะ", '"th"'),
+    ],
+  },
+  "thai-phone-input": {
+    th: "ช่องเบอร์โทรไทย จัดรูปแบบ 081-234-5678 / 02-123-4567 วางเบอร์ +66 ได้ และได้รูปแบบ E.164 สำหรับส่ง SMS หรือ WhatsApp",
+    props: [
+      p("value / defaultValue", "string", "Local digits (0812345678).", "ตัวเลขแบบในประเทศ"),
+      p("onValueChange", "(digits, { e164, valid }) => void", "Local digits, +66 form and completeness.", "ตัวเลข รูปแบบ +66 และครบหรือยัง"),
+    ],
+  },
+  "otp-input": {
+    th: "ช่องรหัส OTP พิมพ์แล้วเลื่อนช่องเอง ลบย้อนได้ วางหรือเติมจาก SMS ได้ทีเดียว ตัวเลขเด้งตอนกรอก และสั่นเมื่อรหัสผิด",
+    props: [
+      p("length", "number", "Number of boxes.", "จำนวนช่อง", "6"),
+      p("value / onValueChange", "string", "Controlled code.", "รหัส (controlled)"),
+      p("onComplete", "(code) => void", "All boxes filled.", "เรียกเมื่อกรอกครบ"),
+      p("invalid", "boolean", "Shake and mark as invalid.", "สั่นและแสดงว่าผิด", "false"),
     ],
   },
   "data-table": {
@@ -218,6 +310,17 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("trailing", "ReactNode", "GroupedRow: control on the right (switch …); hides the chevron.", "GroupedRow: ตัวควบคุมด้านขวา (เช่นสวิตช์) แทนลูกศร"),
       p("href / onClick", "string / () => void", "GroupedRow: makes the row a link or button with a chevron.", "GroupedRow: ทำให้แถวกดได้ เป็นลิงก์หรือปุ่ม"),
       p("destructive", "boolean", "GroupedRow: red title for actions like sign out.", "GroupedRow: หัวข้อสีแดง เช่น ออกจากระบบ", "false"),
+    ],
+  },
+  conversation: {
+    th: "หน้าแชตสำหรับ LINE / Messenger / TikTok / WhatsApp มีตัวคั่นวัน จัดกลุ่มข้อความ สถานะอ่านแล้ว ไฟล์แนบ กำลังพิมพ์ ช่องพิมพ์ และปุ่มข้อความใหม่เมื่อเลื่อนขึ้นไปอ่านย้อนหลัง",
+    props: [
+      p("messages", "ChatMessage[]", "{ id, direction: in | out | system, text, time, author, status, attachments }.", "ข้อความ: id, ทิศทาง, ข้อความ, เวลา, ผู้ส่ง, สถานะ, ไฟล์แนบ"),
+      p("channel", '"line" | "facebook" | "instagram" | "tiktok" | "whatsapp" | "web"', "Channel chip in the header.", "ป้ายช่องทางที่หัวแชต"),
+      p("typing", "string", "Who is typing (shows the indicator).", "ชื่อคนที่กำลังพิมพ์"),
+      p("onSend", "(text) => void", "Shows the composer. Enter sends, Shift+Enter adds a line.", "แสดงช่องพิมพ์ Enter ส่ง Shift+Enter ขึ้นบรรทัด"),
+      p("header", "ReactNode", "Left side of the header.", "ส่วนหัวด้านซ้าย"),
+      p("locale", '"th" | "en"', "Dates, times and labels.", "ภาษาของวันที่ เวลา และป้าย", '"th"'),
     ],
   },
   "collapsing-header": {

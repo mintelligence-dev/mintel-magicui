@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-group",
+  "title": "Toggle group",
+  "description": "Buttons that stay pressed, one or many at a time, with a brand tint and a small spring.",
+  "dependencies": [
+    "@radix-ui/react-toggle-group"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/ui/toggle-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\"\n\nimport { cn } from \"@/lib/utils\"\n\n/**\n * Buttons that stay pressed: `type=\"single\"` (one at a time, e.g. alignment) or `type=\"multiple\"`\n * (filters, formatting). Pressed items take the brand tint with a small spring.\n */\nfunction ToggleGroup({ className, ...props }: React.ComponentProps<typeof ToggleGroupPrimitive.Root>) {\n  return (\n    <ToggleGroupPrimitive.Root\n      data-slot=\"toggle-group\"\n      className={cn(\"inline-flex w-fit flex-wrap items-center gap-1 rounded-lg border bg-background p-1\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction ToggleGroupItem({ className, ...props }: React.ComponentProps<typeof ToggleGroupPrimitive.Item>) {\n  return (\n    <ToggleGroupPrimitive.Item\n      data-slot=\"toggle-group-item\"\n      className={cn(\n        \"inline-flex h-8 min-w-8 items-center justify-center gap-1.5 rounded-md px-2.5 text-sm font-medium text-muted-foreground outline-none\",\n        \"transition-[color,background-color,scale] duration-300 ease-spring-snappy hover:bg-muted hover:text-foreground active:scale-95\",\n        \"focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50\",\n        \"data-[state=on]:bg-brand/12 data-[state=on]:text-brand motion-reduce:transition-none motion-reduce:active:scale-100\",\n        \"pointer-coarse:h-10 pointer-coarse:min-w-10 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { ToggleGroup, ToggleGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
