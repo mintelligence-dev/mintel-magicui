@@ -1,0 +1,22 @@
+<template>
+    <div class={rootClass}>
+        <div class="list" role="tablist" aria-label={label} onkeydown={handleKeydown}>
+            <span class="indicator" style={indicatorStyle} aria-hidden="true"></span>
+            <template for:each={tabs} for:item="tab">
+                <button
+                    key={tab.value}
+                    type="button"
+                    role="tab"
+                    class={tab.className}
+                    aria-selected={tab.ariaSelected}
+                    tabindex={tab.tabindex}
+                    data-value={tab.value}
+                    onclick={handleClick}
+                >
+                    {tab.label}
+                </button>
+            </template>
+        </div>
+        <slot onslotchange={handleSlotChange}></slot>
+    </div>
+</template>

@@ -1,0 +1,93 @@
+@import 'c/mintelTokens';
+
+:host {
+    display: block;
+    font-family: var(--mintel-font-sans);
+}
+
+.list {
+    position: relative;
+    display: inline-flex;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.pill .list {
+    gap: 4px;
+    padding: 4px;
+    border-radius: 999px;
+    background: var(--mintel-muted);
+}
+
+.underline .list {
+    gap: 1rem;
+    border-bottom: 1px solid var(--mintel-border);
+}
+
+.tab {
+    position: relative;
+    z-index: 1;
+    min-height: 2.25rem;
+    padding: 0 1rem;
+    border: 0;
+    background: transparent;
+    color: var(--mintel-muted-foreground);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color var(--mintel-duration-base) var(--mintel-ease-standard);
+}
+.tab:hover {
+    color: var(--mintel-foreground);
+}
+.tab:focus-visible {
+    outline: 3px solid color-mix(in oklab, var(--mintel-ring) 50%, transparent);
+    outline-offset: 2px;
+    border-radius: 999px;
+}
+.pill .tab.active {
+    color: var(--mintel-foreground);
+}
+.underline .tab {
+    padding: 0 0.25rem 0.625rem;
+}
+.underline .tab.active {
+    color: var(--mintel-brand);
+}
+
+.indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    transition: transform var(--mintel-spring-snappy-duration) var(--mintel-ease-spring-snappy),
+        width var(--mintel-spring-snappy-duration) var(--mintel-ease-spring-snappy);
+}
+.pill .indicator {
+    top: 4px;
+    bottom: 4px;
+    border-radius: 999px;
+    background: var(--mintel-background);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+}
+.underline .indicator {
+    top: auto;
+    bottom: -1px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--mintel-brand);
+}
+
+@media (pointer: coarse) {
+    .tab {
+        min-height: 2.75rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .indicator {
+        transition: none;
+    }
+}

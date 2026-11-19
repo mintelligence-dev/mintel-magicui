@@ -228,6 +228,10 @@ const en = {
     components: {
       mintelPath:
         "Stage path in Mintel colors. On a record page it reads a picklist (e.g. Case Status), and changes it in two steps — select, then “Mark as current stage”. Works without a record too.",
+      mintelTabs:
+        "Tabs whose pill or underline springs to the active tab. Wrap c-mintel-tab children; arrow keys move between tabs. For composing inside your own LWC.",
+      mintelSegmentedControl:
+        "Segmented control with a sliding thumb, for switching views or ranges. Set options in App Builder as value:Label pairs, or pass an array from JS.",
       mintelGlassCard: "Frosted glass card with a title, subtitle and any content.",
       mintelShimmerButton: "Brand-gradient call to action with a light sweep; fires a normal click event.",
       mintelGradientText: "Headline filled with a slowly moving brand gradient.",
@@ -461,6 +465,10 @@ const th: Dict = {
     components: {
       mintelPath:
         "แถบขั้นตอนสี Mintel บนหน้า record จะอ่าน picklist (เช่น Case Status) และเปลี่ยนค่าแบบ 2 ขั้น — เลือก แล้วกด “ตั้งเป็นขั้นปัจจุบัน” ใช้แบบไม่มี record ก็ได้",
+      mintelTabs:
+        "แท็บที่ตัวไฮไลต์ (pill หรือขีดเส้นใต้) เด้งไปหาแท็บที่เลือก ใส่ c-mintel-tab ไว้ข้างใน ใช้ปุ่มลูกศรเลื่อนแท็บได้ ใช้ประกอบใน LWC ของเราเอง",
+      mintelSegmentedControl:
+        "ตัวเลือกแบบแบ่งช่อง มีแถบเลื่อนไปยังช่องที่เลือก ใช้สลับมุมมองหรือช่วงเวลา ตั้ง options ใน App Builder เป็นคู่ value:Label หรือส่ง array จาก JS",
       mintelGlassCard: "การ์ดกระจกฝ้า ใส่หัวข้อ คำอธิบาย และเนื้อหาอะไรก็ได้",
       mintelShimmerButton: "ปุ่ม call to action สีแบรนด์ มีแสงวิ่งรอบขอบ ส่ง click event ปกติ",
       mintelGradientText: "หัวข้อที่เติมสีไล่เฉดแบรนด์ซึ่งค่อยๆ เคลื่อนที่",
