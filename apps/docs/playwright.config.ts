@@ -1,7 +1,6 @@
 import { defineConfig, devices } from "@playwright/test"
 
-// QA for the docs site: axe accessibility checks (run in CI) and visual regression of every component
-// preview (run locally; not part of CI).
+// QA for the docs site: visual regression of every component preview and axe accessibility checks.
 // Runs against the static export (apps/docs/out), so `npm run build` first.
 // Visual baselines are rendered on Linux; on a Mac, use `npm run test:e2e:docker`.
 const PORT = 4400
