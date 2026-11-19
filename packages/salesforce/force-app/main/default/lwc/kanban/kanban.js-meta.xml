@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Kanban</masterLabel>
-    <description>Related records as a board grouped by a picklist; drag or "Move to" updates the record. UI API only.</description>
+    <description>[Mintel UI] Related records as a board grouped by a picklist; drag or "Move to" updates the record. UI API only.</description>
     <targets>
         <target>lightning__RecordPage</target>
     </targets>

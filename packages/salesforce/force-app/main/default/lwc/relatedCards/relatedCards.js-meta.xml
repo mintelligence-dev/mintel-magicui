@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Related Cards</masterLabel>
-    <description>A related list (Cases, Opportunities, Contacts…) shown as cards. UI API only, no Apex.</description>
+    <description>[Mintel UI] A related list (Cases, Opportunities, Contacts…) shown as cards. UI API only, no Apex.</description>
     <targets>
         <target>lightning__RecordPage</target>
     </targets>

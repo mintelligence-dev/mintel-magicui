@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Glass Card</masterLabel>
-    <description>Frosted glass card in Mintel brand colors.</description>
+    <description>[Mintel UI] Frosted glass card in Mintel brand colors.</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>

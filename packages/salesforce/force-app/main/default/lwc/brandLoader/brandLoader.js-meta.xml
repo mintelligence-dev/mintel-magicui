@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Brand Loader</masterLabel>
-    <description>Loads the Mintel brand stylesheet and SLDS styling hooks for the page.</description>
+    <description>[Mintel UI] Loads the Mintel brand stylesheet and SLDS styling hooks for the page.</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>

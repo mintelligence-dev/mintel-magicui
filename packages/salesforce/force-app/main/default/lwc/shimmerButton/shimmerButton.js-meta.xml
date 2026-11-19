@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Shimmer Button</masterLabel>
-    <description>Brand-gradient button with a light sweep.</description>
+    <description>[Mintel UI] Brand-gradient button with a light sweep.</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>

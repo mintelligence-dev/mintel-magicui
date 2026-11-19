@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Record Header</masterLabel>
-    <description>Branded record header: icon, title, status badge and up to four highlight fields.</description>
+    <description>[Mintel UI] Branded record header: icon, title, status badge and up to four highlight fields.</description>
     <targets>
         <target>lightning__RecordPage</target>
     </targets>

@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Empty State</masterLabel>
-    <description>Branded empty state: icon in a halo, title, description and an optional action.</description>
+    <description>[Mintel UI] Branded empty state: icon in a halo, title, description and an optional action.</description>
     <targets>
         <target>lightning__RecordPage</target>
         <target>lightning__AppPage</target>

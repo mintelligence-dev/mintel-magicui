@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Activity Timeline</masterLabel>
-    <description>Tasks and events for the record in one timeline (UI API GraphQL, no Apex).</description>
+    <description>[Mintel UI] Tasks and events for the record in one timeline (UI API GraphQL, no Apex).</description>
     <targets>
         <target>lightning__RecordPage</target>
     </targets>
