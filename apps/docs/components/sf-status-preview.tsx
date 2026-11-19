@@ -25,7 +25,7 @@ function Pill({ tone, children, solid }: { tone: keyof typeof TONES; children: s
   )
 }
 
-/** Mirrors mintelStatusBadge's soft and solid looks, for the Salesforce guide preview. */
+/** Mirrors statusBadge's soft and solid looks, for the Salesforce guide preview. */
 export function StatusBadgePreview() {
   return (
     <div className="flex max-w-xs flex-wrap justify-center gap-2">
@@ -40,7 +40,7 @@ export function StatusBadgePreview() {
   )
 }
 
-/** React twin of mintelTimeline, for the Salesforce guide preview. */
+/** React twin of timeline, for the Salesforce guide preview. */
 export function TimelinePreview() {
   return (
     <Timeline aria-label="Case history" className="w-full max-w-xs">

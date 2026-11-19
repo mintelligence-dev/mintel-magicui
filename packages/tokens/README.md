@@ -10,7 +10,7 @@ M-Intelligence brand tokens. **Single source:** [`src/tokens.json`](src/tokens.j
 | `dist/fonts.css` | Google Fonts import (Manrope, Rubik, IBM Plex Sans Thai, JetBrains Mono) |
 | `dist/index.js` | `import { tokens } from "@mintelligence-dev/tokens"` |
 | `dist/shadcn-theme.json` | `cssVars` used by the registry's `mintel-theme` item |
-| `lwc/mintelTokens/` | Salesforce LWC CSS-only module |
+| `lwc/tokens/` | Salesforce LWC CSS-only module |
 | `salesforce/mintel-global.css` | Page-level CSS + SLDS styling hooks |
 
 ## Palette
@@ -66,10 +66,10 @@ import { tokens } from "@mintelligence-dev/tokens"
 
 ### 1. Component styles — CSS-only module
 
-Copy `lwc/mintelTokens/` into `force-app/main/default/lwc/` and deploy. In any component:
+Copy `lwc/tokens/` into `force-app/main/default/lwc/` and deploy. In any component:
 
 ```css
-@import 'c/mintelTokens';
+@import 'c/tokens';
 
 .card {
   background: var(--mintel-card);

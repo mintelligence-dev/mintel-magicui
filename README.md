@@ -63,9 +63,9 @@ Brand fonts are **Manrope** (Latin) + **IBM Plex Sans Thai** (Thai), headings in
 
 ## Use it in Salesforce
 
-[`packages/salesforce`](packages/salesforce) is a deployable SFDX project: the `c/mintelTokens` CSS module, the
+[`packages/salesforce`](packages/salesforce) is a deployable SFDX project: the `c/tokens` CSS module, the
 `mintelGlobal` static resource (SLDS styling hooks that rebrand standard `lightning-*` components) and branded LWC
-(`mintelGlassCard`, `mintelShimmerButton`, `mintelGradientText`, `mintelStatCard`, `mintelBrandLoader`).
+(`glassCard`, `shimmerButton`, `gradientText`, `statCard`, `brandLoader`).
 
 ```bash
 sf project deploy start --source-dir packages/salesforce/force-app --target-org my-org

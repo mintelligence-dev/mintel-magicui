@@ -1,0 +1,57 @@
+@import 'c/tokens';
+
+:host {
+    display: block;
+}
+
+.glass {
+    position: relative;
+    border: 1px solid var(--mintel-glass-border);
+    border-radius: calc(var(--mintel-radius) + 8px);
+    background: var(--mintel-glass);
+    color: var(--mintel-glass-foreground);
+    font-family: var(--mintel-font-sans);
+    -webkit-backdrop-filter: blur(var(--mintel-glass-blur)) saturate(var(--mintel-glass-saturate));
+    backdrop-filter: blur(var(--mintel-glass-blur)) saturate(var(--mintel-glass-saturate));
+    box-shadow: inset 0 1px 0 0 var(--mintel-glass-highlight), 0 12px 40px -12px var(--mintel-glass-shadow);
+    overflow: hidden;
+}
+
+.glass[data-variant='brand'] {
+    background: color-mix(in oklab, var(--mintel-brand) 22%, var(--mintel-glass));
+}
+
+.header {
+    padding: 1.25rem 1.25rem 0;
+}
+
+.title {
+    margin: 0;
+    font-family: var(--mintel-font-heading);
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.subtitle {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    color: var(--mintel-muted-foreground);
+}
+
+.body {
+    padding: 1.25rem;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass {
+        background: var(--mintel-card);
+    }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .glass {
+        background: var(--mintel-card);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}

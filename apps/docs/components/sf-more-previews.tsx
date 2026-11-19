@@ -25,7 +25,7 @@ export function ConversationPreview() {
   return <Conversation className="h-72 w-full max-w-sm" locale="en" channel="line" header={<p className="font-semibold">Somchai K</p>} messages={MESSAGES} />
 }
 
-/** Mirrors mintelSlaTimer: counts down from 31 minutes, turning amber inside 30. */
+/** Mirrors slaTimer: counts down from 31 minutes, turning amber inside 30. */
 export function SlaTimerPreview() {
   const [left, setLeft] = useState(31 * 60 + 4)
   useEffect(() => {

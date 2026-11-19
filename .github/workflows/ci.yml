@@ -20,7 +20,7 @@ jobs:
       - name: Generated files are committed
         run: |
           git diff --exit-code -- packages/tokens/dist packages/tokens/lwc packages/tokens/salesforce \
-            packages/salesforce/force-app/main/default/lwc/mintelTokens packages/salesforce/force-app/main/default/staticresources \
+            packages/salesforce/force-app/main/default/lwc/tokens packages/salesforce/force-app/main/default/staticresources \
             apps/docs/registry.json apps/docs/public/r apps/docs/app/registry.css \
             || (echo "::error::Run 'npm run build' and commit the generated files." && exit 1)
 

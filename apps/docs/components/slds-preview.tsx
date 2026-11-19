@@ -123,20 +123,20 @@ const BRAND_MARKUP = `
           </div>
           <div class="slds-media__body">
             <span class="slds-text-body_small slds-text-color_weak">Account</span>
-            <div class="c-mintelGradientText"><span class="gradient" data-size="medium">Acme Retail Co., Ltd.</span></div>
+            <div class="c-gradientText"><span class="gradient" data-size="medium">Acme Retail Co., Ltd.</span></div>
           </div>
         </div>
       </div>
       <div class="slds-page-header__col-actions" style="align-self:center">
         <div class="slds-grid slds-grid_vertical-align-center" style="gap:.5rem">
           <button class="slds-button slds-button_neutral">Follow</button>
-          <div class="c-mintelShimmerButton"><button class="shimmer" type="button"><span class="spark" aria-hidden="true"></span><span class="label">New Case</span></button></div>
+          <div class="c-shimmerButton"><button class="shimmer" type="button"><span class="spark" aria-hidden="true"></span><span class="label">New Case</span></button></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="c-mintelPath slds-m-top_medium"><div class="path"><ol class="track" aria-label="Progress">
+  <div class="c-path slds-m-top_medium"><div class="path"><ol class="track" aria-label="Progress">
     <li class="item"><button type="button" class="stage complete first"><svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg><span class="label">New</span></button></li>
     <li class="item"><button type="button" class="stage current" aria-current="step"><span class="label">Working</span></button></li>
     <li class="item"><button type="button" class="stage upcoming"><span class="label">Escalated</span></button></li>
@@ -144,9 +144,9 @@ const BRAND_MARKUP = `
   </ol></div></div>
 
   <div class="slds-grid slds-wrap slds-gutters_x-small slds-m-top_medium">
-    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_x-small"><div class="c-mintelStatCard"><div class="stat"><p class="label">Open cases</p><p class="value"><span class="number" data-count="37">37</span><span class="suffix">cases</span></p><p class="caption">3 due today</p></div></div></div>
-    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_x-small"><div class="c-mintelStatCard"><div class="stat"><p class="label">Messages today</p><p class="value"><span class="number" data-count="1284">1,284</span></p><p class="caption">LINE · Facebook · TikTok</p></div></div></div>
-    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_x-small"><div class="c-mintelStatCard"><div class="stat"><p class="label">Customer satisfaction</p><p class="value"><span class="number" data-count="96">96</span><span class="suffix">%</span></p><p class="caption">+4% this month</p></div></div></div>
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_x-small"><div class="c-statCard"><div class="stat"><p class="label">Open cases</p><p class="value"><span class="number" data-count="37">37</span><span class="suffix">cases</span></p><p class="caption">3 due today</p></div></div></div>
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_x-small"><div class="c-statCard"><div class="stat"><p class="label">Messages today</p><p class="value"><span class="number" data-count="1284">1,284</span></p><p class="caption">LINE · Facebook · TikTok</p></div></div></div>
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_x-small"><div class="c-statCard"><div class="stat"><p class="label">Customer satisfaction</p><p class="value"><span class="number" data-count="96">96</span><span class="suffix">%</span></p><p class="caption">+4% this month</p></div></div></div>
   </div>
 
   <div class="slds-grid slds-wrap slds-gutters_x-small slds-m-top_medium">
@@ -164,7 +164,7 @@ const BRAND_MARKUP = `
             <div class="slds-form-element__control"><input type="text" id="subject2" class="slds-input" value="LINE OA message not syncing" /></div>
           </div>
           <div class="slds-grid slds-gutters slds-m-top_small">
-            <div class="slds-col"><span class="slds-form-element__label">Status</span><div><span class="c-mintelStatusBadge"><span class="badge brand soft"><span class="dot" aria-hidden="true"></span><span class="text">Working</span></span></span> <span class="c-mintelStatusBadge"><span class="badge destructive soft"><span class="dot" aria-hidden="true"></span><span class="text">High priority</span></span></span></div></div>
+            <div class="slds-col"><span class="slds-form-element__label">Status</span><div><span class="c-statusBadge"><span class="badge brand soft"><span class="dot" aria-hidden="true"></span><span class="text">Working</span></span></span> <span class="c-statusBadge"><span class="badge destructive soft"><span class="dot" aria-hidden="true"></span><span class="text">High priority</span></span></span></div></div>
             <div class="slds-col">
               <label class="slds-checkbox_toggle slds-grid">
                 <span class="slds-form-element__label slds-m-bottom_none">Notify customer</span>
@@ -183,7 +183,7 @@ const BRAND_MARKUP = `
     </div>
     <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
       <div style="height:100%;padding:1rem;border-radius:18px;background:radial-gradient(120% 120% at 15% 10%,var(--mintel-brand-cyan),transparent 55%),radial-gradient(120% 120% at 90% 90%,var(--mintel-brand-accent),transparent 55%),var(--mintel-brand)">
-        <div class="c-mintelGlassCard"><article class="glass" data-variant="default">
+        <div class="c-glassCard"><article class="glass" data-variant="default">
           <header class="header"><h2 class="title">AI case summary</h2><p class="subtitle">Agentforce · 2 min ago</p></header>
           <div class="body" style="font-size:.875rem;line-height:1.5">
             Customer reports LINE OA messages are not reaching Salesforce since this morning.
@@ -196,7 +196,7 @@ const BRAND_MARKUP = `
   </div>
 </div>
 <script>
-  // Count-up like mintelStatCard (skipped for reduced motion).
+  // Count-up like statCard (skipped for reduced motion).
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('[data-count]').forEach(function (el) {
       var to = +el.dataset.count, t0 = performance.now(), fmt = new Intl.NumberFormat('en-US');
@@ -211,7 +211,7 @@ function srcDoc(brand: { css: string; componentCss: string } | null) {
   return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="${SLDS_CSS}">
 ${brand ? `<style>${brand.css}\n${brand.componentCss}</style>` : ""}
-<style>body{margin:0}a{cursor:default}@media (max-width:640px){.slds-page-header__row{flex-wrap:wrap!important;gap:.75rem}.slds-page-header__col-title{flex:1 1 100%!important;min-width:0}.slds-page-header__col-actions{flex:1 1 100%!important}.c-mintelGradientText .gradient[data-size]{font-size:1.5rem}}</style></head>
+<style>body{margin:0}a{cursor:default}@media (max-width:640px){.slds-page-header__row{flex-wrap:wrap!important;gap:.75rem}.slds-page-header__col-title{flex:1 1 100%!important;min-width:0}.slds-page-header__col-actions{flex:1 1 100%!important}.c-gradientText .gradient[data-size]{font-size:1.5rem}}</style></head>
 <body>${brand ? BRAND_MARKUP : MARKUP}<script>document.addEventListener('click',function(e){e.preventDefault()})</script></body></html>`
 }
 

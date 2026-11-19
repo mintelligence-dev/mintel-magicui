@@ -1,0 +1,79 @@
+@import 'c/tokens';
+
+:host {
+    display: inline-block;
+    font-family: var(--mintel-font-sans);
+    --tone: var(--mintel-muted-foreground);
+}
+
+.badge {
+    display: inline-flex;
+    max-width: 100%;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.125rem 0.625rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    white-space: nowrap;
+    transition: background-color var(--mintel-duration-base) var(--mintel-ease-standard),
+        color var(--mintel-duration-base) var(--mintel-ease-standard);
+}
+.text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: none;
+    border-radius: 999px;
+    background: currentColor;
+}
+
+.neutral {
+    --tone: var(--mintel-muted-foreground);
+}
+.brand {
+    --tone: var(--mintel-brand);
+}
+.info {
+    --tone: var(--mintel-info);
+}
+.success {
+    --tone: var(--mintel-success);
+}
+.warning {
+    --tone: var(--mintel-warning);
+}
+.destructive {
+    --tone: var(--mintel-destructive);
+}
+
+.soft {
+    color: var(--tone);
+    background: color-mix(in oklab, var(--tone) 14%, transparent);
+}
+.solid {
+    color: #fff;
+    background: var(--tone);
+}
+.solid .dot {
+    background: currentColor;
+    opacity: 0.85;
+}
+/* Dark mode tones are light, so solid badges switch to dark text. */
+:host(.mintel-dark) .solid,
+:host([data-theme='dark']) .solid {
+    color: var(--mintel-background);
+}
+.brand.solid {
+    background: var(--mintel-brand-gradient);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .badge {
+        transition: none;
+    }
+}

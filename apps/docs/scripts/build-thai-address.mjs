@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Builds the compact Thai address dataset used by the thai-address-picker item and the mintelThaiAddress LWC.
+// Builds the compact Thai address dataset used by the thai-address-picker item and the thaiAddress LWC.
 // Source: https://github.com/kongvut/thai-province-data (MIT), files api/latest/{province,district,sub_district}.json.
 // Usage: node scripts/build-thai-address.mjs <dir with the three source files>
 //

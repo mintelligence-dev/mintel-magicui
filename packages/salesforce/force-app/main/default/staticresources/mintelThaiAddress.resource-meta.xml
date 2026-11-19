@@ -2,5 +2,5 @@
 <StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
     <cacheControl>Public</cacheControl>
     <contentType>application/json</contentType>
-    <description>Thai provinces, districts, sub-districts and postal codes for c-mintel-thai-address (kongvut/thai-province-data, MIT).</description>
+    <description>Thai provinces, districts, sub-districts and postal codes for c-thai-address (kongvut/thai-province-data, MIT).</description>
 </StaticResource>
