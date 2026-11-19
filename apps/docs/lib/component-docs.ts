@@ -39,7 +39,7 @@ const FORM_ITEMS = new Set([
   "file-upload", "thai-address", "thai-id-input", "thai-phone-input", "otp-input",
 ])
 
-const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper", "grouped-list"])
+const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper", "grouped-list", "conversation"])
 const NAV_ITEMS = new Set(["breadcrumb", "pagination", "accordion", "sheet", "collapsing-header"])
 
 const categoryOf = (it: RawItem): Category =>
@@ -252,6 +252,17 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("trailing", "ReactNode", "GroupedRow: control on the right (switch …); hides the chevron.", "GroupedRow: ตัวควบคุมด้านขวา (เช่นสวิตช์) แทนลูกศร"),
       p("href / onClick", "string / () => void", "GroupedRow: makes the row a link or button with a chevron.", "GroupedRow: ทำให้แถวกดได้ เป็นลิงก์หรือปุ่ม"),
       p("destructive", "boolean", "GroupedRow: red title for actions like sign out.", "GroupedRow: หัวข้อสีแดง เช่น ออกจากระบบ", "false"),
+    ],
+  },
+  conversation: {
+    th: "หน้าแชตสำหรับ LINE / Messenger / TikTok / WhatsApp มีตัวคั่นวัน จัดกลุ่มข้อความ สถานะอ่านแล้ว ไฟล์แนบ กำลังพิมพ์ ช่องพิมพ์ และปุ่มข้อความใหม่เมื่อเลื่อนขึ้นไปอ่านย้อนหลัง",
+    props: [
+      p("messages", "ChatMessage[]", "{ id, direction: in | out | system, text, time, author, status, attachments }.", "ข้อความ: id, ทิศทาง, ข้อความ, เวลา, ผู้ส่ง, สถานะ, ไฟล์แนบ"),
+      p("channel", '"line" | "facebook" | "instagram" | "tiktok" | "whatsapp" | "web"', "Channel chip in the header.", "ป้ายช่องทางที่หัวแชต"),
+      p("typing", "string", "Who is typing (shows the indicator).", "ชื่อคนที่กำลังพิมพ์"),
+      p("onSend", "(text) => void", "Shows the composer. Enter sends, Shift+Enter adds a line.", "แสดงช่องพิมพ์ Enter ส่ง Shift+Enter ขึ้นบรรทัด"),
+      p("header", "ReactNode", "Left side of the header.", "ส่วนหัวด้านซ้าย"),
+      p("locale", '"th" | "en"', "Dates, times and labels.", "ภาษาของวันที่ เวลา และป้าย", '"th"'),
     ],
   },
   "collapsing-header": {

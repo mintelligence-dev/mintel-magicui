@@ -1,0 +1,65 @@
+<template>
+    <section class="conversation">
+        <template lwc:if={hasHeader}>
+            <header class="head">
+                <div class="who">
+                    <p class="title">{title}</p>
+                    <template lwc:if={subtitle}><p class="subtitle">{subtitle}</p></template>
+                </div>
+                <template lwc:if={channelInfo}>
+                    <span class="channel"><span class="dot" style={channelInfo.dotStyle}></span>{channelInfo.label}</span>
+                </template>
+            </header>
+        </template>
+        <div class="log" role="log" aria-live="polite" onscroll={handleScroll}>
+            <template for:each={rows} for:item="row">
+                <div key={row.key} class={row.rowClass}>
+                    <template lwc:if={row.isDay}>
+                        <span class="line"></span><span>{row.text}</span><span class="line"></span>
+                    </template>
+                    <template lwc:elseif={row.isSystem}>
+                        <p class="system">{row.text}</p>
+                    </template>
+                    <template lwc:else>
+                        <template lwc:if={row.showAvatar}>
+                            <span class="avatar">{row.initials}</span>
+                        </template>
+                        <div class="stack">
+                            <template lwc:if={row.showAuthor}><span class="author">{row.author}</span></template>
+                            <template for:each={row.files} for:item="file">
+                                <a key={file.key} class="file" href={file.url} target="_blank" rel="noopener">
+                                    <span class="file-name">{file.name}</span>
+                                    <template lwc:if={file.size}><span class="file-size">{file.size}</span></template>
+                                </a>
+                            </template>
+                            <template lwc:if={row.text}><p class={row.bubbleClass}>{row.text}</p></template>
+                            <span class="meta">{row.time}<template lwc:if={row.status}><span class={row.statusClass}> · {row.status}</span></template></span>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template lwc:if={typing}>
+                <div class="typing"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>{typingText}</div>
+            </template>
+        </div>
+        <template lwc:if={showNewPill}>
+            <button type="button" class="pill" onclick={handlePill}>{labels.newMessages}</button>
+        </template>
+        <template lwc:if={showComposer}>
+            <form class="composer" onsubmit={handleSubmit}>
+                <textarea
+                    class="input"
+                    rows="1"
+                    placeholder={labels.placeholder}
+                    aria-label={labels.placeholder}
+                    value={draft}
+                    oninput={handleInput}
+                    onkeydown={handleKeydown}
+                ></textarea>
+                <button type="submit" class="send" disabled={sendDisabled} aria-label={labels.send}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.7 3.3 21 12 3.7 20.7 6 12z" /><path d="M6 12h7" /></svg>
+                </button>
+            </form>
+        </template>
+    </section>
+</template>

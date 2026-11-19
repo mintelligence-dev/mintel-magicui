@@ -781,6 +781,24 @@
       ]
     },
     {
+      "name": "conversation",
+      "type": "registry:ui",
+      "title": "Conversation",
+      "description": "Chat thread for LINE / Messenger / TikTok / WhatsApp: day dividers, grouped bubbles, read receipts, attachments, typing indicator, composer and a new-messages pill.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/conversation.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "collapsing-header",
       "type": "registry:ui",
       "title": "Collapsing header",

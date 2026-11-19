@@ -27,6 +27,7 @@ import OtpInputExample from "./otp-input"
 import DataTableExample from "./data-table"
 import ChartExample from "./chart"
 import GroupedListExample from "./grouped-list"
+import ConversationExample from "./conversation"
 import CollapsingHeaderExample from "./collapsing-header"
 import TabsExample from "./tabs"
 import ToastExample from "./toast"
@@ -93,6 +94,7 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "data-table": DataTableExample,
   "chart": ChartExample,
   "grouped-list": GroupedListExample,
+  "conversation": ConversationExample,
   "collapsing-header": CollapsingHeaderExample,
   "tabs": TabsExample,
   "toast": ToastExample,
