@@ -34,8 +34,18 @@ export default class MintelFontSizeControl extends LightningElement {
     get isDefault() {
         return this.index === DEFAULT_INDEX ? 'true' : 'false';
     }
+    // The button matching the current size is highlighted: smaller, default or larger.
+    get smallerClass() {
+        return this.index < DEFAULT_INDEX ? 'step small active' : 'step small';
+    }
     get resetClass() {
         return this.index === DEFAULT_INDEX ? 'step base active' : 'step base';
+    }
+    get largerClass() {
+        return this.index > DEFAULT_INDEX ? 'step large active' : 'step large';
+    }
+    get currentLabel() {
+        return `${this.labels.group} ${STEPS[this.index]}%`;
     }
 
     connectedCallback() {

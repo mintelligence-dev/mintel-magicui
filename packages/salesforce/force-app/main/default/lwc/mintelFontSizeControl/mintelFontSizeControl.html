@@ -1,7 +1,7 @@
 <template>
-    <div class="control" role="group" aria-label={labels.group}>
-        <button type="button" class="step small" aria-label={labels.smaller} disabled={atMin} onclick={handleSmaller}>{labels.glyph}-</button>
+    <div class="control" role="group" aria-label={labels.group} title={currentLabel}>
+        <button type="button" class={smallerClass} aria-label={labels.smaller} disabled={atMin} onclick={handleSmaller}>{labels.glyph}-</button>
         <button type="button" class={resetClass} aria-label={labels.reset} aria-pressed={isDefault} onclick={handleReset}>{labels.glyph}</button>
-        <button type="button" class="step large" aria-label={labels.larger} disabled={atMax} onclick={handleLarger}>{labels.glyph}+</button>
+        <button type="button" class={largerClass} aria-label={labels.larger} disabled={atMax} onclick={handleLarger}>{labels.glyph}+</button>
     </div>
 </template>

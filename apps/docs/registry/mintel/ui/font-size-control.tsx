@@ -78,14 +78,23 @@ function FontSizeControl({
 
   const button =
     "relative inline-flex h-8 min-w-9 cursor-pointer items-center justify-center rounded-full px-2.5 leading-none font-medium outline-none transition-[background-color,color,transform] duration-300 ease-spring-snappy select-none touch-manipulation " +
-    "focus-visible:ring-[3px] focus-visible:ring-ring/50 active:scale-90 disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none " +
+    "focus-visible:ring-[3px] focus-visible:ring-ring/50 active:scale-90 disabled:cursor-default motion-reduce:transition-none " +
     "after:absolute after:-inset-1.5 pointer-fine:after:hidden"
+  // The button matching the current size is highlighted: smaller (ก-), default (ก) or larger (ก+).
+  const level = index < defaultStep ? "smaller" : index > defaultStep ? "larger" : "default"
+  const state = (active: boolean) =>
+    active
+      ? "bg-accent text-accent-foreground shadow-[inset_0_0_0_1px_var(--border)]"
+      : "text-muted-foreground hover:bg-accent hover:text-foreground disabled:opacity-40 disabled:hover:bg-transparent"
+  const current = `${t.now} ${steps[index]}%`
 
   return (
     <div
       role="group"
       aria-label={t.group}
+      title={current}
       data-slot="font-size-control"
+      data-level={level}
       className={cn("inline-flex items-center gap-0.5 rounded-full border bg-background p-1 shadow-xs", className)}
     >
       <button
@@ -93,22 +102,16 @@ function FontSizeControl({
         aria-label={t.smaller}
         disabled={index === 0}
         onClick={() => apply(index - 1)}
-        className={cn(button, "text-sm text-muted-foreground hover:bg-accent hover:text-foreground")}
+        className={cn(button, "text-sm", state(level === "smaller"))}
       >
         {t.glyph}-
       </button>
       <button
         type="button"
         aria-label={t.reset}
-        aria-pressed={index === defaultStep}
+        aria-pressed={level === "default"}
         onClick={() => apply(defaultStep)}
-        className={cn(
-          button,
-          "text-base",
-          index === defaultStep
-            ? "bg-accent text-accent-foreground shadow-[inset_0_0_0_1px_var(--border)]"
-            : "text-muted-foreground hover:bg-accent hover:text-foreground"
-        )}
+        className={cn(button, "text-base", state(level === "default"))}
       >
         {t.glyph}
       </button>
@@ -117,12 +120,12 @@ function FontSizeControl({
         aria-label={t.larger}
         disabled={index === steps.length - 1}
         onClick={() => apply(index + 1)}
-        className={cn(button, "text-lg text-muted-foreground hover:bg-accent hover:text-foreground")}
+        className={cn(button, "text-lg", state(level === "larger"))}
       >
         {t.glyph}+
       </button>
       <span className="sr-only" aria-live="polite">
-        {t.now} {steps[index]}%
+        {current}
       </span>
     </div>
   )
