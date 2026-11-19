@@ -26,6 +26,7 @@ export const SF_INDEX: { name: string; group: SfGroup }[] = [
   { name: "fontSizeControl", group: "site" },
   { name: "quickActions", group: "record" },
   { name: "filesGallery", group: "record" },
+  { name: "recordForm", group: "record" },
   { name: "kpiTrend", group: "display" },
   { name: "announcement", group: "display" },
   { name: "siteHero", group: "site" },

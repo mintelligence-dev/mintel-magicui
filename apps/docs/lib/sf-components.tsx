@@ -18,7 +18,7 @@ import {
 } from "@/components/sf-more-previews"
 import { ActivityTimelinePreview, KanbanPreview, RelatedCardsPreview } from "@/components/sf-records-previews"
 import { SegmentedPreview, TabsPreview } from "@/components/sf-tabs-preview"
-import { AnnouncementPreview, FilesGalleryPreview, KpiTrendPreview, QuickActionsPreview } from "@/components/sf-new-previews"
+import { AnnouncementPreview, FilesGalleryPreview, KpiTrendPreview, QuickActionsPreview, RecordFormPreview } from "@/components/sf-new-previews"
 import { SectionCta } from "@/registry/mintel/sections/section-cta"
 import { SectionFaq } from "@/registry/mintel/sections/section-faq"
 import { SectionFeatureGrid } from "@/registry/mintel/sections/section-feature-grid"
@@ -274,6 +274,20 @@ export const SF_COMPONENTS: SfComponent[] = [
     usage: `<!-- Record page: the record's files as cards; opens Salesforce's file preview. UI API, no Apex -->
 <c-files-gallery record-id={recordId} page-size="12"></c-files-gallery>`,
     preview: <FilesGalleryPreview />,
+  },
+  {
+    name: "recordForm",
+    group: "record",
+    react: "form",
+    usage: `<!-- Record page: edit this record; App Builder "Sections and fields" -->
+<c-record-form record-id={recordId} object-api-name="Contact" title="Contact details"
+    sections="Contact: FirstName, LastName, Phone, Email | Address: MailingStreet, MailingCity"
+    onsuccess={handleSaved}></c-record-form>
+
+<!-- App or home page: create a new record -->
+<c-record-form object-api-name="Lead" title="New lead" columns="1"
+    sections="FirstName, LastName, Company"></c-record-form>`,
+    preview: <RecordFormPreview />,
   },
   {
     name: "kpiTrend",

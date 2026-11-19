@@ -31,6 +31,9 @@ import ThaiAddressExample from "./thai-address"
 import ThaiIdInputExample from "./thai-id-input"
 import ThaiPhoneInputExample from "./thai-phone-input"
 import OtpInputExample from "./otp-input"
+import TreeViewExample from "./tree-view"
+import SignaturePadExample from "./signature-pad"
+import VirtualTableExample from "./virtual-table"
 import DataTableExample from "./data-table"
 import ChartExample from "./chart"
 import GroupedListExample from "./grouped-list"
@@ -121,6 +124,9 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "thai-id-input": ThaiIdInputExample,
   "thai-phone-input": ThaiPhoneInputExample,
   "otp-input": OtpInputExample,
+  "tree-view": TreeViewExample,
+  "signature-pad": SignaturePadExample,
+  "virtual-table": VirtualTableExample,
   "data-table": DataTableExample,
   "chart": ChartExample,
   "grouped-list": GroupedListExample,
