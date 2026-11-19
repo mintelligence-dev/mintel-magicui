@@ -1,6 +1,6 @@
 {
   "name": "@mintelligence-dev/salesforce",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Mintel UI for Salesforce: LWC token module, SLDS styling hooks static resource and branded Lightning Web Components.",
   "license": "MIT",
