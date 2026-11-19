@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 @import "@mintelligence-dev/tokens/tailwind.css";
 @import "./registry.css";
 

@@ -31,7 +31,8 @@ npx shadcn@latest add https://raw.githubusercontent.com/mintelligence-dev/mintel
 
 **Components**
 
-- Core: `button` (incl. `brand` gradient variant), `badge`, `card`, `input`
+- Core: `button` (incl. `brand` gradient variant), `badge`, `card`, `input`, `dialog`, `select`,
+  `table`, `tabs`, `toast` (sonner — render `<Toaster />` once, then call `toast()`)
 - Animated (adapted from [Magic UI](https://magicui.design)): `shimmer-button`, `aurora-text`,
   `animated-gradient-text`, `magic-card`, `border-beam`, `shine-border`, `number-ticker`, `meteors`,
   `marquee`, `dot-pattern`, `blur-fade`, `animated-beam`

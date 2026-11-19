@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { IBM_Plex_Sans_Thai, JetBrains_Mono, Manrope, Rubik } from "next/font/google"
 
+import { Toaster } from "@/registry/mintel/ui/toast"
+
 import "./globals.css"
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" })
@@ -31,7 +33,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Toaster richColors={false} />
+      </body>
     </html>
   )
 }

@@ -1,6 +1,7 @@
 import { ArrowRight, Sparkles } from "lucide-react"
 import { tokens } from "@mintelligence-dev/tokens"
 
+import { DialogDemo, ChannelSelect, TableDemo, TabsDemo, ToastDemo } from "@/components/app-ui-demos"
 import { BeamDemo } from "@/components/beam-demo"
 import { CopyCommand } from "@/components/copy-command"
 import { GithubIcon } from "@/components/github-icon"
@@ -69,15 +70,17 @@ function Preview({
   name,
   title,
   className,
+  wrapperClassName,
   children,
 }: {
   name: string
   title: string
   className?: string
+  wrapperClassName?: string
   children: React.ReactNode
 }) {
   return (
-    <Card className="gap-0 overflow-hidden py-0">
+    <Card className={cn("gap-0 overflow-hidden py-0", wrapperClassName)}>
       <div
         className={cn(
           "relative flex min-h-48 items-center justify-center overflow-hidden border-b bg-muted/30 p-6",
@@ -163,7 +166,7 @@ export default function Home() {
         <BlurFade delay={0.45} className="mt-16 grid w-full max-w-3xl grid-cols-3 gap-4">
           {[
             { v: Object.keys(tokens.light).length, l: "Semantic tokens" },
-            { v: 16, l: "Registry items" },
+            { v: 22, l: "Registry items" },
             { v: 2, l: "Platforms" },
           ].map((s) => (
             <div key={s.l} className="rounded-2xl border bg-card/60 p-4 backdrop-blur">
@@ -384,6 +387,21 @@ export default function Home() {
           </Preview>
           <Preview name="input" title="Input">
             <Input placeholder="อีเมลของคุณ" className="max-w-xs bg-background" />
+          </Preview>
+          <Preview name="dialog" title="Dialog">
+            <DialogDemo />
+          </Preview>
+          <Preview name="select" title="Select">
+            <ChannelSelect />
+          </Preview>
+          <Preview name="tabs" title="Tabs">
+            <TabsDemo />
+          </Preview>
+          <Preview name="toast" title="Toast">
+            <ToastDemo />
+          </Preview>
+          <Preview name="table" title="Table" className="p-4" wrapperClassName="md:col-span-2">
+            <TableDemo />
           </Preview>
           <Preview name="card" title="Card" className="p-4">
             <Card className="w-full max-w-xs gap-3 py-4">
