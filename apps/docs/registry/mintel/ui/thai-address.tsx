@@ -48,7 +48,7 @@ const LABELS = {
     subDistrict: "Sub-district",
     subDistrictBkk: "Sub-district (Khwaeng)",
     zip: "Postal code",
-    pick: "Select",
+    pick: "Select ",
     zipHint: (n: number) => `${n} sub-districts use this code; pick one below`,
     zipNone: "No sub-district has this postal code",
     loading: "Loading address data...",

@@ -4,31 +4,120 @@
     "title": "Login page",
     "description": "Split-screen sign-in: brand gradient panel with a glass testimonial, and an email/password form.",
     "route": "login",
-    "dependencies": ["lucide-react"],
-    "registryDependencies": ["aurora-text", "dot-pattern", "glass-card", "button", "checkbox", "input", "label", "toast"]
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "aurora-text",
+      "dot-pattern",
+      "glass-card",
+      "button",
+      "checkbox",
+      "input",
+      "label",
+      "toast"
+    ]
   },
   {
     "name": "dashboard-page",
     "title": "Dashboard",
     "description": "Customer-service dashboard: sidebar, date-range filter, stat cards, and a cases table with channel filter and row actions.",
     "route": "dashboard",
-    "dependencies": ["lucide-react", "react-day-picker"],
-    "registryDependencies": ["number-ticker", "badge", "button", "card", "combobox", "date-picker", "dropdown-menu", "table", "tabs"]
+    "dependencies": [
+      "lucide-react",
+      "react-day-picker"
+    ],
+    "registryDependencies": [
+      "number-ticker",
+      "badge",
+      "button",
+      "card",
+      "combobox",
+      "date-picker",
+      "dropdown-menu",
+      "table",
+      "tabs"
+    ]
   },
   {
     "name": "mobile-app-page",
     "title": "Mobile app shell",
     "description": "Mobile web / PWA shell: glass top bar, segmented filter, chat list, bottom tab bar and a compose drawer.",
     "route": "app",
-    "dependencies": ["lucide-react"],
-    "registryDependencies": ["glass-button", "glass-navbar", "segmented-control", "drawer", "tab-bar", "badge", "button", "textarea", "toast"]
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "glass-button",
+      "glass-navbar",
+      "segmented-control",
+      "drawer",
+      "tab-bar",
+      "badge",
+      "button",
+      "textarea",
+      "toast"
+    ]
   },
   {
     "name": "landing-page",
     "title": "Landing page",
     "description": "Marketing page: glass navbar, animated hero, logo marquee, feature cards with spotlight, stats and a call to action.",
     "route": "landing",
-    "dependencies": ["lucide-react"],
-    "registryDependencies": ["animated-gradient-text", "aurora-text", "blur-fade", "dot-pattern", "magic-card", "marquee", "number-ticker", "shimmer-button", "glass-navbar", "button"]
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "animated-gradient-text",
+      "aurora-text",
+      "blur-fade",
+      "dot-pattern",
+      "magic-card",
+      "marquee",
+      "number-ticker",
+      "shimmer-button",
+      "glass-navbar",
+      "button"
+    ]
+  },
+  {
+    "name": "console-page",
+    "title": "Contact center console",
+    "description": "Agent console: collapsible sidebar, searchable chat list with filters and unread counts, the conversation, and a case panel with SLA countdown, tags and activity. List and chat switch views on phones.",
+    "route": "console",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "segmented-control",
+      "avatar",
+      "badge",
+      "button",
+      "conversation",
+      "input",
+      "sidebar",
+      "tag-input",
+      "timeline"
+    ]
+  },
+  {
+    "name": "register-page",
+    "title": "Thai sign-up",
+    "description": "Four-step sign-up: account, Thai citizen ID (check digit), phone with SMS code, and Thai address with postal-code lookup, then a summary.",
+    "route": "register",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "button",
+      "card",
+      "input",
+      "label",
+      "otp-input",
+      "stepper",
+      "thai-address",
+      "thai-id-input",
+      "thai-phone-input"
+    ]
   }
 ]

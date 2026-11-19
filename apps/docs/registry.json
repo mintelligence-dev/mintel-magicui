@@ -1980,6 +1980,72 @@
         "category": "template",
         "route": "landing"
       }
+    },
+    {
+      "name": "console-page",
+      "type": "registry:block",
+      "title": "Contact center console",
+      "description": "Agent console: collapsible sidebar, searchable chat list with filters and unread counts, the conversation, and a case panel with SLA countdown, tags and activity. List and chat switch views on phones.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "http://localhost:3000/r/mintel-theme.json",
+        "http://localhost:3000/r/segmented-control.json",
+        "http://localhost:3000/r/avatar.json",
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/conversation.json",
+        "http://localhost:3000/r/input.json",
+        "http://localhost:3000/r/sidebar.json",
+        "http://localhost:3000/r/tag-input.json",
+        "http://localhost:3000/r/timeline.json"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/blocks/console-page.tsx",
+          "type": "registry:page",
+          "target": "app/console/page.tsx"
+        }
+      ],
+      "meta": {
+        "category": "template",
+        "route": "console"
+      }
+    },
+    {
+      "name": "register-page",
+      "type": "registry:block",
+      "title": "Thai sign-up",
+      "description": "Four-step sign-up: account, Thai citizen ID (check digit), phone with SMS code, and Thai address with postal-code lookup, then a summary.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "http://localhost:3000/r/mintel-theme.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/card.json",
+        "http://localhost:3000/r/input.json",
+        "http://localhost:3000/r/label.json",
+        "http://localhost:3000/r/otp-input.json",
+        "http://localhost:3000/r/stepper.json",
+        "http://localhost:3000/r/thai-address.json",
+        "http://localhost:3000/r/thai-id-input.json",
+        "http://localhost:3000/r/thai-phone-input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/blocks/register-page.tsx",
+          "type": "registry:page",
+          "target": "app/register/page.tsx"
+        }
+      ],
+      "meta": {
+        "category": "template",
+        "route": "register"
+      }
     }
   ]
 }
