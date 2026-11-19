@@ -1559,5 +1559,298 @@
     "meta": {
       "category": "mobile"
     }
+  },
+  {
+    "name": "section-header",
+    "type": "registry:block",
+    "title": "Header",
+    "description": "Site header: brand, links and call to action; frosted once the page scrolls, a menu panel on phones.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-header.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-hero-split",
+    "type": "registry:block",
+    "title": "Hero split",
+    "description": "Two-column hero: headline, copy, two calls to action, trust points and a product mockup.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-hero-split.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-hero-centered",
+    "type": "registry:block",
+    "title": "Hero centered",
+    "description": "Centered hero with a soft brand glow, two calls to action and a row of customer avatars.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-hero-centered.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-logo-cloud",
+    "type": "registry:block",
+    "title": "Logo cloud",
+    "description": "“Trusted by” row of customer logos, muted until hovered.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-logo-cloud.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-testimonials",
+    "type": "registry:block",
+    "title": "Testimonials",
+    "description": "Customer quotes in cards with rating, name and role.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-testimonials.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-stats",
+    "type": "registry:block",
+    "title": "Stats",
+    "description": "Big numbers that count up when they scroll into view.",
+    "registryDependencies": [
+      "utils",
+      "@mintel/number-ticker"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-stats.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-feature-grid",
+    "type": "registry:block",
+    "title": "Feature grid",
+    "description": "Feature grid with icon tiles, titles and one-line descriptions.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-feature-grid.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-feature-scroll",
+    "type": "registry:block",
+    "title": "Feature scroll",
+    "description": "Story told while scrolling: copy on one side, a sticky visual that changes with it.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils",
+      "@mintel/sticky-showcase"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-feature-scroll.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-feature-slideshow",
+    "type": "registry:block",
+    "title": "Feature slideshow",
+    "description": "Feature tabs that advance with a progress bar; pause button, no autoplay under reduced motion.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-feature-slideshow.tsx",
+        "type": "registry:component"
+      }
+    ],
+    "css": {
+      "@keyframes mintel-slide-progress": {
+        "from": {
+          "transform": "scaleX(0)"
+        },
+        "to": {
+          "transform": "scaleX(1)"
+        }
+      }
+    }
+  },
+  {
+    "name": "section-feature-bento",
+    "type": "registry:block",
+    "title": "Feature bento",
+    "description": "Bento grid of feature cards in mixed sizes with small visuals.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-feature-bento.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-carousel",
+    "type": "registry:block",
+    "title": "Carousel",
+    "description": "Horizontal carousel with snap, previous/next buttons and dots; no autoplay.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-carousel.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-pricing",
+    "type": "registry:block",
+    "title": "Pricing",
+    "description": "Three plans with a monthly/yearly switch and a highlighted popular plan.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-pricing.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-faq",
+    "type": "registry:block",
+    "title": "FAQ",
+    "description": "Questions and answers in an accordion next to a heading and contact link.",
+    "registryDependencies": [
+      "utils",
+      "@mintel/accordion"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-faq.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-cta",
+    "type": "registry:block",
+    "title": "Call to action",
+    "description": "Closing call to action on a brand-gradient band.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-cta.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-contact",
+    "type": "registry:block",
+    "title": "Contact",
+    "description": "Company details beside a short form with a Thai phone field.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils",
+      "@mintel/input",
+      "@mintel/label",
+      "@mintel/textarea",
+      "@mintel/thai-phone-input"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-contact.tsx",
+        "type": "registry:component"
+      }
+    ]
+  },
+  {
+    "name": "section-footer",
+    "type": "registry:block",
+    "title": "Footer",
+    "description": "Site footer with brand, link columns and a bottom bar.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/sections/section-footer.tsx",
+        "type": "registry:component"
+      }
+    ]
   }
 ]

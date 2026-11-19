@@ -1,6 +1,6 @@
 import items from "@/registry/items.json"
 
-export type Category = "core" | "forms" | "data" | "navigation" | "effects" | "glass" | "motion" | "mobile"
+export type Category = "core" | "forms" | "data" | "navigation" | "sections" | "effects" | "glass" | "motion" | "mobile"
 
 export type RegistryItem = {
   name: string
@@ -11,13 +11,14 @@ export type RegistryItem = {
   files: string[]
 }
 
-export const CATEGORY_ORDER: Category[] = ["core", "forms", "data", "navigation", "glass", "motion", "mobile", "effects"]
+export const CATEGORY_ORDER: Category[] = ["core", "forms", "data", "navigation", "sections", "glass", "motion", "mobile", "effects"]
 
 export const CATEGORY_LABEL: Record<Category, { en: string; th: string }> = {
   core: { en: "Core UI", th: "Core UI" },
   forms: { en: "Forms", th: "Forms" },
   data: { en: "Data display", th: "แสดงข้อมูล" },
   navigation: { en: "Navigation", th: "นำทาง" },
+  sections: { en: "Sections", th: "Sections" },
   effects: { en: "Effects", th: "Effects" },
   glass: { en: "Glass", th: "Glass" },
   motion: { en: "Fluid Motion", th: "Fluid Motion" },
@@ -42,8 +43,12 @@ const FORM_ITEMS = new Set([
 const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper", "grouped-list", "conversation"])
 const NAV_ITEMS = new Set(["breadcrumb", "pagination", "accordion", "sheet", "collapsing-header", "command", "sidebar"])
 
+// Page sections (registry:block items in registry/mintel/sections).
+export const isSection = (name: string) => name.startsWith("section-")
+
 const categoryOf = (it: RawItem): Category =>
   (it.meta?.category as Category) ??
+  (isSection(it.name) ? "sections" : undefined) ??
   (FORM_ITEMS.has(it.name) ? "forms" : DATA_ITEMS.has(it.name) ? "data" : NAV_ITEMS.has(it.name) ? "navigation" : "core")
 
 export const ITEMS: RegistryItem[] = (items as RawItem[]).map((it) => ({
@@ -63,6 +68,32 @@ export const itemsByCategory = () =>
   CATEGORY_ORDER.map((c) => ({ category: c, items: ITEMS.filter((i) => i.category === c) })).filter((g) => g.items.length)
 
 export type PropDoc = { name: string; type: string; default?: string; description: { en: string; th: string } }
+
+/**
+ * "New" / "Updated" pills in the docs navigation. Curated by hand (no dates: the build output must not
+ * depend on when it runs); remove an entry once it is no longer news.
+ */
+export const BADGES: Record<string, "new" | "updated"> = {
+  "thai-address": "new",
+  "thai-id-input": "new",
+  "thai-phone-input": "new",
+  "otp-input": "new",
+  conversation: "new",
+  command: "new",
+  sidebar: "new",
+  slider: "new",
+  "toggle-group": "new",
+  "tag-input": "new",
+  progress: "new",
+  "progress-ring": "new",
+  ...Object.fromEntries(
+    (items as RawItem[]).filter((i) => isSection(i.name)).map((i) => [i.name, "new" as const])
+  ),
+  stepper: "updated",
+  tabs: "updated",
+  "date-picker": "updated",
+  drawer: "updated",
+}
 
 export type ComponentDoc = {
   /** Thai version of the registry description. */
@@ -329,6 +360,117 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("title", "ReactNode", "Page title (big, then compact in the bar).", "หัวข้อหน้า (ตัวใหญ่ แล้วย่อไปอยู่ในแถบ)"),
       p("leading / trailing", "ReactNode", "Bar content left and right, e.g. back and actions.", "ปุ่มซ้ายและขวาของแถบ เช่น ย้อนกลับ และปุ่มคำสั่ง"),
       p("children", "ReactNode", "Content under the big title, e.g. a search field.", "เนื้อหาใต้หัวข้อใหญ่ เช่น ช่องค้นหา"),
+    ],
+  },
+  "section-header": {
+    th: "ส่วนหัวเว็บ มีโลโก้ ลิงก์ และปุ่มหลัก กลายเป็นกระจกเมื่อเลื่อนหน้า บนมือถือพับเป็นเมนู",
+    props: [
+      p("links", "{ label; href }[]", "Navigation links.", "ลิงก์เมนู"),
+      p("cta / secondary", "{ label; href }", "Main and secondary buttons.", "ปุ่มหลักและปุ่มรอง"),
+      p("brand", "ReactNode", "Name next to the logo.", "ชื่อข้างโลโก้", '"Mintel"'),
+    ],
+  },
+  "section-hero-centered": {
+    th: "Hero ตรงกลาง มีแสงสีแบรนด์ ปุ่ม 2 ปุ่ม และแถวรูปลูกค้า",
+    props: [
+      p("eyebrow / title / description", "ReactNode", "Copy.", "ข้อความ"),
+      p("primary / secondary", "{ label; href }", "Calls to action.", "ปุ่ม"),
+      p("people", "string[]", "Initials for the avatar row.", "ตัวอักษรย่อในแถวรูปลูกค้า"),
+    ],
+  },
+  "section-logo-cloud": {
+    th: "แถวโลโก้ลูกค้า (Trusted by) สีจางจนเอาเมาส์ชี้",
+    props: [
+      p("logos", "ReactNode[]", "Your SVG logos, or names rendered as wordmarks.", "โลโก้ SVG หรือชื่อบริษัท"),
+      p("title", "ReactNode", "Line above the logos.", "ข้อความเหนือโลโก้"),
+    ],
+  },
+  "section-testimonials": {
+    th: "รีวิวลูกค้าในการ์ด มีดาว ชื่อ และตำแหน่ง",
+    props: [
+      p("items", "{ quote; name; role; rating? }[]", "Quotes.", "รีวิว"),
+      p("title / description", "ReactNode", "Heading.", "หัวข้อ"),
+    ],
+  },
+  "section-stats": {
+    th: "ตัวเลขใหญ่ที่นับขึ้นเมื่อเลื่อนมาเห็น",
+    props: [
+      p("stats", "{ value; label; prefix?; suffix?; decimals? }[]", "Numbers.", "ตัวเลข"),
+    ],
+  },
+  "section-feature-grid": {
+    th: "ตารางฟีเจอร์ ไอคอน หัวข้อ และคำอธิบายสั้น",
+    props: [
+      p("features", "{ icon; title; description }[]", "Features.", "ฟีเจอร์"),
+      p("eyebrow / title / description", "ReactNode", "Heading.", "หัวข้อ"),
+    ],
+  },
+  "section-feature-scroll": {
+    th: "เล่าฟีเจอร์ตามการเลื่อน ข้อความด้านหนึ่ง ภาพค้างอีกด้านเปลี่ยนตาม",
+    props: [
+      p("items", "{ title; description; visual }[]", "Steps.", "ขั้นตอน"),
+    ],
+  },
+  "section-feature-slideshow": {
+    th: "แท็บฟีเจอร์ที่เลื่อนเองพร้อมแถบเวลา มีปุ่มหยุด และไม่เลื่อนเองถ้าผู้ใช้ปิด motion",
+    props: [
+      p("slides", "{ title; description; visual }[]", "Slides.", "สไลด์"),
+      p("interval", "number", "Milliseconds per slide.", "มิลลิวินาทีต่อสไลด์", "6000"),
+    ],
+  },
+  "section-feature-bento": {
+    th: "การ์ดฟีเจอร์แบบ bento ขนาดผสม พร้อมภาพเล็ก",
+    props: [
+      p("items", "{ title; description; icon; visual?; className? }[]", "Cards; use className for spans.", "การ์ด ใช้ className กำหนดความกว้าง"),
+    ],
+  },
+  "section-carousel": {
+    th: "สไลด์แนวนอน เลื่อนแล้วหยุดพอดีการ์ด มีปุ่มก่อนหน้า/ถัดไปและจุดบอกตำแหน่ง ไม่เลื่อนเอง",
+    props: [
+      p("items", "{ title; description; tag? }[]", "Cards.", "การ์ด"),
+    ],
+  },
+  "section-pricing": {
+    th: "ราคา 3 แพ็กเกจ สลับรายเดือน/รายปี และเน้นแพ็กเกจยอดนิยม",
+    props: [
+      p("plans", "{ name; description; monthly; yearly; features; cta; popular? }[]", "Plans (0 = Custom).", "แพ็กเกจ (0 = ติดต่อฝ่ายขาย)"),
+      p("currency", "string", "Currency sign.", "สัญลักษณ์สกุลเงิน", "\"฿\""),
+    ],
+  },
+  "section-faq": {
+    th: "คำถามที่พบบ่อยแบบพับได้ ข้างหัวข้อและลิงก์ติดต่อ",
+    props: [
+      p("items", "{ q; a }[]", "Questions.", "คำถาม"),
+    ],
+  },
+  "section-cta": {
+    th: "แถบปิดท้ายสีแบรนด์ชวนให้สมัคร",
+    props: [
+      p("title / description", "ReactNode", "Copy.", "ข้อความ"),
+      p("primary / secondary", "{ label; href }", "Buttons.", "ปุ่ม"),
+    ],
+  },
+  "section-contact": {
+    th: "ข้อมูลติดต่อคู่กับฟอร์มสั้น มีช่องเบอร์โทรไทย",
+    props: [
+      p("onSubmit", "(values) => void | Promise<void>", "Receives name, email, phone and message.", "ได้ชื่อ อีเมล เบอร์โทร และข้อความ"),
+      p("details", "{ icon; label }[]", "Contact lines.", "ข้อมูลติดต่อ"),
+    ],
+  },
+  "section-footer": {
+    th: "ส่วนท้ายเว็บ มีโลโก้ คอลัมน์ลิงก์ และแถบล่าง",
+    props: [
+      p("columns", "{ title; links }[]", "Link columns.", "คอลัมน์ลิงก์"),
+      p("copyright", "ReactNode", "Bottom line (pass the year from your app).", "ข้อความล่างสุด (ส่งปีมาจากแอป)"),
+    ],
+  },
+  "section-hero-split": {
+    th: "Hero สองคอลัมน์ หัวข้อ คำอธิบาย ปุ่ม 2 ปุ่ม จุดเด่น และภาพตัวอย่างสินค้า บนมือถือเรียงลงมา",
+    props: [
+      p("eyebrow / title / description", "ReactNode", "Copy.", "ข้อความ"),
+      p("primary / secondary", "{ label; href }", "Calls to action.", "ปุ่ม"),
+      p("points", "string[]", "Short trust points under the buttons.", "จุดเด่นสั้นๆ ใต้ปุ่ม"),
+      p("visual", "ReactNode", "Right-hand visual (defaults to a chat mockup).", "ภาพด้านขวา (ค่าเริ่มต้นเป็นหน้าแชตตัวอย่าง)"),
     ],
   },
   tabs: { th: "แท็บที่เลือกเป็นสีแบรนด์ เนื้อหาค่อยๆ ปรากฏ", upstream: radix("Tabs") },

@@ -1,5 +1,6 @@
-import { BookOpen, ChartColumn, Palette, ChevronRight, Cloud, Component, FormInput, Layers, LayoutGrid, LayoutTemplate, Orbit, PanelsTopLeft, Smartphone, Sparkles } from "lucide-react"
+import { BookOpen, ChartColumn, LayoutPanelTop, Palette, ChevronRight, Cloud, Component, FormInput, Layers, LayoutGrid, LayoutTemplate, Orbit, PanelsTopLeft, Smartphone, Sparkles } from "lucide-react"
 
+import { ItemBadge } from "@/components/item-badge"
 import { CATEGORY_LABEL, ITEMS, itemsByCategory, type Category } from "@/lib/component-docs"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
 import { cn } from "@/lib/utils"
@@ -9,6 +10,7 @@ const CATEGORY_ICON: Record<Category, { icon: typeof Component; tone: string }> 
   forms: { icon: FormInput, tone: "text-brand-cyan bg-brand-cyan/10" },
   data: { icon: ChartColumn, tone: "text-brand bg-brand/10" },
   navigation: { icon: PanelsTopLeft, tone: "text-brand-cyan bg-brand-cyan/10" },
+  sections: { icon: LayoutPanelTop, tone: "text-brand-accent bg-brand-accent/10" },
   glass: { icon: Layers, tone: "text-brand-accent bg-brand-accent/10" },
   motion: { icon: Orbit, tone: "text-brand-accent bg-brand-accent/10" },
   mobile: { icon: Smartphone, tone: "text-brand-cyan bg-brand-cyan/10" },
@@ -83,11 +85,12 @@ export function DocsSidebar({ lang, current }: { lang: Lang; current: string }) 
                         href={langPath(lang, `/components/${item.name}`)}
                         aria-current={active ? "page" : undefined}
                         className={cn(
-                          "block rounded-md px-2 py-1.5 transition-colors",
+                          "flex items-center gap-2 rounded-md px-2 py-1.5 transition-colors",
                           active ? "font-medium text-brand" : "text-muted-foreground hover:text-foreground"
                         )}
                       >
-                        {item.title}
+                        <span className="truncate">{item.title}</span>
+                        <ItemBadge name={item.name} lang={lang} />
                       </a>
                     </li>
                   )

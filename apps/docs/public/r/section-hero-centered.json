@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "section-hero-centered",
+  "title": "Hero centered",
+  "description": "Centered hero with a soft brand glow, two calls to action and a row of customer avatars.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/sections/section-hero-centered.tsx",
+      "content": "import * as React from \"react\"\nimport { ArrowRightIcon, PlayIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/** Centered hero with a soft brand glow, two calls to action and a row of customer avatars. */\nexport function SectionHeroCentered({\n  eyebrow = \"Trusted by 2,000+ support teams\",\n  title = (\n    <>\n      Customer service that <span className=\"bg-[image:var(--brand-gradient)] bg-clip-text text-transparent\">feels personal</span>\n    </>\n  ),\n  description = \"Answer every chat in seconds, keep context across channels, and let AI handle the busywork.\",\n  primary = { label: \"Get started free\", href: \"#start\" },\n  secondary = { label: \"Watch the 2-min tour\", href: \"#tour\" },\n  people = [\"NP\", \"SK\", \"BT\", \"PS\", \"NR\"],\n  className,\n}: {\n  eyebrow?: React.ReactNode\n  title?: React.ReactNode\n  description?: React.ReactNode\n  primary?: { label: string; href: string }\n  secondary?: { label: string; href: string }\n  /** Initials for the avatar row. */\n  people?: string[]\n  className?: string\n}) {\n  return (\n    <section data-slot=\"section-hero-centered\" className={cn(\"relative overflow-hidden\", className)}>\n      <div aria-hidden className=\"pointer-events-none absolute inset-x-0 -top-40 mx-auto h-[28rem] max-w-3xl rounded-full bg-[image:var(--brand-gradient)] opacity-20 blur-3xl\" />\n      <div className=\"relative mx-auto grid max-w-4xl justify-items-center gap-6 px-4 py-20 text-center sm:px-6 md:py-28\">\n        <div className=\"flex items-center gap-3\">\n          <div className=\"flex -space-x-2\">\n            {people.map((p, i) => (\n              <span\n                key={p}\n                className=\"flex size-8 items-center justify-center rounded-full bg-brand/12 text-[0.6875rem] font-semibold text-brand ring-2 ring-background\"\n                style={{ zIndex: people.length - i }}\n              >\n                {p}\n              </span>\n            ))}\n          </div>\n          <span className=\"text-sm text-muted-foreground\">{eyebrow}</span>\n        </div>\n        <h1 className=\"font-heading text-4xl font-bold tracking-tight text-balance sm:text-6xl\">{title}</h1>\n        <p className=\"max-w-2xl text-lg text-muted-foreground text-pretty\">{description}</p>\n        <div className=\"flex flex-wrap justify-center gap-3\">\n          <a\n            href={primary.href}\n            className=\"inline-flex items-center gap-2 rounded-full bg-[image:var(--brand-gradient)] px-6 py-3 font-semibold text-brand-foreground shadow-lg shadow-brand/25 transition-transform duration-300 ease-spring-snappy hover:-translate-y-0.5 active:scale-95 motion-reduce:transition-none\"\n          >\n            {primary.label}\n            <ArrowRightIcon className=\"size-4\" />\n          </a>\n          <a href={secondary.href} className=\"inline-flex items-center gap-2 rounded-full border bg-background px-6 py-3 font-semibold transition-colors hover:bg-muted\">\n            <PlayIcon className=\"size-4 text-brand\" />\n            {secondary.label}\n          </a>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:block"
+}

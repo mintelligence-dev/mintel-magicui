@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { ItemBadge } from "@/components/item-badge"
 import { Command } from "cmdk"
 import { BookOpen, Palette, Cloud, Component, Home, LayoutTemplate, Search } from "lucide-react"
 
@@ -90,7 +91,10 @@ export function CommandMenu({ lang }: { lang: Lang }) {
                     className={itemClass}
                   >
                     <Component className="size-4 text-muted-foreground" />
-                    <span className="flex-1">{item.title}</span>
+                    <span className="flex flex-1 items-center gap-2">
+                      {item.title}
+                      <ItemBadge name={item.name} lang={lang} />
+                    </span>
                     <span className="text-xs text-muted-foreground">{CATEGORY_LABEL[item.category][lang]}</span>
                   </Command.Item>
                 ))}
