@@ -112,3 +112,30 @@ export function FilesGalleryPreview() {
     </div>
   )
 }
+
+/** Brand Loader: the same stat card under Theme = brand and Theme = follow-org (values from an SLDS 2 Cosmos org). */
+export function BrandLoaderPreview() {
+  const themes = [
+    { label: "brand", note: "Mintel", vars: { "--c": "#295DA8", "--bg": "#ffffff", "--b": "#E5E6EA", "--r": "14px", "--f": "var(--font-heading)" } },
+    { label: "follow-org", note: "SLDS 2 (Cosmos)", vars: { "--c": "#066afe", "--bg": "#fafafa", "--b": "#c9c9c9", "--r": "12px", "--f": "system-ui, sans-serif" } },
+  ]
+  return (
+    <div className="grid w-full max-w-lg gap-4 sm:grid-cols-2">
+      {themes.map((t) => (
+        <figure key={t.label} className="grid gap-2">
+          <div
+            style={t.vars as React.CSSProperties}
+            className="rounded-[var(--r)] border border-[var(--b)] bg-[var(--bg)] p-5 text-[#181B31] [font-family:var(--f)]"
+          >
+            <p className="text-sm text-[#505469]">Open cases</p>
+            <p className="text-4xl font-bold text-[var(--c)] tabular-nums">37</p>
+            <p className="text-sm text-[#505469]">3 due today</p>
+          </div>
+          <figcaption className="text-center text-xs text-muted-foreground">
+            Theme = <code className="font-mono font-semibold text-foreground">{t.label}</code> · {t.note}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  )
+}

@@ -3,7 +3,7 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Mintel Brand Loader</masterLabel>
-    <description>[Mintel UI] Loads the Mintel brand stylesheet and SLDS styling hooks for the page.</description>
+    <description>[Mintel UI] Loads the Mintel brand stylesheet for the page, or makes Mintel components follow the org theme.</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>
@@ -13,12 +13,14 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage">
+            <property name="theme" type="String" label="Theme" datasource="brand,follow-org" default="brand" description="brand: rebrand standard components with Mintel colors. follow-org: Mintel components use the org theme (SLDS 2 styling hooks)." />
             <supportedFormFactors>
                 <supportedFormFactor type="Large" />
                 <supportedFormFactor type="Small" />
             </supportedFormFactors>
         </targetConfig>
         <targetConfig targets="lightningCommunity__Default">
+            <property name="theme" type="String" label="Theme" datasource="brand,follow-org" default="brand" description="brand: rebrand standard components with Mintel colors. follow-org: Mintel components use the site theme (SLDS 2 styling hooks)." />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

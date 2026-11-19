@@ -18,7 +18,7 @@ import {
 } from "@/components/sf-more-previews"
 import { ActivityTimelinePreview, KanbanPreview, RelatedCardsPreview } from "@/components/sf-records-previews"
 import { SegmentedPreview, TabsPreview } from "@/components/sf-tabs-preview"
-import { AnnouncementPreview, FilesGalleryPreview, KpiTrendPreview, QuickActionsPreview } from "@/components/sf-new-previews"
+import { AnnouncementPreview, BrandLoaderPreview, FilesGalleryPreview, KpiTrendPreview, QuickActionsPreview } from "@/components/sf-new-previews"
 import { SectionCta } from "@/registry/mintel/sections/section-cta"
 import { SectionFaq } from "@/registry/mintel/sections/section-faq"
 import { SectionFeatureGrid } from "@/registry/mintel/sections/section-feature-grid"
@@ -334,13 +334,13 @@ export const SF_COMPONENTS: SfComponent[] = [
   {
     name: "brandLoader",
     group: "site",
-    usage: `<!-- App Builder: drop "Mintel Brand Loader" once on each app, home or record page.
-     It is invisible; it loads the mintelGlobal stylesheet (tokens + SLDS styling hooks). -->`,
-    preview: (
-      <p className="max-w-xs rounded-xl border border-dashed p-5 text-center text-sm text-muted-foreground">
-        Invisible on the page. Standard lightning-* components switch to the Mintel brand.
-      </p>
-    ),
+    usage: `<!-- App Builder: drop "Mintel Brand Loader" once on each app, home or record page (it is invisible).
+     Theme = brand       loads mintelGlobal: standard lightning-* components take the Mintel brand.
+     Theme = follow-org  loads mintelFollowOrg: Mintel components take the org's SLDS 2 theme. -->
+
+<!-- One component only, in your own LWC markup -->
+<c-stat-card class="mintel-follow-org" label="Open cases" value="37"></c-stat-card>`,
+    preview: <BrandLoaderPreview />,
   },
 ]
 
