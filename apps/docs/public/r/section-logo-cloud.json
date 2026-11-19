@@ -9,9 +9,27 @@
   "files": [
     {
       "path": "registry/mintel/sections/section-logo-cloud.tsx",
-      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/**\n * \"Trusted by\" row of customer logos. Pass `logos` as nodes (your SVGs) or plain names, which render as\n * neutral wordmarks. Logos sit muted and come to full color on hover.\n */\nexport function SectionLogoCloud({\n  title = \"Trusted by teams across Thailand and the region\",\n  logos = [\"Siam Retail\", \"Kanok Foods\", \"Bangkok Motors\", \"Lanna Crafts\", \"Andaman Travel\", \"Isan Steel\"],\n  className,\n}: {\n  title?: React.ReactNode\n  logos?: React.ReactNode[]\n  className?: string\n}) {\n  return (\n    <section data-slot=\"section-logo-cloud\" className={cn(\"border-y bg-muted/30\", className)}>\n      <div className=\"mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6\">\n        <p className=\"text-center text-sm font-medium text-muted-foreground\">{title}</p>\n        <ul className=\"grid grid-cols-2 items-center gap-x-8 gap-y-6 sm:grid-cols-3 lg:grid-cols-6\">\n          {logos.map((logo, i) => (\n            <li\n              key={i}\n              className=\"flex h-10 items-center justify-center text-muted-foreground grayscale transition-[color,filter] duration-300 hover:text-foreground hover:grayscale-0\"\n            >\n              {typeof logo === \"string\" ? <span className=\"font-heading text-lg font-bold tracking-tight whitespace-nowrap\">{logo}</span> : logo}\n            </li>\n          ))}\n        </ul>\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/**\n * \"Trusted by\" row of customer logos. Pass `logos` as nodes (your SVGs) or plain names, which render as\n * neutral wordmarks. Logos sit muted and come to full color on hover.\n */\nexport function SectionLogoCloud({\n  title = \"Trusted by teams across Thailand and the region\",\n  logos = [\"Siam Retail\", \"Kanok Foods\", \"Bangkok Motors\", \"Lanna Crafts\", \"Andaman Travel\", \"Isan Steel\"],\n  className,\n}: {\n  title?: React.ReactNode\n  logos?: React.ReactNode[]\n  className?: string\n}) {\n  return (\n    <section data-slot=\"section-logo-cloud\" className={cn(\"reveal-on-scroll border-y bg-muted/30\", className)}>\n      <div className=\"mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6\">\n        <p className=\"text-center text-sm font-medium text-muted-foreground\">{title}</p>\n        <ul className=\"grid grid-cols-2 items-center gap-x-8 gap-y-6 sm:grid-cols-3 lg:grid-cols-6\">\n          {logos.map((logo, i) => (\n            <li\n              key={i}\n              className=\"flex h-10 items-center justify-center text-muted-foreground grayscale transition-[color,filter] duration-300 hover:text-foreground hover:grayscale-0\"\n            >\n              {typeof logo === \"string\" ? <span className=\"font-heading text-lg font-bold tracking-tight whitespace-nowrap\">{logo}</span> : logo}\n            </li>\n          ))}\n        </ul>\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component"
     }
   ],
+  "css": {
+    "@keyframes mintel-reveal": {
+      "from": {
+        "opacity": "0",
+        "translate": "0 1.5rem",
+        "scale": "0.98"
+      }
+    },
+    "@utility reveal-on-scroll": {
+      "@media (prefers-reduced-motion: no-preference)": {
+        "@supports (animation-timeline: view())": {
+          "animation": "mintel-reveal linear both",
+          "animation-timeline": "view()",
+          "animation-range": "entry 0% entry 55%"
+        }
+      }
+    }
+  },
   "type": "registry:block"
 }

@@ -21,7 +21,7 @@ export function SectionStats({
   className?: string
 }) {
   return (
-    <section data-slot="section-stats" className={cn("mx-auto max-w-6xl px-4 py-16 sm:px-6", className)}>
+    <section data-slot="section-stats" className={cn("reveal-on-scroll mx-auto max-w-6xl px-4 py-16 sm:px-6", className)}>
       <div className="overflow-hidden rounded-3xl border bg-card p-8 shadow-sm sm:p-12">
         {title && <h2 className="mb-10 text-center font-heading text-2xl font-bold tracking-tight sm:text-3xl">{title}</h2>}
         <dl className="grid grid-cols-2 gap-8 lg:grid-cols-4">

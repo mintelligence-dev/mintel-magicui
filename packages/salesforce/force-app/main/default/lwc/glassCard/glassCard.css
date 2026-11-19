@@ -55,3 +55,29 @@
         backdrop-filter: none;
     }
 }
+
+/* Motion: settles in, lifts gently on hover. */
+.glass {
+    animation: mintel-glass-in var(--mintel-duration-slower) var(--mintel-ease-out) both;
+    transition: transform var(--mintel-spring-smooth-duration) var(--mintel-ease-spring-smooth),
+        box-shadow var(--mintel-duration-slow) var(--mintel-ease-standard);
+}
+.glass:hover {
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 0 var(--mintel-glass-highlight), 0 18px 48px -14px var(--mintel-glass-shadow);
+}
+@keyframes mintel-glass-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.985);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .glass {
+        animation: none;
+        transition: none;
+    }
+    .glass:hover {
+        transform: none;
+    }
+}

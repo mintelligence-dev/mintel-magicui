@@ -61,7 +61,7 @@ export function SectionPricing({
             <li
               key={p.name}
               className={cn(
-                "relative flex flex-col gap-6 rounded-3xl border bg-card p-7",
+                "reveal-on-scroll relative flex flex-col gap-6 rounded-3xl border bg-card p-7",
                 p.popular && "border-brand/50 shadow-xl shadow-brand/15 lg:-translate-y-2"
               )}
             >

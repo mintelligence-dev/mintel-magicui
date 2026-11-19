@@ -22,7 +22,7 @@ const RING: Record<TimelineVariant, string> = {
 
 /** Vertical list of events, newest or oldest first — the order is yours. */
 function Timeline({ className, ...props }: React.ComponentProps<"ol">) {
-  return <ol data-slot="timeline" className={cn("relative grid", className)} {...props} />
+  return <ol data-slot="timeline" className={cn("relative grid [&>li:nth-child(2)]:[animation-delay:70ms] [&>li:nth-child(3)]:[animation-delay:140ms] [&>li:nth-child(4)]:[animation-delay:210ms] [&>li:nth-child(5)]:[animation-delay:280ms] [&>li:nth-child(6)]:[animation-delay:350ms]", className)} {...props} />
 }
 
 /**
@@ -49,7 +49,7 @@ function TimelineItem({
     <li
       data-slot="timeline-item"
       aria-current={current ? "step" : undefined}
-      className={cn("group/timeline relative grid grid-cols-[2rem_1fr] gap-x-3 pb-6 last:pb-0", className)}
+      className={cn("group/timeline relative grid grid-cols-[2rem_1fr] gap-x-3 pb-6 last:pb-0 motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-left-2 motion-safe:fill-mode-both motion-safe:duration-500 motion-safe:ease-spring-smooth", className)}
       {...props}
     >
       {/* connector to the next item */}

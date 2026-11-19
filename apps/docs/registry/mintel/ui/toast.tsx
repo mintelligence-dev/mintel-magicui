@@ -25,7 +25,8 @@ function Toaster({ ...props }: ToasterProps) {
   return (
     <Sonner
       theme={theme}
-      className="toaster group"
+      // Sonner animates with its own transitions; re-time them with the brand spring (reduced motion is handled by Sonner).
+      className="toaster group [&_[data-sonner-toast]]:![transition-timing-function:var(--ease-spring-snappy)] [&_[data-sonner-toast]]:![transition-duration:500ms]"
       icons={{
         success: <CircleCheckIcon className="size-4 text-success" />,
         info: <InfoIcon className="size-4 text-info" />,

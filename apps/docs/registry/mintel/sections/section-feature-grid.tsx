@@ -37,7 +37,7 @@ export function SectionFeatureGrid({
       </div>
       <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((f) => (
-          <li key={f.title} className="group flex gap-4">
+          <li key={f.title} className="reveal-on-scroll group flex gap-4">
             <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-brand transition-[background-color,color,scale] duration-300 ease-spring-snappy group-hover:scale-105 group-hover:bg-[image:var(--brand-gradient)] group-hover:text-brand-foreground motion-reduce:transition-none [&_svg]:size-5">
               {f.icon}
             </span>

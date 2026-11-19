@@ -18,7 +18,7 @@ export function SectionCta({
   className?: string
 }) {
   return (
-    <section data-slot="section-cta" className={cn("mx-auto max-w-6xl px-4 py-16 sm:px-6", className)}>
+    <section data-slot="section-cta" className={cn("reveal-on-scroll mx-auto max-w-6xl px-4 py-16 sm:px-6", className)}>
       <div className="relative isolate overflow-hidden rounded-[2rem] bg-[image:var(--brand-gradient)] px-6 py-16 text-center text-brand-foreground shadow-2xl shadow-brand/25 sm:px-16">
         <div aria-hidden className="absolute -top-24 -left-24 -z-10 size-72 rounded-full bg-white/20 blur-3xl" />
         <div aria-hidden className="absolute -right-24 -bottom-24 -z-10 size-72 rounded-full bg-brand-cyan/40 blur-3xl" />

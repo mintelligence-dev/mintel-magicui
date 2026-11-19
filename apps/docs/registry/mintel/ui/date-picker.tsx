@@ -41,7 +41,7 @@ const triggerClass =
 
 const contentClass =
   "z-50 max-h-(--radix-popover-content-available-height) w-auto origin-(--radix-popover-content-transform-origin) overflow-y-auto overscroll-contain rounded-xl border bg-popover p-0 text-popover-foreground shadow-lg shadow-brand/5 " +
-  "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 motion-reduce:animate-none"
+  "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:duration-150 data-[state=closed]:ease-in data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-90 data-[state=open]:duration-300 data-[state=open]:ease-spring-snappy motion-reduce:animate-none"
 
 type CommonProps = {
   /** Language of the calendar and built-in strings. Defaults to Thai. */

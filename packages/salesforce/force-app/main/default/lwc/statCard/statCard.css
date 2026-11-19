@@ -39,3 +39,30 @@
     font-weight: 600;
     color: var(--mintel-muted-foreground);
 }
+
+/* Motion: rises in with the count-up; lifts on hover. */
+.stat {
+    animation: mintel-stat-in var(--mintel-duration-slower) var(--mintel-ease-out) both;
+    transition: transform var(--mintel-spring-snappy-duration) var(--mintel-ease-spring-snappy),
+        border-color var(--mintel-duration-base), box-shadow var(--mintel-duration-base);
+}
+.stat:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--mintel-brand) 30%, transparent);
+    box-shadow: 0 12px 28px -16px var(--mintel-brand);
+}
+@keyframes mintel-stat-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .stat {
+        animation: none;
+        transition: none;
+    }
+    .stat:hover {
+        transform: none;
+    }
+}

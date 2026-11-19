@@ -57,7 +57,7 @@ export function SectionFeatureSlideshow({
   }, [playing, reduced, index, interval, slides.length])
 
   return (
-    <section data-slot="section-feature-slideshow" className={cn("mx-auto max-w-6xl px-4 py-20 sm:px-6", className)}>
+    <section data-slot="section-feature-slideshow" className={cn("reveal-on-scroll mx-auto max-w-6xl px-4 py-20 sm:px-6", className)}>
       <div className="mb-8 flex items-end justify-between gap-4">
         <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
         {!reduced && (
