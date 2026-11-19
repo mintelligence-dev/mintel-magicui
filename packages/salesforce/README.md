@@ -68,6 +68,22 @@ For Experience Cloud (LWR) sites, add this to **Settings → Advanced → Edit H
 
 Dark mode: add `class="mintel-dark"` (or `data-theme="dark"`) on the component's host element.
 
+## Mintel brand or the org's theme
+
+By default the Mintel components use the Mintel brand, whatever theme the org has. To make them follow the
+org's SLDS 2 theme (Cosmos or a custom theme) instead, opt in:
+
+| Scope | How |
+| --- | --- |
+| Every Mintel component on a page | Mintel Brand Loader with **Theme = follow-org** (loads the `mintelFollowOrg` stylesheet) |
+| One component | `class="mintel-follow-org"` on it, in your own LWC markup |
+
+They then read colors, corner radius and font from the SLDS 2 global styling hooks (`--slds-g-color-accent-1`,
+`--slds-g-color-surface-container-1`, `--slds-g-color-on-surface-1`, `--slds-g-radius-border-2`,
+`--slds-g-font-family` and others; see `ORG_HOOKS` in `packages/tokens/build.mjs`). In an org without those
+hooks they keep the Mintel values. Theme = brand (the default) does the opposite: it loads `mintelGlobal`,
+which gives standard `lightning-*` components the Mintel brand.
+
 ## Status
 
 All bundles compile with `@lwc/compiler`, and the SLDS hook names are checked against

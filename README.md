@@ -104,6 +104,19 @@ npm run build      # tokens → registry.json → public/r/*.json → static doc
 
   The spec lists the few previews that are skipped (random or scroll-driven effects) and why.
 
+## Versioning
+
+Tokens, the registry and the Salesforce components share one version, managed with
+[Changesets](https://github.com/changesets/changesets). Add a changeset to every pull request that changes
+what people install:
+
+```bash
+npx changeset
+```
+
+`npm run version-packages` applies them, bumps the version and writes the dated `CHANGELOG.md` files that the
+docs show at [/changelog](https://mintel-ui.vercel.app/changelog). See [.changeset/README.md](.changeset/README.md).
+
 ## Deploy (Vercel)
 
 - Import the repo, set **Root Directory** to `apps/docs` (framework: Next.js). Build and install commands can stay

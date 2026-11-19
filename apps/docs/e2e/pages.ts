@@ -10,7 +10,7 @@ export const COMPONENTS: string[] = read("registry/items.json").map((i: { name: 
 export const TEMPLATES: string[] = read("registry/blocks.json").map((b: { name: string }) => b.name)
 // Salesforce component pages, from the lightweight index (no TSX import needed here).
 export const SF_PAGES: string[] = [...readFileSync(join(root, "lib/sf-index.ts"), "utf8").matchAll(/name: "(\w+)", group/g)].map((m) => m[1])
-export const GUIDES = ["/", "/getting-started", "/themes", "/components", "/templates", "/salesforce", "/salesforce/get-started"]
+export const GUIDES = ["/", "/getting-started", "/themes", "/components", "/templates", "/salesforce", "/salesforce/get-started", "/changelog"]
 
 /** A fixed moment for every page, so "Today", calendars and countdowns render the same each run. */
 export const FIXED_TIME = new Date("2026-11-19T10:00:00+07:00")
