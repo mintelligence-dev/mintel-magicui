@@ -11,6 +11,17 @@ import SelectExample from "./select"
 import TableExample from "./table"
 import StepperExample from "./stepper"
 import TimelineExample from "./timeline"
+import AvatarExample from "./avatar"
+import SkeletonExample from "./skeleton"
+import AlertExample from "./alert"
+import EmptyStateExample from "./empty-state"
+import AccordionExample from "./accordion"
+import BreadcrumbExample from "./breadcrumb"
+import PaginationExample from "./pagination"
+import SheetExample from "./sheet"
+import FileUploadExample from "./file-upload"
+import DataTableExample from "./data-table"
+import ChartExample from "./chart"
 import TabsExample from "./tabs"
 import ToastExample from "./toast"
 import LabelExample from "./label"
@@ -60,6 +71,17 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "table": TableExample,
   "stepper": StepperExample,
   "timeline": TimelineExample,
+  "avatar": AvatarExample,
+  "skeleton": SkeletonExample,
+  "alert": AlertExample,
+  "empty-state": EmptyStateExample,
+  "accordion": AccordionExample,
+  "breadcrumb": BreadcrumbExample,
+  "pagination": PaginationExample,
+  "sheet": SheetExample,
+  "file-upload": FileUploadExample,
+  "data-table": DataTableExample,
+  "chart": ChartExample,
   "tabs": TabsExample,
   "toast": ToastExample,
   "label": LabelExample,

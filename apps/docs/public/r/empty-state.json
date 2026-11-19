@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state",
+  "title": "Empty state",
+  "description": "“Nothing here yet” block: icon in a soft brand halo, title, description and actions.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/ui/empty-state.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/**\n * Friendly \"nothing here yet\" block: an icon in a soft brand halo, a title, a short\n * description and an optional action. Use inside cards, tables or whole pages.\n */\nfunction EmptyState({\n  icon,\n  title,\n  description,\n  action,\n  className,\n  ...props\n}: Omit<React.ComponentProps<\"div\">, \"title\"> & {\n  icon?: React.ReactNode\n  title: React.ReactNode\n  description?: React.ReactNode\n  action?: React.ReactNode\n}) {\n  return (\n    <div\n      data-slot=\"empty-state\"\n      className={cn(\"flex flex-col items-center justify-center gap-1 rounded-xl border border-dashed px-6 py-10 text-center\", className)}\n      {...props}\n    >\n      {icon && (\n        <div className=\"relative mb-3 flex size-14 items-center justify-center\">\n          <span aria-hidden className=\"absolute inset-0 rounded-full bg-[image:var(--brand-gradient)] opacity-15 blur-md\" />\n          <span className=\"relative flex size-12 items-center justify-center rounded-2xl border bg-background text-brand shadow-sm [&_svg]:size-6\">\n            {icon}\n          </span>\n        </div>\n      )}\n      <p className=\"font-heading font-semibold\">{title}</p>\n      {description && <p className=\"max-w-sm text-sm text-muted-foreground\">{description}</p>}\n      {action && <div className=\"mt-4 flex flex-wrap justify-center gap-2\">{action}</div>}\n    </div>\n  )\n}\n\nexport { EmptyState }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

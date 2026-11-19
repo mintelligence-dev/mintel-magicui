@@ -36,6 +36,7 @@ type RawItem = {
 // Core UI items that belong to the "Forms" group in the docs navigation.
 const FORM_ITEMS = new Set([
   "input", "label", "textarea", "checkbox", "radio-group", "switch", "select", "combobox", "calendar", "date-picker", "form",
+  "file-upload",
 ])
 
 const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper"])
@@ -119,6 +120,84 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("variant", '"default" | "brand" | "success" | "warning" | "destructive"', "Dot color.", "สีของจุด", '"default"'),
       p("current", "boolean", "Pulses the dot and sets aria-current.", "ให้จุดกระเพื่อม และตั้ง aria-current", "false"),
     ],
+  },
+  avatar: {
+    th: "รูปโปรไฟล์ทรงกลม มีตัวอักษรย่อเมื่อไม่มีรูป จุดสถานะออนไลน์ วงแหวนสีแบรนด์ และแบบกลุ่มซ้อนกัน",
+    props: [
+      p("size", '"sm" | "default" | "lg"', "Avatar size.", "ขนาด", '"default"'),
+      p("status", '"online" | "away" | "busy" | "offline"', "Presence dot.", "จุดสถานะ"),
+      p("ring", "boolean", "Brand-gradient ring.", "วงแหวนสีแบรนด์", "false"),
+      p("max", "number", "AvatarGroup: how many to show before “+N”.", "AvatarGroup: แสดงกี่คนก่อนรวมเป็น “+N”"),
+    ],
+    upstream: radix("Avatar"),
+  },
+  skeleton: { th: "กล่องรอโหลด มีแสงวิ่งผ่านเบาๆ ถ้าผู้ใช้ปิด motion จะเป็นการกะพริบช้าๆ แทน" },
+  alert: {
+    th: "ข้อความแจ้งในหน้า มีโทนปกติ แบรนด์ สำเร็จ เตือน และผิดพลาด ใส่ไอคอนได้",
+    props: [p("variant", '"default" | "brand" | "success" | "warning" | "destructive"', "Tone.", "โทนสี", '"default"')],
+  },
+  "empty-state": {
+    th: "หน้าว่างที่ดูเป็นมิตร ไอคอนมีแสงสีแบรนด์รอบๆ มีหัวข้อ คำอธิบาย และปุ่ม",
+    props: [
+      p("icon", "ReactNode", "Icon in the halo.", "ไอคอน"),
+      p("title", "ReactNode", "Headline.", "หัวข้อ"),
+      p("description", "ReactNode", "One or two short sentences.", "คำอธิบายสั้นๆ"),
+      p("action", "ReactNode", "Buttons.", "ปุ่ม"),
+    ],
+  },
+  accordion: {
+    th: "หัวข้อที่กดขยายได้ ความสูงเลื่อนนุ่มๆ ลูกศรหมุนแบบ spring",
+    props: [p("type", '"single" | "multiple"', "One or many open at once.", "เปิดได้ทีละอันหรือหลายอัน"), p("collapsible", "boolean", "Single: allow closing the open item.", "แบบ single: กดปิดอันที่เปิดอยู่ได้")],
+    upstream: radix("Accordion"),
+  },
+  breadcrumb: { th: "เส้นทางไปยังหน้าปัจจุบัน คั่นด้วยลูกศร ย่อเป็น … ได้เมื่อยาว" },
+  pagination: {
+    th: "ตัวแบ่งหน้า แสดงหน้าแรก/สุดท้ายเสมอ มี … เมื่อหน้าเยอะ หน้าปัจจุบันเป็นสีแบรนด์ มีป้ายภาษาไทย",
+    props: [
+      p("page", "number", "Current page (1-based).", "หน้าปัจจุบัน (เริ่มที่ 1)"),
+      p("pageCount", "number", "Total pages.", "จำนวนหน้าทั้งหมด"),
+      p("onPageChange", "(page: number) => void", "Called with the new page.", "เรียกเมื่อเปลี่ยนหน้า"),
+      p("siblings", "number", "Pages shown on each side of the current one.", "จำนวนหน้าข้างๆ หน้าปัจจุบัน", "1"),
+      p("locale", '"en" | "th"', "Label language.", "ภาษาของป้าย", '"en"'),
+    ],
+  },
+  sheet: {
+    th: "แผงที่เลื่อนออกจากขอบจอ ใช้กับตัวกรอง รายละเอียด หรือแก้ไขเร็ว แบบล่างมีที่จับและเว้นขอบล่างของมือถือ",
+    props: [p("side", '"right" | "left" | "top" | "bottom"', "SheetContent: edge to slide from.", "SheetContent: ขอบที่เลื่อนออกมา", '"right"')],
+    upstream: radix("Dialog"),
+  },
+  "file-upload": {
+    th: "ลากไฟล์มาวางหรือกดเลือก ตรวจชนิดและขนาดไฟล์ แสดงรายการไฟล์และแถบความคืบหน้าของแต่ละไฟล์",
+    props: [
+      p("files", "UploadFile[]", "Selected files (controlled).", "ไฟล์ที่เลือก (controlled)"),
+      p("onFilesChange", "(files: UploadFile[]) => void", "Called when files are added or removed.", "เรียกเมื่อเพิ่มหรือลบไฟล์"),
+      p("accept", "string", 'Like <input accept>: ".pdf,image/*".', 'เหมือน <input accept> เช่น ".pdf,image/*"'),
+      p("maxSize", "number", "Max bytes per file.", "ขนาดสูงสุดต่อไฟล์ (ไบต์)"),
+      p("multiple", "boolean", "Allow several files.", "เลือกได้หลายไฟล์", "true"),
+      p("locale", '"en" | "th"', "Label language.", "ภาษาของป้าย", '"en"'),
+    ],
+  },
+  "data-table": {
+    th: "ตารางข้อมูลจาก TanStack Table มีช่องค้นหา กดหัวคอลัมน์เพื่อเรียง เลือกแถว และแบ่งหน้า",
+    props: [
+      p("columns", "ColumnDef<TData>[]", "TanStack column definitions.", "นิยามคอลัมน์ของ TanStack"),
+      p("data", "TData[]", "Rows.", "ข้อมูลแต่ละแถว"),
+      p("searchable", "boolean", "Show the search box.", "แสดงช่องค้นหา", "true"),
+      p("selectable", "boolean", "Add a checkbox column.", "เพิ่มคอลัมน์ช่องติ๊ก", "false"),
+      p("pageSize", "number", "Rows per page.", "จำนวนแถวต่อหน้า", "10"),
+      p("onSelectionChange", "(rows: TData[]) => void", "Selected rows.", "แถวที่เลือก"),
+      p("toolbar", "ReactNode", "Extra controls next to search.", "ปุ่มหรือตัวกรองเพิ่มข้างช่องค้นหา"),
+      p("locale", '"en" | "th"', "Label language.", "ภาษาของป้าย", '"en"'),
+    ],
+    upstream: { label: "TanStack Table", href: "https://tanstack.com/table" },
+  },
+  chart: {
+    th: "กราฟจาก recharts ใช้ชุดสีข้อมูลของ Mintel (--chart-1 ถึง 5) tooltip แบบกระจกและ legend",
+    props: [
+      p("config", "ChartConfig", "Per-series label and color; exposes --color-<key>.", "ชื่อและสีของแต่ละชุดข้อมูล ใช้เป็น --color-<key>"),
+      p("valueFormatter", "(value) => ReactNode", "ChartTooltipContent: format values.", "ChartTooltipContent: จัดรูปแบบตัวเลข"),
+    ],
+    upstream: { label: "recharts", href: "https://recharts.org" },
   },
   tabs: { th: "แท็บที่เลือกเป็นสีแบรนด์ เนื้อหาค่อยๆ ปรากฏ", upstream: radix("Tabs") },
   toast: {

@@ -154,6 +154,214 @@
     ]
   },
   {
+    "name": "avatar",
+    "type": "registry:ui",
+    "title": "Avatar",
+    "description": "Round avatar with image, initials fallback, presence dot, brand-gradient ring and an overlapping group.",
+    "dependencies": [
+      "@radix-ui/react-avatar",
+      "class-variance-authority"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/avatar.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "skeleton",
+    "type": "registry:ui",
+    "title": "Skeleton",
+    "description": "Loading placeholder with a soft light sweep; pulses gently under reduced motion.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/skeleton.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "css": {
+      "@keyframes mintel-skeleton": {
+        "to": {
+          "transform": "translateX(100%)"
+        }
+      }
+    }
+  },
+  {
+    "name": "alert",
+    "type": "registry:ui",
+    "title": "Alert",
+    "description": "Inline message in default, brand, success, warning and destructive tones, with an optional icon.",
+    "dependencies": [
+      "class-variance-authority"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/alert.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "empty-state",
+    "type": "registry:ui",
+    "title": "Empty state",
+    "description": "“Nothing here yet” block: icon in a soft brand halo, title, description and actions.",
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/empty-state.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "accordion",
+    "type": "registry:ui",
+    "title": "Accordion",
+    "description": "Expandable sections with a smooth height animation and a chevron that springs open.",
+    "dependencies": [
+      "@radix-ui/react-accordion",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/accordion.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "breadcrumb",
+    "type": "registry:ui",
+    "title": "Breadcrumb",
+    "description": "Path to the current page with chevron separators and an ellipsis for long trails.",
+    "dependencies": [
+      "@radix-ui/react-slot",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/breadcrumb.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "pagination",
+    "type": "registry:ui",
+    "title": "Pagination",
+    "description": "Page navigation with first/last pages, ellipses, a brand pill on the current page, and Thai labels.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/pagination.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "sheet",
+    "type": "registry:ui",
+    "title": "Sheet",
+    "description": "Panel that slides in from any edge with a spring; bottom sheets get a grab handle and safe-area padding.",
+    "dependencies": [
+      "@radix-ui/react-dialog",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/sheet.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "file-upload",
+    "type": "registry:ui",
+    "title": "File upload",
+    "description": "Drag-and-drop file picker with type and size checks, a file list and per-file progress.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/file-upload.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "data-table",
+    "type": "registry:ui",
+    "title": "Data table",
+    "description": "TanStack Table with search, sortable headers, row selection and pagination, in Mintel styling.",
+    "dependencies": [
+      "@tanstack/react-table@^8.21.3",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils",
+      "@mintel/table",
+      "@mintel/input",
+      "@mintel/checkbox",
+      "@mintel/pagination"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/data-table.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "chart",
+    "type": "registry:ui",
+    "title": "Chart",
+    "description": "recharts wrapper that maps series to the Mintel data palette, with a glassy tooltip and legend.",
+    "dependencies": [
+      "recharts@^3.11.0"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/chart.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
     "name": "tabs",
     "type": "registry:ui",
     "title": "Tabs",
