@@ -87,7 +87,7 @@ export function KanbanPreview() {
   const [dragging, setDragging] = useState<string>()
   const move = (id: string, stage: string) => setCards((cs) => cs.map((c) => (c.id === id ? { ...c, stage } : c)))
   return (
-    <div className="grid w-full grid-cols-3 gap-2 overflow-x-auto text-sm">
+    <div className="grid w-full grid-cols-[repeat(3,minmax(8.5rem,1fr))] gap-2 overflow-x-auto text-sm">
       {stages.map((s) => (
         <section
           key={s}

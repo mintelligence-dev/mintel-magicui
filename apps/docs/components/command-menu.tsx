@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react"
 import { ItemBadge } from "@/components/item-badge"
+import { SF_INDEX, sfTag } from "@/lib/sf-index"
+import { SF_LABELS } from "@/lib/sf-labels"
 import { Command } from "cmdk"
 import { BookOpen, Palette, Cloud, Component, Home, LayoutTemplate, Search } from "lucide-react"
 
@@ -96,6 +98,24 @@ export function CommandMenu({ lang }: { lang: Lang }) {
                       <ItemBadge name={item.name} lang={lang} />
                     </span>
                     <span className="text-xs text-muted-foreground">{CATEGORY_LABEL[item.category][lang]}</span>
+                  </Command.Item>
+                ))}
+              </Command.Group>
+              <Command.Group heading="Salesforce" className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:text-muted-foreground">
+                {SF_INDEX.map((c) => (
+                  <Command.Item
+                    key={c.name}
+                    value={`sf ${c.name}`}
+                    keywords={[sfTag(c.name), "lwc", "salesforce", SF_LABELS[lang].groups[c.group]]}
+                    onSelect={() => go(`/salesforce/${c.name}`)}
+                    className={itemClass}
+                  >
+                    <Cloud className="size-4 text-muted-foreground" />
+                    <span className="flex flex-1 items-center gap-2 font-mono text-[13px]">
+                      {sfTag(c.name)}
+                      <ItemBadge name={`sf:${c.name}`} lang={lang} />
+                    </span>
+                    <span className="text-xs text-muted-foreground">LWC</span>
                   </Command.Item>
                 ))}
               </Command.Group>
