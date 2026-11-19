@@ -15,7 +15,12 @@ import { Badge } from "@/registry/mintel/ui/badge"
 
 const ROOT = process.cwd()
 // Scroll-driven examples: no clipping (position: sticky). Zoom parallax also runs edge to edge.
-const FRAME: Record<string, "unclipped" | "bleed" | "section"> = { "sticky-showcase": "unclipped", "zoom-parallax": "bleed" }
+// "section-sticky": full width like other sections, but not clipped, so the sticky visual can stick.
+const FRAME: Record<string, "unclipped" | "bleed" | "section" | "section-sticky"> = {
+  "sticky-showcase": "unclipped",
+  "zoom-parallax": "bleed",
+  "section-feature-scroll": "section-sticky",
+}
 const frameOf = (name: string) => FRAME[name] ?? (isSection(name) ? "section" : undefined)
 
 /** Registry imports become what the app actually gets after `shadcn add`. */
