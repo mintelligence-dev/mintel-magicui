@@ -5,13 +5,13 @@ import { DialogDemo, ChannelSelect, TableDemo, TabsDemo, ToastDemo } from "@/com
 import { ChoiceDemo, ComboboxDemo, DatePickerDemo, DropdownMenuDemo, FormDemo, TooltipPopoverDemo } from "@/components/form-demos"
 import { BeamDemo } from "@/components/beam-demo"
 import { CopyCommand } from "@/components/copy-command"
-import { GithubIcon } from "@/components/github-icon"
 import { GlassShowcase } from "@/components/glass-showcase"
 import { MobileNav } from "@/components/mobile-nav"
 import { MobileShowcase } from "@/components/mobile-showcase"
 import { MotionShowcase, ZoomShowcase } from "@/components/motion-showcase"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { REPO_URL, installCmd } from "@/lib/site"
+import { SiteHeader } from "@/components/site-header"
+import { getDict, langPath, type Lang } from "@/lib/i18n"
+import { installCmd } from "@/lib/site"
 import { cn } from "@/lib/utils"
 import { AnimatedGradientText } from "@/registry/mintel/effects/animated-gradient-text"
 import { AuroraText } from "@/registry/mintel/effects/aurora-text"
@@ -86,8 +86,10 @@ function Preview({
   title,
   className,
   wrapperClassName,
+  copyLabel,
   children,
 }: {
+  copyLabel?: string
   name: string
   title: string
   className?: string
@@ -106,43 +108,17 @@ function Preview({
       </div>
       <div className="flex flex-col gap-3 p-4">
         <p className="font-heading text-sm font-semibold">{title}</p>
-        <CopyCommand command={installCmd(name)} />
+        <CopyCommand command={installCmd(name)} label={copyLabel} />
       </div>
     </Card>
   )
 }
 
-export default function Home() {
+export function Home({ lang }: { lang: Lang }) {
+  const t = getDict(lang)
   return (
     <main id="top" className="min-h-screen overflow-x-clip pb-24 sm:pb-0">
-      {/* Nav */}
-      <header className="sticky top-0 z-40 border-b bg-background/70 backdrop-blur-lg">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <a href="#" className="flex items-center gap-2 font-heading font-semibold">
-            <span className="inline-flex size-7 items-center justify-center rounded-lg bg-[image:var(--brand-gradient)] text-sm font-bold text-white">
-              M
-            </span>
-            Mintel UI
-          </a>
-          <nav className="flex items-center gap-1 text-sm">
-            <a href="#tokens" className="hidden rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground sm:block">
-              Tokens
-            </a>
-            <a href="#components" className="hidden rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground sm:block">
-              Components
-            </a>
-            <a href="#salesforce" className="hidden rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground sm:block">
-              Salesforce
-            </a>
-            <Button variant="ghost" size="icon" asChild>
-              <a href={REPO_URL} aria-label="GitHub">
-                <GithubIcon />
-              </a>
-            </Button>
-            <ThemeToggle />
-          </nav>
-        </div>
-      </header>
+      <SiteHeader lang={lang} />
 
       {/* Hero */}
       <section className="relative isolate flex flex-col items-center px-4 pt-20 pb-24 text-center [contain-intrinsic-size:auto_900px] [content-visibility:auto] sm:pt-28">
@@ -152,7 +128,7 @@ export default function Home() {
         <Meteors number={14} className="-z-10" />
         <BlurFade delay={0.05}>
           <AnimatedGradientText className="rounded-full border border-brand/20 bg-background/60 px-4 py-1 text-sm font-medium backdrop-blur">
-            ✨ Open-source design system โดย M-Intelligence
+            {t.hero.badge}
           </AnimatedGradientText>
         </BlurFade>
         <BlurFade delay={0.15}>
@@ -162,27 +138,24 @@ export default function Home() {
           </h1>
         </BlurFade>
         <BlurFade delay={0.25}>
-          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            One set of brand tokens for React, Salesforce LWC and mobile web — plus fluid, ready-made
-            components you install with a single command.
-          </p>
+          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">{t.hero.subtitle}</p>
         </BlurFade>
         <BlurFade delay={0.35} className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <a href="#components">
             <ShimmerButton className="font-semibold">
-              ดู Components <ArrowRight className="ml-2 size-4" />
+              {t.hero.browse} <ArrowRight className="ml-2 size-4" />
             </ShimmerButton>
           </a>
           <Button variant="outline" size="lg" asChild>
-            <a href="#install">เริ่มใช้งาน</a>
+            <a href="#install">{t.hero.start}</a>
           </Button>
         </BlurFade>
 
         <BlurFade delay={0.45} className="mt-16 grid w-full max-w-3xl grid-cols-3 gap-4">
           {[
-            { v: Object.keys(tokens.light).length, l: "Semantic tokens" },
-            { v: 45, l: "Registry items" },
-            { v: 2, l: "Platforms" },
+            { v: Object.keys(tokens.light).length, l: t.hero.stats.tokens },
+            { v: 45, l: t.hero.stats.items },
+            { v: 2, l: t.hero.stats.platforms },
           ].map((s) => (
             <div key={s.l} className="rounded-2xl border bg-card/60 p-4 backdrop-blur">
               <NumberTicker value={s.v} className="font-heading text-3xl font-bold text-foreground sm:text-4xl" />
@@ -194,7 +167,7 @@ export default function Home() {
 
       <div className="border-y bg-muted/30 py-8">
         <p className="mb-5 text-center text-sm font-medium text-muted-foreground">
-          ใช้ได้กับ stack ที่ทีมใช้อยู่แล้ว
+          {t.stackLabel}
         </p>
         <Marquee
           pauseOnHover
@@ -213,26 +186,18 @@ export default function Home() {
       </div>
 
       {/* Architecture */}
-      <Section id="how" eyebrow="Architecture" title="Tokens ชุดเดียว → ทุกแพลตฟอร์ม">
+      <Section id="how" eyebrow={t.architecture.eyebrow} title={t.architecture.title}>
         <div className="grid items-center gap-8 lg:grid-cols-2 [&>*]:min-w-0">
           <div className="relative overflow-hidden rounded-2xl border bg-card">
             <BeamDemo />
             <BorderBeam size={120} duration={8} />
           </div>
           <div className="space-y-4 text-muted-foreground">
-            <p>
-              <strong className="text-foreground">@mintelligence-dev/tokens</strong> เก็บสี ฟอนต์ และ radius ไว้ที่{" "}
-              <code className="rounded bg-muted px-1 py-0.5 text-sm">src/tokens.json</code> ที่เดียว แล้ว build
-              ออกเป็น CSS variables, Tailwind v4 theme, JS object และ LWC module
-            </p>
-            <p>
-              <strong className="text-foreground">Components</strong> แจกผ่าน shadcn registry — คำสั่ง{" "}
-              <code className="rounded bg-muted px-1 py-0.5 text-sm">shadcn add</code> จะ copy source
-              เข้าโปรเจกต์ ไม่ผูก version ไม่ต้องรอ release
-            </p>
+            <p>{t.architecture.tokens}</p>
+            <p>{t.architecture.components}</p>
             <div className="flex flex-wrap gap-2 pt-2">
               <Badge variant="soft">Light + Dark</Badge>
-              <Badge variant="soft">ภาษาไทย (IBM Plex Sans Thai)</Badge>
+              <Badge variant="soft">{t.architecture.thai}</Badge>
               <Badge variant="soft">WCAG AA</Badge>
               <Badge variant="brand">MIT</Badge>
             </div>
@@ -241,33 +206,31 @@ export default function Home() {
       </Section>
 
       {/* Install */}
-      <Section id="install" eyebrow="Getting started" title="เริ่มใช้งานใน 2 ขั้นตอน">
+      <Section id="install" eyebrow={t.install.eyebrow} title={t.install.title}>
         <div className="grid gap-6 md:grid-cols-2 [&>*]:min-w-0">
           <Card>
             <CardHeader>
-              <CardTitle>1. ติดตั้ง theme</CardTitle>
-              <CardDescription>
-                ใส่สีแบรนด์ (light/dark), ฟอนต์ และ radius ลงใน globals.css ของโปรเจกต์ shadcn
-              </CardDescription>
+              <CardTitle>{t.install.step1}</CardTitle>
+              <CardDescription>{t.install.step1Desc}</CardDescription>
             </CardHeader>
             <CardContent>
-              <CopyCommand command={installCmd("mintel-theme")} />
+              <CopyCommand command={installCmd("mintel-theme")} label={t.nav.copy} />
             </CardContent>
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle>2. เพิ่ม component ที่ต้องการ</CardTitle>
-              <CardDescription>ทุก component ใช้ token ของแบรนด์อยู่แล้ว ไม่ต้องตั้งสีเอง</CardDescription>
+              <CardTitle>{t.install.step2}</CardTitle>
+              <CardDescription>{t.install.step2Desc}</CardDescription>
             </CardHeader>
             <CardContent>
-              <CopyCommand command={installCmd("shimmer-button")} />
+              <CopyCommand command={installCmd("shimmer-button")} label={t.nav.copy} />
             </CardContent>
           </Card>
         </div>
       </Section>
 
       {/* Tokens */}
-      <Section id="tokens" eyebrow="Foundations" title="Brand tokens">
+      <Section id="tokens" eyebrow={t.tokens.eyebrow} title={t.tokens.title}>
         <div className="space-y-6">
           {SCALES.map((scale) => (
             <div key={scale}>
@@ -294,7 +257,7 @@ export default function Home() {
             </div>
           ))}
           <div>
-            <p className="mb-2 font-heading text-sm font-semibold">Semantic (สลับ dark mode เพื่อดูค่าที่เปลี่ยน)</p>
+            <p className="mb-2 font-heading text-sm font-semibold">{t.tokens.semantic}</p>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
               {SEMANTIC.map((name) => (
                 <div key={name} className="flex items-center gap-2 rounded-lg border p-2">
@@ -307,11 +270,11 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-3 [&>*]:min-w-0">
             <div className="rounded-xl border p-4">
               <p className="text-xs text-muted-foreground">font-sans · Manrope + IBM Plex Sans Thai</p>
-              <p className="mt-2 text-xl">Customer Experience ลูกค้าคือหัวใจ</p>
+              <p className="mt-2 text-xl">{t.tokens.sampleSans}</p>
             </div>
             <div className="rounded-xl border p-4">
               <p className="text-xs text-muted-foreground">font-heading · Rubik + IBM Plex Sans Thai</p>
-              <p className="mt-2 font-heading text-xl font-semibold">Intelligence ข้อมูลอัจฉริยะ</p>
+              <p className="mt-2 font-heading text-xl font-semibold">{t.tokens.sampleHeading}</p>
             </div>
             <div className="rounded-xl border p-4">
               <p className="text-xs text-muted-foreground">--brand-gradient</p>
@@ -322,8 +285,8 @@ export default function Home() {
       </Section>
 
       {/* Components */}
-      <Section id="components" eyebrow="Registry" title="Components">
-        <nav aria-label="หมวด component" className="mb-10 flex flex-wrap gap-2">
+      <Section id="components" eyebrow={t.components.eyebrow} title={t.components.title}>
+        <nav aria-label={t.components.categories} className="mb-10 flex flex-wrap gap-2">
           {[
             ["#core", "Core UI", 21],
             ["#effects", "Effects", 12],
@@ -344,7 +307,7 @@ export default function Home() {
 
         <h3 id="core" className="mb-4 scroll-mt-20 font-heading text-xl font-semibold">Core UI</h3>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-0">
-          <Preview name="button" title="Button">
+          <Preview copyLabel={t.nav.copy} name="button" title="Button">
             <div className="flex flex-wrap justify-center gap-2">
               <Button>Default</Button>
               <Button variant="brand">Brand</Button>
@@ -354,7 +317,7 @@ export default function Home() {
               <Button variant="destructive">Delete</Button>
             </div>
           </Preview>
-          <Preview name="badge" title="Badge">
+          <Preview copyLabel={t.nav.copy} name="badge" title="Badge">
             <div className="flex flex-wrap justify-center gap-2">
               <Badge>Default</Badge>
               <Badge variant="brand">Brand</Badge>
@@ -365,40 +328,40 @@ export default function Home() {
               <Badge variant="outline">Outline</Badge>
             </div>
           </Preview>
-          <Preview name="input" title="Input">
-            <Input placeholder="อีเมลของคุณ" className="max-w-xs bg-background" />
+          <Preview copyLabel={t.nav.copy} name="input" title="Input">
+            <Input placeholder={t.components.inputPlaceholder} className="max-w-xs bg-background" />
           </Preview>
-          <Preview name="dialog" title="Dialog">
-            <DialogDemo />
+          <Preview copyLabel={t.nav.copy} name="dialog" title="Dialog">
+            <DialogDemo lang={lang} />
           </Preview>
-          <Preview name="select" title="Select">
-            <ChannelSelect />
+          <Preview copyLabel={t.nav.copy} name="select" title="Select">
+            <ChannelSelect lang={lang} />
           </Preview>
-          <Preview name="tabs" title="Tabs">
-            <TabsDemo />
+          <Preview copyLabel={t.nav.copy} name="tabs" title="Tabs">
+            <TabsDemo lang={lang} />
           </Preview>
-          <Preview name="toast" title="Toast">
-            <ToastDemo />
+          <Preview copyLabel={t.nav.copy} name="toast" title="Toast">
+            <ToastDemo lang={lang} />
           </Preview>
-          <Preview name="table" title="Table" className="p-4" wrapperClassName="md:col-span-2">
-            <TableDemo />
+          <Preview copyLabel={t.nav.copy} name="table" title="Table" className="p-4" wrapperClassName="md:col-span-2">
+            <TableDemo lang={lang} />
           </Preview>
-          <Preview name="combobox" title="Combobox — ค้นหาได้ / เลือกหลายค่า">
-            <ComboboxDemo />
+          <Preview copyLabel={t.nav.copy} name="combobox" title={t.components.comboboxTitle}>
+            <ComboboxDemo lang={lang} />
           </Preview>
-          <Preview name="date-picker" title="Date Picker — พ.ศ.">
-            <DatePickerDemo />
+          <Preview copyLabel={t.nav.copy} name="date-picker" title={t.components.datePickerTitle}>
+            <DatePickerDemo lang={lang} />
           </Preview>
-          <Preview name="switch" title="Switch · Checkbox · Radio">
-            <ChoiceDemo />
+          <Preview copyLabel={t.nav.copy} name="switch" title="Switch · Checkbox · Radio">
+            <ChoiceDemo lang={lang} />
           </Preview>
-          <Preview name="dropdown-menu" title="Dropdown Menu">
-            <DropdownMenuDemo />
+          <Preview copyLabel={t.nav.copy} name="dropdown-menu" title="Dropdown Menu">
+            <DropdownMenuDemo lang={lang} />
           </Preview>
-          <Preview name="tooltip" title="Tooltip · Popover">
-            <TooltipPopoverDemo />
+          <Preview copyLabel={t.nav.copy} name="tooltip" title="Tooltip · Popover">
+            <TooltipPopoverDemo lang={lang} />
           </Preview>
-          <Preview name="card" title="Card" className="p-4">
+          <Preview copyLabel={t.nav.copy} name="card" title="Card" className="p-4">
             <Card className="w-full max-w-xs gap-3 py-4">
               <CardHeader className="px-4">
                 <CardTitle>Salesforce Connector</CardTitle>
@@ -406,7 +369,7 @@ export default function Home() {
               </CardHeader>
               <CardContent className="px-4">
                 <Button size="sm" variant="brand" className="w-full">
-                  เชื่อมต่อ
+                  {t.components.connect}
                 </Button>
               </CardContent>
             </Card>
@@ -415,13 +378,11 @@ export default function Home() {
         <div className="mt-6">
           <Card className="gap-0 overflow-hidden py-0">
             <div className="border-b bg-muted/30 p-5 sm:p-8">
-              <FormDemo />
+              <FormDemo lang={lang} />
             </div>
             <div className="flex flex-col gap-3 p-4">
-              <p className="font-heading text-sm font-semibold">
-                Form — react-hook-form + zod (กดส่งโดยไม่กรอกเพื่อดู validation)
-              </p>
-              <CopyCommand command={installCmd("form")} />
+              <p className="font-heading text-sm font-semibold">{t.components.formTitle}</p>
+              <CopyCommand command={installCmd("form")} label={t.nav.copy} />
             </div>
           </Card>
         </div>
@@ -430,43 +391,43 @@ export default function Home() {
           <Sparkles className="size-5 text-brand-accent" /> Effects
         </h3>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-0">
-          <Preview name="shimmer-button" title="Shimmer Button">
+          <Preview copyLabel={t.nav.copy} name="shimmer-button" title="Shimmer Button">
             <ShimmerButton>Get Started</ShimmerButton>
           </Preview>
-          <Preview name="aurora-text" title="Aurora Text">
+          <Preview copyLabel={t.nav.copy} name="aurora-text" title="Aurora Text">
             <span className="font-heading text-4xl font-bold">
               <AuroraText>Mintel</AuroraText>
             </span>
           </Preview>
-          <Preview name="animated-gradient-text" title="Animated Gradient Text">
+          <Preview copyLabel={t.nav.copy} name="animated-gradient-text" title="Animated Gradient Text">
             <AnimatedGradientText className="text-2xl font-semibold">Customer Experience</AnimatedGradientText>
           </Preview>
-          <Preview name="magic-card" title="Magic Card" className="p-4">
+          <Preview copyLabel={t.nav.copy} name="magic-card" title="Magic Card" className="p-4">
             <MagicCard className="flex h-36 w-full flex-col items-center justify-center rounded-xl p-4 text-center">
-              <p className="font-heading font-semibold">เลื่อนเมาส์มาที่นี่</p>
-              <p className="text-sm text-muted-foreground">spotlight ตามเคอร์เซอร์</p>
+              <p className="font-heading font-semibold">{t.components.magicCard}</p>
+              <p className="text-sm text-muted-foreground">{t.components.magicCardSub}</p>
             </MagicCard>
           </Preview>
-          <Preview name="border-beam" title="Border Beam">
+          <Preview copyLabel={t.nav.copy} name="border-beam" title="Border Beam">
             <div className="relative flex h-28 w-full items-center justify-center rounded-xl border bg-card">
-              <span className="text-sm text-muted-foreground">Beam รอบกรอบ</span>
+              <span className="text-sm text-muted-foreground">{t.components.borderBeam}</span>
               <BorderBeam size={80} duration={6} />
             </div>
           </Preview>
-          <Preview name="shine-border" title="Shine Border">
+          <Preview copyLabel={t.nav.copy} name="shine-border" title="Shine Border">
             <div className="relative flex h-28 w-full items-center justify-center overflow-hidden rounded-xl bg-card">
               <ShineBorder borderWidth={2} />
-              <span className="text-sm text-muted-foreground">ขอบไล่เฉดแบรนด์</span>
+              <span className="text-sm text-muted-foreground">{t.components.shineBorder}</span>
             </div>
           </Preview>
-          <Preview name="number-ticker" title="Number Ticker">
+          <Preview copyLabel={t.nav.copy} name="number-ticker" title="Number Ticker">
             <NumberTicker value={98765} className="font-heading text-5xl font-bold text-brand dark:text-brand" />
           </Preview>
-          <Preview name="meteors" title="Meteors">
+          <Preview copyLabel={t.nav.copy} name="meteors" title="Meteors">
             <Meteors number={10} />
             <span className="font-heading text-lg font-semibold">Meteors</span>
           </Preview>
-          <Preview name="marquee" title="Marquee" className="px-0">
+          <Preview copyLabel={t.nav.copy} name="marquee" title="Marquee" className="px-0">
             <Marquee pauseOnHover className="[--duration:18s]">
               {["LINE", "Facebook", "TikTok", "Instagram", "X", "Pantip"].map((s) => (
                 <Badge key={s} variant="soft" className="mx-1 px-3 py-1 text-sm">
@@ -475,15 +436,15 @@ export default function Home() {
               ))}
             </Marquee>
           </Preview>
-          <Preview name="dot-pattern" title="Dot Pattern">
+          <Preview copyLabel={t.nav.copy} name="dot-pattern" title="Dot Pattern">
             <DotPattern glow cr={1.5} className="text-brand/70 [mask-image:radial-gradient(160px_circle_at_center,white,transparent)]" />
           </Preview>
-          <Preview name="blur-fade" title="Blur Fade">
+          <Preview copyLabel={t.nav.copy} name="blur-fade" title="Blur Fade">
             <BlurFade inView delay={0.2}>
-              <p className="font-heading text-xl font-semibold">ค่อยๆ ปรากฏตอน scroll</p>
+              <p className="font-heading text-xl font-semibold">{t.components.blurFade}</p>
             </BlurFade>
           </Preview>
-          <Preview name="animated-beam" title="Animated Beam" className="p-0">
+          <Preview copyLabel={t.nav.copy} name="animated-beam" title="Animated Beam" className="p-0">
             <div className="w-full scale-90">
               <BeamDemo />
             </div>
@@ -492,70 +453,32 @@ export default function Home() {
 
 
         <h3 id="glass" className="mt-16 mb-4 scroll-mt-20 font-heading text-xl font-semibold">Glass</h3>
-        <GlassShowcase />
+        <GlassShowcase lang={lang} />
 
         <h3 id="mobile" className="mt-16 mb-6 scroll-mt-20 font-heading text-xl font-semibold">Mobile</h3>
-        <MobileShowcase />
+        <MobileShowcase lang={lang} />
 
         <h3 id="motion" className="mt-16 mb-6 scroll-mt-20 font-heading text-xl font-semibold">Fluid Motion</h3>
-        <MotionShowcase />
+        <MotionShowcase lang={lang} />
       </Section>
-      <ZoomShowcase />
+      <ZoomShowcase lang={lang} />
 
 
       {/* Salesforce */}
-      <Section id="salesforce" eyebrow="Salesforce" title="ใช้กับ LWC และ SLDS">
-        <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
-          <Card>
-            <CardHeader>
-              <CardTitle>LWC CSS module</CardTitle>
-              <CardDescription>
-                copy โฟลเดอร์ <code>packages/tokens/lwc/mintelTokens</code> ไปที่{" "}
-                <code>force-app/main/default/lwc/</code> แล้ว import ใน CSS ของ component
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <pre className="overflow-x-auto rounded-lg bg-muted p-4 font-mono text-xs leading-relaxed">
-{`/* myCard.css */
-@import 'c/mintelTokens';
-
-.card {
-  background: var(--mintel-card);
-  border-radius: var(--mintel-radius);
-  font-family: var(--mintel-font-sans);
-}
-.cta {
-  background-image: var(--mintel-brand-gradient);
-  color: var(--mintel-brand-foreground);
-}`}
-              </pre>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>SLDS styling hooks</CardTitle>
-              <CardDescription>
-                <code>salesforce/mintel-global.css</code> map สีแบรนด์เข้า <code>lightning-*</code> base
-                components — อัปโหลดเป็น Static Resource หรือใส่ใน head ของ Experience Cloud (LWR)
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <pre className="overflow-x-auto rounded-lg bg-muted p-4 font-mono text-xs leading-relaxed">
-{`import { loadStyle } from 'lightning/platformResourceLoader';
-import MINTEL from '@salesforce/resourceUrl/mintelGlobal';
-
-connectedCallback() {
-  loadStyle(this, MINTEL);
-}`}
-              </pre>
-            </CardContent>
-          </Card>
+      <Section id="salesforce" eyebrow={t.salesforceTeaser.eyebrow} title={t.salesforceTeaser.title}>
+        <div className="flex flex-col items-start gap-6 rounded-2xl border bg-muted/30 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <p className="max-w-2xl text-muted-foreground">{t.salesforceTeaser.body}</p>
+          <Button variant="brand" size="lg" asChild>
+            <a href={langPath(lang, "/salesforce")}>
+              {t.salesforceTeaser.cta} <ArrowRight />
+            </a>
+          </Button>
         </div>
       </Section>
 
-      <MobileNav />
+      <MobileNav lang={lang} />
       <footer className="border-t py-10 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} M Intelligence Co., Ltd. · MIT License
+        © 2026 {t.footer}
       </footer>
     </main>
   )

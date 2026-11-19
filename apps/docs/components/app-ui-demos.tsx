@@ -1,5 +1,7 @@
 "use client"
 
+import type { Lang } from "@/lib/i18n"
+
 import { Badge } from "@/registry/mintel/ui/badge"
 import { Button } from "@/registry/mintel/ui/button"
 import {
@@ -35,33 +37,90 @@ import { toast } from "@/registry/mintel/ui/toast"
 
 const CHANNELS = ["LINE", "Facebook", "TikTok", "Instagram", "X", "Pantip"]
 
-export function DialogDemo() {
+const en = {
+  addConnector: "Add connector",
+  dialogTitle: "Add a social connector",
+  dialogDesc: "Connect a social channel to your Salesforce org.",
+  connectorName: "Connector name",
+  connectorPlaceholder: "e.g. Main LINE OA",
+  channel: "Channel",
+  cancel: "Cancel",
+  save: "Save",
+  saved: "Connector added",
+  pickChannel: "Pick a channel",
+  overview: "Overview",
+  cases: "Cases",
+  settings: "Settings",
+  messagesToday: (n: React.ReactNode) => <>{n} messages today</>,
+  openCases: (n: React.ReactNode) => <>{n} open cases</>,
+  settingsBody: "Notification and SLA settings",
+  savedTitle: "Saved",
+  savedDesc: "Customer record updated",
+  errorTitle: "Couldn't connect",
+  errorDesc: "Check the Pantip token",
+  syncing: "Syncing...",
+  synced: "Sync complete",
+  syncFailed: "Sync failed",
+  messages: "Messages",
+  status: "Status",
+}
+const th: typeof en = {
+  addConnector: "เพิ่ม Connector",
+  dialogTitle: "เพิ่ม Social Connector",
+  dialogDesc: "เชื่อมช่องทางโซเชียลเข้ากับ Salesforce ของคุณ",
+  connectorName: "ชื่อ Connector",
+  connectorPlaceholder: "เช่น LINE OA หลัก",
+  channel: "ช่องทาง",
+  cancel: "ยกเลิก",
+  save: "บันทึก",
+  saved: "เพิ่ม Connector แล้ว",
+  pickChannel: "เลือกช่องทาง",
+  overview: "ภาพรวม",
+  cases: "เคส",
+  settings: "ตั้งค่า",
+  messagesToday: (n) => <>ข้อความเข้า {n} รายการวันนี้</>,
+  openCases: (n) => <>เคสเปิดอยู่ {n} เคส</>,
+  settingsBody: "ตั้งค่าการแจ้งเตือนและ SLA",
+  savedTitle: "บันทึกสำเร็จ",
+  savedDesc: "ข้อมูลลูกค้าอัปเดตแล้ว",
+  errorTitle: "เชื่อมต่อไม่สำเร็จ",
+  errorDesc: "ตรวจสอบ token ของ Pantip",
+  syncing: "กำลัง sync...",
+  synced: "Sync เสร็จแล้ว",
+  syncFailed: "Sync ล้มเหลว",
+  messages: "ข้อความ",
+  status: "สถานะ",
+}
+const COPY: Record<Lang, typeof en> = { en, th }
+
+export function DialogDemo({ lang }: { lang: Lang }) {
+  const t = COPY[lang]
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="brand">เพิ่ม Connector</Button>
+        <Button variant="brand">{t.addConnector}</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>เพิ่ม Social Connector</DialogTitle>
-          <DialogDescription>เชื่อมช่องทางโซเชียลเข้ากับ Salesforce ของคุณ</DialogDescription>
+          <DialogTitle>{t.dialogTitle}</DialogTitle>
+          <DialogDescription>{t.dialogDesc}</DialogDescription>
         </DialogHeader>
         <div className="grid gap-3">
           <label className="grid gap-1.5 text-sm font-medium">
-            ชื่อ Connector
-            <Input placeholder="เช่น LINE OA หลัก" />
+            {t.connectorName}
+            <Input placeholder={t.connectorPlaceholder} />
           </label>
           <label className="grid gap-1.5 text-sm font-medium">
-            ช่องทาง
-            <ChannelSelect className="w-full" />
+            {t.channel}
+            <ChannelSelect lang={lang} className="w-full" />
           </label>
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">ยกเลิก</Button>
+            <Button variant="outline">{t.cancel}</Button>
           </DialogClose>
           <DialogClose asChild>
-            <Button onClick={() => toast.success("เพิ่ม Connector แล้ว")}>บันทึก</Button>
+            <Button onClick={() => toast.success(t.saved)}>{t.save}</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
@@ -69,11 +128,12 @@ export function DialogDemo() {
   )
 }
 
-export function ChannelSelect({ className }: { className?: string }) {
+export function ChannelSelect({ lang, className }: { lang: Lang; className?: string }) {
+  const t = COPY[lang]
   return (
     <Select>
       <SelectTrigger className={className ?? "w-48"}>
-        <SelectValue placeholder="เลือกช่องทาง" />
+        <SelectValue placeholder={t.pickChannel} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
@@ -89,22 +149,23 @@ export function ChannelSelect({ className }: { className?: string }) {
   )
 }
 
-export function TabsDemo() {
+export function TabsDemo({ lang }: { lang: Lang }) {
+  const t = COPY[lang]
   return (
     <Tabs defaultValue="overview" className="w-full max-w-xs">
       <TabsList className="w-full">
-        <TabsTrigger value="overview">ภาพรวม</TabsTrigger>
-        <TabsTrigger value="cases">เคส</TabsTrigger>
-        <TabsTrigger value="settings">ตั้งค่า</TabsTrigger>
+        <TabsTrigger value="overview">{t.overview}</TabsTrigger>
+        <TabsTrigger value="cases">{t.cases}</TabsTrigger>
+        <TabsTrigger value="settings">{t.settings}</TabsTrigger>
       </TabsList>
       <TabsContent value="overview" className="rounded-lg border bg-background p-3 text-sm">
-        ข้อความเข้า <strong className="text-brand">1,284</strong> รายการวันนี้
+        {t.messagesToday(<strong className="text-brand">1,284</strong>)}
       </TabsContent>
       <TabsContent value="cases" className="rounded-lg border bg-background p-3 text-sm">
-        เคสเปิดอยู่ <strong className="text-brand-accent">37</strong> เคส
+        {t.openCases(<strong className="text-brand-accent">37</strong>)}
       </TabsContent>
       <TabsContent value="settings" className="rounded-lg border bg-background p-3 text-sm">
-        ตั้งค่าการแจ้งเตือนและ SLA
+        {t.settingsBody}
       </TabsContent>
     </Tabs>
   )
@@ -117,15 +178,16 @@ const ROWS = [
   { channel: "Pantip", messages: 35, status: "Error" },
 ] as const
 
-export function TableDemo() {
+export function TableDemo({ lang }: { lang: Lang }) {
+  const t = COPY[lang]
   return (
     <div className="w-full overflow-hidden rounded-lg border bg-background">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Channel</TableHead>
-            <TableHead className="text-right">Messages</TableHead>
-            <TableHead>Status</TableHead>
+            <TableHead>{t.channel}</TableHead>
+            <TableHead className="text-right">{t.messages}</TableHead>
+            <TableHead>{t.status}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -148,22 +210,23 @@ export function TableDemo() {
   )
 }
 
-export function ToastDemo() {
+export function ToastDemo({ lang }: { lang: Lang }) {
+  const t = COPY[lang]
   return (
     <div className="flex flex-wrap justify-center gap-2">
-      <Button variant="outline" onClick={() => toast.success("บันทึกสำเร็จ", { description: "ข้อมูลลูกค้าอัปเดตแล้ว" })}>
+      <Button variant="outline" onClick={() => toast.success(t.savedTitle, { description: t.savedDesc })}>
         Success
       </Button>
-      <Button variant="outline" onClick={() => toast.error("เชื่อมต่อไม่สำเร็จ", { description: "ตรวจสอบ token ของ Pantip" })}>
+      <Button variant="outline" onClick={() => toast.error(t.errorTitle, { description: t.errorDesc })}>
         Error
       </Button>
       <Button
         variant="outline"
         onClick={() =>
           toast.promise(new Promise((r) => setTimeout(r, 1500)), {
-            loading: "กำลัง sync...",
-            success: "Sync เสร็จแล้ว",
-            error: "Sync ล้มเหลว",
+            loading: t.syncing,
+            success: t.synced,
+            error: t.syncFailed,
           })
         }
       >

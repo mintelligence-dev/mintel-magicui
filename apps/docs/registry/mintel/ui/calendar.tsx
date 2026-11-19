@@ -13,7 +13,8 @@ const yearOf = (d: Date, era: CalendarEra) => d.getFullYear() + (era === "buddhi
 
 /**
  * Calendar in Thai by default, with Buddhist Era (BE) years in the caption and year dropdown.
- * Pass `era="gregorian"` for Common Era (CE) years, or any react-day-picker `locale` for other languages.
+ * Pass `era="gregorian"` for Common Era (CE) years, or any react-day-picker `locale` for other languages
+ * (non-Thai locales default to CE).
  * Dates you receive are normal JS Dates (Gregorian) — the era only changes what is displayed.
  */
 function Calendar({
@@ -21,11 +22,13 @@ function Calendar({
   classNames,
   showOutsideDays = true,
   captionLayout = "label",
-  era = "buddhist",
+  era,
   locale = th,
   formatters,
   ...props
 }: DayPickerProps & { era?: CalendarEra }) {
+  // Buddhist Era by default for Thai, Common Era for every other locale.
+  const resolvedEra: CalendarEra = era ?? (locale?.code?.startsWith("th") ? "buddhist" : "gregorian")
   const d = getDefaultClassNames()
   const monthName = (date: Date) =>
     new Intl.DateTimeFormat(locale?.code ?? "th", { month: "long" }).format(date)
@@ -39,8 +42,8 @@ function Calendar({
       locale={locale}
       className={cn("bg-background p-3 [--cell-size:--spacing(9)] pointer-coarse:[--cell-size:--spacing(11)]", className)}
       formatters={{
-        formatCaption: (date) => `${monthName(date)} ${yearOf(date, era)}`,
-        formatYearDropdown: (date) => String(yearOf(date, era)),
+        formatCaption: (date) => `${monthName(date)} ${yearOf(date, resolvedEra)}`,
+        formatYearDropdown: (date) => String(yearOf(date, resolvedEra)),
         formatMonthDropdown: (date) => monthShort(date),
         ...formatters,
       }}

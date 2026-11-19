@@ -4,14 +4,34 @@ import * as React from "react"
 import * as PopoverPrimitive from "@radix-ui/react-popover"
 import { CalendarIcon, XIcon } from "lucide-react"
 import type { DateRange } from "react-day-picker"
+import { enUS, th } from "react-day-picker/locale"
 
 import { cn } from "@/lib/utils"
 import { Calendar, type CalendarEra } from "@/registry/mintel/ui/calendar"
 
-/** Formats a date for display in Thai. Uses the Buddhist Era (BE) calendar by default. */
-function formatThaiDate(date: Date, era: CalendarEra = "buddhist", style: "medium" | "long" = "medium") {
-  const locale = era === "buddhist" ? "th-TH-u-ca-buddhist" : "th-TH-u-ca-gregory"
-  return new Intl.DateTimeFormat(locale, { dateStyle: style }).format(date)
+type PickerLocale = "th" | "en"
+
+// Built-in UI strings. Override placeholders with the matching props.
+const STRINGS = {
+  th: { date: "เลือกวันที่", range: "เลือกช่วงวันที่", clear: "ล้างวันที่" },
+  en: { date: "Pick a date", range: "Pick a date range", clear: "Clear date" },
+} as const
+
+const dayPickerLocale = (locale: PickerLocale) => (locale === "en" ? enUS : th)
+const defaultEra = (locale: PickerLocale): CalendarEra => (locale === "th" ? "buddhist" : "gregorian")
+
+/**
+ * Formats a date for display. Thai uses the Buddhist Era (BE) by default; English uses the Common Era.
+ */
+function formatThaiDate(
+  date: Date,
+  era: CalendarEra = "buddhist",
+  style: "medium" | "long" = "medium",
+  locale: PickerLocale = "th"
+) {
+  const tag = locale === "en" ? "en-GB" : "th-TH"
+  const calendar = era === "buddhist" ? "buddhist" : "gregory"
+  return new Intl.DateTimeFormat(`${tag}-u-ca-${calendar}`, { dateStyle: style }).format(date)
 }
 
 const triggerClass =
@@ -24,6 +44,9 @@ const contentClass =
   "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 motion-reduce:animate-none"
 
 type CommonProps = {
+  /** Language of the calendar and built-in strings. Defaults to Thai. */
+  locale?: PickerLocale
+  /** Defaults to Buddhist Era for Thai and Common Era for English. */
   era?: CalendarEra
   placeholder?: string
   className?: string
@@ -35,12 +58,12 @@ type CommonProps = {
   "aria-invalid"?: boolean
 }
 
-function ClearButton({ onClear }: { onClear: () => void }) {
+function ClearButton({ onClear, label }: { onClear: () => void; label: string }) {
   return (
     <span
       role="button"
       tabIndex={-1}
-      aria-label="ล้างวันที่"
+      aria-label={label}
       onPointerDown={(e) => {
         e.preventDefault()
         e.stopPropagation()
@@ -57,6 +80,7 @@ function ClearButton({ onClear }: { onClear: () => void }) {
 // (Next.js cacheComponents rejects reading the current time there).
 function SingleCalendar({
   era,
+  locale,
   value,
   dropdowns,
   fromYear,
@@ -64,6 +88,7 @@ function SingleCalendar({
   onSelect,
 }: {
   era: CalendarEra
+  locale: PickerLocale
   value?: Date
   dropdowns?: boolean
   fromYear?: number
@@ -75,6 +100,7 @@ function SingleCalendar({
     <Calendar
       mode="single"
       era={era}
+      locale={dayPickerLocale(locale)}
       selected={value}
       defaultMonth={value}
       captionLayout={dropdowns ? "dropdown" : "label"}
@@ -89,8 +115,9 @@ function SingleCalendar({
 function DatePicker({
   value,
   onValueChange,
-  era = "buddhist",
-  placeholder = "เลือกวันที่",
+  locale = "th",
+  era = defaultEra(locale),
+  placeholder = STRINGS[locale].date,
   className,
   disabled,
   dropdowns,
@@ -109,14 +136,15 @@ function DatePicker({
       >
         <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
         <span className={cn("truncate", !value && "text-muted-foreground")}>
-          {value ? formatThaiDate(value, era) : placeholder}
+          {value ? formatThaiDate(value, era, "medium", locale) : placeholder}
         </span>
-        {value && <ClearButton onClear={() => onValueChange?.(undefined)} />}
+        {value && <ClearButton label={STRINGS[locale].clear} onClear={() => onValueChange?.(undefined)} />}
       </PopoverPrimitive.Trigger>
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Content align="start" sideOffset={6} className={contentClass}>
           <SingleCalendar
             era={era}
+            locale={locale}
             value={value}
             dropdowns={dropdowns}
             fromYear={fromYear}
@@ -135,16 +163,18 @@ function DatePicker({
 // One month on phones, two side by side from `sm` up. Mounted only while open (no SSR mismatch).
 function RangeCalendar({
   era,
+  locale,
   value,
   onSelect,
 }: {
   era: CalendarEra
+  locale: PickerLocale
   value?: DateRange
   onSelect?: (range: DateRange | undefined) => void
 }) {
   const [months] = React.useState(() => (window.matchMedia("(min-width: 640px)").matches ? 2 : 1))
   return (
-    <Calendar mode="range" era={era} selected={value} defaultMonth={value?.from} numberOfMonths={months} onSelect={onSelect} />
+    <Calendar mode="range" era={era} locale={dayPickerLocale(locale)} selected={value} defaultMonth={value?.from} numberOfMonths={months} onSelect={onSelect} />
   )
 }
 
@@ -152,16 +182,17 @@ function RangeCalendar({
 function DateRangePicker({
   value,
   onValueChange,
-  era = "buddhist",
-  placeholder = "เลือกช่วงวันที่",
+  locale = "th",
+  era = defaultEra(locale),
+  placeholder = STRINGS[locale].range,
   className,
   disabled,
   ...rest
 }: CommonProps & { value?: DateRange; onValueChange?: (range: DateRange | undefined) => void }) {
   const label = value?.from
     ? value.to
-      ? `${formatThaiDate(value.from, era)} – ${formatThaiDate(value.to, era)}`
-      : formatThaiDate(value.from, era)
+      ? `${formatThaiDate(value.from, era, "medium", locale)} – ${formatThaiDate(value.to, era, "medium", locale)}`
+      : formatThaiDate(value.from, era, "medium", locale)
     : placeholder
   return (
     <PopoverPrimitive.Root>
@@ -173,11 +204,11 @@ function DateRangePicker({
       >
         <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
         <span className={cn("truncate", !value?.from && "text-muted-foreground")}>{label}</span>
-        {value?.from && <ClearButton onClear={() => onValueChange?.(undefined)} />}
+        {value?.from && <ClearButton label={STRINGS[locale].clear} onClear={() => onValueChange?.(undefined)} />}
       </PopoverPrimitive.Trigger>
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Content align="start" sideOffset={6} className={contentClass}>
-          <RangeCalendar era={era} value={value} onSelect={onValueChange} />
+          <RangeCalendar era={era} locale={locale} value={value} onSelect={onValueChange} />
         </PopoverPrimitive.Content>
       </PopoverPrimitive.Portal>
     </PopoverPrimitive.Root>

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Bell, Search, Sparkles } from "lucide-react"
 
 import { CopyCommand } from "@/components/copy-command"
+import { getDict, type Lang } from "@/lib/i18n"
 import { installCmd } from "@/lib/site"
 import { GlassButton } from "@/registry/mintel/glass/glass-button"
 import { GlassCard } from "@/registry/mintel/glass/glass-card"
@@ -26,7 +27,8 @@ function Backdrop() {
   )
 }
 
-export function GlassShowcase() {
+export function GlassShowcase({ lang }: { lang: Lang }) {
+  const t = getDict(lang).glass
   const [period, setPeriod] = useState("week")
   const stats = { day: "1,284", week: "8,902", month: "36,417" } as Record<string, string>
 
@@ -39,10 +41,10 @@ export function GlassShowcase() {
             <Sparkles className="size-4 text-brand" /> Mintel
           </span>
           <div className="flex items-center gap-1">
-            <GlassButton size="icon" aria-label="ค้นหา" className="size-9 shadow-none">
+            <GlassButton size="icon" aria-label={t.search} className="size-9 shadow-none">
               <Search />
             </GlassButton>
-            <GlassButton size="icon" aria-label="การแจ้งเตือน" className="size-9 shadow-none">
+            <GlassButton size="icon" aria-label={t.notifications} className="size-9 shadow-none">
               <Bell />
             </GlassButton>
           </div>
@@ -50,29 +52,25 @@ export function GlassShowcase() {
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           <GlassCard refraction className="p-6">
-            <p className="text-sm text-muted-foreground">ข้อความเข้า</p>
+            <p className="text-sm text-muted-foreground">{t.incoming}</p>
             <p className="mt-1 font-heading text-4xl font-bold tabular-nums">{stats[period]}</p>
             <SegmentedControl
-              aria-label="ช่วงเวลา"
+              aria-label={t.period}
               variant="brand"
               className="mt-5 w-full"
               value={period}
               onValueChange={setPeriod}
-              options={[
-                { value: "day", label: "วัน" },
-                { value: "week", label: "สัปดาห์" },
-                { value: "month", label: "เดือน" },
-              ]}
+              options={t.periods.map(([value, label]) => ({ value, label }))}
             />
             <p className="mt-4 text-xs text-muted-foreground">
-              การ์ดนี้เปิด <code>refraction</code> — บน Chrome/Edge (เมาส์) ขอบจะหักเหภาพด้านหลัง
+              {t.refraction}
             </p>
           </GlassCard>
 
           <GlassCard className="flex flex-col justify-between gap-6 p-6">
             <div>
               <p className="font-heading text-xl font-semibold">Glass Button</p>
-              <p className="mt-1 text-sm text-muted-foreground">กดค้างเพื่อดู spring press</p>
+              <p className="mt-1 text-sm text-muted-foreground">{t.pressHint}</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <GlassButton>Default</GlassButton>

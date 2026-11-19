@@ -15,7 +15,8 @@ src/tokens.json ──build──► CSS variables · Tailwind v4 theme · JS ·
 | Package | What it is | How you get it |
 |---|---|---|
 | [`packages/tokens`](packages/tokens) | `@mintelligence-dev/tokens` — colors, fonts, radius (light + dark) | npm (planned) / copy files |
-| [`apps/docs`](apps/docs) | Docs site + shadcn registry (`public/r/*.json`) | `npx shadcn add <url>` |
+| [`apps/docs`](apps/docs) | Docs site (English `/`, Thai `/th`) + shadcn registry (`public/r/*.json`) | `npx shadcn add <url>` |
+| [`packages/salesforce`](packages/salesforce) | SFDX project: LWC tokens, SLDS hooks static resource, branded LWC | `sf project deploy start` |
 
 ## Use it in React / Next.js
 
@@ -60,20 +61,18 @@ so components follow the theme — including dark mode — without passing color
 Brand fonts are **Manrope** (Latin) + **IBM Plex Sans Thai** (Thai), headings in **Rubik**. Load them with
 `next/font` or `@import "@mintelligence-dev/tokens/fonts.css"`.
 
-## Use it in Salesforce (LWC)
+## Use it in Salesforce
 
-See [`packages/tokens/README.md`](packages/tokens/README.md#salesforce-lwc). In short:
+[`packages/salesforce`](packages/salesforce) is a deployable SFDX project: the `c/mintelTokens` CSS module, the
+`mintelGlobal` static resource (SLDS styling hooks that rebrand standard `lightning-*` components) and branded LWC
+(`mintelGlassCard`, `mintelShimmerButton`, `mintelGradientText`, `mintelStatCard`, `mintelBrandLoader`).
 
-```css
-/* force-app/main/default/lwc/myCard/myCard.css */
-@import 'c/mintelTokens';
-
-.cta {
-  background-image: var(--mintel-brand-gradient);
-  color: var(--mintel-brand-foreground);
-  border-radius: var(--mintel-radius);
-}
+```bash
+sf project deploy start --source-dir packages/salesforce/force-app --target-org my-org
 ```
+
+The docs site has a Salesforce guide (`/salesforce`, Thai at `/th/salesforce`) with a live before/after preview of
+real SLDS components. Details: [`packages/salesforce/README.md`](packages/salesforce/README.md).
 
 ## Develop
 

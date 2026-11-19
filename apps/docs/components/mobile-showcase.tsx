@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Bell, Home, MessageCircle, User } from "lucide-react"
 
 import { CopyCommand } from "@/components/copy-command"
+import { getDict, type Lang } from "@/lib/i18n"
 import { installCmd } from "@/lib/site"
 import { Button } from "@/registry/mintel/ui/button"
 import { Input } from "@/registry/mintel/ui/input"
@@ -29,30 +30,31 @@ function Phone({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function MobileShowcase() {
+export function MobileShowcase({ lang }: { lang: Lang }) {
+  const t = getDict(lang).mobile
   const [tab, setTab] = useState("home")
   return (
     <div className="grid gap-8 md:grid-cols-2 [&>*]:min-w-0">
       <div className="space-y-4">
         <p className="font-heading text-lg font-semibold">Drawer</p>
-        <p className="text-sm text-muted-foreground">Bottom sheet ลากที่แถบด้านบนลงเพื่อปิด — ใช้บนมือถือแทน dialog</p>
+        <p className="text-sm text-muted-foreground">{t.drawerDesc}</p>
         <div className="flex min-h-40 items-center justify-center rounded-2xl border bg-muted/30 p-6">
           <Drawer>
             <DrawerTrigger asChild>
-              <Button variant="brand">เปิด Drawer</Button>
+              <Button variant="brand">{t.openDrawer}</Button>
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
-                <DrawerTitle>ส่งข้อความหาลูกค้า</DrawerTitle>
-                <DrawerDescription>ข้อความจะถูกส่งผ่าน LINE OA</DrawerDescription>
+                <DrawerTitle>{t.drawerTitle}</DrawerTitle>
+                <DrawerDescription>{t.drawerDesc2}</DrawerDescription>
               </DrawerHeader>
-              <Input placeholder="พิมพ์ข้อความ..." />
+              <Input placeholder={t.messagePlaceholder} />
               <DrawerFooter>
                 <DrawerClose asChild>
-                  <Button onClick={() => toast.success("ส่งข้อความแล้ว")}>ส่ง</Button>
+                  <Button onClick={() => toast.success(t.sent)}>{t.send}</Button>
                 </DrawerClose>
                 <DrawerClose asChild>
-                  <Button variant="ghost">ยกเลิก</Button>
+                  <Button variant="ghost">{t.cancel}</Button>
                 </DrawerClose>
               </DrawerFooter>
             </DrawerContent>
@@ -62,17 +64,17 @@ export function MobileShowcase() {
       </div>
       <div className="space-y-4">
         <p className="font-heading text-lg font-semibold">Tab Bar</p>
-        <p className="text-sm text-muted-foreground">แถบแท็บด้านล่างแบบกระจก เว้นที่ให้ home indicator อัตโนมัติ</p>
+        <p className="text-sm text-muted-foreground">{t.tabBarDesc}</p>
         <Phone>
           <TabBar
             className="absolute"
             value={tab}
             onValueChange={setTab}
             items={[
-              { value: "home", label: "หน้าแรก", icon: <Home /> },
-              { value: "chat", label: "แชท", icon: <MessageCircle /> },
-              { value: "alerts", label: "แจ้งเตือน", icon: <Bell /> },
-              { value: "me", label: "ฉัน", icon: <User /> },
+              { value: "home", label: t.tabs.home, icon: <Home /> },
+              { value: "chat", label: t.tabs.chat, icon: <MessageCircle /> },
+              { value: "alerts", label: t.tabs.alerts, icon: <Bell /> },
+              { value: "me", label: t.tabs.me, icon: <User /> },
             ]}
           />
         </Phone>
