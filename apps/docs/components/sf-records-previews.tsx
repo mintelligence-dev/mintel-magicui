@@ -1,8 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import { MoveIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/registry/mintel/ui/dropdown-menu"
 import { Timeline, TimelineItem } from "@/registry/mintel/ui/timeline"
 
 // Docs-only previews that mirror the record-page LWC (relatedCards, activityTimeline, kanban).
@@ -94,7 +96,7 @@ export function KanbanPreview() {
           aria-label={s}
           onDragOver={(e) => e.preventDefault()}
           onDrop={() => dragging && move(dragging, s)}
-          className="grid min-h-44 content-start gap-2 rounded-xl bg-muted p-2"
+          className="grid min-h-44 content-start gap-2 rounded-xl bg-muted p-2.5"
         >
           <h3 className="flex items-center justify-between px-1 text-xs font-semibold">
             {s}
@@ -109,25 +111,31 @@ export function KanbanPreview() {
                 onDragStart={() => setDragging(c.id)}
                 onDragEnd={() => setDragging(undefined)}
                 className={cn(
-                  "grid cursor-grab gap-1 rounded-lg border bg-card p-2.5 shadow-xs transition-[opacity,rotate] duration-300 motion-safe:animate-in motion-safe:fade-in-0",
+                  "relative grid cursor-grab gap-1 rounded-lg border bg-card py-3 pr-9 pl-3 shadow-xs transition-[opacity,rotate,translate,box-shadow] duration-300 ease-spring-snappy hover:-translate-y-px hover:shadow-md hover:shadow-brand/15 motion-safe:animate-in motion-safe:fade-in-0 motion-reduce:transition-none",
                   dragging === c.id && "rotate-[-1.5deg] opacity-50"
                 )}
               >
                 <span className="font-semibold">{c.name}</span>
                 <span className="text-xs text-muted-foreground">{c.amount}</span>
-                <label className="sr-only" htmlFor={`move-${c.id}`}>
-                  Move {c.name} to
-                </label>
-                <select
-                  id={`move-${c.id}`}
-                  value={c.stage}
-                  onChange={(e) => move(c.id, e.target.value)}
-                  className="mt-1 rounded-md border bg-background px-1.5 py-1 text-xs"
-                >
-                  {stages.map((o) => (
-                    <option key={o}>{o}</option>
-                  ))}
-                </select>
+                {/* Like the LWC: a small move menu in the corner, for keyboards and touch. */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger
+                    aria-label={`Move ${c.name} to…`}
+                    className="absolute top-1.5 right-1.5 inline-flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+                  >
+                    <MoveIcon className="size-3.5" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>Move to</DropdownMenuLabel>
+                    {stages
+                      .filter((o) => o !== c.stage)
+                      .map((o) => (
+                        <DropdownMenuItem key={o} onSelect={() => move(c.id, o)}>
+                          {o}
+                        </DropdownMenuItem>
+                      ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             ))}
         </section>
