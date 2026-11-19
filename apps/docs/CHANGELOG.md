@@ -2,6 +2,14 @@
 
 The shadcn registry (`@mintel/*`) and the documentation site.
 
+## 0.2.2 — 2026-11-20
+
+### Patch Changes
+
+- File upload: labels are Thai by default (`locale="th"`), like the other Thai-first inputs. Pass `locale="en"` to keep English. This changes what existing uses without a `locale` show.
+- f032504: Every React component and every LWC page now has "When to use / Not for" guidance (75 more components and 15 more LWC), and /llms.txt carries it for all of them. Quick Actions: the App Builder property now explains the format (buttons separated by semicolons, the four types and their targets); no behavior change.
+- @mintelligence-dev/tokens@0.2.2
+
 ## 0.2.1 — 2026-11-20
 
 ### Patch Changes

@@ -59,7 +59,7 @@ function FileUpload({
   maxSize,
   multiple = true,
   disabled = false,
-  locale = "en",
+  locale = "th",
   className,
 }: {
   files: UploadFile[]
@@ -70,7 +70,7 @@ function FileUpload({
   maxSize?: number
   multiple?: boolean
   disabled?: boolean
-  locale?: "en" | "th"
+  locale?: "th" | "en"
   className?: string
 }) {
   const t = LABELS[locale]
