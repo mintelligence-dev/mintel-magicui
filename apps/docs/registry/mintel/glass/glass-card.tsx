@@ -12,6 +12,9 @@ import { cn } from "@/lib/utils"
  *   enables "reduce transparency".
  * - `refraction` adds an edge-lens distortion (SVG displacement map). Chromium + mouse only;
  *   other browsers and touch devices keep the plain frosted look.
+ *
+ * Performance: backdrop blur is recomputed whenever the content *behind* the glass changes.
+ * Keep animated backgrounds static on touch devices (e.g. `pointer-coarse:animate-none`).
  */
 const glassSurface =
   "relative isolate border border-glass-border bg-glass text-glass-foreground backdrop-blur-glass backdrop-saturate-180 " +

@@ -29,16 +29,30 @@ npx shadcn@latest add https://raw.githubusercontent.com/mintelligence-dev/mintel
 npx shadcn@latest add https://raw.githubusercontent.com/mintelligence-dev/mintel-magicui/main/apps/docs/public/r/shimmer-button.json
 ```
 
-**Components**
+**Components** (33 registry items)
 
-- Core: `button` (incl. `brand` gradient variant), `badge`, `card`, `input`, `dialog`, `select`,
-  `table`, `tabs`, `toast` (sonner — render `<Toaster />` once, then call `toast()`)
-- Effects: `shimmer-button`, `aurora-text`,
-  `animated-gradient-text`, `magic-card`, `border-beam`, `shine-border`, `number-ticker`, `meteors`,
-  `marquee`, `dot-pattern`, `blur-fade`, `animated-beam`
+| Category | Items |
+|---|---|
+| Theme | `mintel-theme` — install first |
+| Core UI | `button`, `badge`, `card`, `input`, `dialog`, `select`, `table`, `tabs`, `toast` (sonner — render `<Toaster />` once, then call `toast()`) |
+| Effects | `shimmer-button`, `aurora-text`, `animated-gradient-text`, `magic-card`, `border-beam`, `shine-border`, `number-ticker`, `meteors`, `marquee`, `dot-pattern`, `blur-fade`, `animated-beam` |
+| Glass | `glass-card` (optional refraction), `glass-button`, `glass-navbar`, `segmented-control` |
+| Fluid Motion | `scroll-reveal-text`, `sticky-showcase`, `zoom-parallax`, `dock`, `animated-tabs` |
+| Mobile | `drawer` (bottom sheet, drag to dismiss), `tab-bar` |
 
 All default colors point at brand tokens (`--brand`, `--brand-accent`, `--brand-cyan`, `--brand-gradient`),
 so components follow the theme — including dark mode — without passing colors.
+
+**Mobile web & accessibility** — every component is checked at 390px, on touch, in WebKit (iPhone) and
+with 4× CPU throttling:
+
+- Add `viewport-fit=cover` to your viewport meta so `drawer`, `tab-bar` and `glass-navbar` can pad for the
+  notch / home indicator (`env(safe-area-inset-*)`).
+- Small controls get a ≥ 44px hit area on touch screens without changing their visual size.
+- All animations respect `prefers-reduced-motion`; glass falls back to a solid surface for
+  `prefers-reduced-transparency` and browsers without `backdrop-filter`.
+- Glass refraction only runs on Chromium with a mouse. Don't animate content behind glass on touch devices
+  (backdrop blur is recomputed every frame).
 
 Brand fonts are **Manrope** (Latin) + **IBM Plex Sans Thai** (Thai), headings in **Rubik**. Load them with
 `next/font` or `@import "@mintelligence-dev/tokens/fonts.css"`.

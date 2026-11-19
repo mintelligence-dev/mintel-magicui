@@ -719,5 +719,48 @@
     "meta": {
       "category": "motion"
     }
+  },
+  {
+    "name": "drawer",
+    "type": "registry:ui",
+    "title": "Drawer",
+    "description": "Mobile bottom sheet with drag-to-dismiss handle, safe-area padding; Radix Dialog accessibility.",
+    "dependencies": [
+      "@radix-ui/react-dialog",
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/mobile/drawer.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "mobile"
+    }
+  },
+  {
+    "name": "tab-bar",
+    "type": "registry:ui",
+    "title": "Tab Bar",
+    "description": "Glass bottom tab bar for mobile web/PWA with spring active pill and safe-area padding.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/mobile/tab-bar.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "mobile"
+    }
   }
 ]

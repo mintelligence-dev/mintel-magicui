@@ -6,6 +6,8 @@ import { BeamDemo } from "@/components/beam-demo"
 import { CopyCommand } from "@/components/copy-command"
 import { GithubIcon } from "@/components/github-icon"
 import { GlassShowcase } from "@/components/glass-showcase"
+import { MobileNav } from "@/components/mobile-nav"
+import { MobileShowcase } from "@/components/mobile-showcase"
 import { MotionShowcase, ZoomShowcase } from "@/components/motion-showcase"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { REPO_URL, installCmd } from "@/lib/site"
@@ -101,7 +103,7 @@ function Preview({
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-x-clip">
+    <main id="top" className="min-h-screen overflow-x-clip pb-24 sm:pb-0">
       {/* Nav */}
       <header className="sticky top-0 z-40 border-b bg-background/70 backdrop-blur-lg">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
@@ -168,7 +170,7 @@ export default function Home() {
         <BlurFade delay={0.45} className="mt-16 grid w-full max-w-3xl grid-cols-3 gap-4">
           {[
             { v: Object.keys(tokens.light).length, l: "Semantic tokens" },
-            { v: 31, l: "Registry items" },
+            { v: 33, l: "Registry items" },
             { v: 2, l: "Platforms" },
           ].map((s) => (
             <div key={s.l} className="rounded-2xl border bg-card/60 p-4 backdrop-blur">
@@ -191,7 +193,7 @@ export default function Home() {
 
       {/* Architecture */}
       <Section id="how" eyebrow="Architecture" title="Tokens ชุดเดียว → ทุกแพลตฟอร์ม">
-        <div className="grid items-center gap-8 lg:grid-cols-2">
+        <div className="grid items-center gap-8 lg:grid-cols-2 [&>*]:min-w-0">
           <div className="relative overflow-hidden rounded-2xl border bg-card">
             <BeamDemo />
             <BorderBeam size={120} duration={8} />
@@ -219,7 +221,7 @@ export default function Home() {
 
       {/* Install */}
       <Section id="install" eyebrow="Getting started" title="เริ่มใช้งานใน 2 ขั้นตอน">
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 [&>*]:min-w-0">
           <Card>
             <CardHeader>
               <CardTitle>1. ติดตั้ง theme</CardTitle>
@@ -281,7 +283,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-3 [&>*]:min-w-0">
             <div className="rounded-xl border p-4">
               <p className="text-xs text-muted-foreground">font-sans · Manrope + IBM Plex Sans Thai</p>
               <p className="mt-2 text-xl">Customer Experience ลูกค้าคือหัวใจ</p>
@@ -305,6 +307,7 @@ export default function Home() {
             ["#core", "Core UI", 9],
             ["#effects", "Effects", 12],
             ["#glass", "Glass", 4],
+            ["#mobile", "Mobile", 2],
             ["#motion", "Fluid Motion", 5],
           ].map(([href, label, n]) => (
             <a
@@ -319,7 +322,7 @@ export default function Home() {
         </nav>
 
         <h3 id="core" className="mb-4 scroll-mt-20 font-heading text-xl font-semibold">Core UI</h3>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-0">
           <Preview name="button" title="Button">
             <div className="flex flex-wrap justify-center gap-2">
               <Button>Default</Button>
@@ -376,7 +379,7 @@ export default function Home() {
         <h3 id="effects" className="mt-16 mb-4 flex scroll-mt-20 items-center gap-2 font-heading text-xl font-semibold">
           <Sparkles className="size-5 text-brand-accent" /> Effects
         </h3>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-w-0">
           <Preview name="shimmer-button" title="Shimmer Button">
             <ShimmerButton>Get Started</ShimmerButton>
           </Preview>
@@ -441,6 +444,9 @@ export default function Home() {
         <h3 id="glass" className="mt-16 mb-4 scroll-mt-20 font-heading text-xl font-semibold">Glass</h3>
         <GlassShowcase />
 
+        <h3 id="mobile" className="mt-16 mb-6 scroll-mt-20 font-heading text-xl font-semibold">Mobile</h3>
+        <MobileShowcase />
+
         <h3 id="motion" className="mt-16 mb-6 scroll-mt-20 font-heading text-xl font-semibold">Fluid Motion</h3>
         <MotionShowcase />
       </Section>
@@ -449,7 +455,7 @@ export default function Home() {
 
       {/* Salesforce */}
       <Section id="salesforce" eyebrow="Salesforce" title="ใช้กับ LWC และ SLDS">
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
           <Card>
             <CardHeader>
               <CardTitle>LWC CSS module</CardTitle>
@@ -497,6 +503,7 @@ connectedCallback() {
         </div>
       </Section>
 
+      <MobileNav />
       <footer className="border-t py-10 text-center text-sm text-muted-foreground">
         © {new Date().getFullYear()} M Intelligence Co., Ltd. · MIT License
       </footer>

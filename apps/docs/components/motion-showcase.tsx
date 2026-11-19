@@ -66,7 +66,7 @@ export function MotionShowcase() {
         <CopyCommand className="mt-6 max-w-xl" command={installCmd("sticky-showcase")} />
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid gap-8 lg:grid-cols-2 [&>*]:min-w-0">
         <div className="space-y-4">
           <p className="font-heading text-lg font-semibold">Dock</p>
           <p className="text-sm text-muted-foreground">เลื่อนเมาส์ผ่านเพื่อขยายไอคอน — บนมือถือจะเป็นการกดแบบ spring แทน</p>
