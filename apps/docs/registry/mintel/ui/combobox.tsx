@@ -16,8 +16,17 @@ export type ComboboxOption = {
   disabled?: boolean
 }
 
+// Built-in UI strings. Override any of them with the matching prop.
+const STRINGS = {
+  th: { placeholder: "เลือก...", search: "ค้นหา...", empty: "ไม่พบรายการ", loading: "กำลังโหลด...", remove: "ลบ" },
+  en: { placeholder: "Select...", search: "Search...", empty: "No results", loading: "Loading...", remove: "Remove" },
+} as const
+
 type BaseProps = {
   options: ComboboxOption[]
+  /** Language of the built-in strings (placeholder, search, empty, loading). Defaults to Thai. */
+  locale?: "th" | "en"
+  loadingText?: React.ReactNode
   placeholder?: string
   searchPlaceholder?: string
   emptyText?: React.ReactNode
@@ -50,11 +59,13 @@ type MultipleProps = BaseProps & {
  * Thai search works out of the box; add `keywords` for English aliases.
  */
 function Combobox(props: SingleProps | MultipleProps) {
+  const strings = STRINGS[props.locale ?? "th"]
   const {
     options,
-    placeholder = "เลือก...",
-    searchPlaceholder = "ค้นหา...",
-    emptyText = "ไม่พบรายการ",
+    placeholder = strings.placeholder,
+    searchPlaceholder = strings.search,
+    emptyText = strings.empty,
+    loadingText = strings.loading,
     className,
     disabled,
     loading,
@@ -113,7 +124,7 @@ function Combobox(props: SingleProps | MultipleProps) {
                 <span
                   role="button"
                   tabIndex={-1}
-                  aria-label={`ลบ ${byValue.get(v)?.label ?? v}`}
+                  aria-label={`${strings.remove} ${byValue.get(v)?.label ?? v}`}
                   onPointerDown={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
@@ -157,7 +168,7 @@ function Combobox(props: SingleProps | MultipleProps) {
             <CommandPrimitive.List className="max-h-72 scroll-py-1 overflow-y-auto overscroll-contain p-1">
               {loading ? (
                 <CommandPrimitive.Loading>
-                  <div className="py-6 text-center text-sm text-muted-foreground">กำลังโหลด...</div>
+                  <div className="py-6 text-center text-sm text-muted-foreground">{loadingText}</div>
                 </CommandPrimitive.Loading>
               ) : (
                 <CommandPrimitive.Empty className="py-6 text-center text-sm text-muted-foreground">

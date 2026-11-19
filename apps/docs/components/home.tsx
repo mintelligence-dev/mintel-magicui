@@ -270,11 +270,11 @@ export function Home({ lang }: { lang: Lang }) {
           <div className="grid gap-4 sm:grid-cols-3 [&>*]:min-w-0">
             <div className="rounded-xl border p-4">
               <p className="text-xs text-muted-foreground">font-sans · Manrope + IBM Plex Sans Thai</p>
-              <p className="mt-2 text-xl">Customer Experience ลูกค้าคือหัวใจ</p>
+              <p className="mt-2 text-xl">{t.tokens.sampleSans}</p>
             </div>
             <div className="rounded-xl border p-4">
               <p className="text-xs text-muted-foreground">font-heading · Rubik + IBM Plex Sans Thai</p>
-              <p className="mt-2 font-heading text-xl font-semibold">Intelligence ข้อมูลอัจฉริยะ</p>
+              <p className="mt-2 font-heading text-xl font-semibold">{t.tokens.sampleHeading}</p>
             </div>
             <div className="rounded-xl border p-4">
               <p className="text-xs text-muted-foreground">--brand-gradient</p>
@@ -332,34 +332,34 @@ export function Home({ lang }: { lang: Lang }) {
             <Input placeholder={t.components.inputPlaceholder} className="max-w-xs bg-background" />
           </Preview>
           <Preview copyLabel={t.nav.copy} name="dialog" title="Dialog">
-            <DialogDemo />
+            <DialogDemo lang={lang} />
           </Preview>
           <Preview copyLabel={t.nav.copy} name="select" title="Select">
-            <ChannelSelect />
+            <ChannelSelect lang={lang} />
           </Preview>
           <Preview copyLabel={t.nav.copy} name="tabs" title="Tabs">
-            <TabsDemo />
+            <TabsDemo lang={lang} />
           </Preview>
           <Preview copyLabel={t.nav.copy} name="toast" title="Toast">
-            <ToastDemo />
+            <ToastDemo lang={lang} />
           </Preview>
           <Preview copyLabel={t.nav.copy} name="table" title="Table" className="p-4" wrapperClassName="md:col-span-2">
-            <TableDemo />
+            <TableDemo lang={lang} />
           </Preview>
           <Preview copyLabel={t.nav.copy} name="combobox" title={t.components.comboboxTitle}>
-            <ComboboxDemo />
+            <ComboboxDemo lang={lang} />
           </Preview>
           <Preview copyLabel={t.nav.copy} name="date-picker" title={t.components.datePickerTitle}>
-            <DatePickerDemo />
+            <DatePickerDemo lang={lang} />
           </Preview>
           <Preview copyLabel={t.nav.copy} name="switch" title="Switch · Checkbox · Radio">
-            <ChoiceDemo />
+            <ChoiceDemo lang={lang} />
           </Preview>
           <Preview copyLabel={t.nav.copy} name="dropdown-menu" title="Dropdown Menu">
-            <DropdownMenuDemo />
+            <DropdownMenuDemo lang={lang} />
           </Preview>
           <Preview copyLabel={t.nav.copy} name="tooltip" title="Tooltip · Popover">
-            <TooltipPopoverDemo />
+            <TooltipPopoverDemo lang={lang} />
           </Preview>
           <Preview copyLabel={t.nav.copy} name="card" title="Card" className="p-4">
             <Card className="w-full max-w-xs gap-3 py-4">
@@ -378,7 +378,7 @@ export function Home({ lang }: { lang: Lang }) {
         <div className="mt-6">
           <Card className="gap-0 overflow-hidden py-0">
             <div className="border-b bg-muted/30 p-5 sm:p-8">
-              <FormDemo />
+              <FormDemo lang={lang} />
             </div>
             <div className="flex flex-col gap-3 p-4">
               <p className="font-heading text-sm font-semibold">{t.components.formTitle}</p>

@@ -41,10 +41,10 @@ export function GlassShowcase({ lang }: { lang: Lang }) {
             <Sparkles className="size-4 text-brand" /> Mintel
           </span>
           <div className="flex items-center gap-1">
-            <GlassButton size="icon" aria-label="ค้นหา" className="size-9 shadow-none">
+            <GlassButton size="icon" aria-label={t.search} className="size-9 shadow-none">
               <Search />
             </GlassButton>
-            <GlassButton size="icon" aria-label="การแจ้งเตือน" className="size-9 shadow-none">
+            <GlassButton size="icon" aria-label={t.notifications} className="size-9 shadow-none">
               <Bell />
             </GlassButton>
           </div>
@@ -52,19 +52,15 @@ export function GlassShowcase({ lang }: { lang: Lang }) {
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           <GlassCard refraction className="p-6">
-            <p className="text-sm text-muted-foreground">ข้อความเข้า</p>
+            <p className="text-sm text-muted-foreground">{t.incoming}</p>
             <p className="mt-1 font-heading text-4xl font-bold tabular-nums">{stats[period]}</p>
             <SegmentedControl
-              aria-label="ช่วงเวลา"
+              aria-label={t.period}
               variant="brand"
               className="mt-5 w-full"
               value={period}
               onValueChange={setPeriod}
-              options={[
-                { value: "day", label: "วัน" },
-                { value: "week", label: "สัปดาห์" },
-                { value: "month", label: "เดือน" },
-              ]}
+              options={t.periods.map(([value, label]) => ({ value, label }))}
             />
             <p className="mt-4 text-xs text-muted-foreground">
               {t.refraction}

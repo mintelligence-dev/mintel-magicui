@@ -32,22 +32,10 @@ function Visual({ icon: Icon, from, to, label }: { icon: typeof Bot; from: strin
   )
 }
 
-const FEATURES = [
-  {
-    title: "รวมทุกช่องทางไว้ที่เดียว",
-    description: "LINE, Facebook, TikTok และ Pantip เข้ามาเป็นเคสใน Salesforce อัตโนมัติ",
-    visual: <Visual icon={MessageCircle} from="var(--brand)" to="var(--mintel-color-blue-950)" label="Omnichannel" />,
-  },
-  {
-    title: "AI ช่วยตอบและสรุปเคส",
-    description: "Agentforce ร่างคำตอบ สรุปบทสนทนา และส่งต่อให้คนเมื่อจำเป็น",
-    visual: <Visual icon={Bot} from="var(--brand-accent)" to="var(--mintel-color-purple-950)" label="AI Assist" />,
-  },
-  {
-    title: "เห็นภาพรวมแบบเรียลไทม์",
-    description: "แดชบอร์ด SLA และความพึงพอใจของลูกค้า อัปเดตทุกนาที",
-    visual: <Visual icon={BarChart3} from="var(--brand-cyan)" to="var(--mintel-color-blue-900)" label="Analytics" />,
-  },
+const FEATURE_VISUALS = [
+  <Visual key="omni" icon={MessageCircle} from="var(--brand)" to="var(--mintel-color-blue-950)" label="Omnichannel" />,
+  <Visual key="ai" icon={Bot} from="var(--brand-accent)" to="var(--mintel-color-purple-950)" label="AI Assist" />,
+  <Visual key="analytics" icon={BarChart3} from="var(--brand-cyan)" to="var(--mintel-color-blue-900)" label="Analytics" />,
 ]
 
 export function MotionShowcase({ lang }: { lang: Lang }) {
@@ -65,7 +53,7 @@ export function MotionShowcase({ lang }: { lang: Lang }) {
       </div>
 
       <div>
-        <StickyShowcase items={FEATURES} />
+        <StickyShowcase items={t.features.map((f, i) => ({ ...f, visual: FEATURE_VISUALS[i] }))} />
         <CopyCommand className="mt-6 max-w-xl" command={installCmd("sticky-showcase")} />
       </div>
 
@@ -91,9 +79,9 @@ export function MotionShowcase({ lang }: { lang: Lang }) {
           <div className="flex min-h-40 flex-col items-center justify-center gap-6 rounded-2xl border bg-muted/30 p-6">
             <AnimatedTabs defaultValue="all">
               <AnimatedTabsList>
-                <AnimatedTabsTrigger value="all">ทั้งหมด</AnimatedTabsTrigger>
-                <AnimatedTabsTrigger value="open">เปิดอยู่</AnimatedTabsTrigger>
-                <AnimatedTabsTrigger value="closed">ปิดแล้ว</AnimatedTabsTrigger>
+                <AnimatedTabsTrigger value="all">{t.caseTabs.all}</AnimatedTabsTrigger>
+                <AnimatedTabsTrigger value="open">{t.caseTabs.open}</AnimatedTabsTrigger>
+                <AnimatedTabsTrigger value="closed">{t.caseTabs.closed}</AnimatedTabsTrigger>
               </AnimatedTabsList>
             </AnimatedTabs>
             <AnimatedTabs defaultValue="chat" variant="underline">

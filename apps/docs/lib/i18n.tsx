@@ -31,8 +31,7 @@ const en = {
     tokens: "Tokens",
     components: "Components",
     salesforce: "Salesforce",
-    switchLang: "ไทย",
-    switchLangLabel: "อ่านเป็นภาษาไทย",
+    language: "Language",
     themeToggle: "Toggle light/dark theme",
     copy: "Copy command",
   },
@@ -76,6 +75,8 @@ const en = {
     eyebrow: "Foundations",
     title: "Brand tokens",
     semantic: "Semantic (toggle dark mode to see the values change)",
+    sampleSans: "Customer experience, crafted with care",
+    sampleHeading: "Intelligence that feels human",
   },
   components: {
     eyebrow: "Registry",
@@ -94,6 +95,15 @@ const en = {
   },
   glass: {
     pressHint: "Press and hold to feel the spring press",
+    search: "Search",
+    notifications: "Notifications",
+    incoming: "Incoming messages",
+    period: "Period",
+    periods: [
+      ["day", "Day"],
+      ["week", "Week"],
+      ["month", "Month"],
+    ] as [string, string][],
     refraction: (
       <>
         This card has <code>refraction</code> on — in Chrome/Edge with a mouse, its edges bend the content behind it.
@@ -104,6 +114,13 @@ const en = {
     drawerDesc: "Bottom sheet — drag the handle down to close. Use it instead of a dialog on phones.",
     openDrawer: "Open drawer",
     tabBarDesc: "Glass bottom tab bar that pads for the home indicator automatically.",
+    drawerTitle: "Message the customer",
+    drawerDesc2: "Sent through LINE OA",
+    messagePlaceholder: "Type a message...",
+    send: "Send",
+    sent: "Message sent",
+    cancel: "Cancel",
+    tabs: { home: "Home", chat: "Chat", alerts: "Alerts", me: "Me" },
   },
   motion: {
     reveal:
@@ -111,6 +128,12 @@ const en = {
     dockDesc: "Move your mouse across to magnify — on phones it becomes a spring press instead.",
     tabsDesc: "The tab indicator glides with a spring — pill and underline styles.",
     zoomHint: "Scroll down to see the image settle into a card",
+    features: [
+      { title: "Every channel in one place", description: "LINE, Facebook, TikTok and Pantip arrive as cases in Salesforce automatically." },
+      { title: "AI drafts and summarizes", description: "Agentforce drafts replies, summarizes conversations and hands off to a person when needed." },
+      { title: "Real-time overview", description: "SLA and customer satisfaction dashboards, updated every minute." },
+    ],
+    caseTabs: { all: "All", open: "Open", closed: "Closed" },
   },
   salesforceTeaser: {
     eyebrow: "Salesforce",
@@ -188,8 +211,7 @@ const th: Dict = {
     tokens: "Tokens",
     components: "Components",
     salesforce: "Salesforce",
-    switchLang: "EN",
-    switchLangLabel: "Read in English",
+    language: "ภาษา",
     themeToggle: "สลับธีมสว่าง/มืด",
     copy: "คัดลอกคำสั่ง",
   },
@@ -232,6 +254,8 @@ const th: Dict = {
     eyebrow: "Foundations",
     title: "Brand tokens",
     semantic: "Semantic (สลับ dark mode เพื่อดูค่าที่เปลี่ยน)",
+    sampleSans: "Customer Experience ลูกค้าคือหัวใจ",
+    sampleHeading: "Intelligence ข้อมูลอัจฉริยะ",
   },
   components: {
     eyebrow: "Registry",
@@ -250,6 +274,15 @@ const th: Dict = {
   },
   glass: {
     pressHint: "กดค้างเพื่อดู spring press",
+    search: "ค้นหา",
+    notifications: "การแจ้งเตือน",
+    incoming: "ข้อความเข้า",
+    period: "ช่วงเวลา",
+    periods: [
+      ["day", "วัน"],
+      ["week", "สัปดาห์"],
+      ["month", "เดือน"],
+    ],
     refraction: (
       <>
         การ์ดนี้เปิด <code>refraction</code> — บน Chrome/Edge (เมาส์) ขอบจะหักเหภาพด้านหลัง
@@ -260,6 +293,13 @@ const th: Dict = {
     drawerDesc: "Bottom sheet ลากที่แถบด้านบนลงเพื่อปิด — ใช้บนมือถือแทน dialog",
     openDrawer: "เปิด Drawer",
     tabBarDesc: "แถบแท็บด้านล่างแบบกระจก เว้นที่ให้ home indicator อัตโนมัติ",
+    drawerTitle: "ส่งข้อความหาลูกค้า",
+    drawerDesc2: "ข้อความจะถูกส่งผ่าน LINE OA",
+    messagePlaceholder: "พิมพ์ข้อความ...",
+    send: "ส่ง",
+    sent: "ส่งข้อความแล้ว",
+    cancel: "ยกเลิก",
+    tabs: { home: "หน้าแรก", chat: "แชท", alerts: "แจ้งเตือน", me: "ฉัน" },
   },
   motion: {
     reveal:
@@ -267,6 +307,12 @@ const th: Dict = {
     dockDesc: "เลื่อนเมาส์ผ่านเพื่อขยายไอคอน — บนมือถือจะเป็นการกดแบบ spring แทน",
     tabsDesc: "ตัวชี้แท็บเลื่อนตามด้วย spring — มีแบบ pill และ underline",
     zoomHint: "เลื่อนลงเพื่อดูภาพย่อเข้าเป็นการ์ด",
+    features: [
+      { title: "รวมทุกช่องทางไว้ที่เดียว", description: "LINE, Facebook, TikTok และ Pantip เข้ามาเป็นเคสใน Salesforce อัตโนมัติ" },
+      { title: "AI ช่วยตอบและสรุปเคส", description: "Agentforce ร่างคำตอบ สรุปบทสนทนา และส่งต่อให้คนเมื่อจำเป็น" },
+      { title: "เห็นภาพรวมแบบเรียลไทม์", description: "แดชบอร์ด SLA และความพึงพอใจของลูกค้า อัปเดตทุกนาที" },
+    ],
+    caseTabs: { all: "ทั้งหมด", open: "เปิดอยู่", closed: "ปิดแล้ว" },
   },
   salesforceTeaser: {
     eyebrow: "Salesforce",

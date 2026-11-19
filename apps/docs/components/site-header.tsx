@@ -28,7 +28,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
           <a href={langPath(lang, "/salesforce")} className={link}>
             {t.salesforce}
           </a>
-          <LangSwitch lang={lang} label={t.switchLang} title={t.switchLangLabel} />
+          <LangSwitch lang={lang} groupLabel={t.language} />
           <Button variant="ghost" size="icon" asChild>
             <a href={REPO_URL} aria-label="GitHub">
               <GithubIcon />

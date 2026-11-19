@@ -45,16 +45,16 @@ export function MobileShowcase({ lang }: { lang: Lang }) {
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
-                <DrawerTitle>ส่งข้อความหาลูกค้า</DrawerTitle>
-                <DrawerDescription>ข้อความจะถูกส่งผ่าน LINE OA</DrawerDescription>
+                <DrawerTitle>{t.drawerTitle}</DrawerTitle>
+                <DrawerDescription>{t.drawerDesc2}</DrawerDescription>
               </DrawerHeader>
-              <Input placeholder="พิมพ์ข้อความ..." />
+              <Input placeholder={t.messagePlaceholder} />
               <DrawerFooter>
                 <DrawerClose asChild>
-                  <Button onClick={() => toast.success("ส่งข้อความแล้ว")}>ส่ง</Button>
+                  <Button onClick={() => toast.success(t.sent)}>{t.send}</Button>
                 </DrawerClose>
                 <DrawerClose asChild>
-                  <Button variant="ghost">ยกเลิก</Button>
+                  <Button variant="ghost">{t.cancel}</Button>
                 </DrawerClose>
               </DrawerFooter>
             </DrawerContent>
@@ -71,10 +71,10 @@ export function MobileShowcase({ lang }: { lang: Lang }) {
             value={tab}
             onValueChange={setTab}
             items={[
-              { value: "home", label: "หน้าแรก", icon: <Home /> },
-              { value: "chat", label: "แชท", icon: <MessageCircle /> },
-              { value: "alerts", label: "แจ้งเตือน", icon: <Bell /> },
-              { value: "me", label: "ฉัน", icon: <User /> },
+              { value: "home", label: t.tabs.home, icon: <Home /> },
+              { value: "chat", label: t.tabs.chat, icon: <MessageCircle /> },
+              { value: "alerts", label: t.tabs.alerts, icon: <Bell /> },
+              { value: "me", label: t.tabs.me, icon: <User /> },
             ]}
           />
         </Phone>
