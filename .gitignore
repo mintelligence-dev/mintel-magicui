@@ -10,3 +10,8 @@ next-env.d.ts
 .env*
 .sf/
 .sfdx/
+
+# Playwright
+apps/docs/test-results/
+apps/docs/playwright-report/
+apps/docs/blob-report/

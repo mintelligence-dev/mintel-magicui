@@ -88,6 +88,22 @@ npm run build      # tokens → registry.json → public/r/*.json → static doc
 - Generated files (`packages/tokens/{dist,lwc,salesforce}`, `apps/docs/public/r`, `registry.json`)
   are committed; CI fails if they are stale.
 
+### Quality checks (CI)
+
+- `npm test`: LWC unit tests (jest).
+- `npm run test:a11y -w docs`: axe on every docs page (EN, plus TH and dark mode for a sample). CI fails on
+  serious or critical WCAG 2.1 AA issues.
+- Visual regression: every component preview (light and dark) and every template is compared with the
+  baselines in `apps/docs/e2e/__screenshots__`. Baselines are rendered on Linux, so on a Mac run them in
+  Docker after `npm run build`:
+
+  ```bash
+  npm run test:e2e:docker -w docs                          # compare
+  npm run test:e2e:docker -w docs -- --update-snapshots    # accept intended visual changes
+  ```
+
+  The spec lists the few previews that are skipped (random or scroll-driven effects) and why.
+
 ## Deploy (Vercel)
 
 - Import the repo, set **Root Directory** to `apps/docs` (framework: Next.js). Build and install commands can stay
