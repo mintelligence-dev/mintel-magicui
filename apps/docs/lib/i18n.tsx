@@ -327,7 +327,7 @@ const en = {
     deployTitle: "Deploy to your org",
     deploySteps: [
       "Log in to the org with the Salesforce CLI.",
-      "Deploy the SFDX project from packages/salesforce.",
+      "Deploy with npm run deploy: it checks the org for name conflicts first.",
       "In Lightning App Builder, add “Mintel Brand Loader” once per page, then place the components you need.",
     ],
     lwrTitle: "Experience Cloud (LWR)",
@@ -648,7 +648,7 @@ const th: Dict = {
     deployTitle: "Deploy เข้า org",
     deploySteps: [
       "Login เข้า org ด้วย Salesforce CLI",
-      "Deploy SFDX project จาก packages/salesforce",
+      "Deploy ด้วย npm run deploy ซึ่งจะตรวจชื่อซ้ำใน org ก่อน",
       "ใน Lightning App Builder ใส่ “Mintel Brand Loader” หน้าละ 1 ตัว แล้ววาง component ที่ต้องการ",
     ],
     lwrTitle: "Experience Cloud (LWR)",

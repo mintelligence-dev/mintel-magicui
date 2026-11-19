@@ -4,6 +4,14 @@ import type { SfGroup } from "@/lib/sf-index"
 export const SF_LABELS = {
   en: {
     overview: "Overview",
+    getStarted: "Getting started",
+    pager: "More components",
+    previous: "Previous",
+    next: "Next",
+    count: (n: number) => `${n} components`,
+    stats: { components: "Lightning Web Components", apex: "Apex classes to install", targets: "Places to use them" },
+    heroCta: "Get started",
+    heroBrowse: "Browse components",
     groups: {
       record: "Record pages",
       display: "Display",
@@ -42,6 +50,14 @@ export const SF_LABELS = {
   },
   th: {
     overview: "ภาพรวม",
+    getStarted: "เริ่มต้นใช้งาน",
+    pager: "component อื่น",
+    previous: "ก่อนหน้า",
+    next: "ถัดไป",
+    count: (n: number) => `${n} ตัว`,
+    stats: { components: "Lightning Web Components", apex: "Apex ที่ต้องติดตั้ง", targets: "ที่ที่ใช้ได้" },
+    heroCta: "เริ่มต้นใช้งาน",
+    heroBrowse: "ดู component ทั้งหมด",
     groups: {
       record: "หน้า Record",
       display: "แสดงผล",
