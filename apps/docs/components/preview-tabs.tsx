@@ -8,13 +8,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/mintel/ui/t
 export function PreviewTabs({
   code,
   labels,
-  fullBleed = false,
+  frame = "padded",
   children,
 }: {
   code: string
   labels: { preview: string; code: string; copy: string }
-  /** Scroll-driven examples need room and no clipping (position: sticky). */
-  fullBleed?: boolean
+  /**
+   * "padded" (default): centered, padded, clipped. "unclipped": padded but not clipped, so position: sticky
+   * works. "bleed": edge to edge and not clipped.
+   */
+  frame?: "padded" | "unclipped" | "bleed"
   children: React.ReactNode
 }) {
   return (
@@ -27,7 +30,7 @@ export function PreviewTabs({
         <div
           className={cn(
             "relative flex w-full items-center justify-center rounded-xl border bg-muted/30",
-            fullBleed ? "p-0" : "min-h-72 overflow-hidden p-6 sm:p-10"
+            frame === "bleed" ? "p-0" : frame === "unclipped" ? "px-6 py-6 sm:px-10 sm:py-10" : "min-h-72 overflow-hidden p-6 sm:p-10"
           )}
         >
           {children}

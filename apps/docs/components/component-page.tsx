@@ -13,7 +13,8 @@ import { REGISTRY_URL } from "@/lib/site"
 import { Badge } from "@/registry/mintel/ui/badge"
 
 const ROOT = process.cwd()
-const FULL_BLEED = new Set(["sticky-showcase", "zoom-parallax"])
+// Scroll-driven examples: no clipping (position: sticky). Zoom parallax also runs edge to edge.
+const FRAME: Record<string, "unclipped" | "bleed"> = { "sticky-showcase": "unclipped", "zoom-parallax": "bleed" }
 
 /** Registry imports become what the app actually gets after `shadcn add`. */
 const toAppPaths = (code: string) =>
@@ -76,7 +77,7 @@ export function ComponentPage({ lang, name }: { lang: Lang; name: string }) {
         <section className="space-y-3">
           <PreviewTabs
             code={exampleCode}
-            fullBleed={FULL_BLEED.has(name)}
+            frame={FRAME[name]}
             labels={{ preview: t.preview, code: t.code, copy: d.nav.copy }}
           >
             <Example />
