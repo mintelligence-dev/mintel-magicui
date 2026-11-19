@@ -2,9 +2,8 @@
 
 ## Magic UI
 
-The animated components in `apps/docs/registry/mintel/magicui/` are adapted from
-[Magic UI](https://github.com/magicuidesign/magicui). Each file keeps an attribution header
-describing what was changed (mainly: default colors use M-Intelligence brand tokens).
+Components in `apps/docs/registry/mintel/effects/` contain portions of
+[Magic UI](https://github.com/magicuidesign/magicui), used under the MIT License below.
 
 ```
 MIT License

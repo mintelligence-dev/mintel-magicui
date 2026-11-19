@@ -170,13 +170,12 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/animated-beam.tsx",
+        "path": "registry/mintel/effects/animated-beam.tsx",
         "type": "registry:ui"
       }
     ],
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     }
   },
   {
@@ -189,7 +188,7 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/animated-gradient-text.tsx",
+        "path": "registry/mintel/effects/animated-gradient-text.tsx",
         "type": "registry:ui"
       }
     ],
@@ -206,8 +205,7 @@
       }
     },
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     }
   },
   {
@@ -220,7 +218,7 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/aurora-text.tsx",
+        "path": "registry/mintel/effects/aurora-text.tsx",
         "type": "registry:ui"
       }
     ],
@@ -254,8 +252,7 @@
       }
     },
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     }
   },
   {
@@ -271,13 +268,12 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/blur-fade.tsx",
+        "path": "registry/mintel/effects/blur-fade.tsx",
         "type": "registry:ui"
       }
     ],
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     }
   },
   {
@@ -293,13 +289,12 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/border-beam.tsx",
+        "path": "registry/mintel/effects/border-beam.tsx",
         "type": "registry:ui"
       }
     ],
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     }
   },
   {
@@ -312,13 +307,12 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/dot-pattern.tsx",
+        "path": "registry/mintel/effects/dot-pattern.tsx",
         "type": "registry:ui"
       }
     ],
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     },
     "cssVars": {
       "theme": {
@@ -351,13 +345,12 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/magic-card.tsx",
+        "path": "registry/mintel/effects/magic-card.tsx",
         "type": "registry:ui"
       }
     ],
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     }
   },
   {
@@ -370,7 +363,7 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/marquee.tsx",
+        "path": "registry/mintel/effects/marquee.tsx",
         "type": "registry:ui"
       }
     ],
@@ -399,8 +392,7 @@
       }
     },
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     }
   },
   {
@@ -413,7 +405,7 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/meteors.tsx",
+        "path": "registry/mintel/effects/meteors.tsx",
         "type": "registry:ui"
       }
     ],
@@ -438,8 +430,7 @@
       }
     },
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     }
   },
   {
@@ -455,13 +446,12 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/number-ticker.tsx",
+        "path": "registry/mintel/effects/number-ticker.tsx",
         "type": "registry:ui"
       }
     ],
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     }
   },
   {
@@ -474,7 +464,7 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/shimmer-button.tsx",
+        "path": "registry/mintel/effects/shimmer-button.tsx",
         "type": "registry:ui"
       }
     ],
@@ -506,8 +496,7 @@
       }
     },
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     }
   },
   {
@@ -520,7 +509,7 @@
     ],
     "files": [
       {
-        "path": "registry/mintel/magicui/shine-border.tsx",
+        "path": "registry/mintel/effects/shine-border.tsx",
         "type": "registry:ui"
       }
     ],
@@ -543,8 +532,7 @@
       }
     },
     "meta": {
-      "source": "Magic UI (MIT)",
-      "category": "animated"
+      "category": "effects"
     }
   },
   {
@@ -609,7 +597,7 @@
     "name": "segmented-control",
     "type": "registry:ui",
     "title": "Segmented Control",
-    "description": "iOS-style segmented control with a spring-animated thumb and radiogroup keyboard support.",
+    "description": "Segmented control with a spring-animated thumb and radiogroup keyboard support.",
     "dependencies": [
       "motion"
     ],
@@ -624,6 +612,112 @@
     ],
     "meta": {
       "category": "glass"
+    }
+  },
+  {
+    "name": "scroll-reveal-text",
+    "type": "registry:ui",
+    "title": "Scroll Reveal Text",
+    "description": "Paragraph that lights up word by word as you scroll (Thai-aware word segmentation).",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/motion/scroll-reveal-text.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "motion"
+    }
+  },
+  {
+    "name": "sticky-showcase",
+    "type": "registry:ui",
+    "title": "Sticky Showcase",
+    "description": "Sticky visual beside scrolling feature copy; stacks on mobile.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/motion/sticky-showcase.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "motion"
+    }
+  },
+  {
+    "name": "zoom-parallax",
+    "type": "registry:ui",
+    "title": "Zoom Parallax",
+    "description": "Full-bleed media that shrinks into a rounded card on scroll while the headline fades out.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/motion/zoom-parallax.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "motion"
+    }
+  },
+  {
+    "name": "dock",
+    "type": "registry:ui",
+    "title": "Dock",
+    "description": "Magnifying icon dock on glass; press feedback instead of magnification on touch.",
+    "dependencies": [
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/motion/dock.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "motion"
+    }
+  },
+  {
+    "name": "animated-tabs",
+    "type": "registry:ui",
+    "title": "Animated Tabs",
+    "description": "Radix tabs with a spring-animated indicator (pill or underline).",
+    "dependencies": [
+      "@radix-ui/react-tabs",
+      "motion"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/motion/animated-tabs.tsx",
+        "type": "registry:ui"
+      }
+    ],
+    "meta": {
+      "category": "motion"
     }
   }
 ]

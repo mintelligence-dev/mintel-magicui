@@ -1,7 +1,6 @@
 "use client"
 
-// Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.
-// Changes: default colors use M-Intelligence brand tokens. See THIRD_PARTY_NOTICES.md.
+// Portions Copyright (c) 2023 Magic UI — MIT License. See THIRD_PARTY_NOTICES.md.
 import * as React from "react"
 
 import { cn } from "@/lib/utils"

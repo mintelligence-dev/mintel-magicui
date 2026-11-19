@@ -6,20 +6,21 @@ import { BeamDemo } from "@/components/beam-demo"
 import { CopyCommand } from "@/components/copy-command"
 import { GithubIcon } from "@/components/github-icon"
 import { GlassShowcase } from "@/components/glass-showcase"
+import { MotionShowcase, ZoomShowcase } from "@/components/motion-showcase"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { REPO_URL, installCmd } from "@/lib/site"
 import { cn } from "@/lib/utils"
-import { AnimatedGradientText } from "@/registry/mintel/magicui/animated-gradient-text"
-import { AuroraText } from "@/registry/mintel/magicui/aurora-text"
-import { BlurFade } from "@/registry/mintel/magicui/blur-fade"
-import { BorderBeam } from "@/registry/mintel/magicui/border-beam"
-import { DotPattern } from "@/registry/mintel/magicui/dot-pattern"
-import { MagicCard } from "@/registry/mintel/magicui/magic-card"
-import { Marquee } from "@/registry/mintel/magicui/marquee"
-import { Meteors } from "@/registry/mintel/magicui/meteors"
-import { NumberTicker } from "@/registry/mintel/magicui/number-ticker"
-import { ShimmerButton } from "@/registry/mintel/magicui/shimmer-button"
-import { ShineBorder } from "@/registry/mintel/magicui/shine-border"
+import { AnimatedGradientText } from "@/registry/mintel/effects/animated-gradient-text"
+import { AuroraText } from "@/registry/mintel/effects/aurora-text"
+import { BlurFade } from "@/registry/mintel/effects/blur-fade"
+import { BorderBeam } from "@/registry/mintel/effects/border-beam"
+import { DotPattern } from "@/registry/mintel/effects/dot-pattern"
+import { MagicCard } from "@/registry/mintel/effects/magic-card"
+import { Marquee } from "@/registry/mintel/effects/marquee"
+import { Meteors } from "@/registry/mintel/effects/meteors"
+import { NumberTicker } from "@/registry/mintel/effects/number-ticker"
+import { ShimmerButton } from "@/registry/mintel/effects/shimmer-button"
+import { ShineBorder } from "@/registry/mintel/effects/shine-border"
 import { Badge } from "@/registry/mintel/ui/badge"
 import { Button } from "@/registry/mintel/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/mintel/ui/card"
@@ -117,9 +118,6 @@ export default function Home() {
             <a href="#components" className="hidden rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground sm:block">
               Components
             </a>
-            <a href="#glass" className="hidden rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground sm:block">
-              Glass
-            </a>
             <a href="#salesforce" className="hidden rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground sm:block">
               Salesforce
             </a>
@@ -170,7 +168,7 @@ export default function Home() {
         <BlurFade delay={0.45} className="mt-16 grid w-full max-w-3xl grid-cols-3 gap-4">
           {[
             { v: Object.keys(tokens.light).length, l: "Semantic tokens" },
-            { v: 22, l: "Registry items" },
+            { v: 31, l: "Registry items" },
             { v: 2, l: "Platforms" },
           ].map((s) => (
             <div key={s.l} className="rounded-2xl border bg-card/60 p-4 backdrop-blur">
@@ -302,8 +300,81 @@ export default function Home() {
 
       {/* Components */}
       <Section id="components" eyebrow="Registry" title="Components">
-        <h3 className="mb-4 flex items-center gap-2 font-heading text-lg font-semibold">
-          <Sparkles className="size-5 text-brand-accent" /> Animated
+        <nav aria-label="หมวด component" className="mb-10 flex flex-wrap gap-2">
+          {[
+            ["#core", "Core UI", 9],
+            ["#effects", "Effects", 12],
+            ["#glass", "Glass", 4],
+            ["#motion", "Fluid Motion", 5],
+          ].map(([href, label, n]) => (
+            <a
+              key={href}
+              href={href as string}
+              className="inline-flex min-h-9 items-center gap-2 rounded-full border bg-background px-4 text-sm font-medium transition-colors hover:border-brand/40 hover:text-brand"
+            >
+              {label}
+              <span className="rounded-full bg-muted px-1.5 text-xs text-muted-foreground tabular-nums">{n}</span>
+            </a>
+          ))}
+        </nav>
+
+        <h3 id="core" className="mb-4 scroll-mt-20 font-heading text-xl font-semibold">Core UI</h3>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <Preview name="button" title="Button">
+            <div className="flex flex-wrap justify-center gap-2">
+              <Button>Default</Button>
+              <Button variant="brand">Brand</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="outline">Outline</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="destructive">Delete</Button>
+            </div>
+          </Preview>
+          <Preview name="badge" title="Badge">
+            <div className="flex flex-wrap justify-center gap-2">
+              <Badge>Default</Badge>
+              <Badge variant="brand">Brand</Badge>
+              <Badge variant="soft">Soft</Badge>
+              <Badge variant="success">Success</Badge>
+              <Badge variant="warning">Warning</Badge>
+              <Badge variant="destructive">Error</Badge>
+              <Badge variant="outline">Outline</Badge>
+            </div>
+          </Preview>
+          <Preview name="input" title="Input">
+            <Input placeholder="อีเมลของคุณ" className="max-w-xs bg-background" />
+          </Preview>
+          <Preview name="dialog" title="Dialog">
+            <DialogDemo />
+          </Preview>
+          <Preview name="select" title="Select">
+            <ChannelSelect />
+          </Preview>
+          <Preview name="tabs" title="Tabs">
+            <TabsDemo />
+          </Preview>
+          <Preview name="toast" title="Toast">
+            <ToastDemo />
+          </Preview>
+          <Preview name="table" title="Table" className="p-4" wrapperClassName="md:col-span-2">
+            <TableDemo />
+          </Preview>
+          <Preview name="card" title="Card" className="p-4">
+            <Card className="w-full max-w-xs gap-3 py-4">
+              <CardHeader className="px-4">
+                <CardTitle>Salesforce Connector</CardTitle>
+                <CardDescription>LINE · Facebook · TikTok</CardDescription>
+              </CardHeader>
+              <CardContent className="px-4">
+                <Button size="sm" variant="brand" className="w-full">
+                  เชื่อมต่อ
+                </Button>
+              </CardContent>
+            </Card>
+          </Preview>
+        </div>
+        <h3 id="effects" className="mt-16 mb-4 flex scroll-mt-20 items-center gap-2 font-heading text-xl font-semibold">
+          <Sparkles className="size-5 text-brand-accent" /> Effects
         </h3>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Preview name="shimmer-button" title="Shimmer Button">
@@ -366,67 +437,15 @@ export default function Home() {
           </Preview>
         </div>
 
-        <h3 className="mt-14 mb-4 font-heading text-lg font-semibold">Core UI</h3>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <Preview name="button" title="Button">
-            <div className="flex flex-wrap justify-center gap-2">
-              <Button>Default</Button>
-              <Button variant="brand">Brand</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="outline">Outline</Button>
-              <Button variant="ghost">Ghost</Button>
-              <Button variant="destructive">Delete</Button>
-            </div>
-          </Preview>
-          <Preview name="badge" title="Badge">
-            <div className="flex flex-wrap justify-center gap-2">
-              <Badge>Default</Badge>
-              <Badge variant="brand">Brand</Badge>
-              <Badge variant="soft">Soft</Badge>
-              <Badge variant="success">Success</Badge>
-              <Badge variant="warning">Warning</Badge>
-              <Badge variant="destructive">Error</Badge>
-              <Badge variant="outline">Outline</Badge>
-            </div>
-          </Preview>
-          <Preview name="input" title="Input">
-            <Input placeholder="อีเมลของคุณ" className="max-w-xs bg-background" />
-          </Preview>
-          <Preview name="dialog" title="Dialog">
-            <DialogDemo />
-          </Preview>
-          <Preview name="select" title="Select">
-            <ChannelSelect />
-          </Preview>
-          <Preview name="tabs" title="Tabs">
-            <TabsDemo />
-          </Preview>
-          <Preview name="toast" title="Toast">
-            <ToastDemo />
-          </Preview>
-          <Preview name="table" title="Table" className="p-4" wrapperClassName="md:col-span-2">
-            <TableDemo />
-          </Preview>
-          <Preview name="card" title="Card" className="p-4">
-            <Card className="w-full max-w-xs gap-3 py-4">
-              <CardHeader className="px-4">
-                <CardTitle>Salesforce Connector</CardTitle>
-                <CardDescription>LINE · Facebook · TikTok</CardDescription>
-              </CardHeader>
-              <CardContent className="px-4">
-                <Button size="sm" variant="brand" className="w-full">
-                  เชื่อมต่อ
-                </Button>
-              </CardContent>
-            </Card>
-          </Preview>
-        </div>
-      </Section>
 
-      {/* Glass */}
-      <Section id="glass" eyebrow="Glass" title="Frosted glass + refraction">
+        <h3 id="glass" className="mt-16 mb-4 scroll-mt-20 font-heading text-xl font-semibold">Glass</h3>
         <GlassShowcase />
+
+        <h3 id="motion" className="mt-16 mb-6 scroll-mt-20 font-heading text-xl font-semibold">Fluid Motion</h3>
+        <MotionShowcase />
       </Section>
+      <ZoomShowcase />
+
 
       {/* Salesforce */}
       <Section id="salesforce" eyebrow="Salesforce" title="ใช้กับ LWC และ SLDS">
@@ -479,10 +498,7 @@ connectedCallback() {
       </Section>
 
       <footer className="border-t py-10 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} M Intelligence Co., Ltd. · MIT License · Animated components adapted from{" "}
-        <a href="https://magicui.design" className="underline underline-offset-4 hover:text-foreground">
-          Magic UI
-        </a>
+        © {new Date().getFullYear()} M Intelligence Co., Ltd. · MIT License
       </footer>
     </main>
   )

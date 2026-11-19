@@ -33,7 +33,7 @@ npx shadcn@latest add https://raw.githubusercontent.com/mintelligence-dev/mintel
 
 - Core: `button` (incl. `brand` gradient variant), `badge`, `card`, `input`, `dialog`, `select`,
   `table`, `tabs`, `toast` (sonner — render `<Toaster />` once, then call `toast()`)
-- Animated (adapted from [Magic UI](https://magicui.design)): `shimmer-button`, `aurora-text`,
+- Effects: `shimmer-button`, `aurora-text`,
   `animated-gradient-text`, `magic-card`, `border-beam`, `shine-border`, `number-ticker`, `meteors`,
   `marquee`, `dot-pattern`, `blur-fade`, `animated-beam`
 
@@ -67,12 +67,11 @@ npm run build      # tokens → registry.json → public/r/*.json → static doc
 ```
 
 - Change colors/fonts only in `packages/tokens/src/tokens.json`, then `npm run build`.
-- Add a component: put the file in `apps/docs/registry/mintel/{ui,magicui}/`, add an entry to
+- Add a component: put the file in `apps/docs/registry/mintel/{ui,effects,glass,motion}/`, add an entry to
   `apps/docs/registry/items.json`, run `npm run build`.
 - Generated files (`packages/tokens/{dist,lwc,salesforce}`, `apps/docs/public/r`, `registry.json`)
   are committed so they can be used straight from GitHub; CI fails if they are stale.
 
 ## License
 
-[MIT](LICENSE) © M Intelligence Co., Ltd. Animated components are adapted from Magic UI (MIT) — see
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+[MIT](LICENSE) © M Intelligence Co., Ltd. Third-party licenses: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

@@ -11,7 +11,7 @@ const SPRING = { type: "spring", stiffness: 400, damping: 32, mass: 1 } as const
 type Option = { value: string; label: React.ReactNode }
 
 /**
- * iOS-style segmented control: a glass track with a thumb that springs to the selected option.
+ * Segmented control: a glass track with a thumb that springs to the selected option.
  * Keyboard: arrow keys move the selection (radiogroup semantics).
  */
 function SegmentedControl({

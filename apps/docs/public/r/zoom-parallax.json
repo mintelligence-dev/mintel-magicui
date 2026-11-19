@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "zoom-parallax",
+  "title": "Zoom Parallax",
+  "description": "Full-bleed media that shrinks into a rounded card on scroll while the headline fades out.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/motion/zoom-parallax.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, useReducedMotion, useScroll, useTransform } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Hydration-safe: only switch to the static layout after mount.\nfunction useReducedMotionSafe() {\n  const prefersReduced = useReducedMotion()\n  const [mounted, setMounted] = React.useState(false)\n  React.useEffect(() => setMounted(true), [])\n  return mounted && prefersReduced === true\n}\n\n/**\n * Zoom-out hero reveal: full-bleed media that shrinks into a rounded card as you scroll,\n * while an optional overlay (headline) fades out. Uses `svh` so the iOS toolbar doesn't jump it.\n * Animates transform/opacity/border-radius only.\n */\nfunction ZoomParallax({\n  children,\n  overlay,\n  className,\n  height = \"200svh\",\n  fromScale = 1,\n  toScale = 0.82,\n  radius = 28,\n}: {\n  /** The media (image / video / any node), rendered full-bleed. */\n  children: React.ReactNode\n  /** Content over the media that fades out during the zoom. */\n  overlay?: React.ReactNode\n  className?: string\n  /** Scroll distance of the effect. */\n  height?: string\n  fromScale?: number\n  toScale?: number\n  /** Final corner radius in px. */\n  radius?: number\n}) {\n  const ref = React.useRef<HTMLDivElement>(null)\n  const reduceMotion = useReducedMotionSafe()\n  const { scrollYProgress } = useScroll({ target: ref, offset: [\"start start\", \"end end\"] })\n  const scale = useTransform(scrollYProgress, [0, 0.8], [fromScale, toScale])\n  const borderRadius = useTransform(scrollYProgress, [0, 0.8], [0, radius])\n  const overlayOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0])\n  const overlayY = useTransform(scrollYProgress, [0, 0.35], [0, -40])\n\n  if (reduceMotion) {\n    return (\n      <div className={cn(\"relative h-[80svh] overflow-hidden rounded-3xl\", className)}>\n        {children}\n        {overlay && <div className=\"absolute inset-0 flex items-center justify-center\">{overlay}</div>}\n      </div>\n    )\n  }\n\n  return (\n    <div ref={ref} className={cn(\"relative\", className)} style={{ height }}>\n      <div className=\"sticky top-0 flex h-svh items-center justify-center overflow-hidden\">\n        <motion.div\n          style={{ scale, borderRadius }}\n          className=\"relative size-full overflow-hidden will-change-transform\"\n        >\n          {children}\n          {overlay && (\n            <motion.div\n              style={{ opacity: overlayOpacity, y: overlayY }}\n              className=\"absolute inset-0 flex items-center justify-center\"\n            >\n              {overlay}\n            </motion.div>\n          )}\n        </motion.div>\n      </div>\n    </div>\n  )\n}\n\nexport { ZoomParallax }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "motion"
+  },
+  "type": "registry:ui"
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-reveal-text",
+  "title": "Scroll Reveal Text",
+  "description": "Paragraph that lights up word by word as you scroll (Thai-aware word segmentation).",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/mintel/motion/scroll-reveal-text.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction useReducedMotionSafe() {\n  const prefersReduced = useReducedMotion()\n  const [mounted, setMounted] = React.useState(false)\n  React.useEffect(() => setMounted(true), [])\n  return mounted && prefersReduced === true\n}\n\nfunction Word({\n  children,\n  progress,\n  range,\n  dim,\n}: {\n  children: string\n  progress: MotionValue<number>\n  range: [number, number]\n  dim: number\n}) {\n  const opacity = useTransform(progress, range, [dim, 1])\n  return (\n    <motion.span style={{ opacity }} className=\"inline-block\">\n      {children}\n    </motion.span>\n  )\n}\n\ntype Segment = { text: string; word: boolean }\n\nfunction segment(text: string, locale: string): Segment[] {\n  if (typeof Intl !== \"undefined\" && \"Segmenter\" in Intl) {\n    const seg = new Intl.Segmenter(locale, { granularity: \"word\" })\n    const out: Segment[] = []\n    for (const s of seg.segment(text)) {\n      const isSpace = /^\\s+$/.test(s.segment)\n      // Attach punctuation to the previous word so it doesn't animate on its own.\n      if (!isSpace && !s.isWordLike && out.length && out[out.length - 1].word) {\n        out[out.length - 1].text += s.segment\n      } else {\n        out.push({ text: s.segment, word: !isSpace })\n      }\n    }\n    return out\n  }\n  return text.split(/(\\s+)/).filter(Boolean).map((t) => ({ text: t, word: !/^\\s+$/.test(t) }))\n}\n\n/**\n * Paragraph that lights up word by word as it scrolls through the viewport.\n * Uses motion's useScroll (native ScrollTimeline where available) and animates opacity only.\n */\nfunction ScrollRevealText({\n  text,\n  className,\n  dim = 0.15,\n  as: Tag = \"p\",\n  locale = \"th\",\n}: {\n  text: string\n  className?: string\n  /** Opacity of words not yet revealed. */\n  dim?: number\n  as?: \"p\" | \"h2\" | \"h3\" | \"div\"\n  /** Locale for word segmentation (Thai has no spaces between words). */\n  locale?: string\n}) {\n  const ref = React.useRef<HTMLDivElement>(null)\n  const reduceMotion = useReducedMotionSafe()\n  const { scrollYProgress } = useScroll({ target: ref, offset: [\"start 0.85\", \"end 0.45\"] })\n  // Word segmentation that also works for Thai (no spaces between words). Whitespace stays as plain\n  // text so lines wrap naturally; only words become animated inline-blocks.\n  const segments = React.useMemo(() => segment(text, locale), [text, locale])\n  const words = segments.filter((seg) => seg.word).length\n  let wordIndex = 0\n\n  return (\n    <div ref={ref}>\n      <Tag className={cn(\"text-balance\", className)} aria-label={text}>\n        {reduceMotion\n          ? text\n          : segments.map((seg, i) => {\n              if (!seg.word) return seg.text\n              const n = wordIndex++\n              return (\n                <Word key={i} progress={scrollYProgress} range={[n / words, (n + 1) / words]} dim={dim}>\n                  {seg.text}\n                </Word>\n              )\n            })}\n      </Tag>\n    </div>\n  )\n}\n\nexport { ScrollRevealText }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "motion"
+  },
+  "type": "registry:ui"
+}

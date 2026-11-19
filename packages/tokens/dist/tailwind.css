@@ -104,7 +104,7 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --blur-glass: var(--mintel-glass-blur);
   --ease-standard: var(--mintel-ease-standard);
-  --ease-ios: var(--mintel-ease-out);
+  --ease-decelerate: var(--mintel-ease-out);
   --ease-in-out: var(--mintel-ease-in-out);
   --ease-spring-snappy: var(--mintel-ease-spring-snappy);
   --ease-spring-smooth: var(--mintel-ease-spring-smooth);

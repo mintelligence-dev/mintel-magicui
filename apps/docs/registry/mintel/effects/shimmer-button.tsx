@@ -1,5 +1,4 @@
-// Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.
-// Changes: default colors use M-Intelligence brand tokens; respects prefers-reduced-motion. See THIRD_PARTY_NOTICES.md.
+// Portions Copyright (c) 2023 Magic UI — MIT License. See THIRD_PARTY_NOTICES.md.
 
 import React, { type ComponentPropsWithoutRef, type CSSProperties } from "react"
 

@@ -71,7 +71,7 @@ export function GlassShowcase() {
           <GlassCard className="flex flex-col justify-between gap-6 p-6">
             <div>
               <p className="font-heading text-xl font-semibold">Glass Button</p>
-              <p className="mt-1 text-sm text-muted-foreground">กดค้างเพื่อดู spring press แบบ iOS</p>
+              <p className="mt-1 text-sm text-muted-foreground">กดค้างเพื่อดู spring press</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <GlassButton>Default</GlassButton>

@@ -8,8 +8,8 @@
   ],
   "files": [
     {
-      "path": "registry/mintel/magicui/animated-gradient-text.tsx",
-      "content": "// Adapted from Magic UI (https://magicui.design) — MIT License, Copyright (c) 2023 Magic UI.\n// Changes: default colors use M-Intelligence brand tokens; respects prefers-reduced-motion. See THIRD_PARTY_NOTICES.md.\n\nimport { type ComponentPropsWithoutRef } from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface AnimatedGradientTextProps extends ComponentPropsWithoutRef<\"div\"> {\n  speed?: number\n  colorFrom?: string\n  colorTo?: string\n}\n\nexport function AnimatedGradientText({\n  children,\n  className,\n  speed = 1,\n  colorFrom = \"var(--brand)\",\n  colorTo = \"var(--brand-accent)\",\n  ...props\n}: AnimatedGradientTextProps) {\n  return (\n    <span\n      style={\n        {\n          \"--bg-size\": `${speed * 300}%`,\n          \"--color-from\": colorFrom,\n          \"--color-to\": colorTo,\n        } as React.CSSProperties\n      }\n      className={cn(\n        `animate-gradient motion-reduce:animate-none inline bg-linear-to-r from-(--color-from) via-(--color-to) to-(--color-from) bg-size-[var(--bg-size)_100%] bg-clip-text text-transparent`,\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </span>\n  )\n}\n",
+      "path": "registry/mintel/effects/animated-gradient-text.tsx",
+      "content": "// Portions Copyright (c) 2023 Magic UI — MIT License. See THIRD_PARTY_NOTICES.md.\n\nimport { type ComponentPropsWithoutRef } from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface AnimatedGradientTextProps extends ComponentPropsWithoutRef<\"div\"> {\n  speed?: number\n  colorFrom?: string\n  colorTo?: string\n}\n\nexport function AnimatedGradientText({\n  children,\n  className,\n  speed = 1,\n  colorFrom = \"var(--brand)\",\n  colorTo = \"var(--brand-accent)\",\n  ...props\n}: AnimatedGradientTextProps) {\n  return (\n    <span\n      style={\n        {\n          \"--bg-size\": `${speed * 300}%`,\n          \"--color-from\": colorFrom,\n          \"--color-to\": colorTo,\n        } as React.CSSProperties\n      }\n      className={cn(\n        `animate-gradient motion-reduce:animate-none inline bg-linear-to-r from-(--color-from) via-(--color-to) to-(--color-from) bg-size-[var(--bg-size)_100%] bg-clip-text text-transparent`,\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </span>\n  )\n}\n",
       "type": "registry:ui"
     }
   ],
@@ -26,8 +26,7 @@
     }
   },
   "meta": {
-    "source": "Magic UI (MIT)",
-    "category": "animated"
+    "category": "effects"
   },
   "type": "registry:ui"
 }

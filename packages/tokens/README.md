@@ -32,7 +32,7 @@ Anchors come from the company website and logo. Text/background pairs meet WCAG 
 | Token | Value | Use |
 |---|---|---|
 | `--mintel-duration-{instant,fast,base,slow,slower}` | 100 / 150 / 250 / 400 / 600ms | transitions |
-| `--mintel-ease-standard` · `--mintel-ease-out` · `--mintel-ease-in-out` | cubic-bezier | `ease-standard`, `ease-ios` in Tailwind |
+| `--mintel-ease-standard` · `--mintel-ease-out` · `--mintel-ease-in-out` | cubic-bezier | `ease-standard`, `ease-decelerate` in Tailwind |
 | `--mintel-ease-spring-{snappy,smooth,bouncy}` | CSS `linear()` spring curve | `ease-spring-smooth` in Tailwind |
 | `--mintel-spring-{name}-duration` | settle time of that spring | pair with the curve above |
 

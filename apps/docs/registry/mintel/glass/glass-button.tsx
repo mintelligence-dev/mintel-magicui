@@ -8,7 +8,7 @@ const glassButtonVariants = cva(
   "relative isolate inline-flex shrink-0 items-center justify-center gap-2 rounded-full border text-sm font-semibold whitespace-nowrap outline-none select-none touch-manipulation " +
     "backdrop-blur-glass backdrop-saturate-180 " +
     "shadow-[inset_0_1px_0_0_var(--glass-highlight),0_8px_24px_-10px_var(--glass-shadow)] " +
-    // spring press feedback (Apple-style); disabled for reduced motion
+    // spring press feedback; disabled for reduced motion
     "transition-[transform,background-color,box-shadow] duration-500 ease-spring-snappy active:scale-[0.96] motion-reduce:transition-none motion-reduce:active:scale-100 " +
     "focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 " +
     "not-supports-[backdrop-filter:blur(1px)]:bg-card [@media(prefers-reduced-transparency:reduce)]:bg-card " +
@@ -26,7 +26,7 @@ const glassButtonVariants = cva(
         default: "h-10 px-5",
         sm: "h-8 px-3.5 text-xs",
         lg: "h-12 px-7 text-base",
-        // 44px: Apple HIG minimum touch target
+        // 44px: minimum comfortable touch target
         icon: "size-11",
       },
     },

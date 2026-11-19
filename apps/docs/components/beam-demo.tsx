@@ -4,7 +4,7 @@ import { forwardRef, useRef } from "react"
 import { Atom, Cloud, Palette } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { AnimatedBeam } from "@/registry/mintel/magicui/animated-beam"
+import { AnimatedBeam } from "@/registry/mintel/effects/animated-beam"
 
 const Node = forwardRef<HTMLDivElement, { className?: string; children: React.ReactNode; label: string }>(
   ({ className, children, label }, ref) => (

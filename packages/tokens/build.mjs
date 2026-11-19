@@ -171,7 +171,7 @@ const themeLines = [
   `--radius-xl: calc(var(--radius) + 4px);`,
   `--radius-2xl: calc(var(--radius) + 8px);`,
   `--blur-glass: var(--mintel-glass-blur);`,
-  ...Object.keys(easings).map((k) => `--ease-${k === "out" ? "ios" : k}: var(--mintel-ease-${k});`),
+  ...Object.keys(easings).map((k) => `--ease-${k === "out" ? "decelerate" : k}: var(--mintel-ease-${k});`),
   ...Object.keys(springs).map((k) => `--ease-spring-${k}: var(--mintel-ease-spring-${k});`),
 ]
 out(
@@ -249,7 +249,7 @@ out(
         "color-warning": "var(--warning)",
         "color-info": "var(--info)",
         "blur-glass": glass.blur,
-        ...Object.fromEntries(Object.entries(easings).map(([k, e]) => [`ease-${k === "out" ? "ios" : k}`, e.css])),
+        ...Object.fromEntries(Object.entries(easings).map(([k, e]) => [`ease-${k === "out" ? "decelerate" : k}`, e.css])),
         ...Object.fromEntries(Object.entries(springs).map(([k, sp]) => [`ease-spring-${k}`, sp.linear])),
       },
       light: {
