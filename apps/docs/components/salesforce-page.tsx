@@ -17,6 +17,7 @@ import {
   SlaTimerPreview,
   ThaiAddressPreview,
 } from "@/components/sf-more-previews"
+import { ActivityTimelinePreview, KanbanPreview, RelatedCardsPreview } from "@/components/sf-records-previews"
 import { SegmentedPreview, TabsPreview } from "@/components/sf-tabs-preview"
 import { SldsPreview } from "@/components/slds-preview"
 import { getDict, type Lang } from "@/lib/i18n"
@@ -90,6 +91,28 @@ const COMPONENTS = [
     <lightning-button slot="actions" label="Escalate"></lightning-button>
 </c-mintel-record-header>`,
     preview: <RecordHeaderPreview />,
+  },
+  {
+    name: "mintelRelatedCards",
+    usage: `<!-- Record page (App Builder): an Account's Cases as cards. UI API, no Apex -->
+<c-mintel-related-cards record-id={recordId} related-list-id="Cases" child-object-api-name="Case"
+    title-field="CaseNumber" fields="Subject,Status,Priority" sort-by="-CreatedDate" page-size="6">
+</c-mintel-related-cards>`,
+    preview: <RelatedCardsPreview />,
+  },
+  {
+    name: "mintelKanban",
+    usage: `<!-- Record page: an Account's Opportunities by Stage. Drag, or "Move to" for keyboard and mobile -->
+<c-mintel-kanban record-id={recordId} related-list-id="Opportunities" child-object-api-name="Opportunity"
+    group-field="StageName" title-field="Name" subtitle-field="Amount" hide-values="Closed Lost"
+    onmove={handleMove}></c-mintel-kanban>`,
+    preview: <KanbanPreview />,
+  },
+  {
+    name: "mintelActivityTimeline",
+    usage: `<!-- Record page: Tasks and Events for the record (UI API GraphQL, no Apex) -->
+<c-mintel-activity-timeline record-id={recordId} limit="20"></c-mintel-activity-timeline>`,
+    preview: <ActivityTimelinePreview />,
   },
   {
     name: "mintelSlaTimer",

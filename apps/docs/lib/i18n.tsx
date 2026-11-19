@@ -283,6 +283,12 @@ const en = {
         "Segmented control with a sliding thumb, for switching views or ranges. Set options in App Builder as value:Label pairs, or pass an array from JS.",
       mintelRecordHeader:
         "Branded record header for record pages: object icon and label, the title in the brand gradient, a status badge and up to four highlight fields, with a slot for action buttons.",
+      mintelRelatedCards:
+        "A record page related list (Cases, Opportunities, Contacts…) as cards with a count and View all. Uses the UI API, so sharing and field security apply and there is no Apex.",
+      mintelKanban:
+        "Related records as a board grouped by a picklist, e.g. Opportunities by Stage. Drag a card or use its Move to menu (keyboard and mobile app); it saves at once and rolls back with Salesforce's message if a validation rule says no.",
+      mintelActivityTimeline:
+        "Tasks and Events for the record in one timeline with an All / Tasks / Events filter. Overdue tasks are red, completed ones green. Reads through UI API GraphQL, no Apex.",
       mintelSlaTimer:
         "Countdown to a DateTime field such as a Case SLA. Green on track, amber inside the warning window, red and counting up once overdue; a bar shows time used; a Boolean field like IsClosed stops it.",
       mintelConversation:
@@ -585,6 +591,12 @@ const th: Dict = {
         "ตัวเลือกแบบแบ่งช่อง มีแถบเลื่อนไปยังช่องที่เลือก ใช้สลับมุมมองหรือช่วงเวลา ตั้ง options ใน App Builder เป็นคู่ value:Label หรือส่ง array จาก JS",
       mintelRecordHeader:
         "หัวหน้า record แบบมีแบรนด์ มีไอคอนและชื่อ object ชื่อ record สีไล่เฉด ป้ายสถานะ ฟิลด์สำคัญไม่เกิน 4 ช่อง และช่องใส่ปุ่มคำสั่ง",
+      mintelRelatedCards:
+        "related list บนหน้า record (เช่น Cases, Opportunities, Contacts) แสดงเป็นการ์ด มีจำนวนและปุ่มดูทั้งหมด ดึงผ่าน UI API จึงเคารพสิทธิ์และ field security และไม่ต้องเขียน Apex",
+      mintelKanban:
+        "บอร์ดของ record ที่เกี่ยวข้อง แบ่งคอลัมน์ตาม picklist เช่น Opportunity ตาม Stage ลากการ์ดหรือใช้เมนูย้ายไป (ใช้คีย์บอร์ดและแอปมือถือได้) บันทึกทันที และย้อนกลับพร้อมข้อความของ Salesforce ถ้าติด validation rule",
+      mintelActivityTimeline:
+        "Task และ Event ของ record ในไทม์ไลน์เดียว กรองได้ ทั้งหมด/งาน/นัดหมาย งานเลยกำหนดเป็นสีแดง งานเสร็จเป็นสีเขียว ดึงผ่าน UI API GraphQL ไม่ต้องเขียน Apex",
       mintelSlaTimer:
         "นับถอยหลังถึงเวลาในฟิลด์ DateTime เช่น SLA ของเคส เขียวเมื่อทันเวลา เหลืองเมื่อใกล้ครบ แดงและนับเวลาที่เกินเมื่อเลยกำหนด มีแถบเวลาที่ใช้ไป และหยุดเมื่อฟิลด์ Boolean เช่น IsClosed เป็นจริง",
       mintelConversation:
