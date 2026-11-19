@@ -12,9 +12,27 @@
   "files": [
     {
       "path": "registry/mintel/sections/section-cta.tsx",
-      "content": "import * as React from \"react\"\nimport { ArrowRightIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/** Closing call to action on a brand-gradient band with a soft glow. */\nexport function SectionCta({\n  title = \"Ready to answer every customer faster?\",\n  description = \"Start free for 14 days. Bring your LINE OA, we'll handle the rest.\",\n  primary = { label: \"Start free trial\", href: \"#start\" },\n  secondary = { label: \"Talk to sales\", href: \"#sales\" },\n  className,\n}: {\n  title?: React.ReactNode\n  description?: React.ReactNode\n  primary?: { label: string; href: string }\n  secondary?: { label: string; href: string }\n  className?: string\n}) {\n  return (\n    <section data-slot=\"section-cta\" className={cn(\"mx-auto max-w-6xl px-4 py-16 sm:px-6\", className)}>\n      <div className=\"relative isolate overflow-hidden rounded-[2rem] bg-[image:var(--brand-gradient)] px-6 py-16 text-center text-brand-foreground shadow-2xl shadow-brand/25 sm:px-16\">\n        <div aria-hidden className=\"absolute -top-24 -left-24 -z-10 size-72 rounded-full bg-white/20 blur-3xl\" />\n        <div aria-hidden className=\"absolute -right-24 -bottom-24 -z-10 size-72 rounded-full bg-brand-cyan/40 blur-3xl\" />\n        <h2 className=\"mx-auto max-w-2xl font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl\">{title}</h2>\n        <p className=\"mx-auto mt-4 max-w-xl text-lg opacity-90\">{description}</p>\n        <div className=\"mt-8 flex flex-wrap justify-center gap-3\">\n          <a\n            href={primary.href}\n            className=\"inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 font-semibold text-foreground shadow-lg transition-transform duration-300 ease-spring-snappy hover:-translate-y-0.5 active:scale-95 motion-reduce:transition-none\"\n          >\n            {primary.label}\n            <ArrowRightIcon className=\"size-4\" />\n          </a>\n          <a href={secondary.href} className=\"inline-flex items-center rounded-full border border-current/30 px-6 py-3 font-semibold transition-colors hover:bg-white/10\">\n            {secondary.label}\n          </a>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import * as React from \"react\"\nimport { ArrowRightIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/** Closing call to action on a brand-gradient band with a soft glow. */\nexport function SectionCta({\n  title = \"Ready to answer every customer faster?\",\n  description = \"Start free for 14 days. Bring your LINE OA, we'll handle the rest.\",\n  primary = { label: \"Start free trial\", href: \"#start\" },\n  secondary = { label: \"Talk to sales\", href: \"#sales\" },\n  className,\n}: {\n  title?: React.ReactNode\n  description?: React.ReactNode\n  primary?: { label: string; href: string }\n  secondary?: { label: string; href: string }\n  className?: string\n}) {\n  return (\n    <section data-slot=\"section-cta\" className={cn(\"reveal-on-scroll mx-auto max-w-6xl px-4 py-16 sm:px-6\", className)}>\n      <div className=\"relative isolate overflow-hidden rounded-[2rem] bg-[image:var(--brand-gradient)] px-6 py-16 text-center text-brand-foreground shadow-2xl shadow-brand/25 sm:px-16\">\n        <div aria-hidden className=\"absolute -top-24 -left-24 -z-10 size-72 rounded-full bg-white/20 blur-3xl\" />\n        <div aria-hidden className=\"absolute -right-24 -bottom-24 -z-10 size-72 rounded-full bg-brand-cyan/40 blur-3xl\" />\n        <h2 className=\"mx-auto max-w-2xl font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl\">{title}</h2>\n        <p className=\"mx-auto mt-4 max-w-xl text-lg opacity-90\">{description}</p>\n        <div className=\"mt-8 flex flex-wrap justify-center gap-3\">\n          <a\n            href={primary.href}\n            className=\"inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 font-semibold text-foreground shadow-lg transition-transform duration-300 ease-spring-snappy hover:-translate-y-0.5 active:scale-95 motion-reduce:transition-none\"\n          >\n            {primary.label}\n            <ArrowRightIcon className=\"size-4\" />\n          </a>\n          <a href={secondary.href} className=\"inline-flex items-center rounded-full border border-current/30 px-6 py-3 font-semibold transition-colors hover:bg-white/10\">\n            {secondary.label}\n          </a>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component"
     }
   ],
+  "css": {
+    "@keyframes mintel-reveal": {
+      "from": {
+        "opacity": "0",
+        "translate": "0 1.5rem",
+        "scale": "0.98"
+      }
+    },
+    "@utility reveal-on-scroll": {
+      "@media (prefers-reduced-motion: no-preference)": {
+        "@supports (animation-timeline: view())": {
+          "animation": "mintel-reveal linear both",
+          "animation-timeline": "view()",
+          "animation-range": "entry 0% entry 55%"
+        }
+      }
+    }
+  },
   "type": "registry:block"
 }

@@ -52,7 +52,7 @@ export function SectionFeatureBento({
           <li
             key={it.title}
             className={cn(
-              "group relative flex flex-col justify-between gap-6 overflow-hidden rounded-3xl border bg-card p-6 transition-[border-color,box-shadow] duration-300 hover:border-brand/30 hover:shadow-lg hover:shadow-brand/10",
+              "reveal-on-scroll group relative flex flex-col justify-between gap-6 overflow-hidden rounded-3xl border bg-card p-6 transition-[border-color,box-shadow] duration-300 hover:border-brand/30 hover:shadow-lg hover:shadow-brand/10",
               it.className
             )}
           >

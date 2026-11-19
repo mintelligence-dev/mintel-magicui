@@ -10,9 +10,27 @@
   "files": [
     {
       "path": "registry/mintel/sections/section-stats.tsx",
-      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { NumberTicker } from \"@/registry/mintel/effects/number-ticker\"\n\nexport type Stat = { value: number; suffix?: string; prefix?: string; label: string; decimals?: number }\n\n/** Big numbers that count up when they scroll into view (static under reduced motion). */\nexport function SectionStats({\n  title = \"Numbers our customers see\",\n  stats = [\n    { value: 4, suffix: \" min\", label: \"Average first reply\" },\n    { value: 96, suffix: \"%\", label: \"Customer satisfaction\" },\n    { value: 1.2, suffix: \"M\", label: \"Chats handled each month\", decimals: 1 },\n    { value: 40, suffix: \"%\", label: \"Less time per case\" },\n  ],\n  className,\n}: {\n  title?: React.ReactNode\n  stats?: Stat[]\n  className?: string\n}) {\n  return (\n    <section data-slot=\"section-stats\" className={cn(\"mx-auto max-w-6xl px-4 py-16 sm:px-6\", className)}>\n      <div className=\"overflow-hidden rounded-3xl border bg-card p-8 shadow-sm sm:p-12\">\n        {title && <h2 className=\"mb-10 text-center font-heading text-2xl font-bold tracking-tight sm:text-3xl\">{title}</h2>}\n        <dl className=\"grid grid-cols-2 gap-8 lg:grid-cols-4\">\n          {stats.map((s) => (\n            <div key={s.label} className=\"grid gap-1 text-center\">\n              <dt className=\"order-2 text-sm text-muted-foreground\">{s.label}</dt>\n              <dd className=\"order-1 font-heading text-4xl font-bold tracking-tight sm:text-5xl\">\n                {s.prefix}\n                <NumberTicker value={s.value} decimalPlaces={s.decimals ?? 0} className=\"text-brand\" />\n                <span className=\"text-brand\">{s.suffix}</span>\n              </dd>\n            </div>\n          ))}\n        </dl>\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { NumberTicker } from \"@/registry/mintel/effects/number-ticker\"\n\nexport type Stat = { value: number; suffix?: string; prefix?: string; label: string; decimals?: number }\n\n/** Big numbers that count up when they scroll into view (static under reduced motion). */\nexport function SectionStats({\n  title = \"Numbers our customers see\",\n  stats = [\n    { value: 4, suffix: \" min\", label: \"Average first reply\" },\n    { value: 96, suffix: \"%\", label: \"Customer satisfaction\" },\n    { value: 1.2, suffix: \"M\", label: \"Chats handled each month\", decimals: 1 },\n    { value: 40, suffix: \"%\", label: \"Less time per case\" },\n  ],\n  className,\n}: {\n  title?: React.ReactNode\n  stats?: Stat[]\n  className?: string\n}) {\n  return (\n    <section data-slot=\"section-stats\" className={cn(\"reveal-on-scroll mx-auto max-w-6xl px-4 py-16 sm:px-6\", className)}>\n      <div className=\"overflow-hidden rounded-3xl border bg-card p-8 shadow-sm sm:p-12\">\n        {title && <h2 className=\"mb-10 text-center font-heading text-2xl font-bold tracking-tight sm:text-3xl\">{title}</h2>}\n        <dl className=\"grid grid-cols-2 gap-8 lg:grid-cols-4\">\n          {stats.map((s) => (\n            <div key={s.label} className=\"grid gap-1 text-center\">\n              <dt className=\"order-2 text-sm text-muted-foreground\">{s.label}</dt>\n              <dd className=\"order-1 font-heading text-4xl font-bold tracking-tight sm:text-5xl\">\n                {s.prefix}\n                <NumberTicker value={s.value} decimalPlaces={s.decimals ?? 0} className=\"text-brand\" />\n                <span className=\"text-brand\">{s.suffix}</span>\n              </dd>\n            </div>\n          ))}\n        </dl>\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component"
     }
   ],
+  "css": {
+    "@keyframes mintel-reveal": {
+      "from": {
+        "opacity": "0",
+        "translate": "0 1.5rem",
+        "scale": "0.98"
+      }
+    },
+    "@utility reveal-on-scroll": {
+      "@media (prefers-reduced-motion: no-preference)": {
+        "@supports (animation-timeline: view())": {
+          "animation": "mintel-reveal linear both",
+          "animation-timeline": "view()",
+          "animation-range": "entry 0% entry 55%"
+        }
+      }
+    }
+  },
   "type": "registry:block"
 }

@@ -1915,7 +1915,25 @@
           "path": "registry/mintel/sections/section-logo-cloud.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
+        }
+      }
     },
     {
       "name": "section-testimonials",
@@ -1933,7 +1951,25 @@
           "path": "registry/mintel/sections/section-testimonials.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
+        }
+      }
     },
     {
       "name": "section-stats",
@@ -1949,7 +1985,25 @@
           "path": "registry/mintel/sections/section-stats.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
+        }
+      }
     },
     {
       "name": "section-feature-grid",
@@ -1967,7 +2021,25 @@
           "path": "registry/mintel/sections/section-feature-grid.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
+        }
+      }
     },
     {
       "name": "section-feature-scroll",
@@ -2013,6 +2085,22 @@
           "to": {
             "transform": "scaleX(1)"
           }
+        },
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
         }
       }
     },
@@ -2032,7 +2120,25 @@
           "path": "registry/mintel/sections/section-feature-bento.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
+        }
+      }
     },
     {
       "name": "section-carousel",
@@ -2050,7 +2156,25 @@
           "path": "registry/mintel/sections/section-carousel.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
+        }
+      }
     },
     {
       "name": "section-pricing",
@@ -2068,7 +2192,25 @@
           "path": "registry/mintel/sections/section-pricing.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
+        }
+      }
     },
     {
       "name": "section-faq",
@@ -2084,7 +2226,25 @@
           "path": "registry/mintel/sections/section-faq.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
+        }
+      }
     },
     {
       "name": "section-cta",
@@ -2102,7 +2262,25 @@
           "path": "registry/mintel/sections/section-cta.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
+        }
+      }
     },
     {
       "name": "section-contact",
@@ -2124,7 +2302,25 @@
           "path": "registry/mintel/sections/section-contact.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
+        }
+      }
     },
     {
       "name": "section-footer",
@@ -2139,7 +2335,25 @@
           "path": "registry/mintel/sections/section-footer.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "css": {
+        "@keyframes mintel-reveal": {
+          "from": {
+            "opacity": "0",
+            "translate": "0 1.5rem",
+            "scale": "0.98"
+          }
+        },
+        "@utility reveal-on-scroll": {
+          "@media (prefers-reduced-motion: no-preference)": {
+            "@supports (animation-timeline: view())": {
+              "animation": "mintel-reveal linear both",
+              "animation-timeline": "view()",
+              "animation-range": "entry 0% entry 55%"
+            }
+          }
+        }
+      }
     },
     {
       "name": "login-page",

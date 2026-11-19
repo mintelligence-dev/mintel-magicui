@@ -10,9 +10,27 @@
   "files": [
     {
       "path": "registry/mintel/sections/section-faq.tsx",
-      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from \"@/registry/mintel/ui/accordion\"\n\nexport type Faq = { q: string; a: React.ReactNode }\n\nconst DEFAULTS: Faq[] = [\n  { q: \"Which channels can we connect?\", a: \"LINE Official Account, Facebook Messenger, Instagram, TikTok and WhatsApp, plus a web chat widget.\" },\n  { q: \"Do we need Salesforce?\", a: \"No. Mintel works on its own, and syncs cases, contacts and history to Salesforce when you connect it.\" },\n  { q: \"Is our data kept in Thailand?\", a: \"You choose the region. Data is encrypted in transit and at rest, with PDPA-ready retention controls.\" },\n  { q: \"How long does setup take?\", a: \"Most teams are live in a day: connect channels, invite agents, import quick replies.\" },\n  { q: \"Can we try it first?\", a: \"Yes, every plan starts with a 14-day free trial. No credit card needed.\" },\n]\n\n/** Frequently asked questions: heading and contact link on one side, an accordion on the other. */\nexport function SectionFaq({\n  title = \"Questions, answered\",\n  description = (\n    <>\n      Can't find what you're looking for?{\" \"}\n      <a href=\"#contact\" className=\"font-medium text-brand underline decoration-brand/40 underline-offset-4 hover:decoration-brand\">\n        Talk to us\n      </a>\n      .\n    </>\n  ),\n  items = DEFAULTS,\n  className,\n}: {\n  title?: React.ReactNode\n  description?: React.ReactNode\n  items?: Faq[]\n  className?: string\n}) {\n  return (\n    <section data-slot=\"section-faq\" className={cn(\"mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.5fr]\", className)}>\n      <div>\n        <h2 className=\"font-heading text-3xl font-bold tracking-tight sm:text-4xl\">{title}</h2>\n        <p className=\"mt-3 text-muted-foreground\">{description}</p>\n      </div>\n      <Accordion type=\"single\" collapsible defaultValue=\"item-0\">\n        {items.map((f, i) => (\n          <AccordionItem key={f.q} value={`item-${i}`}>\n            <AccordionTrigger className=\"text-base\">{f.q}</AccordionTrigger>\n            <AccordionContent className=\"text-base\">{f.a}</AccordionContent>\n          </AccordionItem>\n        ))}\n      </Accordion>\n    </section>\n  )\n}\n",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from \"@/registry/mintel/ui/accordion\"\n\nexport type Faq = { q: string; a: React.ReactNode }\n\nconst DEFAULTS: Faq[] = [\n  { q: \"Which channels can we connect?\", a: \"LINE Official Account, Facebook Messenger, Instagram, TikTok and WhatsApp, plus a web chat widget.\" },\n  { q: \"Do we need Salesforce?\", a: \"No. Mintel works on its own, and syncs cases, contacts and history to Salesforce when you connect it.\" },\n  { q: \"Is our data kept in Thailand?\", a: \"You choose the region. Data is encrypted in transit and at rest, with PDPA-ready retention controls.\" },\n  { q: \"How long does setup take?\", a: \"Most teams are live in a day: connect channels, invite agents, import quick replies.\" },\n  { q: \"Can we try it first?\", a: \"Yes, every plan starts with a 14-day free trial. No credit card needed.\" },\n]\n\n/** Frequently asked questions: heading and contact link on one side, an accordion on the other. */\nexport function SectionFaq({\n  title = \"Questions, answered\",\n  description = (\n    <>\n      Can't find what you're looking for?{\" \"}\n      <a href=\"#contact\" className=\"font-medium text-brand underline decoration-brand/40 underline-offset-4 hover:decoration-brand\">\n        Talk to us\n      </a>\n      .\n    </>\n  ),\n  items = DEFAULTS,\n  className,\n}: {\n  title?: React.ReactNode\n  description?: React.ReactNode\n  items?: Faq[]\n  className?: string\n}) {\n  return (\n    <section data-slot=\"section-faq\" className={cn(\"reveal-on-scroll mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.5fr]\", className)}>\n      <div>\n        <h2 className=\"font-heading text-3xl font-bold tracking-tight sm:text-4xl\">{title}</h2>\n        <p className=\"mt-3 text-muted-foreground\">{description}</p>\n      </div>\n      <Accordion type=\"single\" collapsible defaultValue=\"item-0\">\n        {items.map((f, i) => (\n          <AccordionItem key={f.q} value={`item-${i}`}>\n            <AccordionTrigger className=\"text-base\">{f.q}</AccordionTrigger>\n            <AccordionContent className=\"text-base\">{f.a}</AccordionContent>\n          </AccordionItem>\n        ))}\n      </Accordion>\n    </section>\n  )\n}\n",
       "type": "registry:component"
     }
   ],
+  "css": {
+    "@keyframes mintel-reveal": {
+      "from": {
+        "opacity": "0",
+        "translate": "0 1.5rem",
+        "scale": "0.98"
+      }
+    },
+    "@utility reveal-on-scroll": {
+      "@media (prefers-reduced-motion: no-preference)": {
+        "@supports (animation-timeline: view())": {
+          "animation": "mintel-reveal linear both",
+          "animation-timeline": "view()",
+          "animation-range": "entry 0% entry 55%"
+        }
+      }
+    }
+  },
   "type": "registry:block"
 }

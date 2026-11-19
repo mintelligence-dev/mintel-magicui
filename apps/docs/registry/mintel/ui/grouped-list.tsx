@@ -20,7 +20,7 @@ function GroupedSection({
 }: Omit<React.ComponentProps<"section">, "title"> & { header?: React.ReactNode; footer?: React.ReactNode }) {
   const id = React.useId()
   return (
-    <section data-slot="grouped-section" aria-labelledby={header ? id : undefined} className={cn("grid gap-1.5", className)} {...props}>
+    <section data-slot="grouped-section" aria-labelledby={header ? id : undefined} className={cn("grid gap-1.5 motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both motion-safe:duration-500 motion-safe:ease-spring-smooth", className)} {...props}>
       {header && (
         <h3 id={id} className="px-4 text-xs font-normal tracking-wide text-muted-foreground uppercase">
           {header}
@@ -93,7 +93,7 @@ function GroupedRow({
   const pressable = href !== undefined || onClick !== undefined
   const inner = cn(
     "flex w-full items-center gap-3 pl-4 text-left text-sm outline-none",
-    pressable && "transition-colors hover:bg-muted active:bg-muted focus-visible:bg-accent"
+    pressable && "transition-[background-color,scale] duration-200 ease-spring-snappy hover:bg-muted active:scale-[0.99] active:bg-muted focus-visible:bg-accent motion-reduce:active:scale-100"
   )
   return (
     <li data-slot="grouped-row" className={cn("group/row", className)}>

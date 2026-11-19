@@ -33,7 +33,7 @@ export function SectionContact({
   const [sent, setSent] = React.useState(false)
   const [phone, setPhone] = React.useState("")
   return (
-    <section data-slot="section-contact" className={cn("mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2", className)}>
+    <section data-slot="section-contact" className={cn("reveal-on-scroll mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2", className)}>
       <div>
         <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
         <p className="mt-3 text-muted-foreground">{description}</p>

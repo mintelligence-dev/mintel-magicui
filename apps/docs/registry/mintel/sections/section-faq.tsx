@@ -34,7 +34,7 @@ export function SectionFaq({
   className?: string
 }) {
   return (
-    <section data-slot="section-faq" className={cn("mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.5fr]", className)}>
+    <section data-slot="section-faq" className={cn("reveal-on-scroll mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.5fr]", className)}>
       <div>
         <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
         <p className="mt-3 text-muted-foreground">{description}</p>

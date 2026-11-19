@@ -28,7 +28,7 @@ export function SectionFooter({
   className?: string
 }) {
   return (
-    <footer data-slot="section-footer" className={cn("border-t bg-muted/30", className)}>
+    <footer data-slot="section-footer" className={cn("reveal-on-scroll border-t bg-muted/30", className)}>
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.5fr_repeat(3,1fr)]">
         <div className="grid content-start gap-3">
           <a href="#" className="flex items-center gap-2 font-heading text-lg font-bold">

@@ -26,3 +26,21 @@
     font-size: 0.8125rem;
     color: var(--mintel-destructive);
 }
+
+/* Motion: hints and errors ease in instead of popping. */
+.hint,
+.error {
+    animation: mintel-address-note var(--mintel-duration-slow) var(--mintel-ease-out);
+}
+@keyframes mintel-address-note {
+    from {
+        opacity: 0;
+        transform: translateY(-3px);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hint,
+    .error {
+        animation: none;
+    }
+}
