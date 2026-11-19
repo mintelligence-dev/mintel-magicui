@@ -151,7 +151,13 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     props: [p("interactive", "boolean", "Lift on hover and press on click, for cards that open something.", "ยกขึ้นตอนชี้และยุบตอนกด สำหรับการ์ดที่กดได้", "false")],
   },
   input: { th: "ช่องกรอกข้อความ ใช้ตัวอักษร 16px บนมือถือเพื่อไม่ให้ iOS ซูม ขอบเปลี่ยนสีนุ่มๆ และสั่นเบาๆ เมื่อ aria-invalid" },
-  dialog: { th: "หน้าต่าง modal พื้นหลังเบลอ เปิดแบบซูมเข้า", upstream: radix("Dialog") },
+  dialog: {
+    th: "หน้าต่าง modal พื้นหลังเบลอ เปิดแบบซูมเข้า",
+    props: [
+      p("open / onOpenChange", "boolean / (open) => void", "On <Dialog>: control it from state instead of a <DialogTrigger>, e.g. one confirm dialog for a whole list.", "ใส่ที่ <Dialog> เพื่อควบคุมจาก state แทน <DialogTrigger> เช่น dialog ยืนยันตัวเดียวสำหรับทั้งรายการ"),
+    ],
+    upstream: radix("Dialog"),
+  },
   select: { th: "dropdown เลือกค่า มีเครื่องหมายถูกสีแบรนด์", upstream: radix("Select") },
   table: { th: "ตารางข้อมูล มี header, body, footer, caption และไฮไลต์แถวเมื่อชี้" },
   stepper: {
@@ -352,14 +358,15 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
   "virtual-table": {
     th: "ตารางสำหรับข้อมูลหลักพันถึงหลักหมื่นแถว แสดงเฉพาะแถวที่อยู่บนจอ หัวตารางติดด้านบน และกดหัวคอลัมน์เพื่อเรียงได้ ยังเป็น <table> จริงสำหรับ screen reader",
     props: [
-      p("columns", "ColumnDef<TData>[]", "TanStack column definitions.", "นิยามคอลัมน์ของ TanStack"),
-      p("data", "TData[]", "All rows.", "ข้อมูลทุกแถว"),
+      p("columns", "ColumnDef<TData>[]", "TanStack Table column definitions. Columns with an accessor sort when their header is clicked; set enableSorting: false to turn that off. A display column ({ id, header, cell }) works for row actions.", "นิยามคอลัมน์ของ TanStack Table คอลัมน์ที่มี accessor กดหัวเพื่อเรียงได้ ปิดด้วย enableSorting: false ส่วนคอลัมน์แบบ { id, header, cell } ใช้วางปุ่มของแต่ละแถวได้"),
+      p("data", "TData[]", "All rows. With an empty array only the header shows, so render your own empty state instead.", "ข้อมูลทุกแถว ถ้าเป็น array ว่างจะเห็นแค่หัวตาราง ควรแสดง empty state เองแทน"),
       p("label", "string", "Accessible name of the table.", "ชื่อของตารางสำหรับ screen reader"),
       p("height", "number", "Scroll area height in px.", "ความสูงของพื้นที่เลื่อน (px)", "480"),
       p("rowHeight", "number", "Estimated row height; rows are measured.", "ความสูงแถวโดยประมาณ (วัดจริงภายหลัง)", "44"),
-      p("onRowClick", "(row) => void", "Row clicked.", "เรียกเมื่อคลิกแถว"),
+      p("onRowClick", "(row: TData) => void", "Row clicked; receives the row's data.", "เรียกเมื่อคลิกแถว ได้ข้อมูลของแถวนั้น"),
+      p("className", "string", "Classes for the scroll container.", "class ของกรอบที่เลื่อน"),
     ],
-    upstream: { label: "TanStack Virtual", href: "https://tanstack.com/virtual/latest" },
+    upstream: { label: "TanStack Table (column definitions)", href: "https://tanstack.com/table/v8/docs/guide/column-defs" },
   },
   "data-table": {
     th: "ตารางข้อมูลจาก TanStack Table มีช่องค้นหา กดหัวคอลัมน์เพื่อเรียง เลือกแถว และแบ่งหน้า",

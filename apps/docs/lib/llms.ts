@@ -90,6 +90,8 @@ function intro(full: boolean): string[] {
     "",
     "Rules:",
     "- Files land in `components/ui/<name>.tsx`; sections land in `components/section-*.tsx`; templates land in `app/<route>/page.tsx`.",
+    "- Components with state or event handlers are client components: files that use them need `\"use client\"`, as the examples show.",
+    "- Icons in the examples come from `lucide-react`.",
     "- When Mintel has a component, use it instead of the stock shadcn one with the same name. For anything Mintel does not have, stock shadcn components work with the theme.",
     `- The source and dependencies of an item are at \`${REGISTRY_URL}/<name>.json\`; the index of all items is \`${REGISTRY_URL}/registry.json\`.`,
     `- Step-by-step guide: ${abs("/getting-started")}`,
@@ -106,6 +108,10 @@ function intro(full: boolean): string[] {
     "Rules:",
     "- Admins place components in Lightning App Builder or Experience Builder, where each is listed under Custom by its App Builder name (\"Mintel Kanban\"). Developers use the tag (`<c-kanban>`) inside their own LWC.",
     "- Every component carries its own styles. \"Mintel Brand Loader\" is optional: once per Lightning page, Theme = brand gives standard `lightning-*` components the Mintel brand; Theme = follow-org makes the Mintel components follow the org's SLDS 2 theme instead.",
+    "- After deploying: open a page, gear icon, Edit Page, drag the component from Custom, set its properties, then Save and Activate.",
+    "- On a record page, `recordId` and `objectApiName` are filled in by Salesforce; you do not enter them.",
+    "- Text inside the components is Thai by default: set the Language property (`locale`) to `en` for English.",
+    "- To use a component inside your own LWC, deploy Mintel UI to the org first, then reference its tag; attributes are the property names in kebab-case.",
     "- No component uses Apex; they use the UI API, so sharing and field-level security apply.",
     "- In your own LWC CSS, `@import 'c/tokens';` gives the `--mintel-*` variables.",
     `- Step-by-step guide: ${abs("/salesforce/get-started")}`,
@@ -202,12 +208,16 @@ export function buildLlmsFull(): string {
         lines.push("App Builder properties (the same names are attributes in kebab-case, or `@api` properties, from a parent LWC):")
         for (const p of meta.properties) {
           const extra = [p.type, p.default ? `default ${p.default}` : "", p.options ? `options: ${p.options}` : "", `on: ${targetNames(p.targets)}`].filter(Boolean).join("; ")
-          lines.push(`- \`${p.name}\` — ${p.label} (${extra})`)
+          lines.push(`- \`${p.name}\` — ${p.label} (${extra})${p.description ? `. ${p.description}` : ""}`)
         }
         lines.push("")
       }
       if (meta.apiOnly.length) lines.push(`Set from a parent LWC only: ${meta.apiOnly.map((a) => `\`${a}\``).join(", ")}`, "")
-      if (meta.events.length) lines.push(`Events: ${meta.events.map((e) => `\`on${e}\``).join(", ")}`, "")
+      if (meta.events.length) {
+        lines.push("Events:")
+        for (const e of meta.events) lines.push(`- \`on${e}\`${meta.eventDetails[e] ? ` — event.detail: { ${meta.eventDetails[e].join(", ")} }` : ""}`)
+        lines.push("")
+      }
       const usage = SF_COMPONENTS.find((x) => x.name === c.name)?.usage
       if (usage) lines.push("Usage:", "```html", usage.trim(), "```", "")
     }
