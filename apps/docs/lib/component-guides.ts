@@ -70,6 +70,16 @@ export const COMPONENT_GUIDES: Record<string, ComponentGuide> = {
       l("More than about 6 tabs, or content people compare side by side.", "มีมากกว่าประมาณ 6 แท็บ หรือเนื้อหาที่ต้องเทียบกัน"),
     ],
   },
+  "segmented-control": {
+    use: [
+      l("Two to five options that change one view: Day / Week / Month, List / Board.", "ตัวเลือก 2–5 ตัวที่เปลี่ยนมุมมองเดียว เช่น วัน / สัปดาห์ / เดือน หรือ รายการ / บอร์ด"),
+    ],
+    avoid: [
+      l("Separate content per option: use tabs.", "แต่ละตัวเลือกมีเนื้อหาแยกกัน ควรใช้ tabs", "tabs"),
+      l("Turning several options on at once: use a toggle group.", "เปิดหลายตัวเลือกพร้อมกัน ควรใช้ toggle group", "toggle-group"),
+      l("More than five options or long labels: use a select.", "มีมากกว่า 5 ตัวเลือกหรือชื่อยาว ควรใช้ select", "select"),
+    ],
+  },
   toast: {
     use: [
       l("Confirming an action finished: saved, sent, copied.", "ยืนยันว่าการกระทำเสร็จแล้ว เช่น บันทึกแล้ว ส่งแล้ว คัดลอกแล้ว"),

@@ -35,7 +35,8 @@ export const SF_GUIDES: Record<string, SfGuide> = {
     ],
     avoid: [
       l("You need guidance text and key fields per stage: the standard Path has them.", "ต้องการคำแนะนำและฟิลด์สำคัญของแต่ละขั้น ซึ่ง Path มาตรฐานมีให้"),
-      l("Switching between views of the page.", "สลับมุมมองของหน้า", "tabs"),
+      l("Related records people move between stages (the Opportunities of an Account).", "record ลูกที่ต้องย้ายสถานะ เช่น Opportunity ของ Account", "kanban"),
+      l("Only showing a status, with no way to change it.", "แค่แสดงสถานะ โดยไม่ให้เปลี่ยน", "statusBadge"),
     ],
   },
   statCard: {

@@ -5,7 +5,7 @@ import { join } from "node:path"
 
 const LWC_DIR = join(process.cwd(), "../../packages/salesforce/force-app/main/default/lwc")
 
-export type SfProperty = { name: string; type: string; label: string; default?: string; options?: string; targets: string[] }
+export type SfProperty = { name: string; type: string; label: string; description?: string; default?: string; options?: string; targets: string[] }
 export type SfMeta = {
   label?: string
   exposed: boolean
@@ -15,6 +15,8 @@ export type SfMeta = {
   /** @api names that are not App Builder properties (set from a parent LWC). */
   apiOnly: string[]
   events: string[]
+  /** Keys of each event's detail object, where the code builds it as a literal. */
+  eventDetails: Record<string, string[]>
   apex: boolean
 }
 
@@ -43,6 +45,7 @@ export function readSfMeta(name: string): SfMeta {
           name: n,
           type: attr(p[0], "type") ?? "String",
           label: attr(p[0], "label") ?? n,
+          description: attr(p[0], "description"),
           default: attr(p[0], "default"),
           options: attr(p[0], "datasource"),
           targets: [...cfgTargets],
@@ -53,6 +56,12 @@ export function readSfMeta(name: string): SfMeta {
   const api = [...js.matchAll(/@api\s+(?:get\s+)?(\w+)/g)].map((m) => m[1])
   const events = [...new Set([...js.matchAll(/new CustomEvent\(\s*['"]([\w-]+)['"]/g)].map((m) => m[1]))]
 
+  const eventDetails: Record<string, string[]> = {}
+  for (const m of js.matchAll(/new CustomEvent\(\s*['"]([\w-]+)['"]\s*,\s*\{[^{}]*?detail:\s*\{([^{}]*)\}/g)) {
+    const keys = m[2].split(",").map((k) => k.trim().split(":")[0].trim()).filter((k) => /^\w+$/.test(k))
+    if (keys.length) eventDetails[m[1]] = [...new Set([...(eventDetails[m[1]] ?? []), ...keys])]
+  }
+
   return {
     label: xml.match(/<masterLabel>([^<]+)<\/masterLabel>/)?.[1],
     exposed: /<isExposed>true<\/isExposed>/.test(xml),
@@ -61,6 +70,7 @@ export function readSfMeta(name: string): SfMeta {
     properties: [...props.values()],
     apiOnly: [...new Set(api)].filter((n) => !props.has(n)),
     events,
+    eventDetails,
     apex: /@salesforce\/apex\//.test(js),
   }
 }

@@ -9,12 +9,12 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
-            <property name="relatedListId" type="String" label="Related list API name" default="Opportunities" />
+            <property name="relatedListId" type="String" label="Related list API name" default="Opportunities" description="Child relationship name, e.g. Opportunities, Cases, Contacts" />
             <property name="childObjectApiName" type="String" label="Child object API name" default="Opportunity" />
             <property name="groupField" type="String" label="Column picklist field" default="StageName" />
-            <property name="titleField" type="String" label="Card title field" default="Name" />
-            <property name="subtitleField" type="String" label="Card second line field" default="Amount" />
-            <property name="hideValues" type="String" label="Picklist values to hide (comma-separated)" default="" />
+            <property name="titleField" type="String" label="Card title field" default="Name" description="Field of the child object shown as the card title, e.g. Name, or CaseNumber for Cases" />
+            <property name="subtitleField" type="String" label="Card second line field" default="Amount" description="Field of the child object shown under the title, e.g. Amount, or Subject for Cases" />
+            <property name="hideValues" type="String" label="Picklist values to hide (comma-separated)" default="" description="API values of the picklist, e.g. Closed Lost" />
             <property name="pageSize" type="Integer" label="Most records to load" default="50" />
             <property name="label" type="String" label="Heading" />
             <property name="locale" type="String" label="Language" datasource="th,en" default="th" />
