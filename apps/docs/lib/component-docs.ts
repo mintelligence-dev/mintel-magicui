@@ -89,6 +89,13 @@ export const BADGES: Record<string, "new" | "updated"> = {
   ...Object.fromEntries(
     (items as RawItem[]).filter((i) => isSection(i.name)).map((i) => [i.name, "new" as const])
   ),
+  "sf:relatedCards": "new",
+  "sf:kanban": "new",
+  "sf:activityTimeline": "new",
+  "sf:recordHeader": "new",
+  "sf:slaTimer": "new",
+  "sf:conversation": "new",
+  "sf:thaiAddress": "new",
   stepper: "updated",
   tabs: "updated",
   "date-picker": "updated",

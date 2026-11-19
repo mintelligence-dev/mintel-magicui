@@ -307,6 +307,8 @@ const en = {
       shimmerButton: "Brand-gradient call to action with a light sweep; fires a normal click event.",
       gradientText: "Headline filled with a slowly moving brand gradient.",
       statCard: "KPI card whose number counts up when it appears.",
+      brandLoader:
+        "Invisible helper: drop it once on an app, home or record page to load the mintelGlobal stylesheet, so standard lightning-* components switch to the Mintel brand.",
       fontSizeControl:
         "Text-size control (ก- ก ก+) for Experience Cloud: scales the page and remembers the choice. Not for Lightning Experience, whose global font size should not change.",
     },
@@ -614,6 +616,8 @@ const th: Dict = {
       shimmerButton: "ปุ่ม call to action สีแบรนด์ มีแสงวิ่งรอบขอบ ส่ง click event ปกติ",
       gradientText: "หัวข้อที่เติมสีไล่เฉดแบรนด์ซึ่งค่อยๆ เคลื่อนที่",
       statCard: "การ์ด KPI ที่ตัวเลขนับขึ้นตอนแสดงผล",
+      brandLoader:
+        "ตัวช่วยที่มองไม่เห็น วางครั้งเดียวในหน้า app, home หรือ record เพื่อโหลด stylesheet mintelGlobal ให้ component มาตรฐาน lightning-* เป็นแบรนด์ Mintel",
       fontSizeControl:
         "ปุ่มปรับขนาดตัวอักษร (ก- ก ก+) สำหรับ Experience Cloud ขยายทั้งหน้าและจำค่าที่เลือก ไม่ใช้กับ Lightning Experience เพราะไม่ควรเปลี่ยนขนาดฟอนต์ของทั้งระบบ",
     },

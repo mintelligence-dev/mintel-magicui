@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 
-import { COMPONENTS, GUIDES, TEMPLATES, openPage } from "./pages"
+import { COMPONENTS, GUIDES, SF_PAGES, TEMPLATES, openPage } from "./pages"
 
 /** Fails on serious and critical WCAG 2.1 A/AA issues; prints every finding so it can be fixed. */
 async function audit(page: import("@playwright/test").Page) {
@@ -21,6 +21,7 @@ const PAGES = [
   ...GUIDES,
   ...COMPONENTS.map((c) => `/components/${c}`),
   ...TEMPLATES.map((t) => `/templates/${t}`),
+  ...SF_PAGES.map((n) => `/salesforce/${n}`),
 ]
 
 for (const path of PAGES) {
