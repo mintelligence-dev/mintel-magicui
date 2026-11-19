@@ -1,0 +1,16 @@
+{
+  "name": "mintel-magicui",
+  "private": true,
+  "description": "M-Intelligence design system: brand tokens (React + Salesforce LWC) and a shadcn-compatible component registry with animated components.",
+  "license": "MIT",
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "build:tokens": "npm run build -w @mintelligence-dev/tokens",
+    "build:registry": "npm run registry:build -w docs",
+    "build": "npm run build:tokens && npm run build -w docs",
+    "dev": "npm run build:tokens && npm run dev -w docs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

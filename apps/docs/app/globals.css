@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "@mintelligence-dev/tokens/tailwind.css";
+@import "./registry.css";
+
+/* next/font exposes the brand fonts as CSS variables; point the token font stacks at them. */
+:root {
+  --mintel-font-sans: var(--font-manrope), var(--font-plex-thai), ui-sans-serif, system-ui, sans-serif;
+  --mintel-font-heading: var(--font-rubik), var(--font-plex-thai), ui-sans-serif, system-ui, sans-serif;
+  --mintel-font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}

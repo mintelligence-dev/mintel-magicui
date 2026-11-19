@@ -1,0 +1,572 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "mintel",
+  "homepage": "https://github.com/mintelligence-dev/mintel-magicui",
+  "items": [
+    {
+      "name": "mintel-theme",
+      "type": "registry:theme",
+      "title": "Mintel Theme",
+      "description": "M-Intelligence brand theme: colors (light + dark), fonts and radius. Install this first.",
+      "cssVars": {
+        "theme": {
+          "font-sans": "Manrope, \"IBM Plex Sans Thai\", ui-sans-serif, system-ui, sans-serif",
+          "font-heading": "Rubik, \"IBM Plex Sans Thai\", ui-sans-serif, system-ui, sans-serif",
+          "font-mono": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, monospace",
+          "color-brand": "var(--brand)",
+          "color-brand-foreground": "var(--brand-foreground)",
+          "color-brand-accent": "var(--brand-accent)",
+          "color-brand-accent-foreground": "var(--brand-accent-foreground)",
+          "color-brand-cyan": "var(--brand-cyan)",
+          "color-success": "var(--success)",
+          "color-warning": "var(--warning)",
+          "color-info": "var(--info)",
+          "brand-gradient": "linear-gradient(135deg, var(--brand) 0%, var(--brand-accent) 100%)"
+        },
+        "light": {
+          "radius": "0.625rem",
+          "background": "#FFFFFF",
+          "foreground": "#181B31",
+          "card": "#FFFFFF",
+          "card-foreground": "#181B31",
+          "popover": "#FFFFFF",
+          "popover-foreground": "#181B31",
+          "primary": "#295DA8",
+          "primary-foreground": "#FFFFFF",
+          "secondary": "#F2F3F8",
+          "secondary-foreground": "#181B31",
+          "muted": "#F2F3F8",
+          "muted-foreground": "#6E717E",
+          "accent": "#EDF6FF",
+          "accent-foreground": "#1A3F73",
+          "destructive": "#DC2626",
+          "destructive-foreground": "#FFFFFF",
+          "border": "#E5E6EA",
+          "input": "#E5E6EA",
+          "ring": "#5186D5",
+          "brand": "#295DA8",
+          "brand-foreground": "#FFFFFF",
+          "brand-accent": "#7040F2",
+          "brand-accent-foreground": "#FFFFFF",
+          "brand-cyan": "#06B6D4",
+          "success": "#16A34A",
+          "warning": "#D97706",
+          "info": "#0891B2",
+          "chart-1": "#295DA8",
+          "chart-2": "#7040F2",
+          "chart-3": "#06B6D4",
+          "chart-4": "#10B981",
+          "chart-5": "#F59E0B",
+          "sidebar": "#F9FAFE",
+          "sidebar-foreground": "#181B31",
+          "sidebar-primary": "#295DA8",
+          "sidebar-primary-foreground": "#FFFFFF",
+          "sidebar-accent": "#F2F3F8",
+          "sidebar-accent-foreground": "#181B31",
+          "sidebar-border": "#E5E6EA",
+          "sidebar-ring": "#5186D5"
+        },
+        "dark": {
+          "background": "#0C0E1E",
+          "foreground": "#F9FAFE",
+          "card": "#181B31",
+          "card-foreground": "#F9FAFE",
+          "popover": "#181B31",
+          "popover-foreground": "#F9FAFE",
+          "primary": "#72A3EB",
+          "primary-foreground": "#0C0E1E",
+          "secondary": "#272A3D",
+          "secondary-foreground": "#F9FAFE",
+          "muted": "#272A3D",
+          "muted-foreground": "#9EA1AE",
+          "accent": "#272A3D",
+          "accent-foreground": "#F9FAFE",
+          "destructive": "#EF4444",
+          "destructive-foreground": "#FFFFFF",
+          "border": "#272A3D",
+          "input": "#3B3E52",
+          "ring": "#72A3EB",
+          "brand": "#72A3EB",
+          "brand-foreground": "#0C0E1E",
+          "brand-accent": "#9E82FF",
+          "brand-accent-foreground": "#0C0E1E",
+          "brand-cyan": "#22D3EE",
+          "success": "#4ADE80",
+          "warning": "#FBBF24",
+          "info": "#22D3EE",
+          "chart-1": "#72A3EB",
+          "chart-2": "#9E82FF",
+          "chart-3": "#22D3EE",
+          "chart-4": "#4ADE80",
+          "chart-5": "#FBBF24",
+          "sidebar": "#181B31",
+          "sidebar-foreground": "#F9FAFE",
+          "sidebar-primary": "#72A3EB",
+          "sidebar-primary-foreground": "#0C0E1E",
+          "sidebar-accent": "#272A3D",
+          "sidebar-accent-foreground": "#F9FAFE",
+          "sidebar-border": "#272A3D",
+          "sidebar-ring": "#72A3EB"
+        }
+      }
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Button with Mintel brand variants (default, brand gradient, secondary, outline, ghost, destructive, link).",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Status badge with brand, soft, success, warning and destructive variants.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Card container with header, title, description, action, content and footer slots.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Text input styled with Mintel tokens.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "animated-beam",
+      "type": "registry:ui",
+      "title": "Animated Beam",
+      "description": "An animated beam of light which travels along a path. Useful for showcasing the integration features of a website.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/animated-beam.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      }
+    },
+    {
+      "name": "animated-gradient-text",
+      "type": "registry:ui",
+      "title": "Animated Gradient Text",
+      "description": "An animated gradient background which transitions between colors for text.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/animated-gradient-text.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "animate-gradient": "gradient 8s linear infinite"
+        }
+      },
+      "css": {
+        "@keyframes gradient": {
+          "to": {
+            "background-position": "var(--bg-size, 300%) 0"
+          }
+        }
+      },
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      }
+    },
+    {
+      "name": "aurora-text",
+      "type": "registry:ui",
+      "title": "Aurora Text",
+      "description": "A beautiful aurora text effect",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/aurora-text.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "animate-aurora": "aurora 8s ease-in-out infinite alternate"
+        }
+      },
+      "css": {
+        "@keyframes aurora": {
+          "0%": {
+            "background-position": "0% 50%",
+            "transform": "rotate(-5deg) scale(0.9)"
+          },
+          "25%": {
+            "background-position": "50% 100%",
+            "transform": "rotate(5deg) scale(1.1)"
+          },
+          "50%": {
+            "background-position": "100% 50%",
+            "transform": "rotate(-3deg) scale(0.95)"
+          },
+          "75%": {
+            "background-position": "50% 0%",
+            "transform": "rotate(3deg) scale(1.05)"
+          },
+          "100%": {
+            "background-position": "0% 50%",
+            "transform": "rotate(-5deg) scale(0.9)"
+          }
+        }
+      },
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      }
+    },
+    {
+      "name": "blur-fade",
+      "type": "registry:ui",
+      "title": "Blur Fade",
+      "description": "Blur fade in and out animation. Used to smoothly fade in and out content.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/blur-fade.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      }
+    },
+    {
+      "name": "border-beam",
+      "type": "registry:ui",
+      "title": "Border Beam",
+      "description": "An animated beam of light which travels along the border of its container.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/border-beam.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      }
+    },
+    {
+      "name": "dot-pattern",
+      "type": "registry:ui",
+      "title": "Dot Pattern",
+      "description": "A background dot pattern made with SVGs, fully customizable using Tailwind CSS.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/dot-pattern.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      },
+      "cssVars": {
+        "theme": {
+          "animate-dot-glow": "dot-glow var(--dot-duration, 3s) ease-in-out infinite"
+        }
+      },
+      "css": {
+        "@keyframes dot-glow": {
+          "0%, 100%": {
+            "opacity": "0.4",
+            "transform": "scale(1)"
+          },
+          "50%": {
+            "opacity": "1",
+            "transform": "scale(1.5)"
+          }
+        }
+      }
+    },
+    {
+      "name": "magic-card",
+      "type": "registry:ui",
+      "title": "Magic Card",
+      "description": "A spotlight effect that follows your mouse cursor and highlights borders on hover.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/magic-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      }
+    },
+    {
+      "name": "marquee",
+      "type": "registry:ui",
+      "title": "Marquee",
+      "description": "An infinite scrolling component that can be used to display text, images, or videos.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/marquee.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "animate-marquee": "marquee var(--duration) infinite linear",
+          "animate-marquee-vertical": "marquee-vertical var(--duration) linear infinite"
+        }
+      },
+      "css": {
+        "@keyframes marquee": {
+          "from": {
+            "transform": "translateX(0)"
+          },
+          "to": {
+            "transform": "translateX(calc(-100% - var(--gap)))"
+          }
+        },
+        "@keyframes marquee-vertical": {
+          "from": {
+            "transform": "translateY(0)"
+          },
+          "to": {
+            "transform": "translateY(calc(-100% - var(--gap)))"
+          }
+        }
+      },
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      }
+    },
+    {
+      "name": "meteors",
+      "type": "registry:ui",
+      "title": "Meteors",
+      "description": "A meteor shower effect.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/meteors.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "animate-meteor": "meteor 5s linear infinite"
+        }
+      },
+      "css": {
+        "@keyframes meteor": {
+          "0%": {
+            "transform": "rotate(var(--angle)) translateX(0)",
+            "opacity": "1"
+          },
+          "70%": {
+            "opacity": "1"
+          },
+          "100%": {
+            "transform": "rotate(var(--angle)) translateX(-500px)",
+            "opacity": "0"
+          }
+        }
+      },
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      }
+    },
+    {
+      "name": "number-ticker",
+      "type": "registry:ui",
+      "title": "Number Ticker",
+      "description": "Animate numbers to count up or down to a target number",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/number-ticker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      }
+    },
+    {
+      "name": "shimmer-button",
+      "type": "registry:ui",
+      "title": "Shimmer Button",
+      "description": "A button with a shimmering light which travels around the perimeter.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/shimmer-button.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "animate-shimmer-slide": "shimmer-slide var(--speed) ease-in-out infinite alternate",
+          "animate-spin-around": "spin-around calc(var(--speed) * 2) infinite linear"
+        }
+      },
+      "css": {
+        "@keyframes shimmer-slide": {
+          "to": {
+            "transform": "translate(calc(100cqw - 100%), 0)"
+          }
+        },
+        "@keyframes spin-around": {
+          "0%": {
+            "transform": "translateZ(0) rotate(0)"
+          },
+          "15%, 35%": {
+            "transform": "translateZ(0) rotate(90deg)"
+          },
+          "65%, 85%": {
+            "transform": "translateZ(0) rotate(270deg)"
+          },
+          "100%": {
+            "transform": "translateZ(0) rotate(360deg)"
+          }
+        }
+      },
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      }
+    },
+    {
+      "name": "shine-border",
+      "type": "registry:ui",
+      "title": "Shine Border",
+      "description": "Shine border is an animated background border effect.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/mintel/magicui/shine-border.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "animate-shine": "shine var(--duration) infinite linear"
+        }
+      },
+      "css": {
+        "@keyframes shine": {
+          "0%": {
+            "background-position": "0% 0%"
+          },
+          "50%": {
+            "background-position": "100% 100%"
+          },
+          "to": {
+            "background-position": "0% 0%"
+          }
+        }
+      },
+      "meta": {
+        "source": "Magic UI (MIT)",
+        "category": "animated"
+      }
+    }
+  ]
+}
