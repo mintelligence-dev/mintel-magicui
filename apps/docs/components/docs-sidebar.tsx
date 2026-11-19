@@ -1,4 +1,4 @@
-import { BookOpen, ChartColumn, LayoutPanelTop, Palette, ChevronRight, Cloud, Component, FormInput, Layers, LayoutGrid, LayoutTemplate, Orbit, PanelsTopLeft, Smartphone, Sparkles } from "lucide-react"
+import { BookOpen, History, ChartColumn, LayoutPanelTop, Palette, ChevronRight, Cloud, Component, FormInput, Layers, LayoutGrid, LayoutTemplate, Orbit, PanelsTopLeft, Smartphone, Sparkles } from "lucide-react"
 
 import { ItemBadge } from "@/components/item-badge"
 import { CATEGORY_LABEL, ITEMS, itemsByCategory, type Category } from "@/lib/component-docs"
@@ -31,6 +31,7 @@ export function DocsSidebar({ lang, current }: { lang: Lang; current: string }) 
     { key: "components", path: "/components", label: t.allComponents, icon: LayoutGrid },
     { key: "templates", path: "/templates", label: t.templates, icon: LayoutTemplate },
     { key: "salesforce", path: "/salesforce", label: "Salesforce", icon: Cloud },
+    { key: "changelog", path: "/changelog", label: t.changelog, icon: History },
   ]
 
   return (
