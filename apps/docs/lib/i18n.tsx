@@ -258,7 +258,7 @@ const en = {
       },
       {
         title: "Ready-made Mintel LWC",
-        body: "Glass card, shimmer button, gradient text and stat card — drag them onto any Lightning or Experience Builder page.",
+        body: "Record pages, KPIs, kanban, timelines, Thai forms, chat and Experience Cloud sections — about 30 components to drag onto any Lightning or Experience Builder page.",
       },
     ],
     previewTitle: "Live preview: SLDS vs. Mintel",
@@ -328,7 +328,7 @@ const en = {
     deployTitle: "Deploy to your org",
     deploySteps: [
       "Log in to the org with the Salesforce CLI.",
-      "Deploy the SFDX project from packages/salesforce.",
+      "Deploy with npm run deploy: it checks the org for name conflicts first.",
       "In Lightning App Builder, add “Mintel Brand Loader” once per page, then place the components you need.",
     ],
     lwrTitle: "Experience Cloud (LWR)",
@@ -581,7 +581,7 @@ const th: Dict = {
       },
       {
         title: "LWC สำเร็จรูปของ Mintel",
-        body: "Glass card, shimmer button, gradient text และ stat card ลากวางบนหน้า Lightning หรือ Experience Builder ได้เลย",
+        body: "หน้า record, KPI, kanban, timeline, ฟอร์มไทย, แชต และ section สำหรับ Experience Cloud รวมราว 30 ตัว ลากวางบนหน้า Lightning หรือ Experience Builder ได้เลย",
       },
     ],
     previewTitle: "ตัวอย่างจริง: SLDS เทียบกับ Mintel",
@@ -650,7 +650,7 @@ const th: Dict = {
     deployTitle: "Deploy เข้า org",
     deploySteps: [
       "Login เข้า org ด้วย Salesforce CLI",
-      "Deploy SFDX project จาก packages/salesforce",
+      "Deploy ด้วย npm run deploy ซึ่งจะตรวจชื่อซ้ำใน org ก่อน",
       "ใน Lightning App Builder ใส่ “Mintel Brand Loader” หน้าละ 1 ตัว แล้ววาง component ที่ต้องการ",
     ],
     lwrTitle: "Experience Cloud (LWR)",

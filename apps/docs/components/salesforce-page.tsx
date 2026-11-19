@@ -1,13 +1,17 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
-import { ArrowUpRight, Cloud, LayoutTemplate, Palette, ShieldCheck } from "lucide-react"
+import { ArrowRight, ArrowUpRight, Cloud, LayoutTemplate, Palette, ShieldCheck } from "lucide-react"
 
 import { CopyCommand } from "@/components/copy-command"
 import { ItemBadge } from "@/components/item-badge"
 import { SfShell } from "@/components/sf-shell"
+import { PathPreview } from "@/components/path-preview"
+import { RecordHeaderPreview } from "@/components/sf-more-previews"
+import { KpiTrendPreview, QuickActionsPreview } from "@/components/sf-new-previews"
 import { SldsPreview } from "@/components/slds-preview"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
 import { SF_COMPONENTS, SF_GROUP_ORDER, sfTag } from "@/lib/sf-components"
+import { SF_GROUP_STYLE, sfIcon } from "@/lib/sf-icons"
 import { SF_LABELS } from "@/lib/sf-labels"
 import { scopeLwcCss } from "@/lib/scope-css"
 import { Badge } from "@/registry/mintel/ui/badge"
@@ -35,16 +39,66 @@ export function SalesforcePage({ lang }: { lang: Lang }) {
   return (
     <SfShell lang={lang} current="overview">
 
-      <section className="pb-10">
-        <p className="text-sm font-semibold tracking-wide text-brand uppercase">{t.eyebrow}</p>
-        <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold tracking-tight sm:text-6xl">{t.title}</h1>
-        <p className="mt-5 max-w-2xl text-lg text-muted-foreground">{t.subtitle}</p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          {["Lightning Experience", "Salesforce mobile app", "Experience Cloud (LWR)", "SLDS"].map((x) => (
-            <Badge key={x} variant="soft">
-              {x}
-            </Badge>
-          ))}
+      <section className="grid items-center gap-12 pb-12 xl:grid-cols-[minmax(0,1fr)_minmax(0,34rem)]">
+        <div>
+          <p className="text-sm font-semibold tracking-wide text-brand uppercase">{t.eyebrow}</p>
+          <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold tracking-tight text-balance sm:text-6xl xl:text-5xl 2xl:text-6xl">{t.title}</h1>
+          <p className="mt-5 max-w-2xl text-lg text-muted-foreground">{t.subtitle}</p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a
+              href={langPath(lang, "/salesforce/get-started")}
+              className="inline-flex items-center gap-2 rounded-full bg-[image:var(--brand-gradient)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_-12px_var(--brand)] transition-[translate,box-shadow] duration-300 ease-spring-snappy hover:-translate-y-0.5 motion-reduce:transition-none"
+            >
+              {sl.heroCta} <ArrowRight className="size-4" />
+            </a>
+            <a href="#lwc" className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition-colors hover:bg-muted">
+              {sl.heroBrowse}
+            </a>
+          </div>
+          <dl className="mt-10 grid max-w-xl grid-cols-3 gap-4 border-t pt-6">
+            {[
+              [String(SF_COMPONENTS.length), sl.stats.components],
+              ["0", sl.stats.apex],
+              ["5", sl.stats.targets],
+            ].map(([n, label]) => (
+              <div key={label} className="flex min-w-0 flex-col gap-1">
+                <dt className="text-xs text-muted-foreground">{label}</dt>
+                <dd className="order-first font-heading text-3xl font-bold tabular-nums">{n}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {["Lightning Experience", "Salesforce mobile app", "Experience Cloud (LWR)", "SLDS"].map((x) => (
+              <Badge key={x} variant="soft">
+                {x}
+              </Badge>
+            ))}
+          </div>
+        </div>
+
+        {/* Decorative: a record page assembled from the React twins of the LWC. */}
+        <div aria-hidden inert className="relative hidden min-w-0 sm:block">
+          <div className="pointer-events-none absolute -inset-8 -z-10 rounded-[3rem] bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--brand)_18%,transparent),transparent)]" />
+          <div className="overflow-hidden rounded-2xl border bg-muted/40 shadow-[0_30px_60px_-30px_color-mix(in_oklab,var(--brand)_45%,transparent)] backdrop-blur">
+            <div className="flex items-center gap-1.5 border-b bg-card/80 px-4 py-2.5">
+              <span className="size-2.5 rounded-full bg-destructive/60" />
+              <span className="size-2.5 rounded-full bg-warning/60" />
+              <span className="size-2.5 rounded-full bg-success/60" />
+              <span className="ml-3 truncate text-xs text-muted-foreground">Case · 00012345 | Salesforce</span>
+            </div>
+            <div className="grid grid-cols-[minmax(0,1fr)] gap-3 p-4 [&>*]:max-w-none">
+              <RecordHeaderPreview />
+              <div className="rounded-2xl border bg-card p-3 [&_*]:[scrollbar-width:none]">
+                <PathPreview />
+              </div>
+              <div className="rounded-2xl border bg-card p-3 [&_button]:min-h-18 [&_ul]:max-w-none [&_ul]:grid-cols-4">
+                <QuickActionsPreview />
+              </div>
+            </div>
+          </div>
+          <div className="absolute -bottom-8 -left-10 hidden w-60 rotate-[-3deg] shadow-xl xl:block [&>*]:max-w-none">
+            <KpiTrendPreview />
+          </div>
         </div>
       </section>
 
@@ -87,29 +141,48 @@ export function SalesforcePage({ lang }: { lang: Lang }) {
       <section id="lwc" className="scroll-mt-20 py-10">
         <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">{t.componentsTitle}</h2>
         <p className="mt-3 max-w-3xl text-muted-foreground">{t.componentsBody}</p>
-        <div className="mt-8 space-y-10">
-          {SF_GROUP_ORDER.map((g) => (
-            <div key={g}>
-              <h3 className="mb-3 text-sm font-semibold tracking-wide text-muted-foreground uppercase">{sl.groups[g]}</h3>
-              <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                {SF_COMPONENTS.filter((c) => c.group === g).map((c) => (
-                  <li key={c.name}>
-                    <a
-                      href={langPath(lang, `/salesforce/${c.name}`)}
-                      className="group relative flex h-full flex-col gap-1 rounded-xl border bg-card p-4 transition-[border-color,box-shadow,translate] duration-300 ease-spring-snappy hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md motion-reduce:transition-none"
-                    >
-                      <span className="flex items-center gap-2 font-mono text-sm font-semibold">
-                        {sfTag(c.name)}
-                        <ItemBadge name={`sf:${c.name}`} lang={lang} />
-                      </span>
-                      <span className="line-clamp-2 text-sm text-muted-foreground">{(t.components as Record<string, string>)[c.name]}</span>
-                      <ArrowUpRight className="absolute top-4 right-4 size-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="mt-8 space-y-12">
+          {SF_GROUP_ORDER.map((g) => {
+            const items = SF_COMPONENTS.filter((c) => c.group === g)
+            const style = SF_GROUP_STYLE[g]
+            const GroupIcon = style.icon
+            return (
+              <div key={g}>
+                <h3 className="mb-4 flex items-center gap-3">
+                  <span className={`inline-flex size-8 items-center justify-center rounded-lg ${style.tile}`}>
+                    <GroupIcon className="size-4" />
+                  </span>
+                  <span className="font-heading text-lg font-semibold">{sl.groups[g]}</span>
+                  <span className="text-sm text-muted-foreground">{sl.count(items.length)}</span>
+                </h3>
+                <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                  {items.map((c) => {
+                    const Icon = sfIcon(c.name)
+                    return (
+                      <li key={c.name}>
+                        <a
+                          href={langPath(lang, `/salesforce/${c.name}`)}
+                          className={`group relative flex h-full gap-3.5 rounded-2xl border bg-card p-4 transition-[border-color,box-shadow,translate] duration-300 ease-spring-snappy hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/5 motion-reduce:transition-none ${style.hover}`}
+                        >
+                          <span className={`inline-flex size-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 ease-spring-bouncy group-hover:scale-110 group-hover:-rotate-6 motion-reduce:transition-none ${style.tile}`}>
+                            <Icon className="size-5" />
+                          </span>
+                          <span className="flex min-w-0 flex-col gap-1">
+                            <span className="flex flex-wrap items-center gap-2 pr-5 font-mono text-sm font-semibold">
+                              {sfTag(c.name)}
+                              <ItemBadge name={`sf:${c.name}`} lang={lang} />
+                            </span>
+                            <span className="line-clamp-2 text-sm text-muted-foreground">{(t.components as Record<string, string>)[c.name]}</span>
+                          </span>
+                          <ArrowUpRight className="absolute top-4 right-4 size-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                        </a>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            )
+          })}
         </div>
       </section>
 
@@ -129,7 +202,7 @@ export function SalesforcePage({ lang }: { lang: Lang }) {
           <CopyCommand label={d.nav.copy} command="sf org login web --alias my-org" />
           <CopyCommand
             label={d.nav.copy}
-            command="sf project deploy start --source-dir packages/salesforce/force-app --target-org my-org"
+            command="npm run deploy -w @mintelligence-dev/salesforce -- --target-org my-org"
           />
         </div>
 
