@@ -20,7 +20,13 @@ const themeItem = {
   description:
     "M-Intelligence brand theme: colors (light + dark), fonts and radius. Install this first.",
   // Safety net for apps whose globals.css lacks shadcn's base layer (Tailwind v4 borders default to currentColor).
-  css: { "@layer base": { "*": { "border-color": "var(--border)" } } },
+  css: {
+    "@layer base": {
+      "*": { "border-color": "var(--border)" },
+      // Tailwind v4 resets buttons to the default cursor.
+      'button:not(:disabled), [role="button"]:not(:disabled)': { cursor: "pointer" },
+    },
+  },
   cssVars: {
     theme: {
       ...theme.theme,

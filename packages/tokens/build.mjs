@@ -182,7 +182,7 @@ out(
     `@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));\n\n` +
     block("@theme inline", themeLines) +
     "\n" +
-    `@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  body {\n    @apply bg-background text-foreground font-sans antialiased;\n  }\n}\n`
+    `@layer base {\n  * {\n    @apply border-border outline-ring/50;\n  }\n  body {\n    @apply bg-background text-foreground font-sans antialiased;\n  }\n  /* Tailwind v4 resets buttons to the default cursor */\n  button:not(:disabled),\n  [role="button"]:not(:disabled) {\n    cursor: pointer;\n  }\n}\n`
 )
 
 // ---------- dist/fonts.css ----------

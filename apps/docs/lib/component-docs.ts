@@ -1,6 +1,6 @@
 import items from "@/registry/items.json"
 
-export type Category = "core" | "effects" | "glass" | "motion" | "mobile"
+export type Category = "core" | "forms" | "effects" | "glass" | "motion" | "mobile"
 
 export type RegistryItem = {
   name: string
@@ -11,10 +11,11 @@ export type RegistryItem = {
   files: string[]
 }
 
-export const CATEGORY_ORDER: Category[] = ["core", "glass", "motion", "mobile", "effects"]
+export const CATEGORY_ORDER: Category[] = ["core", "forms", "glass", "motion", "mobile", "effects"]
 
 export const CATEGORY_LABEL: Record<Category, { en: string; th: string }> = {
   core: { en: "Core UI", th: "Core UI" },
+  forms: { en: "Forms", th: "Forms" },
   effects: { en: "Effects", th: "Effects" },
   glass: { en: "Glass", th: "Glass" },
   motion: { en: "Fluid Motion", th: "Fluid Motion" },
@@ -30,11 +31,16 @@ type RawItem = {
   meta?: { category?: string }
 }
 
+// Core UI items that belong to the "Forms" group in the docs navigation.
+const FORM_ITEMS = new Set([
+  "input", "label", "textarea", "checkbox", "radio-group", "switch", "select", "combobox", "calendar", "date-picker", "form",
+])
+
 export const ITEMS: RegistryItem[] = (items as RawItem[]).map((it) => ({
   name: it.name,
   title: it.title,
   description: it.description,
-  category: (it.meta?.category as Category) ?? "core",
+  category: (it.meta?.category as Category) ?? (FORM_ITEMS.has(it.name) ? "forms" : "core"),
   dependencies: it.dependencies ?? [],
   files: it.files.map((f) => f.path),
 }))

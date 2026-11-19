@@ -77,7 +77,7 @@ function FontSizeControl({
   }
 
   const button =
-    "relative inline-flex h-8 min-w-9 items-center justify-center rounded-full px-2.5 font-medium outline-none transition-[background-color,color,transform] duration-300 ease-spring-snappy select-none touch-manipulation " +
+    "relative inline-flex h-8 min-w-9 cursor-pointer items-center justify-center rounded-full px-2.5 leading-none font-medium outline-none transition-[background-color,color,transform] duration-300 ease-spring-snappy select-none touch-manipulation " +
     "focus-visible:ring-[3px] focus-visible:ring-ring/50 active:scale-90 disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none " +
     "after:absolute after:-inset-1.5 pointer-fine:after:hidden"
 
