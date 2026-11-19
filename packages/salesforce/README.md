@@ -2,6 +2,21 @@
 
 An SFDX project with everything a Salesforce org needs to use the Mintel brand. Deployable as-is.
 
+## Namespace
+
+The project uses the namespace **`mintel`** (`sfdx-project.json`). Component names carry no prefix of their own;
+the namespace is the prefix:
+
+| Where | Tag |
+|---|---|
+| Inside this project (same namespace) | `<c-sla-timer>`, `@import 'c/tokens'` |
+| In an org that installed the package | `<mintel-sla-timer>`, `@import 'mintel/tokens'` |
+
+No package version exists yet. Before creating one, the namespace must be registered in a Developer Edition org
+owned by M-Intelligence and linked to the Dev Hub. Until then, a direct deploy puts the components in the target
+org's default namespace (`c`), where generic names such as `tabs`, `path` or `kanban` can overwrite components
+that already exist there, so check the target org for same-named bundles first.
+
 | Metadata | What it does |
 |---|---|
 | `lwc/tokens` | CSS-only module with all Mintel tokens as `--mintel-*` variables (`@import 'c/tokens';`) |
