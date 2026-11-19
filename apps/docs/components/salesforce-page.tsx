@@ -10,7 +10,7 @@ import { RecordHeaderPreview } from "@/components/sf-more-previews"
 import { KpiTrendPreview, QuickActionsPreview } from "@/components/sf-new-previews"
 import { SldsPreview } from "@/components/slds-preview"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
-import { SF_COMPONENTS, SF_GROUP_ORDER, sfTag } from "@/lib/sf-components"
+import { SF_COMPONENTS, SF_GROUP_ORDER, sfLabel, sfTag } from "@/lib/sf-components"
 import { SF_GROUP_STYLE, sfIcon } from "@/lib/sf-icons"
 import { SF_LABELS } from "@/lib/sf-labels"
 import { scopeLwcCss } from "@/lib/scope-css"
@@ -168,10 +168,11 @@ export function SalesforcePage({ lang }: { lang: Lang }) {
                             <Icon className="size-5" />
                           </span>
                           <span className="flex min-w-0 flex-col gap-1">
-                            <span className="flex flex-wrap items-center gap-2 pr-5 font-mono text-sm font-semibold">
-                              {sfTag(c.name)}
+                            <span className="flex flex-wrap items-center gap-2 pr-5 font-heading font-semibold">
+                              {sfLabel(c.name)}
                               <ItemBadge name={`sf:${c.name}`} lang={lang} />
                             </span>
+                            <span className="font-mono text-xs text-muted-foreground">{sfTag(c.name)}</span>
                             <span className="line-clamp-2 text-sm text-muted-foreground">{(t.components as Record<string, string>)[c.name]}</span>
                           </span>
                           <ArrowUpRight className="absolute top-4 right-4 size-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />

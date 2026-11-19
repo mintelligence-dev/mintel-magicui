@@ -23,6 +23,8 @@ export function KpiTrendPreview() {
       <svg viewBox="0 0 100 32" preserveAspectRatio="none" className="h-12 w-full overflow-visible" role="img" aria-label="Open cases: 31, 28, 35, 33, 37">
         <path d={`${line} L100,32 L0,32 Z`} className="fill-brand/12" />
         <path d={line} fill="none" className="stroke-brand" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+        {/* End dot, as in the LWC. */}
+        <circle cx={coords[coords.length - 1][0]} cy={coords[coords.length - 1][1]} r="2.2" className="fill-brand" />
       </svg>
       <p className="text-xs text-muted-foreground">Last 5 weeks</p>
     </article>

@@ -21,20 +21,28 @@ export function RelatedCardsPreview() {
         <p className="flex items-center gap-2 font-heading font-semibold">
           Cases <span className="rounded-full bg-muted px-2 text-xs font-semibold text-muted-foreground">5</span>
         </p>
-        <span className="rounded-md px-2 py-1 text-sm font-semibold text-brand">View all</span>
+        <button type="button" className="rounded-md px-2 py-1 text-sm font-semibold text-brand transition-colors hover:bg-brand/10">
+          View all
+        </button>
       </div>
       <ul className="grid gap-2 sm:grid-cols-2">
         {cases.map(([n, s, st]) => (
-          <li key={n} className="grid gap-1.5 rounded-xl border bg-card p-3 text-sm">
-            <span className="font-semibold text-brand">{n}</span>
-            <span className="grid grid-cols-[4rem_1fr] gap-2">
-              <span className="text-muted-foreground">Subject</span>
-              <span className="truncate">{s}</span>
-            </span>
-            <span className="grid grid-cols-[4rem_1fr] gap-2">
-              <span className="text-muted-foreground">Status</span>
-              <span>{st}</span>
-            </span>
+          <li key={n}>
+            {/* The whole card opens the record, as in the LWC. */}
+            <button
+              type="button"
+              className="grid w-full gap-1.5 rounded-xl border bg-card p-3 text-left text-sm transition-[translate,box-shadow,border-color] duration-300 ease-spring-snappy hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md hover:shadow-brand/10 motion-reduce:transition-none"
+            >
+              <span className="font-semibold text-brand">{n}</span>
+              <span className="grid grid-cols-[4rem_1fr] gap-2">
+                <span className="text-muted-foreground">Subject</span>
+                <span className="truncate">{s}</span>
+              </span>
+              <span className="grid grid-cols-[4rem_1fr] gap-2">
+                <span className="text-muted-foreground">Status</span>
+                <span>{st}</span>
+              </span>
+            </button>
           </li>
         ))}
       </ul>

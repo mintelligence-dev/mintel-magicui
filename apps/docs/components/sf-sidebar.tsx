@@ -2,7 +2,7 @@ import { Cloud, LayoutGrid, Rocket } from "lucide-react"
 
 import { ItemBadge } from "@/components/item-badge"
 import { langPath, type Lang } from "@/lib/i18n"
-import { SF_COMPONENTS, SF_GROUP_ORDER } from "@/lib/sf-components"
+import { SF_COMPONENTS, SF_GROUP_ORDER, sfLabel } from "@/lib/sf-components"
 import { SF_GROUP_STYLE, sfIcon } from "@/lib/sf-icons"
 import { SF_LABELS } from "@/lib/sf-labels"
 import { cn } from "@/lib/utils"
@@ -47,10 +47,10 @@ export function SfSidebar({ lang, current }: { lang: Lang; current: string }) {
                   <a
                     href={langPath(lang, `/salesforce/${c.name}`)}
                     aria-current={current === c.name ? "page" : undefined}
-                    className={cn(link(current === c.name), "font-mono text-[13px]")}
+                    className={link(current === c.name)}
                   >
                     <Icon className="size-3.5 shrink-0 opacity-70" />
-                    <span className="truncate">{c.name}</span>
+                    <span className="truncate">{sfLabel(c.name)}</span>
                     <ItemBadge name={`sf:${c.name}`} lang={lang} />
                   </a>
                 </li>

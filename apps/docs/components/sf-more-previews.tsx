@@ -32,6 +32,12 @@ export function SlaTimerPreview() {
     const id = setInterval(() => setLeft((s) => (s <= -90 ? 31 * 60 + 4 : s - 1)), 1000)
     return () => clearInterval(id)
   }, [])
+  // Deadline text, as the LWC shows it. Read the clock after mount only (the page is prerendered).
+  const [due, setDue] = useState<string>()
+  useEffect(() => {
+    const at = new Date(Date.now() + (31 * 60 + 4) * 1000)
+    setDue(at.toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }))
+  }, [])
   const state = left < 0 ? "overdue" : left <= 30 * 60 ? "risk" : "ok"
   const abs = Math.abs(left)
   const clock = `${left < 0 ? "+" : ""}${String(Math.floor(abs / 3600)).padStart(2, "0")}:${String(Math.floor((abs % 3600) / 60)).padStart(2, "0")}:${String(abs % 60).padStart(2, "0")}`
@@ -56,6 +62,7 @@ export function SlaTimerPreview() {
       <div className="h-1.5 overflow-hidden rounded-full bg-muted">
         <div className={cn("h-full rounded-full bg-current transition-[width] duration-1000 ease-linear", tone)} style={{ width: `${Math.min(100, Math.max(0, 100 - (left / (60 * 60)) * 100))}%` }} />
       </div>
+      <p className="min-h-4 text-xs text-muted-foreground">{due && `Due ${due}`}</p>
     </div>
   )
 }

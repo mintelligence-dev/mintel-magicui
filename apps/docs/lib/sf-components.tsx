@@ -25,8 +25,9 @@ import { SectionFeatureGrid } from "@/registry/mintel/sections/section-feature-g
 import { SectionHeroCentered } from "@/registry/mintel/sections/section-hero-centered"
 
 import { SF_INDEX, type SfGroup } from "@/lib/sf-index"
+import { readSfMeta } from "@/lib/sf-meta"
 
-export { SF_GROUP_ORDER, sfTag, type SfGroup } from "@/lib/sf-index"
+export { SF_GROUP_ORDER, sfLabel, sfTag, type SfGroup } from "@/lib/sf-index"
 
 export type SfComponent = {
   name: string
@@ -363,4 +364,9 @@ export const SF_COMPONENTS: SfComponent[] = [
   const a = SF_COMPONENTS.map((c) => `${c.name}:${c.group}`).join()
   const b = SF_INDEX.map((c) => `${c.name}:${c.group}`).join()
   if (a !== b) throw new Error(`lib/sf-index.ts is out of date with lib/sf-components.tsx`)
+  // Labels must match what App Builder shows (masterLabel without "Mintel"), where the bundle has one.
+  for (const c of SF_INDEX) {
+    const master = readSfMeta(c.name).label?.replace(/^Mintel /, "")
+    if (master && master !== c.label) throw new Error(`lib/sf-index.ts: label of ${c.name} is "${c.label}", App Builder shows "${master}"`)
+  }
 }
