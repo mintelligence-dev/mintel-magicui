@@ -51,12 +51,6 @@ export function ThemeToggle() {
   )
 }`
 
-const THEME_CSS = `@import "tailwindcss";
-@import "@mintelligence-dev/tokens/tailwind.css";
-@import "@mintelligence-dev/tokens/themes/clarity.css";
-
-/* <html data-mintel-theme="clarity"> turns Clarity on; remove the attribute for Mintel. */`
-
 export function GettingStartedPage({ lang }: { lang: Lang }) {
   const d = getDict(lang)
   const t = d.docs.gs
@@ -71,7 +65,15 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
     <CopyCommand key="1" label={copy} command="npx create-next-app@latest my-app --yes" />,
     <CopyCommand key="2" label={copy} command="npx shadcn@latest init" />,
     <CodeBlock key="3" title="components.json" code={registries} copyLabel={copy} />,
-    <CopyCommand key="4" label={copy} command="npx shadcn@latest add @mintel/mintel-theme" />,
+    <div key="4" className="grid gap-2">
+      <CopyCommand label={copy} command="npx shadcn@latest add @mintel/mintel-theme" />
+      <p className="text-sm text-muted-foreground">
+        {t.themesMore}{" "}
+        <a href={langPath(lang, "/themes")} className="font-medium text-brand underline-offset-4 hover:underline">
+          {t.themesLink}
+        </a>
+      </p>
+    </div>,
     <CodeBlock key="5" title="app/layout.tsx" code={LAYOUT} copyLabel={copy} />,
     <CopyCommand key="6" label={copy} command="npx shadcn@latest add @mintel/button @mintel/toast @mintel/date-picker" />,
     <CodeBlock key="7" title="components/theme-toggle.tsx" code={DARK} copyLabel={copy} />,
@@ -87,7 +89,7 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
 
         <ol className="space-y-10">
           {t.steps.map((step, i) => (
-            <li key={step.title} className="relative grid gap-3 pl-12">
+            <li key={step.title} className="relative grid gap-3 pl-12 [&>*]:min-w-0">
               <span className="absolute top-0 left-0 inline-flex size-8 items-center justify-center rounded-full bg-[image:var(--brand-gradient)] text-sm font-bold text-white">
                 {i + 1}
               </span>
@@ -103,14 +105,6 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
           <CopyCommand label={copy} command={`npx shadcn@latest add ${REGISTRY_URL}/mintel-theme.json`} />
         </section>
 
-        <section id="themes" className="scroll-mt-20 space-y-3">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight">{t.themesTitle}</h2>
-          <p className="text-muted-foreground">{t.themesBody}</p>
-          <p className="text-sm">{t.themesWhole}</p>
-          <CopyCommand label={copy} command="npx shadcn@latest add @mintel/theme-clarity" />
-          <p className="text-sm">{t.themesSwitch}</p>
-          <CodeBlock title="app/globals.css" code={THEME_CSS} copyLabel={copy} />
-        </section>
 
         <div className="flex flex-wrap gap-3">
           <a

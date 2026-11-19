@@ -1,4 +1,4 @@
-import { BookOpen, ChartColumn, ChevronRight, Cloud, Component, FormInput, Layers, LayoutGrid, LayoutTemplate, Orbit, PanelsTopLeft, Smartphone, Sparkles } from "lucide-react"
+import { BookOpen, ChartColumn, Palette, ChevronRight, Cloud, Component, FormInput, Layers, LayoutGrid, LayoutTemplate, Orbit, PanelsTopLeft, Smartphone, Sparkles } from "lucide-react"
 
 import { CATEGORY_LABEL, ITEMS, itemsByCategory, type Category } from "@/lib/component-docs"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
@@ -25,6 +25,7 @@ export function DocsSidebar({ lang, current }: { lang: Lang; current: string }) 
 
   const guides = [
     { key: "getting-started", path: "/getting-started", label: t.gettingStarted, icon: BookOpen },
+    { key: "themes", path: "/themes", label: t.themes, icon: Palette },
     { key: "components", path: "/components", label: t.allComponents, icon: LayoutGrid },
     { key: "templates", path: "/templates", label: t.templates, icon: LayoutTemplate },
     { key: "salesforce", path: "/salesforce", label: "Salesforce", icon: Cloud },

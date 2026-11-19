@@ -58,7 +58,7 @@ export function SiteHeader({ lang, page = "home" }: { lang: Lang; page?: SitePag
               <GithubIcon />
             </a>
           </Button>
-          <StyleSwitch label={t.styleSwitch} />
+          <StyleSwitch label={t.styleSwitch} allLabel={t.allThemes} allHref={langPath(lang, "/themes")} />
           <ThemeToggle label={t.themeToggle} />
         </nav>
       </div>

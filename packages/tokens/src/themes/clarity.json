@@ -1,6 +1,10 @@
 {
   "$description": "Mintel Clarity: a calm, content-first theme. Overrides only; anything not listed here comes from ../tokens.json. Mintel blue stays the tint.",
-  "selector": "data-mintel-theme",
+  "title": "Clarity",
+  "description": {
+    "en": "Calm and content-first: system font, larger reading sizes, layered dark mode, continuous corners.",
+    "th": "เรียบและสงบ เน้นเนื้อหา ฟอนต์ระบบ ตัวอักษรใหญ่ขึ้น dark mode แยกชั้น มุมโค้งต่อเนื่อง"
+  },
   "font": {
     "sans": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, var(--font-plex-thai, \"IBM Plex Sans Thai\"), sans-serif",
     "heading": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, var(--font-plex-thai, \"IBM Plex Sans Thai\"), sans-serif",
@@ -8,52 +12,186 @@
   },
   "radius": "0.875rem",
   "brandGradient": "linear-gradient(180deg, var(--brand-accent) 0%, var(--brand) 100%)",
-  "glass": { "blur": "20px", "saturate": 1.9, "levels": { "thin": "10px", "regular": "20px", "thick": "32px" } },
+  "glass": {
+    "blur": "20px",
+    "saturate": 1.9,
+    "levels": {
+      "thin": "10px",
+      "regular": "20px",
+      "thick": "32px"
+    }
+  },
   "type": {
     "$description": "Reading sizes a step larger than Mintel. rem only, so the text-size control keeps working.",
-    "xs": ["0.8125rem", "1.0625rem"],
-    "sm": ["0.9375rem", "1.375rem"],
-    "base": ["1.0625rem", "1.5rem"]
+    "xs": [
+      "0.8125rem",
+      "1.0625rem"
+    ],
+    "sm": [
+      "0.9375rem",
+      "1.375rem"
+    ],
+    "base": [
+      "1.0625rem",
+      "1.5rem"
+    ]
   },
   "semantic": {
-    "background": ["#FFFFFF", "#000000"],
-    "foreground": ["#0B0C10", "#FFFFFF"],
-    "card": ["#FFFFFF", "#1C1C20"],
-    "card-foreground": ["#0B0C10", "#FFFFFF"],
-    "popover": ["#FFFFFF", "#2A2A30"],
-    "popover-foreground": ["#0B0C10", "#FFFFFF"],
-    "primary": ["#295DA8", "#72A3EB"],
-    "primary-foreground": ["#FFFFFF", "#051A39"],
-    "secondary": ["rgba(116, 118, 132, 0.12)", "rgba(116, 118, 132, 0.24)"],
-    "secondary-foreground": ["#0B0C10", "#FFFFFF"],
-    "muted": ["rgba(116, 118, 132, 0.08)", "rgba(116, 118, 132, 0.18)"],
-    "muted-foreground": ["rgba(61, 63, 77, 0.62)", "rgba(233, 234, 245, 0.62)"],
-    "accent": ["rgba(41, 93, 168, 0.1)", "rgba(114, 163, 235, 0.16)"],
-    "accent-foreground": ["#295DA8", "#9CC3FD"],
-    "destructive": ["#E0383E", "#FF6369"],
-    "destructive-foreground": ["#FFFFFF", "#FFFFFF"],
-    "border": ["rgba(61, 63, 77, 0.16)", "rgba(255, 255, 255, 0.14)"],
-    "input": ["rgba(61, 63, 77, 0.2)", "rgba(255, 255, 255, 0.18)"],
-    "ring": ["#295DA8", "#72A3EB"],
-    "brand": ["#295DA8", "#72A3EB"],
-    "brand-foreground": ["#FFFFFF", "#051A39"],
-    "brand-accent": ["#5186D5", "#9CC3FD"],
-    "brand-accent-foreground": ["#FFFFFF", "#051A39"],
-    "success": ["#1F9254", "#3DD68C"],
-    "warning": ["#C76A06", "#FBBF24"],
-    "info": ["#295DA8", "#72A3EB"],
-    "sidebar": ["#F2F3F7", "#1C1C20"],
-    "sidebar-border": ["rgba(61, 63, 77, 0.12)", "rgba(255, 255, 255, 0.1)"],
-    "grouped": ["#F2F3F7", "#000000"],
-    "glass": ["rgba(250, 250, 252, 0.72)", "rgba(28, 28, 32, 0.68)"],
-    "glass-border": ["rgba(255, 255, 255, 0.6)", "rgba(255, 255, 255, 0.1)"],
-    "glass-shadow": ["rgba(11, 12, 16, 0.1)", "rgba(0, 0, 0, 0.5)"],
-    "material-thin": ["rgba(250, 250, 252, 0.45)", "rgba(28, 28, 32, 0.42)"],
-    "material-regular": ["rgba(250, 250, 252, 0.72)", "rgba(28, 28, 32, 0.68)"],
-    "material-thick": ["rgba(250, 250, 252, 0.88)", "rgba(28, 28, 32, 0.86)"]
+    "background": [
+      "#FFFFFF",
+      "#000000"
+    ],
+    "foreground": [
+      "#0B0C10",
+      "#FFFFFF"
+    ],
+    "card": [
+      "#FFFFFF",
+      "#1C1C20"
+    ],
+    "card-foreground": [
+      "#0B0C10",
+      "#FFFFFF"
+    ],
+    "popover": [
+      "#FFFFFF",
+      "#2A2A30"
+    ],
+    "popover-foreground": [
+      "#0B0C10",
+      "#FFFFFF"
+    ],
+    "primary": [
+      "#295DA8",
+      "#72A3EB"
+    ],
+    "primary-foreground": [
+      "#FFFFFF",
+      "#051A39"
+    ],
+    "secondary": [
+      "rgba(116, 118, 132, 0.12)",
+      "rgba(116, 118, 132, 0.24)"
+    ],
+    "secondary-foreground": [
+      "#0B0C10",
+      "#FFFFFF"
+    ],
+    "muted": [
+      "rgba(116, 118, 132, 0.08)",
+      "rgba(116, 118, 132, 0.18)"
+    ],
+    "muted-foreground": [
+      "rgba(61, 63, 77, 0.62)",
+      "rgba(233, 234, 245, 0.62)"
+    ],
+    "accent": [
+      "rgba(41, 93, 168, 0.1)",
+      "rgba(114, 163, 235, 0.16)"
+    ],
+    "accent-foreground": [
+      "#295DA8",
+      "#9CC3FD"
+    ],
+    "destructive": [
+      "#E0383E",
+      "#FF6369"
+    ],
+    "destructive-foreground": [
+      "#FFFFFF",
+      "#FFFFFF"
+    ],
+    "border": [
+      "rgba(61, 63, 77, 0.16)",
+      "rgba(255, 255, 255, 0.14)"
+    ],
+    "input": [
+      "rgba(61, 63, 77, 0.2)",
+      "rgba(255, 255, 255, 0.18)"
+    ],
+    "ring": [
+      "#295DA8",
+      "#72A3EB"
+    ],
+    "brand": [
+      "#295DA8",
+      "#72A3EB"
+    ],
+    "brand-foreground": [
+      "#FFFFFF",
+      "#051A39"
+    ],
+    "brand-accent": [
+      "#5186D5",
+      "#9CC3FD"
+    ],
+    "brand-accent-foreground": [
+      "#FFFFFF",
+      "#051A39"
+    ],
+    "success": [
+      "#1F9254",
+      "#3DD68C"
+    ],
+    "warning": [
+      "#C76A06",
+      "#FBBF24"
+    ],
+    "info": [
+      "#295DA8",
+      "#72A3EB"
+    ],
+    "sidebar": [
+      "#F2F3F7",
+      "#1C1C20"
+    ],
+    "sidebar-border": [
+      "rgba(61, 63, 77, 0.12)",
+      "rgba(255, 255, 255, 0.1)"
+    ],
+    "grouped": [
+      "#F2F3F7",
+      "#000000"
+    ],
+    "glass": [
+      "rgba(250, 250, 252, 0.72)",
+      "rgba(28, 28, 32, 0.68)"
+    ],
+    "glass-border": [
+      "rgba(255, 255, 255, 0.6)",
+      "rgba(255, 255, 255, 0.1)"
+    ],
+    "glass-shadow": [
+      "rgba(11, 12, 16, 0.1)",
+      "rgba(0, 0, 0, 0.5)"
+    ],
+    "material-thin": [
+      "rgba(250, 250, 252, 0.45)",
+      "rgba(28, 28, 32, 0.42)"
+    ],
+    "material-regular": [
+      "rgba(250, 250, 252, 0.72)",
+      "rgba(28, 28, 32, 0.68)"
+    ],
+    "material-thick": [
+      "rgba(250, 250, 252, 0.88)",
+      "rgba(28, 28, 32, 0.86)"
+    ]
   },
   "squircle": [
-    "card", "dialog-content", "sheet-content", "drawer-content", "popover-content", "dropdown-menu-content",
-    "select-trigger", "select-content", "alert", "input", "textarea", "button", "table-container", "glass-card"
+    "card",
+    "dialog-content",
+    "sheet-content",
+    "drawer-content",
+    "popover-content",
+    "dropdown-menu-content",
+    "select-trigger",
+    "select-content",
+    "alert",
+    "input",
+    "textarea",
+    "button",
+    "table-container",
+    "glass-card"
   ]
 }
