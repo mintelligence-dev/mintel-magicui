@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Mintel KPI Trend</masterLabel>
+    <description>[Mintel UI] KPI card with a sparkline and a change badge.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="fieldApiName" type="String" label="Number field API name" description="e.g. AnnualRevenue" />
+            <property name="label" type="String" label="Label" default="KPI" />
+            <property name="trend" type="String" label="Trend points (comma-separated)" default="12,15,14,18,22" />
+            <property name="suffix" type="String" label="Suffix" />
+            <property name="caption" type="String" label="Caption" />
+            <property name="goodDirection" type="String" label="Good direction" datasource="up,down" default="up" />
+            <property name="locale" type="String" label="Language" datasource="th,en" default="th" />
+            <supportedFormFactors>
+                <supportedFormFactor type="Large" />
+                <supportedFormFactor type="Small" />
+            </supportedFormFactors>
+        </targetConfig>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage">
+            <property name="label" type="String" label="Label" default="Open cases" />
+            <property name="value" type="String" label="Value (defaults to the last trend point)" />
+            <property name="trend" type="String" label="Trend points (comma-separated)" default="31,28,35,33,37" />
+            <property name="suffix" type="String" label="Suffix" />
+            <property name="caption" type="String" label="Caption" />
+            <property name="goodDirection" type="String" label="Good direction" datasource="up,down" default="up" />
+            <property name="locale" type="String" label="Language" datasource="th,en" default="th" />
+            <supportedFormFactors>
+                <supportedFormFactor type="Large" />
+                <supportedFormFactor type="Small" />
+            </supportedFormFactors>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="label" type="String" label="Label" default="KPI" />
+            <property name="value" type="String" label="Value" />
+            <property name="trend" type="String" label="Trend points (comma-separated)" />
+            <property name="suffix" type="String" label="Suffix" />
+            <property name="caption" type="String" label="Caption" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

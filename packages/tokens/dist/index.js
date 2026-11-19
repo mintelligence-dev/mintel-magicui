@@ -87,7 +87,7 @@ export const tokens = {
     "brand-cyan": "#06B6D4",
     "success": "#137038",
     "warning": "#A14A08",
-    "info": "#0891B2",
+    "info": "#0E7490",
     "chart-1": "#295DA8",
     "chart-2": "#7040F2",
     "chart-3": "#06B6D4",

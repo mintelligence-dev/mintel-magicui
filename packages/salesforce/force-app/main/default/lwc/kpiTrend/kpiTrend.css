@@ -1,0 +1,113 @@
+@import 'c/tokens';
+
+:host {
+    display: block;
+    font-family: var(--mintel-font-sans);
+    color: var(--mintel-card-foreground);
+}
+.kpi {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1.25rem;
+    border: 1px solid var(--mintel-border);
+    border-radius: calc(var(--mintel-radius) + 4px);
+    background: var(--mintel-card);
+    animation: mintel-kpi-in var(--mintel-duration-slower) var(--mintel-ease-out) both;
+    transition: transform var(--mintel-spring-snappy-duration) var(--mintel-ease-spring-snappy), box-shadow var(--mintel-duration-base);
+}
+.kpi:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -16px var(--mintel-brand);
+}
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+.label,
+.caption {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--mintel-muted-foreground);
+}
+.caption {
+    font-size: 0.75rem;
+}
+.delta {
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.delta.good {
+    background: color-mix(in oklab, var(--mintel-success) 14%, transparent);
+    color: var(--mintel-success);
+}
+.delta.bad {
+    background: color-mix(in oklab, var(--mintel-destructive) 14%, transparent);
+    color: var(--mintel-destructive);
+}
+.value {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    margin: 0;
+}
+.number {
+    font-family: var(--mintel-font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+.suffix {
+    font-weight: 600;
+    color: var(--mintel-muted-foreground);
+}
+.spark {
+    width: 100%;
+    height: 3rem;
+    overflow: visible;
+}
+.line {
+    fill: none;
+    stroke: var(--mintel-brand);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: mintel-kpi-draw 1.2s var(--mintel-ease-out) 0.15s forwards;
+}
+.area {
+    fill: color-mix(in oklab, var(--mintel-brand) 12%, transparent);
+    stroke: none;
+}
+.dot {
+    fill: var(--mintel-brand);
+}
+@keyframes mintel-kpi-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+@keyframes mintel-kpi-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .kpi {
+        animation: none;
+        transition: none;
+    }
+    .kpi:hover {
+        transform: none;
+    }
+    .line {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+}

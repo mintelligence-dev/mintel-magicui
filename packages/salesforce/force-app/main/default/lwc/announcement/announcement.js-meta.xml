@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Mintel Announcement</masterLabel>
+    <description>[Mintel UI] Page banner for a message, with an optional link; dismissal is remembered until the version changes.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage,lightningCommunity__Default">
+            <property name="title" type="String" label="Title" />
+            <property name="message" type="String" label="Message" required="true" default="Scheduled maintenance on Saturday 22:00–23:00." />
+            <property name="variant" type="String" label="Color" datasource="info,success,warning,brand" default="info" />
+            <property name="linkLabel" type="String" label="Link label" />
+            <property name="linkUrl" type="String" label="Link URL" />
+            <property name="dismissible" type="Boolean" label="Can be dismissed" default="true" />
+            <property name="version" type="String" label="Version (change it to show the banner again)" default="1" />
+            <property name="locale" type="String" label="Language" datasource="th,en" default="th" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

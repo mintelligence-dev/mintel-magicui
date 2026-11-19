@@ -89,6 +89,14 @@ export const BADGES: Record<string, "new" | "updated"> = {
   ...Object.fromEntries(
     (items as RawItem[]).filter((i) => isSection(i.name)).map((i) => [i.name, "new" as const])
   ),
+  "sf:quickActions": "new",
+  "sf:filesGallery": "new",
+  "sf:kpiTrend": "new",
+  "sf:announcement": "new",
+  "sf:siteHero": "new",
+  "sf:siteFeatures": "new",
+  "sf:siteFaq": "new",
+  "sf:siteCta": "new",
   "sf:relatedCards": "new",
   "sf:kanban": "new",
   "sf:activityTimeline": "new",

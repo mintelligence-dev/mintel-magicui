@@ -24,6 +24,14 @@ export const SF_INDEX: { name: string; group: SfGroup }[] = [
   { name: "gradientText", group: "display" },
   { name: "statCard", group: "display" },
   { name: "fontSizeControl", group: "site" },
+  { name: "quickActions", group: "record" },
+  { name: "filesGallery", group: "record" },
+  { name: "kpiTrend", group: "display" },
+  { name: "announcement", group: "display" },
+  { name: "siteHero", group: "site" },
+  { name: "siteFeatures", group: "site" },
+  { name: "siteFaq", group: "site" },
+  { name: "siteCta", group: "site" },
   { name: "brandLoader", group: "site" },
 ]
 

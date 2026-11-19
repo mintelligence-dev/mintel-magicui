@@ -1,0 +1,94 @@
+@import 'c/tokens';
+
+:host {
+    display: block;
+    font-family: var(--mintel-font-sans);
+    --tone: var(--mintel-info);
+}
+.banner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid color-mix(in oklab, var(--tone) 30%, transparent);
+    border-radius: calc(var(--mintel-radius) + 2px);
+    background: color-mix(in oklab, var(--tone) 8%, var(--mintel-card));
+    color: var(--mintel-foreground);
+    animation: mintel-banner-in var(--mintel-spring-smooth-duration) var(--mintel-ease-spring-smooth) both;
+}
+.info {
+    --tone: var(--mintel-info);
+}
+.success {
+    --tone: var(--mintel-success);
+}
+.warning {
+    --tone: var(--mintel-warning);
+}
+.brand {
+    --tone: var(--mintel-brand);
+}
+.icon {
+    width: 0.625rem;
+    height: 0.625rem;
+    flex: none;
+    border-radius: 999px;
+    background: var(--tone);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--tone) 20%, transparent);
+}
+.text {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.875rem;
+}
+.title {
+    margin-right: 0.375rem;
+    color: var(--tone);
+}
+.link {
+    flex: none;
+    color: var(--tone);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.close {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--mintel-muted-foreground);
+    cursor: pointer;
+}
+.close:hover {
+    background: color-mix(in oklab, var(--tone) 12%, transparent);
+}
+.close:focus-visible {
+    outline: 2px solid var(--mintel-ring);
+    outline-offset: 2px;
+}
+.close svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+@keyframes mintel-banner-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .banner {
+        animation: none;
+    }
+}

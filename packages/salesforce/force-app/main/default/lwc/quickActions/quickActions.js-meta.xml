@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Mintel Quick Actions</masterLabel>
+    <description>[Mintel UI] Big buttons for frequent actions: flows, quick actions, links or events.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage">
+            <property name="heading" type="String" label="Heading" />
+            <property name="actions" type="String" label="Actions (Label | icon | flow/action/url/event | target; …)" default="New task | utility:task | action | NewTask; Log a call | utility:call | action | LogACall; Help | utility:help | url | https://help.salesforce.com" />
+            <supportedFormFactors>
+                <supportedFormFactor type="Large" />
+                <supportedFormFactor type="Small" />
+            </supportedFormFactors>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
