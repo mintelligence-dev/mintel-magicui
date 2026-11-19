@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles } from "lucide-react"
+import { ArrowRight, Atom, Cloud, Globe, Layers, Orbit, Palette, Smartphone, Sparkles, Triangle, Wind } from "lucide-react"
 import { tokens } from "@mintelligence-dev/tokens"
 
 import { DialogDemo, ChannelSelect, TableDemo, TabsDemo, ToastDemo } from "@/components/app-ui-demos"
@@ -44,7 +44,17 @@ const SEMANTIC = [
   "destructive",
 ] as const
 
-const STACK = ["React", "Next.js", "Tailwind v4", "shadcn/ui", "Motion", "Salesforce LWC", "SLDS", "Experience Cloud"]
+const STACK = [
+  { name: "React", icon: Atom, tone: "text-brand-cyan" },
+  { name: "Next.js", icon: Triangle, tone: "text-foreground" },
+  { name: "Tailwind v4", icon: Wind, tone: "text-brand-cyan" },
+  { name: "shadcn/ui", icon: Layers, tone: "text-foreground" },
+  { name: "Motion", icon: Orbit, tone: "text-brand-accent" },
+  { name: "Salesforce LWC", icon: Cloud, tone: "text-brand" },
+  { name: "SLDS", icon: Palette, tone: "text-brand" },
+  { name: "Experience Cloud", icon: Globe, tone: "text-brand" },
+  { name: "Mobile Web", icon: Smartphone, tone: "text-brand-accent" },
+]
 
 function Section({
   id,
@@ -146,14 +156,14 @@ export default function Home() {
         </BlurFade>
         <BlurFade delay={0.15}>
           <h1 className="mt-6 max-w-4xl font-heading text-5xl leading-[1.05] font-bold tracking-tight sm:text-7xl">
-            ออกแบบครั้งเดียว <br className="hidden sm:block" />
-            <AuroraText>ใช้ได้ทุกที่</AuroraText>
+            Build faster. <br />
+            <AuroraText>Look Mintel.</AuroraText>
           </h1>
         </BlurFade>
         <BlurFade delay={0.25}>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            Brand tokens ชุดเดียวสำหรับ React และ Salesforce LWC พร้อม animated components
-            ที่ติดตั้งผ่าน shadcn registry — โค้ดเป็นของโปรเจกต์คุณ ปรับแต่งได้ทุกบรรทัด
+            One set of brand tokens for React, Salesforce LWC and mobile web — plus fluid, ready-made
+            components you install with a single command.
           </p>
         </BlurFade>
         <BlurFade delay={0.35} className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -181,11 +191,21 @@ export default function Home() {
         </BlurFade>
       </section>
 
-      <div className="border-y bg-muted/30 py-6">
-        <Marquee pauseOnHover className="[--duration:30s]">
-          {STACK.map((s) => (
-            <span key={s} className="mx-6 font-heading text-lg font-semibold text-muted-foreground">
-              {s}
+      <div className="border-y bg-muted/30 py-8">
+        <p className="mb-5 text-center text-sm font-medium text-muted-foreground">
+          ใช้ได้กับ stack ที่ทีมใช้อยู่แล้ว
+        </p>
+        <Marquee
+          pauseOnHover
+          className="[--duration:45s] [--gap:0.75rem] [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
+        >
+          {STACK.map(({ name, icon: Icon, tone }) => (
+            <span
+              key={name}
+              className="inline-flex items-center gap-2 rounded-full border bg-background/80 px-4 py-2 font-heading text-sm font-semibold text-foreground/80 shadow-xs transition-colors hover:border-brand/40 hover:text-foreground"
+            >
+              <Icon className={cn("size-4", tone)} />
+              {name}
             </span>
           ))}
         </Marquee>
