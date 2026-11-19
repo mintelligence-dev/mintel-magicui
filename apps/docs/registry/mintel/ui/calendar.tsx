@@ -12,8 +12,8 @@ export type CalendarEra = "buddhist" | "gregorian"
 const yearOf = (d: Date, era: CalendarEra) => d.getFullYear() + (era === "buddhist" ? 543 : 0)
 
 /**
- * Calendar in Thai by default, with Buddhist-era years (พ.ศ.) in the caption and year dropdown.
- * Pass `era="gregorian"` for ค.ศ., or any react-day-picker `locale` for other languages.
+ * Calendar in Thai by default, with Buddhist Era (BE) years in the caption and year dropdown.
+ * Pass `era="gregorian"` for Common Era (CE) years, or any react-day-picker `locale` for other languages.
  * Dates you receive are normal JS Dates (Gregorian) — the era only changes what is displayed.
  */
 function Calendar({

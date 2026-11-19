@@ -8,7 +8,7 @@ import type { DateRange } from "react-day-picker"
 import { cn } from "@/lib/utils"
 import { Calendar, type CalendarEra } from "@/registry/mintel/ui/calendar"
 
-/** Formats a date for display. Thai locale uses the Buddhist calendar (พ.ศ.) by default. */
+/** Formats a date for display in Thai. Uses the Buddhist Era (BE) calendar by default. */
 function formatThaiDate(date: Date, era: CalendarEra = "buddhist", style: "medium" | "long" = "medium") {
   const locale = era === "buddhist" ? "th-TH-u-ca-buddhist" : "th-TH-u-ca-gregory"
   return new Intl.DateTimeFormat(locale, { dateStyle: style }).format(date)
@@ -85,7 +85,7 @@ function SingleCalendar({
   )
 }
 
-/** Single date picker. Displays e.g. "19 พ.ย. 2569"; `value` is a normal JS Date. */
+/** Single date picker. Displays the date in Thai with a BE year (e.g. 19 Nov 2569 BE); `value` is a normal JS Date. */
 function DatePicker({
   value,
   onValueChange,

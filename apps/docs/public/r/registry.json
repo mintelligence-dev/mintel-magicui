@@ -423,7 +423,7 @@
       "name": "calendar",
       "type": "registry:ui",
       "title": "Calendar",
-      "description": "Thai calendar with Buddhist-era (พ.ศ.) years by default; single, multiple and range modes.",
+      "description": "Thai calendar with Buddhist Era (BE) years by default; single, multiple and range modes.",
       "dependencies": [
         "react-day-picker",
         "lucide-react"
@@ -442,7 +442,7 @@
       "name": "date-picker",
       "type": "registry:ui",
       "title": "Date Picker",
-      "description": "Date and date-range pickers showing พ.ศ. by default (e.g. 19 พ.ย. 2569); value stays a JS Date.",
+      "description": "Date and date-range pickers showing Buddhist Era (BE) years by default; values stay JS Dates.",
       "dependencies": [
         "@radix-ui/react-popover",
         "react-day-picker",
