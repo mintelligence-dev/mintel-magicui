@@ -229,6 +229,8 @@ const en = {
       mintelShimmerButton: "Brand-gradient call to action with a light sweep; fires a normal click event.",
       mintelGradientText: "Headline filled with a slowly moving brand gradient.",
       mintelStatCard: "KPI card whose number counts up when it appears.",
+      mintelFontSizeControl:
+        "Text-size control (ก- ก ก+) for Experience Cloud: scales the page and remembers the choice. Not for Lightning Experience, whose global font size should not change.",
     },
     deployTitle: "Deploy to your org",
     deploySteps: [
@@ -457,6 +459,8 @@ const th: Dict = {
       mintelShimmerButton: "ปุ่ม call to action สีแบรนด์ มีแสงวิ่งรอบขอบ ส่ง click event ปกติ",
       mintelGradientText: "หัวข้อที่เติมสีไล่เฉดแบรนด์ซึ่งค่อยๆ เคลื่อนที่",
       mintelStatCard: "การ์ด KPI ที่ตัวเลขนับขึ้นตอนแสดงผล",
+      mintelFontSizeControl:
+        "ปุ่มปรับขนาดตัวอักษร (ก- ก ก+) สำหรับ Experience Cloud ขยายทั้งหน้าและจำค่าที่เลือก ไม่ใช้กับ Lightning Experience เพราะไม่ควรเปลี่ยนขนาดฟอนต์ของทั้งระบบ",
     },
     deployTitle: "Deploy เข้า org",
     deploySteps: [

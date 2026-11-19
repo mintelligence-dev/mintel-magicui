@@ -5,6 +5,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { getDict, langPath, type Lang } from "@/lib/i18n"
 import { REPO_URL } from "@/lib/site"
 import { Button } from "@/registry/mintel/ui/button"
+import { FontSizeControl } from "@/registry/mintel/ui/font-size-control"
 
 export type SitePage = "home" | "docs" | "components" | "templates" | "salesforce"
 
@@ -41,6 +42,7 @@ export function SiteHeader({ lang, page = "home" }: { lang: Lang; page?: SitePag
               {l.label}
             </a>
           ))}
+          <FontSizeControl locale={lang} className="hidden xl:inline-flex" />
           <CommandMenu lang={lang} />
           <LangSwitch lang={lang} groupLabel={t.language} />
           <Button variant="ghost" size="icon" asChild className="hidden sm:inline-flex">

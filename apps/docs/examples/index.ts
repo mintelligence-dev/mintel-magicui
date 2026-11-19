@@ -23,6 +23,7 @@ import DatePickerExample from "./date-picker"
 import DropdownMenuExample from "./dropdown-menu"
 import TooltipExample from "./tooltip"
 import PopoverExample from "./popover"
+import FontSizeControlExample from "./font-size-control"
 import AnimatedBeamExample from "./animated-beam"
 import AnimatedGradientTextExample from "./animated-gradient-text"
 import AuroraTextExample from "./aurora-text"
@@ -69,6 +70,7 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "dropdown-menu": DropdownMenuExample,
   "tooltip": TooltipExample,
   "popover": PopoverExample,
+  "font-size-control": FontSizeControlExample,
   "animated-beam": AnimatedBeamExample,
   "animated-gradient-text": AnimatedGradientTextExample,
   "aurora-text": AuroraTextExample,

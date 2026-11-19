@@ -134,6 +134,17 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
   "dropdown-menu": { th: "เมนู dropdown มีเมนูย่อย ติ๊กเลือก แสดงคีย์ลัด และแบบสีแดงสำหรับคำสั่งลบ", upstream: radix("Dropdown Menu") },
   tooltip: { th: "คำอธิบายเมื่อชี้ ใช้ได้โดยไม่ต้องครอบ provider", upstream: radix("Tooltip") },
   popover: { th: "กล่องลอยที่ผูกกับปุ่ม", upstream: radix("Popover") },
+  "font-size-control": {
+    th: "ปุ่มปรับขนาดตัวอักษร (ก- ก ก+) ขยายทั้งหน้าผ่าน font-size ของ html จำค่าที่เลือก และมีสคริปต์สำหรับ head ไม่ให้หน้ากระพริบ",
+    props: [
+      p("steps", "number[]", "Root font sizes in percent.", "ขนาดฟอนต์ของหน้าเป็นเปอร์เซ็นต์", "[87.5, 100, 112.5, 125]"),
+      p("defaultStep", "number", "Index of the normal size.", "ลำดับของขนาดปกติ", "1"),
+      p("locale", '"th" | "en"', "ก or A labels.", "ใช้ ก หรือ A", '"th"'),
+      p("storageKey", "string", "localStorage key (use the same in fontScaleScript).", "คีย์ใน localStorage (ใช้คีย์เดียวกับ fontScaleScript)", '"mintel-font-scale"'),
+      p("onScaleChange", "(percent: number) => void", "Called after the size changes.", "เรียกหลังเปลี่ยนขนาด"),
+      p("<FontScaleScript storageKey? />", "component", "Render in <head>: applies the saved size before the first paint.", "วางใน <head> ให้ขนาดที่บันทึกไว้มีผลก่อนแสดงผล"),
+    ],
+  },
 
   "animated-beam": {
     th: "เส้นแสงวิ่งเชื่อมระหว่างกล่อง เหมาะทำแผนภาพ flow",
