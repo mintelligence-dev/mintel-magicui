@@ -8,7 +8,11 @@
     "dev": "npm run registry:build && next dev",
     "build": "npm run registry:build && next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test",
+    "test:a11y": "playwright test e2e/a11y.spec.ts",
+    "test:visual": "playwright test e2e/visual.spec.ts",
+    "test:e2e:docker": "docker run --rm --ipc=host -v \"$PWD/../..\":/work -w /work/apps/docs mcr.microsoft.com/playwright:v1.65.1-noble npx playwright test"
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.7",
@@ -48,10 +52,13 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.65.1",
     "@tailwindcss/postcss": "^4.3.5",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "serve": "14.2.8",
     "shadcn": "^4.23.0",
     "tailwindcss": "^4.3.5",
     "typescript": "^7.0.2"

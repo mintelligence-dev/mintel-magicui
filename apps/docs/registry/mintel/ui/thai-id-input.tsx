@@ -92,7 +92,7 @@ function ThaiIdInput({
           role="status"
           className={cn(
             "pointer-events-none absolute top-1/2 right-2.5 flex size-5 -translate-y-1/2 items-center justify-center rounded-full motion-safe:animate-in motion-safe:zoom-in-50 motion-safe:duration-300 motion-safe:ease-spring-bouncy",
-            valid ? "bg-success text-white" : "bg-destructive text-white"
+            valid ? "bg-success text-white" : "bg-destructive text-white dark:bg-destructive/60"
           )}
         >
           {valid ? <CheckIcon className="size-3.5" /> : <XIcon className="size-3.5" />}

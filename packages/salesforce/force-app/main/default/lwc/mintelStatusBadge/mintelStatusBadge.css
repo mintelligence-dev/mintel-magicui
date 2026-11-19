@@ -60,7 +60,13 @@
     background: var(--tone);
 }
 .solid .dot {
-    background: rgb(255 255 255 / 0.85);
+    background: currentColor;
+    opacity: 0.85;
+}
+/* Dark mode tones are light, so solid badges switch to dark text. */
+:host(.mintel-dark) .solid,
+:host([data-theme='dark']) .solid {
+    color: var(--mintel-background);
 }
 .brand.solid {
     background: var(--mintel-brand-gradient);

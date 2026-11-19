@@ -71,3 +71,9 @@ html {
     navigation: none;
   }
 }
+
+/* Scrollable code blocks are focusable (tabIndex=0) so keyboard users can scroll them. */
+pre[tabindex]:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}

@@ -47,7 +47,6 @@ export function CommandMenu({ lang }: { lang: Lang }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label={t.docs.searchShort}
         className={cn(
           "relative inline-flex h-9 items-center gap-2 rounded-full border bg-muted/50 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
           "size-9 justify-center xl:w-56 xl:justify-start xl:px-3",
@@ -55,8 +54,9 @@ export function CommandMenu({ lang }: { lang: Lang }) {
         )}
       >
         <Search className="size-4 shrink-0" />
+        <span className="sr-only xl:hidden">{t.docs.searchShort}</span>
         <span className="hidden flex-1 text-left xl:inline">{t.docs.search}</span>
-        <kbd className="hidden rounded border bg-background px-1.5 font-mono text-[10px] xl:inline">⌘K</kbd>
+        <kbd aria-hidden className="hidden rounded border bg-background px-1.5 font-mono text-[10px] xl:inline">⌘K</kbd>
       </button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent showCloseButton={false} className="top-[15%] translate-y-0 overflow-hidden p-0 sm:max-w-xl">

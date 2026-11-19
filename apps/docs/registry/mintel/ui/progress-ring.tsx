@@ -43,7 +43,7 @@ function ProgressRing({
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={v}
-      aria-label={typeof label === "string" ? label : undefined}
+      aria-label={typeof label === "string" ? label : "Progress"}
       className={cn("relative inline-grid place-items-center", className)}
       style={{ width: px, height: px }}
     >

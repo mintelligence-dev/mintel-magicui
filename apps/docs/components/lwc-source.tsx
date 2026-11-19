@@ -15,7 +15,7 @@ export function LwcSource({ files }: { files: { name: string; code: string }[] }
       </TabsList>
       {files.map((f) => (
         <TabsContent key={f.name} value={f.name}>
-          <pre className="max-h-80 overflow-auto rounded-lg bg-muted p-4 font-mono text-xs leading-relaxed">
+          <pre tabIndex={0} className="max-h-80 overflow-auto rounded-lg bg-muted p-4 font-mono text-xs leading-relaxed">
             <code>{f.code}</code>
           </pre>
         </TabsContent>

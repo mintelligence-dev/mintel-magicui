@@ -42,7 +42,7 @@ export function CodeBlock({
       >
         {copied ? <Check className="size-3.5 text-success" /> : <Copy className="size-3.5" />}
       </button>
-      <pre className={cn("overflow-auto p-4 font-mono text-[13px] leading-relaxed", maxHeight)}>
+      <pre tabIndex={0} className={cn("overflow-auto p-4 font-mono text-[13px] leading-relaxed", maxHeight)}>
         <code>{code}</code>
       </pre>
     </div>

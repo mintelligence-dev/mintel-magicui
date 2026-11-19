@@ -42,7 +42,7 @@ const ICON_TONES = {
   cyan: "bg-chart-3 text-white",
   green: "bg-success text-white",
   amber: "bg-warning text-white",
-  red: "bg-destructive text-white",
+  red: "bg-destructive text-white dark:bg-destructive/60",
   gray: "bg-muted-foreground text-background",
 } as const
 
