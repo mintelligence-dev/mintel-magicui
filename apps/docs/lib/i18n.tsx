@@ -257,7 +257,7 @@ const en = {
       },
       {
         title: "Ready-made Mintel LWC",
-        body: "Glass card, shimmer button, gradient text and stat card — drag them onto any Lightning or Experience Builder page.",
+        body: "Record pages, KPIs, kanban, timelines, Thai forms, chat and Experience Cloud sections — about 30 components to drag onto any Lightning or Experience Builder page.",
       },
     ],
     previewTitle: "Live preview: SLDS vs. Mintel",
@@ -579,7 +579,7 @@ const th: Dict = {
       },
       {
         title: "LWC สำเร็จรูปของ Mintel",
-        body: "Glass card, shimmer button, gradient text และ stat card ลากวางบนหน้า Lightning หรือ Experience Builder ได้เลย",
+        body: "หน้า record, KPI, kanban, timeline, ฟอร์มไทย, แชต และ section สำหรับ Experience Cloud รวมราว 30 ตัว ลากวางบนหน้า Lightning หรือ Experience Builder ได้เลย",
       },
     ],
     previewTitle: "ตัวอย่างจริง: SLDS เทียบกับ Mintel",
