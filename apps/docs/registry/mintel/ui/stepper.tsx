@@ -37,11 +37,12 @@ function Stepper({
   const interactive = !!onStepClick
 
   if (variant === "steps") {
+    // Scrolls sideways on narrow screens; the padding keeps the current step's halo and focus rings unclipped.
     return (
       <ol
         aria-label={ariaLabel}
         data-slot="stepper"
-        className={cn("flex w-full snap-x items-start overflow-x-auto pb-1", className)}
+        className={cn("flex w-full snap-x items-start overflow-x-auto pt-2 pb-1", className)}
       >
         {steps.map((step, i) => {
           const state = i < currentIndex ? "complete" : i === currentIndex ? "current" : "upcoming"
@@ -92,7 +93,7 @@ function Stepper({
     <ol
       aria-label={ariaLabel}
       data-slot="stepper"
-      className={cn("flex w-full snap-x gap-1 overflow-x-auto pb-1 [scrollbar-width:thin]", className)}
+      className={cn("flex w-full snap-x gap-1 overflow-x-auto px-1 pt-1 pb-1.5 [scrollbar-width:thin]", className)}
     >
       {steps.map((step, i) => {
         const state = i < currentIndex ? "complete" : i === currentIndex ? "current" : "upcoming"
