@@ -21,6 +21,11 @@ import AccordionExample from "./accordion"
 import BreadcrumbExample from "./breadcrumb"
 import PaginationExample from "./pagination"
 import SheetExample from "./sheet"
+import CommandExample from "./command"
+import SidebarExample from "./sidebar"
+import SliderExample from "./slider"
+import ToggleGroupExample from "./toggle-group"
+import TagInputExample from "./tag-input"
 import FileUploadExample from "./file-upload"
 import ThaiAddressExample from "./thai-address"
 import ThaiIdInputExample from "./thai-id-input"
@@ -90,6 +95,11 @@ export const EXAMPLES: Record<string, ComponentType> = {
   "breadcrumb": BreadcrumbExample,
   "pagination": PaginationExample,
   "sheet": SheetExample,
+  "command": CommandExample,
+  "sidebar": SidebarExample,
+  "slider": SliderExample,
+  "toggle-group": ToggleGroupExample,
+  "tag-input": TagInputExample,
   "file-upload": FileUploadExample,
   "thai-address": ThaiAddressExample,
   "thai-id-input": ThaiIdInputExample,

@@ -36,11 +36,11 @@ type RawItem = {
 // Core UI items that belong to the "Forms" group in the docs navigation.
 const FORM_ITEMS = new Set([
   "input", "label", "textarea", "checkbox", "radio-group", "switch", "select", "combobox", "calendar", "date-picker", "form",
-  "file-upload", "thai-address", "thai-id-input", "thai-phone-input", "otp-input",
+  "file-upload", "thai-address", "thai-id-input", "thai-phone-input", "otp-input", "slider", "toggle-group", "tag-input",
 ])
 
 const DATA_ITEMS = new Set(["table", "data-table", "chart", "timeline", "stepper", "grouped-list", "conversation"])
-const NAV_ITEMS = new Set(["breadcrumb", "pagination", "accordion", "sheet", "collapsing-header"])
+const NAV_ITEMS = new Set(["breadcrumb", "pagination", "accordion", "sheet", "collapsing-header", "command", "sidebar"])
 
 const categoryOf = (it: RawItem): Category =>
   (it.meta?.category as Category) ??
@@ -191,6 +191,47 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     th: "แผงที่เลื่อนออกจากขอบจอ ใช้กับตัวกรอง รายละเอียด หรือแก้ไขเร็ว แบบล่างมีที่จับและเว้นขอบล่างของมือถือ",
     props: [p("side", '"right" | "left" | "top" | "bottom"', "SheetContent: edge to slide from.", "SheetContent: ขอบที่เลื่อนออกมา", '"right"')],
     upstream: radix("Dialog"),
+  },
+  command: {
+    th: "กล่องคำสั่งแบบ ⌘K ในหน้าต่าง มีกลุ่ม ไอคอน ปุ่มลัด ค้นหาภาษาไทยได้ ความสูงรายการเปลี่ยนนุ่มๆ ตอนพิมพ์",
+    props: [
+      p("open / onOpenChange", "boolean", "CommandDialog: controlled open state.", "CommandDialog: สถานะเปิด/ปิด"),
+      p("shortcut", "boolean", "CommandDialog: open with ⌘K / Ctrl+K.", "CommandDialog: เปิดด้วย ⌘K / Ctrl+K", "true"),
+      p("keywords", "string[]", "CommandItem: extra search words (e.g. Thai).", "CommandItem: คำค้นเพิ่ม เช่นภาษาไทย"),
+      p("onSelect", "() => void", "CommandItem: run the command.", "CommandItem: คำสั่งที่จะทำ"),
+    ],
+  },
+  sidebar: {
+    th: "โครงหน้าแอปพร้อมเมนูซ้าย ย่อเป็นแถบไอคอนได้ (⌘B) บนมือถือเป็นแผงเลื่อนออกมา มีกลุ่ม ตัวเลขแจ้งเตือน และแถบบอกหน้าปัจจุบัน",
+    props: [
+      p("defaultCollapsed", "boolean", "SidebarProvider: start as an icon rail.", "SidebarProvider: เริ่มแบบแถบไอคอน", "false"),
+      p("shortcut", "boolean", "SidebarProvider: toggle with ⌘B / Ctrl+B.", "SidebarProvider: สลับด้วย ⌘B", "true"),
+      p("icon / label / href / active / badge", "—", "SidebarItem: one nav link (label becomes the tooltip in the rail).", "SidebarItem: ลิงก์เมนู (ตอนย่อ label เป็น tooltip)"),
+      p("label", "ReactNode", "SidebarGroup: section heading.", "SidebarGroup: หัวข้อกลุ่ม"),
+    ],
+  },
+  slider: {
+    th: "แถบเลื่อนเลือกค่าเดียวหรือช่วง แถบสีไล่เฉด ปุ่มขยายตอนลากและแสดงค่าเป็นบับเบิล",
+    props: [
+      p("value / defaultValue", "number[]", "One value, or two for a range.", "ค่าเดียว หรือ 2 ค่าสำหรับช่วง"),
+      p("formatValue", "(v) => ReactNode", "Text in the bubble.", "ข้อความในบับเบิล"),
+      p("showValue", "boolean", "Show the bubble while dragging.", "แสดงบับเบิลตอนลาก", "true"),
+    ],
+    upstream: radix("Slider"),
+  },
+  "toggle-group": {
+    th: "กลุ่มปุ่มกดค้าง เลือกได้ทีละอันหรือหลายอัน เช่นจัดตำแหน่ง ตัวหนา หรือกรองช่องทาง",
+    props: [p("type", '"single" | "multiple"', "One or many pressed.", "กดค้างได้ทีละอันหรือหลายอัน")],
+    upstream: radix("Toggle Group"),
+  },
+  "tag-input": {
+    th: "ช่องใส่แท็ก กด Enter หรือคอมมาเพื่อเพิ่ม Backspace ลบตัวท้าย วางหลายคำคั่นคอมมาได้ ไม่รับซ้ำ และมีคำแนะนำ",
+    props: [
+      p("value / defaultValue / onValueChange", "string[]", "Tags.", "รายการแท็ก"),
+      p("suggestions", "string[]", "Shown as you type.", "คำแนะนำตอนพิมพ์"),
+      p("max", "number", "Most tags allowed.", "จำนวนแท็กสูงสุด"),
+      p("locale", '"th" | "en"', "Built-in labels.", "ภาษาของป้าย", '"th"'),
+    ],
   },
   "file-upload": {
     th: "ลากไฟล์มาวางหรือกดเลือก ตรวจชนิดและขนาดไฟล์ แสดงรายการไฟล์และแถบความคืบหน้าของแต่ละไฟล์",

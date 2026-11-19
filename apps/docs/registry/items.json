@@ -356,6 +356,98 @@
     ]
   },
   {
+    "name": "command",
+    "type": "registry:ui",
+    "title": "Command palette",
+    "description": "⌘K command palette in a dialog: groups, icons, shortcuts, Thai search, animated list height.",
+    "dependencies": [
+      "@radix-ui/react-dialog",
+      "cmdk",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/command.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "sidebar",
+    "type": "registry:ui",
+    "title": "Sidebar",
+    "description": "App shell: a sidebar that collapses to an icon rail (⌘B) and becomes an off-canvas panel on phones, with groups, badges and an active marker.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/sidebar.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "slider",
+    "type": "registry:ui",
+    "title": "Slider",
+    "description": "Single or range slider with a brand-gradient track and a thumb that grows and shows its value while dragged.",
+    "dependencies": [
+      "@radix-ui/react-slider"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/slider.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "toggle-group",
+    "type": "registry:ui",
+    "title": "Toggle group",
+    "description": "Buttons that stay pressed, one or many at a time, with a brand tint and a small spring.",
+    "dependencies": [
+      "@radix-ui/react-toggle-group"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/toggle-group.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "tag-input",
+    "type": "registry:ui",
+    "title": "Tag input",
+    "description": "Free-form tags: Enter/comma adds, Backspace removes, paste splits, duplicates ignored, optional suggestions.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "utils"
+    ],
+    "files": [
+      {
+        "path": "registry/mintel/ui/tag-input.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
     "name": "file-upload",
     "type": "registry:ui",
     "title": "File upload",

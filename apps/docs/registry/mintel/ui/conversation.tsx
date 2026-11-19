@@ -52,12 +52,14 @@ const LABELS = {
 const toDate = (t: string | Date) => (t instanceof Date ? t : new Date(t))
 const sameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString()
 
-function dayLabel(d: Date, locale: "th" | "en") {
-  const now = new Date()
-  const yesterday = new Date(now)
-  yesterday.setDate(now.getDate() - 1)
-  if (sameDay(d, now)) return LABELS[locale].today
-  if (sameDay(d, yesterday)) return LABELS[locale].yesterday
+/** "Today" / "Yesterday" need the current date, which is only known in the browser (`now` is null before mount). */
+function dayLabel(d: Date, locale: "th" | "en", now: Date | null) {
+  if (now) {
+    const yesterday = new Date(now)
+    yesterday.setDate(now.getDate() - 1)
+    if (sameDay(d, now)) return LABELS[locale].today
+    if (sameDay(d, yesterday)) return LABELS[locale].yesterday
+  }
   return d.toLocaleDateString(locale === "th" ? "th-TH" : "en-GB", { day: "numeric", month: "short", year: "numeric" })
 }
 
@@ -131,6 +133,9 @@ function Conversation({
   const [unseen, setUnseen] = React.useState(false)
   const [draft, setDraft] = React.useState("")
   const lastId = messages[messages.length - 1]?.id
+  // Read the clock after mount: rendering must not depend on the current time (prerendering, hydration).
+  const [now, setNow] = React.useState<Date | null>(null)
+  React.useEffect(() => setNow(new Date()), [])
 
   const scrollToEnd = (smooth: boolean) => {
     const el = scroller.current
@@ -164,7 +169,7 @@ function Conversation({
         <div key={`day-${m.id}`} role="separator" className="my-2 flex items-center gap-3 text-xs text-muted-foreground">
           <span className="h-px flex-1 bg-border" />
           {/* Day and time depend on the reader's clock and time zone, so they can differ from the server render. */}
-          <span suppressHydrationWarning>{dayLabel(date, locale)}</span>
+          <span suppressHydrationWarning>{dayLabel(date, locale, now)}</span>
           <span className="h-px flex-1 bg-border" />
         </div>
       )
