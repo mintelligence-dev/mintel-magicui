@@ -2,6 +2,13 @@
 
 The shadcn registry (`@mintel/*`) and the documentation site.
 
+## 0.3.1 — 2026-11-21
+
+### Patch Changes
+
+- Updated dependencies [e77c5ef]
+  - @m-intelligence/tokens@0.3.1
+
 ## 0.3.0 — 2026-11-20
 
 ### Minor Changes

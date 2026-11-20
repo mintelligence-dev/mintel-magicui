@@ -1,5 +1,11 @@
 # @m-intelligence/tokens
 
+## 0.3.1 — 2026-11-21
+
+### Patch Changes
+
+- e77c5ef: The README no longer says the package is unpublished; it now starts with the install command.
+
 ## 0.3.0 — 2026-11-20
 
 ### Patch Changes
