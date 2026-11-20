@@ -56,6 +56,11 @@ type CommonProps = {
   fromYear?: number
   toYear?: number
   "aria-invalid"?: boolean
+  /** Id of the trigger, so a <Label htmlFor> can point at it. */
+  id?: string
+  "aria-labelledby"?: string
+  /** Name when there is no <Label htmlFor> / aria-labelledby. */
+  "aria-label"?: string
 }
 
 /** A real button beside the trigger (not inside it: a button in a button is invalid and unreachable by keyboard). */
@@ -129,6 +134,9 @@ function DatePicker({
           data-slot="date-picker-trigger"
           disabled={disabled}
           aria-invalid={rest["aria-invalid"]}
+          id={rest.id}
+          aria-labelledby={rest["aria-labelledby"]}
+          aria-label={rest["aria-label"]}
           className={cn(triggerClass, "w-full", value && "pr-9")}
         >
           <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
@@ -218,6 +226,9 @@ function DateRangePicker({
           data-slot="date-range-picker-trigger"
           disabled={disabled}
           aria-invalid={rest["aria-invalid"]}
+          id={rest.id}
+          aria-labelledby={rest["aria-labelledby"]}
+          aria-label={rest["aria-label"]}
           className={cn(triggerClass, "w-full", value?.from && "pr-9")}
         >
           <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />

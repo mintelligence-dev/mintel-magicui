@@ -84,6 +84,8 @@ function intro(full: boolean): string[] {
     "   ```",
     "3. Install the theme once: `npx shadcn@latest add @mintel/mintel-theme`",
     "4. Install components, several at a time if you like: `npx shadcn@latest add @mintel/button @mintel/toast @mintel/date-picker`",
+    "",
+    "If the Next.js app is in a subfolder (for example `apps/web`) with no package.json of its own, the shadcn CLI will not work from that folder. Put `components.json` at the root next to package.json with `tailwind.css` set to the path from the root (`apps/web/app/globals.css`), add `\"paths\": { \"@/*\": [\"./apps/web/*\"] }` to the root tsconfig.json, and run the CLI from the root. Answer no if it asks to overwrite `lib/utils.ts`.",
     "5. Fonts: load Manrope, Rubik and IBM Plex Sans Thai with `next/font/google`, with the CSS variables `--font-manrope`, `--font-rubik` and `--font-plex-thai`, and put the three variable classes on `<html>`.",
     "6. Toasts: render `<Toaster />` (from `@/components/ui/toast`) once in the root layout.",
     "7. Dark mode: toggle the `dark` class on `<html>`.",
