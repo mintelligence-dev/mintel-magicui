@@ -1,6 +1,6 @@
-# @mintelligence-dev/tokens
+# @m-intelligence/tokens
 
-> **Not published to npm yet.** `npm install @mintelligence-dev/tokens` will not work outside this repository.
+> **Not published to npm yet.** `npm install @m-intelligence/tokens` will not work outside this repository.
 > Until it is published:
 > - React apps get the same variables from the registry theme: `npx shadcn@latest add @mintel/mintel-theme`
 >   (see the [Getting started guide](https://mintel-ui.vercel.app/getting-started)).
@@ -18,7 +18,7 @@ M-Intelligence brand tokens. **Single source:** [`src/tokens.json`](src/tokens.j
 | `dist/tokens.css` | Plain CSS variables (`:root`, dark under `.dark` / `[data-theme="dark"]`) |
 | `dist/tailwind.css` | `tokens.css` + Tailwind v4 `@theme inline` (`bg-brand`, `text-muted-foreground`, `bg-mintel-blue-600`, …) |
 | `dist/fonts.css` | Google Fonts import (Manrope, Rubik, IBM Plex Sans Thai, JetBrains Mono) |
-| `dist/index.js` | `import { tokens } from "@mintelligence-dev/tokens"` |
+| `dist/index.js` | `import { tokens } from "@m-intelligence/tokens"` |
 | `dist/shadcn-theme.json` | `cssVars` used by the registry's `mintel-theme` item |
 | `lwc/tokens/` | Salesforce LWC CSS-only module |
 | `salesforce/mintel-global.css` | Page-level CSS + SLDS styling hooks |
@@ -49,7 +49,7 @@ Anchors come from the company website and logo. Text/background pairs meet WCAG 
 The same springs are exported for JS so React (motion) and CSS/LWC animations move identically:
 
 ```ts
-import { tokens } from "@mintelligence-dev/tokens"
+import { tokens } from "@m-intelligence/tokens"
 <motion.div animate={{ x: 100 }} transition={tokens.motion.spring.smooth} />
 ```
 
@@ -69,7 +69,7 @@ import { tokens } from "@mintelligence-dev/tokens"
 
 ```css
 @import "tailwindcss";
-@import "@mintelligence-dev/tokens/tailwind.css";
+@import "@m-intelligence/tokens/tailwind.css";
 ```
 
 ## Salesforce LWC

@@ -172,7 +172,7 @@ edit("lib/component-docs.ts", before(`  "sf:quickActions": "new",`, `  "sf:${nam
 // 3. The changeset.
 writeFileSync(
   join(root, `.changeset/lwc-${name}.md`),
-  `---\n"@mintelligence-dev/salesforce": minor\n"docs": patch\n---\n\nNew LWC: ${label} (\`<${tag}>\`). TODO: one sentence for the changelog.\n`
+  `---\n"@m-intelligence/salesforce": minor\n"docs": patch\n---\n\nNew LWC: ${label} (\`<${tag}>\`). TODO: one sentence for the changelog.\n`
 )
 
 console.log(`✓ Scaffolded <${tag}> ("Mintel ${label}", group: ${group})

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@mintelligence-dev/tokens/tailwind.css";
-@import "@mintelligence-dev/tokens/themes/all.css";
+@import "@m-intelligence/tokens/tailwind.css";
+@import "@m-intelligence/tokens/themes/all.css";
 @import "./registry.css";
 
 /* next/font exposes the brand fonts as CSS variables; point the token font stacks at them. */

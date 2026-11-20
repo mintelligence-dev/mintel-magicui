@@ -5,7 +5,7 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "format": false,
-  "fixed": [["@mintelligence-dev/tokens", "@mintelligence-dev/salesforce", "docs"]],
+  "fixed": [["@m-intelligence/tokens", "@m-intelligence/salesforce", "docs"]],
   "privatePackages": { "version": true, "tag": true },
   "updateInternalDependencies": "patch",
   "ignore": []

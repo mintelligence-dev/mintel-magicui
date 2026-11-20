@@ -1,5 +1,5 @@
 import { ArrowRight, Atom, Cloud, Globe, Layers, Orbit, Palette, Smartphone, Sparkles, Triangle, Wind } from "lucide-react"
-import { tokens } from "@mintelligence-dev/tokens"
+import { tokens } from "@m-intelligence/tokens"
 
 import { DialogDemo, ChannelSelect, TableDemo, TabsDemo, ToastDemo } from "@/components/app-ui-demos"
 import { ChoiceDemo, ComboboxDemo, DatePickerDemo, DropdownMenuDemo, FormDemo, TooltipPopoverDemo } from "@/components/form-demos"

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Assembles registry.json and app/registry.css from:
 //   - registry/items.json                         (component items)
-//   - @mintelligence-dev/tokens/shadcn-theme.json (theme item, generated from tokens)
+//   - @m-intelligence/tokens/shadcn-theme.json (theme item, generated from tokens)
 // Then `shadcn build` turns registry.json into public/r/*.json.
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { createRequire } from "node:module"
@@ -10,8 +10,8 @@ import { fileURLToPath } from "node:url"
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..")
 const require = createRequire(import.meta.url)
-const theme = require("@mintelligence-dev/tokens/shadcn-theme.json")
-const themeIndex = require("@mintelligence-dev/tokens/themes/index.json")
+const theme = require("@m-intelligence/tokens/shadcn-theme.json")
+const themeIndex = require("@m-intelligence/tokens/themes/index.json")
 const items = JSON.parse(readFileSync(join(root, "registry/items.json"), "utf8"))
 
 // Registry dependencies on our own items must point at THIS registry by URL — a bare name like
@@ -64,7 +64,7 @@ const themeItem = {
 const extraThemeItems = themeIndex
   .filter((t) => !t.base)
   .map((t) => {
-    const th = require(`@mintelligence-dev/tokens/themes/${t.id}-shadcn.json`)
+    const th = require(`@m-intelligence/tokens/themes/${t.id}-shadcn.json`)
     return {
       name: `theme-${t.id}`,
       type: "registry:theme",

@@ -120,7 +120,7 @@ If a visual change is intended, re-render the baselines with `--update-snapshots
 
 - Every pull request that changes what people install adds a changeset: `npx changeset` (the scaffold
   scripts write one for you). List **every** package the change touches: `docs` for the registry and site,
-  `@mintelligence-dev/salesforce` for LWC, `@mintelligence-dev/tokens` for tokens. See
+  `@m-intelligence/salesforce` for LWC, `@m-intelligence/tokens` for tokens. See
   [.changeset/README.md](.changeset/README.md).
 - Code comments, commit messages and pull requests are in English.
 - Open pull requests against `main`. Merges to `main` deploy the docs to production.
