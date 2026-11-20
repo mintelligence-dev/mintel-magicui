@@ -1,0 +1,41 @@
+name: Bug report
+description: Something does not work as the docs say
+labels: [bug]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - React component
+        - Lightning Web Component
+        - Tokens or theme
+        - Docs site
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: component
+    attributes:
+      label: Component
+      description: The name as the docs show it
+      placeholder: data-table
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The smallest code or steps that show the problem
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version and environment
+      description: Mintel UI version, browser or Salesforce release, framework version
+      placeholder: 0.2.2, Chrome 141, Next.js 16
