@@ -42,6 +42,7 @@ The shadcn registry (`@mintel/*`) and the documentation site.
   - `npm run deploy`: the name check also covers orgs that have their own namespace.
 - Updated dependencies
   - @m-intelligence/tokens@0.3.0
+- c0aac0a: Date picker and date range picker accept `id`, `aria-labelledby` and `aria-label`, so a form label can name the field. Getting started explains how to use the shadcn CLI when the app is in a subfolder without its own package.json.
 
 ## 0.2.2 — 2026-11-20
 
