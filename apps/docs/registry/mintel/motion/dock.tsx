@@ -12,7 +12,7 @@ import {
 
 import { cn } from "@/lib/utils"
 
-// Same values as tokens.motion.spring.bouncy (softened) in @mintelligence-dev/tokens.
+// Same values as tokens.motion.spring.bouncy (softened) in @m-intelligence/tokens.
 const SPRING = { stiffness: 300, damping: 22, mass: 0.6 }
 
 type DockContextValue = { mouseX: MotionValue<number>; size: number; magnification: number; distance: number; enabled: boolean }

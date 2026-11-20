@@ -5,7 +5,7 @@ import { ThemeGallery } from "@/components/theme-gallery"
 import { getDict, type Lang } from "@/lib/i18n"
 
 const RUNTIME_CSS = `/* app/globals.css (after the Mintel theme) */
-@import "@mintelligence-dev/tokens/themes/all.css";`
+@import "@m-intelligence/tokens/themes/all.css";`
 
 const RUNTIME_JS = `// Switch: "clarity", or null for Mintel
 function setTheme(id: string | null) {

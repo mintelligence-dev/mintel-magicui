@@ -10,9 +10,9 @@ Pick the packages it touches and the bump:
 
 | Package | What it covers |
 | --- | --- |
-| `@mintelligence-dev/tokens` | Design tokens and their generated outputs (CSS, Tailwind, shadcn, LWC, themes) |
+| `@m-intelligence/tokens` | Design tokens and their generated outputs (CSS, Tailwind, shadcn, LWC, themes) |
 | `docs` | The shadcn registry (`@mintel/*` components, sections, templates) and the docs site |
-| `@mintelligence-dev/salesforce` | Lightning Web Components, static resources, deploy scripts |
+| `@m-intelligence/salesforce` | Lightning Web Components, static resources, deploy scripts |
 
 - **patch**: fixes and small visual changes
 - **minor**: new components, props or tokens (while the version is 0.x, also anything that breaks)

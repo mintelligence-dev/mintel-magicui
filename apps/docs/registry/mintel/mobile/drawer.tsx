@@ -6,7 +6,7 @@ import { AnimatePresence, animate, motion, useDragControls, useMotionValue, useR
 
 import { cn } from "@/lib/utils"
 
-// Decelerate curve = tokens.motion.easing.out in @mintelligence-dev/tokens.
+// Decelerate curve = tokens.motion.easing.out in @m-intelligence/tokens.
 const EASE_OUT = [0.32, 0.72, 0, 1] as const
 
 type DrawerContextValue = { open: boolean; setOpen: (open: boolean) => void }
@@ -49,7 +49,7 @@ function Drawer({
 const DrawerTrigger = DialogPrimitive.Trigger
 const DrawerClose = DialogPrimitive.Close
 
-// Same values as tokens.motion.spring.smooth in @mintelligence-dev/tokens.
+// Same values as tokens.motion.spring.smooth in @m-intelligence/tokens.
 const SNAP_SPRING = {
   type: "spring",
   stiffness: 260,

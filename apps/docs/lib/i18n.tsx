@@ -52,7 +52,7 @@ const en = {
     title: "One token set → every platform",
     tokens: (
       <>
-        <Strong>@mintelligence-dev/tokens</Strong> keeps colors, fonts, radius and motion in a single{" "}
+        <Strong>@m-intelligence/tokens</Strong> keeps colors, fonts, radius and motion in a single{" "}
         <Code>src/tokens.json</Code> and builds CSS variables, a Tailwind v4 theme, a JS object and an LWC module from
         it.
       </>
@@ -388,7 +388,7 @@ const th: Dict = {
     title: "Tokens ชุดเดียว → ทุกแพลตฟอร์ม",
     tokens: (
       <>
-        <Strong>@mintelligence-dev/tokens</Strong> เก็บสี ฟอนต์ radius และ motion ไว้ที่ <Code>src/tokens.json</Code>{" "}
+        <Strong>@m-intelligence/tokens</Strong> เก็บสี ฟอนต์ radius และ motion ไว้ที่ <Code>src/tokens.json</Code>{" "}
         ที่เดียว แล้ว build ออกเป็น CSS variables, Tailwind v4 theme, JS object และ LWC module
       </>
     ),

@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/rea
 
 import { cn } from "@/lib/utils"
 
-// Same values as tokens.motion.spring.smooth in @mintelligence-dev/tokens.
+// Same values as tokens.motion.spring.smooth in @m-intelligence/tokens.
 const SPRING = { type: "spring", stiffness: 170, damping: 26, mass: 1 } as const
 
 export type ShowcaseItem = {

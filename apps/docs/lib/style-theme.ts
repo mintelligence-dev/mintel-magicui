@@ -1,6 +1,6 @@
 // Design themes for the docs site (Mintel plus every file in packages/tokens/src/themes), shared by the
 // head script, the header menu, the Themes page and the theme builder.
-import themeIndex from "@mintelligence-dev/tokens/themes/index.json"
+import themeIndex from "@m-intelligence/tokens/themes/index.json"
 
 export const STYLE_KEY = "mintel-theme"
 

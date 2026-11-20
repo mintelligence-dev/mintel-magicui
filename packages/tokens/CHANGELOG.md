@@ -1,4 +1,10 @@
-# @mintelligence-dev/tokens
+# @m-intelligence/tokens
+
+## 0.3.0 — 2026-11-20
+
+### Patch Changes
+
+- The npm scope is now `@m-intelligence` (was `@mintelligence-dev`, which was never published). Install the tokens with `npm install @m-intelligence/tokens`.
 
 ## 0.2.2 — 2026-11-20
 

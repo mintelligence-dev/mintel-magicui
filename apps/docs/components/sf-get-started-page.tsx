@@ -34,13 +34,13 @@ const COPY = {
       {
         title: "Check for name conflicts",
         body: "Without a package, our components go into the org's default namespace, where names like tabs or path may already be used. The check lists any such component and writes nothing.",
-        commands: ["npm run deploy:check -w @mintelligence-dev/salesforce -- --target-org my-org"],
+        commands: ["npm run deploy:check -w @m-intelligence/salesforce -- --target-org my-org"],
         icon: CheckCircle2,
       },
       {
         title: "Deploy",
         body: "Runs the same check, then deploys the LWC, the c/tokens module and the mintelGlobal stylesheet. Components from an earlier Mintel deploy are updated; anything else stops the deploy.",
-        commands: ["npm run deploy -w @mintelligence-dev/salesforce -- --target-org my-org"],
+        commands: ["npm run deploy -w @m-intelligence/salesforce -- --target-org my-org"],
         icon: Terminal,
       },
       {
@@ -96,13 +96,13 @@ const COPY = {
       {
         title: "ตรวจชื่อซ้ำ",
         body: "ตอนที่ยังไม่มี package component จะเข้าไปอยู่ใน namespace หลักของ org ซึ่งอาจมีชื่ออย่าง tabs หรือ path อยู่แล้ว คำสั่งนี้แค่แสดงรายการที่ชนกัน ไม่เขียนอะไรลง org",
-        commands: ["npm run deploy:check -w @mintelligence-dev/salesforce -- --target-org my-org"],
+        commands: ["npm run deploy:check -w @m-intelligence/salesforce -- --target-org my-org"],
         icon: CheckCircle2,
       },
       {
         title: "Deploy",
         body: "ตรวจซ้ำแบบเดียวกันแล้ว deploy LWC, module c/tokens และ stylesheet mintelGlobal ตัวที่เคย deploy จาก Mintel จะถูกอัปเดต ถ้าเจอของคนอื่นชื่อซ้ำจะหยุดทันที",
-        commands: ["npm run deploy -w @mintelligence-dev/salesforce -- --target-org my-org"],
+        commands: ["npm run deploy -w @m-intelligence/salesforce -- --target-org my-org"],
         icon: Terminal,
       },
       {

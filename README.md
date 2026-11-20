@@ -58,8 +58,8 @@ resource of SLDS styling hooks that rebrands standard `lightning-*` components, 
 git clone https://github.com/mintelligence-dev/mintel-magicui.git && cd mintel-magicui
 npm install
 sf org login web --alias my-org
-npm run deploy:check -w @mintelligence-dev/salesforce -- --target-org my-org   # name conflicts only
-npm run deploy -w @mintelligence-dev/salesforce -- --target-org my-org         # checks, then deploys
+npm run deploy:check -w @m-intelligence/salesforce -- --target-org my-org   # name conflicts only
+npm run deploy -w @m-intelligence/salesforce -- --target-org my-org         # checks, then deploys
 ```
 
 Use a sandbox, scratch org or Developer Edition first. Guide:
@@ -75,7 +75,7 @@ versions. The [changelog](https://mintel-ui.vercel.app/changelog) lists every ch
   in WebKit and with CPU throttling; not yet tested on real devices or Firefox.
 - **Salesforce:** the LWC are covered by jest and compile checks, but **have not been verified in a real org
   yet**. No package version exists; components are deployed from source.
-- **npm:** `@mintelligence-dev/tokens` is not published yet. The registry theme delivers the tokens.
+- **npm:** `@m-intelligence/tokens` is not published yet. The registry theme delivers the tokens.
 
 ## Repository layout
 

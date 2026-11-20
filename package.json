@@ -8,11 +8,11 @@
     "apps/*"
   ],
   "scripts": {
-    "build:tokens": "npm run build -w @mintelligence-dev/tokens",
+    "build:tokens": "npm run build -w @m-intelligence/tokens",
     "build:registry": "npm run registry:build -w docs",
     "build": "npm run build:tokens && npm run build -w docs",
     "dev": "npm run build:tokens && npm run dev -w docs",
-    "test": "npm test -w @mintelligence-dev/salesforce",
+    "test": "npm test -w @m-intelligence/salesforce",
     "changeset": "changeset",
     "version-packages": "changeset version && node scripts/date-changelogs.mjs",
     "new:component": "node scripts/new-component.mjs",

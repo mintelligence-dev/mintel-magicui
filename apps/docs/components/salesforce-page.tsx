@@ -203,7 +203,7 @@ export function SalesforcePage({ lang }: { lang: Lang }) {
           <CopyCommand label={d.nav.copy} command="sf org login web --alias my-org" />
           <CopyCommand
             label={d.nav.copy}
-            command="npm run deploy -w @mintelligence-dev/salesforce -- --target-org my-org"
+            command="npm run deploy -w @m-intelligence/salesforce -- --target-org my-org"
           />
         </div>
 

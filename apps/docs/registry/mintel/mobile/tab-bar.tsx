@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
 
-// Same values as tokens.motion.spring.snappy in @mintelligence-dev/tokens.
+// Same values as tokens.motion.spring.snappy in @m-intelligence/tokens.
 const SPRING = { type: "spring", stiffness: 400, damping: 32, mass: 1 } as const
 
 export type TabBarItem = {
