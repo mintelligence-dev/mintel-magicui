@@ -603,6 +603,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       p("era", '"buddhist" | "gregorian"', "Defaults to BE for Thai and CE for English.", "ค่าเริ่มต้น พ.ศ. สำหรับไทย ค.ศ. สำหรับอังกฤษ"),
       p("dropdowns", "boolean", "Month/year dropdowns (good for birth dates).", "มี dropdown เดือน/ปี (เหมาะกับวันเกิด)", "false"),
       p("fromYear / toYear", "number", "Year range for dropdowns.", "ช่วงปีของ dropdown"),
+      p("id / aria-labelledby / aria-label", "string", "Names the field: point a <Label htmlFor> at the id, or pass a label.", "ตั้งชื่อช่อง: ให้ <Label htmlFor> ชี้มาที่ id หรือส่ง label เข้ามา"),
     ],
   },
   "dropdown-menu": { th: "เมนู dropdown มีเมนูย่อย ติ๊กเลือก แสดงคีย์ลัด และแบบสีแดงสำหรับคำสั่งลบ", upstream: radix("Dropdown Menu") },

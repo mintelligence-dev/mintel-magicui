@@ -61,6 +61,18 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
   }
 }`
 
+  const nestedConfig = `{
+  "tailwind": { "css": "apps/web/app/globals.css" },
+  "registries": {
+    "@mintel": "${REGISTRY_URL}/{name}.json"
+  }
+}`
+  const nestedPaths = `{
+  "compilerOptions": {
+    "paths": { "@/*": ["./apps/web/*"] }
+  }
+}`
+
   const steps: React.ReactNode[] = [
     <CopyCommand key="1" label={copy} command="npx create-next-app@latest my-app --yes" />,
     <CopyCommand key="2" label={copy} command="npx shadcn@latest init" />,
@@ -105,6 +117,16 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
           <CopyCommand label={copy} command={`npx shadcn@latest add ${REGISTRY_URL}/mintel-theme.json`} />
         </section>
 
+
+        <section className="space-y-3 rounded-xl border bg-muted/30 p-5 [&>*]:min-w-0">
+          <h2 className="font-heading text-lg font-semibold">{t.nested.title}</h2>
+          <p className="text-sm text-muted-foreground">{t.nested.body}</p>
+          <p className="text-sm">{t.nested.configNote}</p>
+          <CodeBlock title="components.json" code={nestedConfig} copyLabel={copy} />
+          <p className="text-sm">{t.nested.pathsNote}</p>
+          <CodeBlock title="tsconfig.json" code={nestedPaths} copyLabel={copy} />
+          <p className="text-sm text-muted-foreground">{t.nested.utilsNote}</p>
+        </section>
 
         <div className="flex flex-wrap gap-3">
           <a
