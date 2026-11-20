@@ -22,7 +22,7 @@ const COPY = {
       {
         title: "Get the project",
         body: "Clone the repository and install its dependencies once.",
-        commands: ["git clone https://github.com/muisurasak/mintel-ui.git && cd mintel-ui", "npm install"],
+        commands: ["git clone https://github.com/mintelligence-dev/mintel-magicui.git && cd mintel-magicui", "npm install"],
         icon: Terminal,
       },
       {
@@ -84,7 +84,7 @@ const COPY = {
       {
         title: "ดึงโปรเจกต์",
         body: "clone repository แล้วติดตั้ง dependency ครั้งเดียว",
-        commands: ["git clone https://github.com/muisurasak/mintel-ui.git && cd mintel-ui", "npm install"],
+        commands: ["git clone https://github.com/mintelligence-dev/mintel-magicui.git && cd mintel-magicui", "npm install"],
         icon: Terminal,
       },
       {

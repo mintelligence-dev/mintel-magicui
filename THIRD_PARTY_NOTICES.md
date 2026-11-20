@@ -40,3 +40,26 @@ components (MIT License, Copyright (c) 2023 shadcn).
 `packages/salesforce/force-app/main/default/staticresources/mintelThaiAddress.json` are generated from
 [kongvut/thai-province-data](https://github.com/kongvut/thai-province-data) by
 `apps/docs/scripts/build-thai-address.mjs` (MIT License, Copyright (c) 2025 Kongvut Sangkla).
+
+## Fonts
+
+The docs site, and apps set up as the Getting started guide describes, load these fonts from Google Fonts
+through `next/font`. The font files are not stored in this repository. All four are licensed under the
+[SIL Open Font License 1.1](https://openfontlicense.org).
+
+- Manrope: Copyright The Manrope Project Authors
+- Rubik: Copyright The Rubik Project Authors
+- IBM Plex Sans Thai: Copyright IBM Corp.
+- JetBrains Mono: Copyright The JetBrains Mono Project Authors
+
+## Salesforce Lightning Design System
+
+The Salesforce previews on the docs site load the Salesforce Lightning Design System stylesheet from a CDN
+(`@salesforce-ux/design-system`, BSD 3-Clause License, Copyright Salesforce, Inc.). It is not stored in this
+repository and is not part of what Mintel UI installs.
+
+## npm dependencies
+
+Components declare the npm packages they need (Radix UI, TanStack, React Hook Form, Zod, React DayPicker,
+Recharts, Motion, cmdk, Sonner, Lucide, class-variance-authority and others). They are installed from npm
+under their own licenses (MIT, ISC or Apache-2.0) and are not copied into this repository.

@@ -8,6 +8,6 @@ export const SITE_URL =
 
 export const REGISTRY_URL = process.env.NEXT_PUBLIC_REGISTRY_URL ?? `${SITE_URL}/r`
 
-export const REPO_URL = process.env.NEXT_PUBLIC_REPO_URL ?? "https://github.com/muisurasak/mintel-ui"
+export const REPO_URL = process.env.NEXT_PUBLIC_REPO_URL ?? "https://github.com/mintelligence-dev/mintel-magicui"
 
 export const installCmd = (name: string) => `npx shadcn@latest add ${REGISTRY_URL}/${name}.json`

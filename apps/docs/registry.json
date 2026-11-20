@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "mintel",
-  "homepage": "https://github.com/muisurasak/mintel-ui",
+  "homepage": "https://github.com/mintelligence-dev/mintel-magicui",
   "items": [
     {
       "name": "mintel-theme",

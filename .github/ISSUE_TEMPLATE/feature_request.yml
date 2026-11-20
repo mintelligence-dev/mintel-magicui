@@ -1,0 +1,27 @@
+name: Feature request
+description: A new component, or a change to one
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The screen or task this is for
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would help?
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - React
+        - Salesforce LWC
+        - Both
+    validations:
+      required: true
