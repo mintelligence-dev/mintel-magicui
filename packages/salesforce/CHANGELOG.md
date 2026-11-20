@@ -2,6 +2,10 @@
 
 Lightning Web Components, static resources and deploy scripts for Salesforce.
 
+## 0.3.1 — 2026-11-21
+
+No changes in this release.
+
 ## 0.3.0 — 2026-11-20
 
 ### Patch Changes
