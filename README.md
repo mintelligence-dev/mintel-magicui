@@ -75,7 +75,7 @@ versions. The [changelog](https://mintel-ui.vercel.app/changelog) lists every ch
   in WebKit and with CPU throttling; not yet tested on real devices or Firefox.
 - **Salesforce:** the LWC are covered by jest and compile checks, but **have not been verified in a real org
   yet**. No package version exists; components are deployed from source.
-- **npm:** `@m-intelligence/tokens` is not published yet. The registry theme delivers the tokens.
+- **npm:** `@m-intelligence/tokens` is on [npm](https://www.npmjs.com/package/@m-intelligence/tokens). React apps that use the registry theme get the same tokens without installing it.
 
 ## Repository layout
 
