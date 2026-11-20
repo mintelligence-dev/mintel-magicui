@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { BarChart3, ChevronLeft, Inbox, MessageCircle, Search, Settings, UserRound } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -178,6 +178,17 @@ export default function ConsolePage() {
   const [filter, setFilter] = useState("all")
   const [query, setQuery] = useState("")
   const [mobileView, setMobileView] = useState<"list" | "chat">("list")
+  // On phones only one of the two panes is shown: move focus with the switch, or it is lost with the hidden pane.
+  const backRef = useRef<HTMLButtonElement>(null)
+  const listHeadingRef = useRef<HTMLHeadingElement>(null)
+  const switched = useRef(false)
+  useEffect(() => {
+    if (!switched.current) {
+      switched.current = true
+      return
+    }
+    ;(mobileView === "chat" ? backRef : listHeadingRef).current?.focus()
+  }, [mobileView])
   const active = chats.find((c) => c.id === activeId)!
 
   const visible = useMemo(
@@ -229,7 +240,9 @@ export default function ConsolePage() {
           <section className={cn("min-h-0 flex-col border-r", mobileView === "list" ? "flex" : "hidden md:flex")} aria-label="Conversations">
             <header className="flex items-center gap-2 border-b px-3 py-3">
               <SidebarTrigger />
-              <h1 className="font-heading text-lg font-semibold">Live chats</h1>
+              <h1 ref={listHeadingRef} tabIndex={-1} className="font-heading text-lg font-semibold outline-none">
+                Live chats
+              </h1>
             </header>
             <div className="grid gap-2 border-b p-3">
               <div className="relative">
@@ -293,7 +306,7 @@ export default function ConsolePage() {
               channel={active.channel}
               header={
                 <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="icon" className="md:hidden" aria-label="Back to conversations" onClick={() => setMobileView("list")}>
+                  <Button ref={backRef} variant="ghost" size="icon" className="md:hidden" aria-label="Back to conversations" onClick={() => setMobileView("list")}>
                     <ChevronLeft />
                   </Button>
                   <div className="min-w-0">

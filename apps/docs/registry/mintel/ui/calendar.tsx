@@ -25,6 +25,7 @@ function Calendar({
   era,
   locale = th,
   formatters,
+  labels,
   ...props
 }: DayPickerProps & { era?: CalendarEra }) {
   // Buddhist Era by default for Thai, Common Era for every other locale.
@@ -35,8 +36,25 @@ function Calendar({
   const monthShort = (date: Date) =>
     new Intl.DateTimeFormat(locale?.code ?? "th", { month: "short" }).format(date)
 
+  // Screen readers must hear the same year the caption shows, and "today" / "selected" in the page's language.
+  const thai = (locale?.code ?? "th").startsWith("th")
+  const fullDate = (date: Date) =>
+    new Intl.DateTimeFormat(`${locale?.code ?? "th"}-u-ca-${resolvedEra === "buddhist" ? "buddhist" : "gregory"}`, { dateStyle: "full" }).format(date)
+  const dayLabel = (date: Date, modifiers?: { today?: boolean; selected?: boolean }) => {
+    let label = fullDate(date)
+    if (modifiers?.today) label = `${thai ? "วันนี้" : "Today"}, ${label}`
+    if (modifiers?.selected) label = `${label}, ${thai ? "เลือกแล้ว" : "selected"}`
+    return label
+  }
+
   return (
     <DayPicker
+      labels={{
+        labelGrid: (date) => `${monthName(date)} ${yearOf(date, resolvedEra)}`,
+        labelDayButton: (date, modifiers) => dayLabel(date, modifiers),
+        labelGridcell: (date, modifiers) => dayLabel(date, modifiers),
+        ...labels,
+      }}
       showOutsideDays={showOutsideDays}
       captionLayout={captionLayout}
       locale={locale}

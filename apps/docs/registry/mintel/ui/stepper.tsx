@@ -119,7 +119,8 @@ function Stepper({
               className={cn(
                 "group relative flex h-10 w-full items-center justify-center gap-1.5 px-6 text-sm font-semibold whitespace-nowrap outline-none",
                 "transition-[background-color,color,filter] duration-500 ease-spring-snappy motion-reduce:transition-none",
-                "focus-visible:brightness-95",
+                // Inside the shape, because the arrow clip-path would cut an outer ring.
+                "focus-visible:underline focus-visible:decoration-2 focus-visible:underline-offset-4 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-current focus-visible:brightness-95",
                 first && "rounded-l-full pl-5",
                 last && "rounded-r-full pr-5",
                 clip,

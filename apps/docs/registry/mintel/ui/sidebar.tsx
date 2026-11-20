@@ -142,18 +142,21 @@ function SidebarItem({
   active,
   badge,
   onClick,
+  linkComponent,
   className,
 }: {
   icon: React.ReactNode
   label: string
   href?: string
+  /** Rendered instead of <a> when `href` is set, e.g. your router's Link, so navigation stays client-side. */
+  linkComponent?: React.ElementType
   active?: boolean
   badge?: React.ReactNode
   onClick?: () => void
   className?: string
 }) {
   const { collapsed, setMobileOpen } = useSidebar()
-  const Comp = href ? "a" : "button"
+  const Comp: React.ElementType = href ? (linkComponent ?? "a") : "button"
   return (
     <Comp
       {...(href ? { href } : { type: "button" as const })}
