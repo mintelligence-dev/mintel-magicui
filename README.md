@@ -1,5 +1,14 @@
 # Mintel UI
 
+[![CI](https://github.com/mintelligence-dev/mintel-magicui/actions/workflows/ci.yml/badge.svg)](https://github.com/mintelligence-dev/mintel-magicui/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/tag/mintelligence-dev/mintel-magicui?label=release&sort=semver)](https://github.com/mintelligence-dev/mintel-magicui/tags)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+**Docs and registry:** <https://mintel-ui.vercel.app> · [ภาษาไทย](https://mintel-ui.vercel.app/th) ·
+[Changelog](https://mintel-ui.vercel.app/changelog)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmintelligence-dev%2Fmintel-magicui&root-directory=apps%2Fdocs&project-name=mintel-ui&repository-name=mintel-ui)
+
 Design system ของ [M-Intelligence](https://m-intelligence.tech) สำหรับงาน open source ของบริษัท:
 brand tokens ชุดเดียวใช้ได้ทั้ง **React** และ **Salesforce LWC** พร้อม **animated components**
 ที่ติดตั้งผ่าน [shadcn registry](https://ui.shadcn.com/docs/registry).
@@ -85,6 +94,7 @@ has a page under [/salesforce](https://mintel-ui.vercel.app/salesforce). Details
 ## Develop
 
 ```bash
+git clone https://github.com/mintelligence-dev/mintel-magicui.git && cd mintel-magicui
 npm install
 npm run dev        # builds tokens + registry, starts docs on http://localhost:3000
 npm run build      # tokens → registry.json → public/r/*.json → static docs (apps/docs/out)
@@ -125,15 +135,28 @@ npx changeset
 `npm run version-packages` applies them, bumps the version and writes the dated `CHANGELOG.md` files that the
 docs show at [/changelog](https://mintel-ui.vercel.app/changelog). See [.changeset/README.md](.changeset/README.md).
 
-## Deploy (Vercel)
+## Host your own copy (Vercel)
 
-- Import the repo, set **Root Directory** to `apps/docs` (framework: Next.js). Build and install commands can stay
-  default — npm workspaces are detected from the repo root.
-- The site is a static export; the registry is served at `https://<domain>/r/<item>.json`.
-- Install commands on the site use the production domain automatically (`NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL`).
-  Set `NEXT_PUBLIC_SITE_URL` when you add a custom domain.
+To run the docs and the registry on your own domain, for example to serve a customised theme:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmintelligence-dev%2Fmintel-magicui&root-directory=apps%2Fdocs&project-name=mintel-ui&repository-name=mintel-ui)
+
+The button copies this repository into your GitHub account and creates a Vercel project with **Root
+Directory** set to `apps/docs`. No environment variables are needed.
+
+- The site is a static export; the registry is served at `https://<your-domain>/r/<item>.json`.
+- Install commands and registry links on the site use the project's production domain automatically
+  (`NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL`). Set `NEXT_PUBLIC_SITE_URL` when you add a custom domain.
 - `npx shadcn add` must be able to fetch `/r/*.json` without logging in: keep the production deployment public
   (Vercel Authentication protects preview URLs by default).
+- Importing by hand works too: import the repo and set **Root Directory** to `apps/docs` (framework: Next.js).
+  Build and install commands can stay default; npm workspaces are detected from the repo root.
+
+## Contributing and support
+
+- Bugs and requests: [open an issue](https://github.com/mintelligence-dev/mintel-magicui/issues).
+- Pull requests are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) has the rules the build checks, and the
+  scaffold scripts that create every file a new component needs.
 
 ## License
 

@@ -105,7 +105,7 @@ for (const b of blocks) {
 const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "mintel",
-  homepage: "https://github.com/muisurasak/mintel-ui",
+  homepage: "https://github.com/mintelligence-dev/mintel-magicui",
   items: [themeItem, ...extraThemeItems, ...items, ...blocks],
 }
 writeFileSync(join(root, "registry.json"), JSON.stringify(registry, null, 2) + "\n")
