@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: monthly }
+    groups:
+      actions: { patterns: ['*'] }
+  # Monthly, not weekly: CI does not run the visual regression tests, so each update
+  # should be checked by eye (`npm run test:e2e:docker -w docs -- e2e/visual.spec.ts`).
+  - package-ecosystem: npm
+    directory: /
+    schedule: { interval: monthly }
+    open-pull-requests-limit: 5
+    groups:
+      # Minor and patch bumps arrive as one pull request; a major gets its own.
+      dependencies: { patterns: ['*'], update-types: [minor, patch] }
